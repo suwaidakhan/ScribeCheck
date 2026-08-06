@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# Refuse any commit that carries a secret. This repo is going public, so
+# .gitignore alone is not enough: it stops an accident, but not `git add -f`,
+# and it does nothing about a key pasted into a source file, a notebook or a
+# README.
+#
+# Install:  bash scripts/install-hooks.sh
+# Bypass:   git commit --no-verify   (do not, unless you have read the diff)
+
+set -uo pipefail
+
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$staged" ] && exit 0
+
+fail=0
+
+note() {
+    echo "BLOCKED: $1" >&2
+    fail=1
+}
+
+# 1. Filenames that hold secrets by definition. .gitignore already hides
+#    .env, but `git add -f` walks straight past that.
+while IFS= read -r file; do
+    case "$file" in
+        .env|.env.*|*/.env|*/.env.*)
+            note "$file is a secrets file and must never be committed." ;;
+        *.pem|*.key|*.p12|*.pfx|id_rsa|id_ed25519)
+            note "$file looks like a private key." ;;
+        credentials|credentials.*|*/credentials|*/credentials.*)
+            note "$file looks like a credentials file." ;;
+    esac
+done <<< "$staged"
+
+# 2. Key-shaped strings in the staged content. Matched on vendor prefixes
+#    rather than on length, because a bare 40-hex string is also what every
+#    git SHA looks like and blocking those would cry wolf on every commit.
+#
+#    Only added lines are scanned. Three files are exempt because carrying
+#    key-shaped strings is their job: env.example holds the names with nothing
+#    after the "=", and this script plus its test hold the patterns and the
+#    fixtures. Without the exemption the filter blocks its own test suite,
+#    which it did on the first run. The fixtures are all obvious fakes and are
+#    checked by scripts/test-pre-commit.sh itself.
+patterns=(
+    'gsk_[A-Za-z0-9]\{20,\}'          # Groq
+    'sk-[A-Za-z0-9_-]\{20,\}'         # OpenAI and lookalikes
+    'AIza[A-Za-z0-9_-]\{30,\}'        # Google API key
+    'AQ\.[A-Za-z0-9_-]\{30,\}'        # Google AI Studio key
+    'xox[baprs]-[A-Za-z0-9-]\{10,\}'  # Slack
+    'ghp_[A-Za-z0-9]\{20,\}'          # GitHub PAT
+)
+
+for file in $staged; do
+    [ "$file" = "env.example" ] && continue
+    [ "$file" = "scripts/pre-commit" ] && continue
+    [ "$file" = "scripts/test-pre-commit.sh" ] && continue
+    added=$(git diff --cached -U0 -- "$file" | grep '^+' | grep -v '^+++' || true)
+    [ -z "$added" ] && continue
+
+    for pattern in "${patterns[@]}"; do
+        if echo "$added" | grep -q "$pattern"; then
+            note "$file contains something shaped like an API key."
+        fi
+    done
+
+    # An assignment with a value after it. `FOO_API_KEY=` on its own is a
+    # template and fine; `FOO_API_KEY=abc123...` is a leak.
+    if echo "$added" | grep -qE '(API_KEY|SECRET|TOKEN|PASSWORD)[[:space:]]*=[[:space:]]*["'"'"']?[A-Za-z0-9_.-]{16,}'; then
+        note "$file assigns a value to a key, secret, token or password."
+    fi
+done
+
+if [ "$fail" -ne 0 ]; then
+    cat >&2 <<'MSG'
+
+Nothing was committed. Secrets belong in .env, which is gitignored.
+If this is a false positive, commit with --no-verify after reading the diff.
+MSG
+    exit 1
+fi
+
+exit 0

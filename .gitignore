@@ -18,3 +18,12 @@ htmlcov/
 
 # macOS
 .DS_Store
+
+# Belt and braces on secrets. .env is above; these catch the near misses.
+.env.*
+!env.example
+*.pem
+*.key
+*.p12
+credentials
+credentials.*
