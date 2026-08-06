@@ -182,4 +182,42 @@ python-dotenv 1.2.2, tqdm 4.70.0, soxr 1.1.0, numpy 2.5.1, pytest 9.1.1.
 
 ## 12. Outcomes and Retrospective
 
-To be filled at the end of the run.
+**Shipped.** Phases 2 through 5 complete and verified against real data. Phases
+6 through 8 written and tested against fixtures, blocked on API keys. Phase 9
+complete. Phase 10 dropped on purpose, see below. Four commits, 197 tests, USD
+0.00 spent.
+
+- 400-clip manifest, deterministic under seed 42, every SPEC section 3 quota
+  passing, committed.
+- 400 of 400 WAVs on disk at 16 kHz mono, 132 MB kept from 4.67 GB streamed.
+- 4,865-term drug lexicon, checked against 3,607 real clinical transcripts
+  before being trusted.
+- Integrity check passing 20 of 20, spot-listen page rendered and verified in a
+  browser, audio paths confirmed to resolve.
+- Scoring, failure selection and the labeling page proven end to end against
+  transcripts carrying known planted errors.
+
+**What the night actually bought.** Not results. Four bugs found and fixed that
+would each have produced confident wrong numbers rather than a visible error:
+the lexicon measuring the word "pain", clip IDs colliding on a non-unique
+filename, the spend cap overshooting by one clip, and an integrity threshold
+miscalibrated badly enough to halt clean runs at close to even odds. Every one
+of those was caught by looking at the artifact rather than the mechanism. The
+lexicon looked fine as code and as a 14,481-line file; it only looked wrong when
+counted against real transcripts.
+
+**What went wrong in my own process.** The audio download died on the first
+attempt and wrote nothing, because I handled network errors inside the download
+loop and not inside the size-projection loop that ran before it. That is the
+optimistic-path failure, in code written the same hour I wrote a decision entry
+about resumability. Cost about twenty minutes and a restart.
+
+**Phase 10 dropped deliberately.** A local faster-whisper run would have given
+real transcripts for one system overnight, and would also have been a different
+system from the one SPEC names. It was named and parked rather than started
+quietly, which is the rule it would have broken.
+
+**For the morning.** The blocker is four API keys and about twenty minutes of
+Suwaid's hands. Real projected spend is USD 1.78, of which USD 0.43 is genuinely
+out of pocket, inflated to USD 5.00 only by OpenAI's minimum top-up. See
+`MORNING_BRIEF.md`.

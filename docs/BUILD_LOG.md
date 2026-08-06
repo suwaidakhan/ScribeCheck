@@ -24,3 +24,15 @@ One line per event. Failures, fixes, and anything that cost time. Writeup materi
 - 21:30 Traced the four remaining contaminants to one root cause: the combination-splitter was fragmenting descriptive names. "SUS SCROFA PITUITARY GLAND, POSTERIOR" left "posterior", and "suspension/ drops" left "drops". Dropped slash as a separator and blocklisted the anatomy and lab-value residue. See DECISIONS D010 and D011.
 - 21:35 Final lexicon: 4,865 terms. Entity rates on the real split, clinical against general: drug 10.7 vs 0.8 percent, dose 13.1 vs 2.1, negation 9.0 vs 9.7, any 26.0 vs 12.2. Negation not separating by domain is expected; it is a feature of English, not of clinical speech.
 - 21:36 Noted for the sampler: 26.0 percent of clinical clips carry an entity, so SPEC section 3's 55 percent entity quota over 400 clips needs deliberate oversampling and may bind hardest in Tier C, where few clips exist per accent.
+
+## 2026-08-06, overnight run
+
+- 00:10 Audio download died before writing a byte. A HEAD request timed out during the size projection and the exception propagated uncaught: errors were handled in the download loop and not in the projection loop that runs before it. Both now retry with backoff. Cost a restart.
+- 01:20 Restarted unbuffered. 86 tarballs, 4.67 GB streamed, 400 of 400 clips found and written as 16 kHz mono WAV, 132 MB kept.
+- 03:40 Integrity check halted the run: 3 of 20 clips flagged against a threshold of 2, all three on speech rate, none with anything wrong. Measured the distribution before touching the threshold. Corpus median is 1.67 words per second and 12.2 percent of the full test split falls below the prompt's 1.0 floor, 17.2 percent among clinical clips. The floor expected 2.46 flags in a 20-clip check. Replaced with bounds derived from the corpus median. 20 of 20 now pass. See DECISIONS D015.
+- 03:45 Confirmed the one repeated transcript in the manifest is the same tadalafil prompt read by two different speakers, in etsako and ikulu, which is AfriSpeech working as designed rather than an indexing bug. Split the duplicate-pairing check accordingly. See DECISIONS D014.
+- 03:50 Spot-listen page rendered and opened in a browser. All 20 audio paths resolve.
+- 04:00 Failure-sheet fill band was selecting clips with zero errors. Caught by the end-to-end test. A clip transcribed correctly is not a failure and would have wasted a labeling slot.
+- 04:05 Spend-cap check was comparing accumulated cost after the fact and overshot by one clip. Now estimates the next call from observed cost and stops before the call that would breach.
+- 04:10 Verified the labeling page's diff highlighting by extracting the generated regex and executing it, rather than reasoning about the escaping.
+- 04:20 197 tests passing, compliance scan clean, pre-publication checklist passing. Total spend for the night: USD 0.00.
