@@ -118,6 +118,13 @@ the manifest and results inherit the same license.
 No bulk audio is committed. The manifest names every clip used, so anyone can
 rebuild the exact sample from the source dataset.
 
+One consequence for anyone cloning this: `taxonomy/labeling.html` plays clips
+from `data/audio/`, which is gitignored, so the audio players are silent until
+`python -m src.fetch_audio` has populated it. The reference-against-hypothesis
+diffs in `taxonomy/failure_taxonomy.csv` are committed and readable on their own,
+and most failure types are judgeable from the text alone. Only the
+accent-phonology calls need the audio.
+
 ## Limitations
 
 Stated in full in the writeup, and worth knowing before reading any number:

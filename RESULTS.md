@@ -1,15 +1,31 @@
 # Results
 
-2,000 transcriptions: 400 clips through five ASR configurations, zero failures,
-USD 1.35 spent entirely against provider signup credit. Generated 2026-08-06
-from `data/manifest.csv` under seed 42. Every number below is reproducible from
-`results/headline.csv`.
+**Two speech-to-text systems can post the same word error rate and differ by 11.7
+points on whether they get the drug name right.**
 
-**The failure labelling is not finished.** The taxonomy sheet is built and the
-100 rows are selected, but `failure_code`, `severity` and `note` are empty until
-a human fills them. The severity-1 count, which is the number this project is
-actually for, does not exist yet. Nothing here should be read as a final
-finding.
+Whisper large-v3 and Deepgram nova-3 landed 0.0009 apart on WER, the metric
+vendors publish and buyers compare. On drug-name accuracy they landed 62.8
+percent against 74.5 percent, and Whisper substituted one real drug for a
+different real drug 7 times against Deepgram's 2. A procurement decision made on
+published WER would treat those two systems as interchangeable.
+
+Measured over 2,000 transcriptions: 400 clips through five commercial
+configurations, zero failures, USD 1.35 spent entirely against provider signup
+credit. Generated 2026-08-06 from `data/manifest.csv` under seed 42, and
+reproducible from `results/headline.csv`.
+
+## What is settled and what comes next
+
+The measurement is complete. All five metrics are computed over every clip and
+every configuration, and the comparison above is the finding.
+
+One layer is outstanding. Ranking systems by *how badly* they fail needs a human
+to classify each error, and 100 failures have been selected and prepared for
+that. `failure_code` and `severity` are empty until a person fills them, and the
+code refuses to guess: a model rating the danger of its own domain's mistakes is
+the one number nobody should accept. So this page reports accuracy, not harm.
+The per-provider count of errors that could change a clinical action is the next
+deliverable and does not exist yet.
 
 ## Headline
 
@@ -26,12 +42,9 @@ pairs, negation over 172 cues.
 
 ## What the numbers say
 
-**Whisper large-v3 and Deepgram nova-3 differ by 0.0009 on WER and 11.7 points
-on drug-name accuracy.** On the metric vendors publish, those two systems are
-indistinguishable. On the words that can change a prescription, one of them gets
-it wrong half again as often, with 7 drug substitutions against 2. A substituted
-drug is the dangerous class, because the output reads as a complete, plausible
-sentence and nothing downstream looks wrong.
+A substituted drug is the dangerous class. A dropped drug leaves a hole a reader
+notices; a drug swapped for a different real drug reads as a complete, plausible
+sentence, and nothing downstream looks wrong.
 
 Gemini and Deepgram nova-3 also swap places between the two columns: Gemini
 ranks 3rd on WER and 4th on drugs.

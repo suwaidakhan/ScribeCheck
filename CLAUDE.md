@@ -1,6 +1,8 @@
-# CLAUDE.md — ScribeCheck
+# CLAUDE.md, ScribeCheck
 
-You are building a clinical ASR safety and equity benchmark for Suwaid Khan, a product manager. He does not write code. You write, run, and debug everything. He makes product judgments, labels failures, and owns the public writeup.
+You are building a clinical ASR safety and equity benchmark with Suwaid Khan, a product manager. The split is deliberate: he sets the product direction, makes the judgment calls that move a result, labels the failures by hand, and owns the public writeup. You do the implementation, and you run and debug it.
+
+That division is the point rather than a constraint. The classifications a reader is asked to trust, `failure_code` and `severity`, are the ones a model must never fill in, and the code refuses to. Everything else is his to direct and yours to build.
 
 Read SPEC.md before any task. It defines the sampling design, metrics, taxonomy, and deliverables. SPEC.md wins over anything else, including this file, if they conflict.
 
@@ -17,6 +19,30 @@ Measure whether commercial speech-to-text systems transcribe the words that can 
 - Determinism: random seed 42 everywhere. The sample manifest is committed; scoring reruns must reproduce identical numbers.
 - Never fabricate a number. If a metric cannot be computed, say so and show what blocked it.
 - Do not upload dataset audio anywhere except to the ASR provider APIs for transcription. Do not commit audio files to git (gitignore `data/audio/`). The public repo carries the manifest, code, results, and up to 10 short illustrative clips only if license attribution is included.
+
+## When the project finishes, the documents have to catch up
+
+This is a public repository and a hiring artifact, so a document that describes
+an earlier state of the work is worse than no document. It has already happened
+once: `MORNING_BRIEF.md` still said "Ran no provider. Spent nothing" after all
+2,000 transcriptions had run, and it was the second file a visitor opened.
+
+So when the 100 failures are labelled and the writeup exists, the following are
+stale by definition and every one of them gets revisited in the same pass:
+
+- `README.md`, whose status line and headline claim both name the current phase
+- `RESULTS.md`, which says the severity classification does not exist yet
+- `CLAUDE.md`, this file, whose phase-by-phase framing stops applying
+- `SPEC.md`, wherever the built thing diverged from the plan
+- `docs/DECISIONS.md` and `docs/BUILD_LOG.md`, which are append-only and stay
+- `task_plan.md`, section 12
+- The GitHub profile README at `suwaidakhan/suwaidakhan`, which quotes the
+  headline result and calls the labelling in progress
+
+The check before publishing anything: does every number in a public document
+still match `results/headline.csv`, and does every status claim still describe
+what is on disk? Recompute rather than retype. That check has already caught a
+wrong figure once.
 
 ## Working style
 
