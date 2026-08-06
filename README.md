@@ -11,15 +11,20 @@ The claim under test is that headline WER is the wrong acceptance metric for
 clinical dictation. The benchmark either supports that with numbers or it does
 not, and both outcomes are reportable.
 
-**Status: sample built and verified, transcription pending API keys.** See
-[MORNING_BRIEF.md](MORNING_BRIEF.md).
+**Status: all 2,000 transcriptions complete, scored, failure sheet built.
+Human labelling of the 100 failures is outstanding.** See
+[RESULTS.md](RESULTS.md).
 
 ## What is measured
 
 Five system configurations across four vendors: Whisper large-v3 hosted by Groq,
-Deepgram nova-3, Deepgram nova-3-medical, AssemblyAI, and Gemini Flash. Deepgram
-appears twice because the general-against-medical delta is a pricing and product
-finding in itself.
+Deepgram nova-3, Deepgram nova-3-medical, AssemblyAI universal-3-5-pro, and
+Gemini 3.5 Flash Lite. Deepgram appears twice because the general-against-medical
+delta is a pricing and product finding in itself.
+
+The result, in one line: Whisper large-v3 and Deepgram nova-3 differ by 0.0009
+on WER and 11.7 points on drug-name accuracy. Full table in
+[RESULTS.md](RESULTS.md).
 
 Whisper runs through Groq rather than OpenAI because every configuration here
 sits on a free tier, which keeps the benchmark reproducible by anyone without a
@@ -56,7 +61,8 @@ selected failures, and no part of this repository will guess it.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp env.example .env      # then paste four API keys
+cp env.example .env          # then paste four free API keys
+bash scripts/install-hooks.sh  # secret-blocking pre-commit hook
 ```
 
 ```bash
@@ -78,7 +84,7 @@ second run costs nothing.
 .venv/bin/python -m pytest tests/ -q
 ```
 
-197 tests. The one worth reading is
+220 tests. The one worth reading is
 [tests/test_pipeline_end_to_end.py](tests/test_pipeline_end_to_end.py), which
 plants known errors into otherwise perfect transcripts and asserts the headline
 table reports exactly those.
