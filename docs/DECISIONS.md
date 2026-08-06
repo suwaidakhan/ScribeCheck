@@ -259,3 +259,19 @@ vendor for exactly this reason.
 The 17 responses already cached from `gemini-3.6-flash`, and the 4 from
 `gemini-3.5-flash`, were deleted rather than kept. Mixing three models inside
 one provider column would have produced a number that describes no system.
+
+**D020 | labeling persistence | Autosave labels to `localStorage` on every
+change, keyed on `clip_id|provider`, and offer CSV import to move between
+browsers. | Keep the in-memory-only page, where Export was the sole way to save.
+| The original page held everything in a JavaScript object and wrote it out only
+on Export. Closing the tab discarded the work. That is a defect for a job that
+takes 3 to 4 hours and that nobody does in one sitting: the first accidental
+close costs an hour and the labelling never gets finished. The key is the clip
+and provider pair rather than the row number, so labels survive the sheet being
+regenerated; row order is a presentation detail while the pair is the identity
+of the thing being judged. `localStorage` is per browser, so Import restores
+from an exported CSV when moving machines, and a quota or private-browsing
+failure says so in the header rather than losing the work silently. A
+`needs_listen` flag was added alongside, because most rows are judgeable from
+the text diff and only accent-phonology calls require audio, so the sheet can be
+worked without headphones and the audio-dependent rows revisited.

@@ -138,3 +138,69 @@ class TestExcerpt:
     def test_survives_text_with_no_marked_token(self):
         words = " ".join(["w"] * 40)
         assert len(excerpt(words, width=15).split()) <= 17
+
+
+class TestLabelingPageIsValid:
+    """The generated page has to actually run.
+
+    It shipped once with a JS syntax error and nothing caught it: the template
+    is authored as literal HTML, and inside a non-raw Python string the `\\n`
+    in `lines.join("\\n")` became a real newline, splitting a string literal
+    across two lines. Every Python test still passed, because none of them
+    looked at the emitted page. These do.
+    """
+
+    def _page(self, tmp_path):
+        import pandas as pd
+        from src import config, failures
+
+        sheet = pd.DataFrame(
+            [{
+                "row_id": 1, "clip_id": "c1", "provider": "aai", "accent": "hausa",
+                "tier": "A", "domain": "clinical", "ref_excerpt": "takes *metformin*",
+                "hyp_excerpt": "takes *metronidazole*", "entity_expected": "metformin",
+                "entity_transcribed": "", "auto_flag": "DRUG-SUB candidate",
+                "needs_listen": "", "failure_code": "", "severity": "", "note": "",
+            }],
+            columns=failures.SHEET_COLUMNS,
+        )
+        original = config.TAXONOMY
+        config.TAXONOMY = tmp_path
+        try:
+            failures._write_labeling_page(sheet, pd.DataFrame())
+        finally:
+            config.TAXONOMY = original
+        return (tmp_path / "labeling.html").read_text()
+
+    def test_escape_sequences_survive_into_the_page(self, tmp_path):
+        # The exact bug: this must be a backslash and an n, not a newline.
+        page = self._page(tmp_path)
+        assert r'lines.join("\n")' in page
+        assert r"/\*([^*]+)\*/g" in page
+
+    def test_the_script_parses(self, tmp_path):
+        # The real check: hand it to a JS engine.
+        import shutil, subprocess
+
+        node = shutil.which("node")
+        if not node:
+            import pytest
+
+            pytest.skip("node not installed")
+        page = self._page(tmp_path)
+        script = page.split("<script>")[1].split("</script>")[0]
+        js = tmp_path / "page.js"
+        js.write_text(script)
+        result = subprocess.run([node, "--check", str(js)], capture_output=True, text=True)
+        assert result.returncode == 0, result.stderr
+
+    def test_the_page_carries_its_persistence(self, tmp_path):
+        # Without these the page loses everything the moment it is closed.
+        page = self._page(tmp_path)
+        for needed in ["localStorage", "scribecheck-labels-v1", "parseCsv", "needs_listen"]:
+            assert needed in page, f"{needed} missing from the labeling page"
+
+    def test_transcript_text_is_escaped_before_markup(self, tmp_path):
+        page = self._page(tmp_path)
+        assert "markup(escapeHtml(r.ref))" in page
+        assert "markup(escapeHtml(r.hyp))" in page

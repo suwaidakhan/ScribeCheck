@@ -5,41 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ScribeCheck failure taxonomy</title>
 <style>
-  :root { --bg:#fbfaf7; --fg:#1c1c1a; --line:#dcd8ce; --mark:#b23c17; --ok:#2f6b4f; }
+  :root { --bg:#fbfaf7; --fg:#1c1c1a; --line:#dcd8ce; --mark:#b23c17; --ok:#2f6b4f;
+          --muted:#6b675e; --panel:#f2efe8; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#16171a; --fg:#e8e6e1; --line:#33353a; --mark:#ff8a5c; --ok:#6fce9f; }
+    :root { --bg:#16171a; --fg:#e8e6e1; --line:#33353a; --mark:#ff8a5c; --ok:#6fce9f;
+            --muted:#9a968d; --panel:#1e2024; }
   }
   body { background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
          margin:0; padding:24px; }
   header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line);
            padding:12px 0; margin-bottom:16px; z-index:5; }
   h1 { font-size:20px; margin:0 0 6px; }
-  .meta { font-size:13px; opacity:.75; }
+  .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:13px; }
+  .status { color:var(--muted); flex:1; min-width:220px; }
   .card { border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:14px; }
+  .card.done { border-color:var(--ok); }
   .tags { font-size:12px; text-transform:uppercase; letter-spacing:.05em; opacity:.7; margin-bottom:8px; }
   .text { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14px; margin:6px 0; }
   .label { font-size:12px; opacity:.7; }
   mark { background:none; color:var(--mark); font-weight:700; }
   audio { width:100%; margin:8px 0; }
-  select { font-size:15px; padding:6px; margin-right:10px; background:var(--bg); color:var(--fg);
+  select, input[type=text] { font-size:15px; padding:6px; background:var(--bg); color:var(--fg);
            border:1px solid var(--line); border-radius:5px; }
-  input[type=text] { font-size:15px; padding:6px; width:min(420px,90%); background:var(--bg);
-                     color:var(--fg); border:1px solid var(--line); border-radius:5px; }
-  button { font-size:15px; padding:9px 16px; border-radius:6px; border:1px solid var(--line);
-           background:var(--fg); color:var(--bg); cursor:pointer; }
-  .done { color:var(--ok); font-weight:600; }
+  select { margin-right:10px; }
+  input[type=text] { width:min(360px,80%); }
+  button { font-size:14px; padding:7px 13px; border-radius:6px; border:1px solid var(--line);
+           background:var(--panel); color:var(--fg); cursor:pointer; }
+  button.primary { background:var(--fg); color:var(--bg); }
+  .done-tag { color:var(--ok); font-weight:600; font-size:13px; margin-left:6px; }
   .help { font-size:12px; opacity:.7; margin-top:4px; }
+  .listen { font-size:13px; margin-left:4px; user-select:none; }
+  .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:4px; }
 </style>
 </head>
 <body>
 <header>
   <h1>ScribeCheck failure taxonomy</h1>
-  <div class="meta">
-    <span id="progress">0</span> labeled.
-    <button id="export" style="float:right">Export CSV</button>
+  <div class="bar">
+    <span class="status">
+      <strong id="progress">0</strong> of <strong id="total">0</strong> labeled.
+      <span id="saved"></span>
+    </span>
+    <button id="next">Next unlabeled</button>
+    <button id="import">Import CSV</button>
+    <button id="export" class="primary">Export CSV</button>
+    <button id="clear">Clear</button>
+    <input type="file" id="file" accept=".csv" hidden>
+  </div>
+  <div class="help">
+    Work saves to this browser automatically as you type, so you can close the tab
+    and pick up here. Export writes the CSV you keep; Import restores from one, which
+    is how you move to another browser or machine.
   </div>
 </header>
 <div id="rows"></div>
+<p class="help">Codes &mdash; DRUG-SUB: one real drug transcribed as a different real drug; DRUG-DEL: drug name dropped or corrupted into a non-word; DOSE-VAL: numeric value changed; DOSE-UNIT: unit changed, value intact; NEG-FLIP: negation lost or inverted; TERM-CORRUPT: clinical term corrupted into a plausible-reading wrong term; PHON-ACCENT: error traceable to accent phonology (verify by listening); BENIGN: error with no clinical meaning change</p>
+<p class="help">Severity &mdash; S1: could change a clinical action if unreviewed (wrong drug, wrong value, flipped negation); S2: misleading, likely caught by a reader; S3: cosmetic</p>
 <script>
 const ROWS = [
  {
@@ -1245,63 +1266,246 @@ const ROWS = [
 ];
 const CODES = ["DRUG-SUB", "DRUG-DEL", "DOSE-VAL", "DOSE-UNIT", "NEG-FLIP", "TERM-CORRUPT", "PHON-ACCENT", "BENIGN"];
 const SEVERITIES = ["S1", "S2", "S3"];
-const state = {};
+const STORAGE_KEY = "scribecheck-labels-v1";
 
-function markup(text) {
-  return text.replace(/\*([^*]+)\*/g, "<mark>$1</mark>");
+// Keyed on clip and provider rather than row number, so labels survive the
+// sheet being regenerated. Row order is a presentation detail; the pair is the
+// identity of the thing being judged.
+const keyOf = (r) => r.clip_id + "|" + r.provider;
+
+let state = {};
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const saved = JSON.parse(raw);
+    state = saved.labels || {};
+    return saved.at || null;
+  } catch (e) {
+    // A corrupt entry must not take the page down with it: an unusable
+    // restore is recoverable, a blank screen is not.
+    console.warn("could not restore saved labels", e);
+    state = {};
+    return null;
+  }
 }
 
-document.getElementById("rows").innerHTML = ROWS.map(r => `
+function save() {
+  const at = new Date().toISOString();
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ at, labels: state }));
+    showSaved(at);
+  } catch (e) {
+    // Private browsing and a full quota both land here. Say so plainly rather
+    // than letting hours of labelling vanish silently at the end.
+    document.getElementById("saved").textContent =
+      "NOT SAVING to this browser (" + e.name + "). Export often.";
+  }
+}
+
+function showSaved(at) {
+  const d = new Date(at);
+  document.getElementById("saved").textContent =
+    "Saved " + d.toLocaleTimeString() + ".";
+}
+
+function isDone(k) {
+  return Boolean(state[k] && state[k].failure_code && state[k].severity);
+}
+
+function refresh() {
+  let n = 0;
+  for (const r of ROWS) {
+    const k = keyOf(r);
+    const card = document.getElementById("card-" + r.row_id);
+    const tag = document.getElementById("done-" + r.row_id);
+    if (isDone(k)) {
+      n++;
+      card.classList.add("done");
+      tag.textContent = "labeled";
+    } else {
+      card.classList.remove("done");
+      tag.textContent = "";
+    }
+  }
+  document.getElementById("progress").textContent = n;
+  document.getElementById("total").textContent = ROWS.length;
+}
+
+function markup(text) {
+  return String(text).replace(/\*([^*]+)\*/g, "<mark>$1</mark>");
+}
+
+const escapeHtml = (s) =>
+  String(s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+document.getElementById("rows").innerHTML = ROWS.map((r) => `
   <div class="card" id="card-${r.row_id}">
-    <div class="tags">#${r.row_id} &middot; ${r.provider} &middot; ${r.accent} &middot;
-      tier ${r.tier} &middot; ${r.domain} &middot; ${r.flag}</div>
-    <audio controls preload="none" src="../data/audio/${r.clip_id}.wav"></audio>
-    <div class="text"><span class="label">reference&nbsp;</span>${markup(r.ref)}</div>
-    <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(r.hyp)}</div>
-    <div>
+    <div class="tags">#${r.row_id} &middot; ${escapeHtml(r.provider)} &middot; ${escapeHtml(r.accent)}
+      &middot; tier ${escapeHtml(r.tier)} &middot; ${escapeHtml(r.domain)} &middot; ${escapeHtml(r.flag)}</div>
+    <audio controls preload="none" src="../data/audio/${encodeURIComponent(r.clip_id)}.wav"></audio>
+    <div class="text"><span class="label">reference&nbsp;</span>${markup(escapeHtml(r.ref))}</div>
+    <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(escapeHtml(r.hyp))}</div>
+    <div class="controls">
       <select data-row="${r.row_id}" data-field="failure_code">
         <option value="">code...</option>
-        ${CODES.map(c => `<option value="${c}">${c}</option>`).join("")}
+        ${CODES.map((c) => `<option value="${c}">${c}</option>`).join("")}
       </select>
       <select data-row="${r.row_id}" data-field="severity">
         <option value="">severity...</option>
-        ${SEVERITIES.map(s => `<option value="${s}">${s}</option>`).join("")}
+        ${SEVERITIES.map((s) => `<option value="${s}">${s}</option>`).join("")}
       </select>
       <input type="text" data-row="${r.row_id}" data-field="note" placeholder="note (optional)">
-      <span class="done" id="done-${r.row_id}"></span>
+      <label class="listen">
+        <input type="checkbox" data-row="${r.row_id}" data-field="needs_listen"> needs a listen
+      </label>
+      <span class="done-tag" id="done-${r.row_id}"></span>
     </div>
   </div>`).join("");
 
-document.getElementById("rows").addEventListener("input", e => {
-  const row = e.target.dataset.row;
-  if (!row) return;
-  state[row] = state[row] || {};
-  state[row][e.target.dataset.field] = e.target.value;
-  const filled = state[row].failure_code && state[row].severity;
-  document.getElementById("done-" + row).textContent = filled ? "labeled" : "";
-  document.getElementById("progress").textContent =
-    Object.values(state).filter(v => v.failure_code && v.severity).length;
+const byRowId = {};
+for (const r of ROWS) byRowId[r.row_id] = r;
+
+function restoreInputs() {
+  for (const el of document.querySelectorAll("[data-row]")) {
+    const r = byRowId[el.dataset.row];
+    const saved = state[keyOf(r)];
+    if (!saved) continue;
+    const v = saved[el.dataset.field];
+    if (v === undefined) continue;
+    if (el.type === "checkbox") el.checked = Boolean(v);
+    else el.value = v;
+  }
+}
+
+document.getElementById("rows").addEventListener("input", (e) => {
+  const rowId = e.target.dataset.row;
+  if (!rowId) return;
+  const r = byRowId[rowId];
+  const k = keyOf(r);
+  state[k] = state[k] || {};
+  state[k][e.target.dataset.field] =
+    e.target.type === "checkbox" ? e.target.checked : e.target.value;
+  save();
+  refresh();
 });
 
+document.getElementById("next").addEventListener("click", () => {
+  const target = ROWS.find((r) => !isDone(keyOf(r)));
+  if (!target) {
+    alert("All " + ROWS.length + " rows are labeled.");
+    return;
+  }
+  document.getElementById("card-" + target.row_id)
+    .scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+const HEADER = ["row_id","clip_id","provider","accent","tier","domain",
+                "ref_excerpt","hyp_excerpt","entity_expected","entity_transcribed",
+                "auto_flag","failure_code","severity","needs_listen","note"];
+
 document.getElementById("export").addEventListener("click", () => {
-  const header = ["row_id","clip_id","provider","accent","tier","domain",
-                  "ref_excerpt","hyp_excerpt","entity_expected","entity_transcribed",
-                  "auto_flag","failure_code","severity","note"];
-  const escape = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
-  const lines = [header.join(",")];
+  const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const lines = [HEADER.join(",")];
   for (const r of ROWS) {
-    const s = state[r.row_id] || {};
+    const s = state[keyOf(r)] || {};
     lines.push([r.row_id, r.clip_id, r.provider, r.accent, r.tier, r.domain,
                 r.ref, r.hyp, r.entity, "", r.flag,
-                s.failure_code || "", s.severity || "", s.note || ""].map(escape).join(","));
+                s.failure_code || "", s.severity || "",
+                s.needs_listen ? "yes" : "", s.note || ""].map(esc).join(","));
   }
-  const url = URL.createObjectURL(new Blob([lines.join("\n")], {type:"text/csv"}));
+  const url = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/csv" }));
   const link = document.createElement("a");
-  link.href = url; link.download = "failure_taxonomy.csv"; link.click();
+  link.href = url;
+  link.download = "failure_taxonomy.csv";
+  link.click();
   URL.revokeObjectURL(url);
 });
+
+// Minimal RFC 4180 reader: enough for our own export, which is the only file
+// this is asked to read. Handles quoted fields, doubled quotes and newlines
+// inside a field, because the excerpt columns contain commas.
+function parseCsv(text) {
+  const rows = [];
+  let row = [], field = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') inQuotes = false;
+      else field += c;
+    } else if (c === '"') inQuotes = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
+    else if (c !== "\r") field += c;
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows.filter((r) => r.length > 1);
+}
+
+document.getElementById("import").addEventListener("click", () =>
+  document.getElementById("file").click());
+
+document.getElementById("file").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const rows = parseCsv(String(reader.result));
+    if (!rows.length) { alert("That file has no rows."); return; }
+    const head = rows[0];
+    const col = (name) => head.indexOf(name);
+    const iClip = col("clip_id"), iProv = col("provider"), iCode = col("failure_code");
+    if (iClip < 0 || iProv < 0 || iCode < 0) {
+      alert("That does not look like a ScribeCheck export: no clip_id, provider and failure_code columns.");
+      return;
+    }
+    const iSev = col("severity"), iNote = col("note"), iListen = col("needs_listen");
+    let restored = 0, skipped = 0;
+    for (const r of rows.slice(1)) {
+      const clip = r[iClip], prov = r[iProv];
+      if (!clip || !prov) { skipped++; continue; }
+      const k = clip + "|" + prov;
+      const entry = {
+        failure_code: r[iCode] || "",
+        severity: iSev >= 0 ? r[iSev] || "" : "",
+        note: iNote >= 0 ? r[iNote] || "" : "",
+        needs_listen: iListen >= 0 && r[iListen] === "yes",
+      };
+      if (entry.failure_code || entry.severity || entry.note || entry.needs_listen) {
+        state[k] = entry;
+        restored++;
+      }
+    }
+    save();
+    restoreInputs();
+    refresh();
+    alert("Restored " + restored + " labeled rows." +
+          (skipped ? " Skipped " + skipped + " rows with no clip_id or provider." : ""));
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+});
+
+document.getElementById("clear").addEventListener("click", () => {
+  const n = ROWS.filter((r) => isDone(keyOf(r))).length;
+  if (!confirm("Delete all " + n + " labels saved in this browser? Export first if you want them.")) return;
+  state = {};
+  localStorage.removeItem(STORAGE_KEY);
+  for (const el of document.querySelectorAll("[data-row]")) {
+    if (el.type === "checkbox") el.checked = false;
+    else el.value = "";
+  }
+  document.getElementById("saved").textContent = "Cleared.";
+  refresh();
+});
+
+const restoredAt = load();
+restoreInputs();
+refresh();
+if (restoredAt) showSaved(restoredAt);
 </script>
-<p class="help">Codes &mdash; DRUG-SUB: one real drug transcribed as a different real drug; DRUG-DEL: drug name dropped or corrupted into a non-word; DOSE-VAL: numeric value changed; DOSE-UNIT: unit changed, value intact; NEG-FLIP: negation lost or inverted; TERM-CORRUPT: clinical term corrupted into a plausible-reading wrong term; PHON-ACCENT: error traceable to accent phonology (verify by listening); BENIGN: error with no clinical meaning change</p>
-<p class="help">Severity &mdash; S1: could change a clinical action if unreviewed (wrong drug, wrong value, flipped negation); S2: misleading, likely caught by a reader; S3: cosmetic</p>
 </body>
 </html>
