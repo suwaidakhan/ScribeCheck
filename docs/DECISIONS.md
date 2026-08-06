@@ -106,3 +106,17 @@ name a body part or a lab result far more often than a prescription. The
 lexicon leans to precision for the reason stated in the module docstring: a
 missed drug costs one observation, a false term costs every clip that says the
 word.
+
+**D012 | clip identity | Use the `audio_ids` column as `clip_id`. | Use the
+basename of `audio_paths`, which the first version did. | The basename is not
+unique. 46 filenames in the test split appear in two different session
+directories: the same prompt read by two different speakers, stored under the
+same name, with different durations and an identical transcript. Keyed on the
+basename, the manifest carried duplicate clip_ids, extraction would have written
+one clip over the other, and the surviving row would have paired one speaker's
+audio with a transcript verified against another's. `audio_paths` and
+`audio_ids` are both unique across all 6,319 rows, so either works as identity;
+`audio_ids` is used because it is already a single token and needs no parsing.
+`path` is kept alongside it, because locating the file inside the tarball needs
+the full path. Caught by the manifest's own duplicate-clip_id check, which is
+the same failure signature the overnight run's integrity check 4 looks for.
