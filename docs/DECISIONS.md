@@ -137,6 +137,46 @@ is still transcribed correctly, while a different drug appearing far away in a
 long clip is not evidence that this mention was swapped. Applied identically to
 all five configurations.
 
+**D017 | AssemblyAI route and model | Call the sync endpoint
+`sync.assemblyai.com/transcribe` and name `universal-3-5-pro` explicitly in the
+`X-AAI-Model` header. | The async `/v2/transcript` route with no model
+parameter, which is what the first version did. | Two separate faults, one of
+which would have put a false number in the results.
+
+The model was never being requested. On the async route the model parameter is
+optional, and when it is omitted AssemblyAI applies its own default. `config.py`
+declared `universal`, which is not a valid model string on any route, and that
+label was written into every cache record and every results row. The benchmark
+would have reported accuracy for a model it never asked for. Naming the model
+explicitly is the fix; `universal-3-5-pro` is the current flagship, which is
+what a buyer evaluating AssemblyAI today would use.
+
+The latency was measuring the wrong thing. The async route is upload, then
+submit, then poll until the job settles, and the poll loop slept two seconds
+between checks. So the figure recorded for AssemblyAI was dominated by that
+sleep rather than by anything AssemblyAI did, and M5 places it in a column
+beside three providers that answer in a single request. The sync route returns
+the finished transcript in one round trip and reports its own
+`request_time_ms`, which is the provider's processing time with our network and
+our polling excluded. Every clip in the manifest is 3 to 30 seconds of 16 kHz
+mono PCM16, comfortably inside the sync route's 80 ms to 120 s and 40 MB
+limits. Measured on a real clip: 545 ms against the several seconds the polling
+path would have reported. The sync route does not expose diarisation, chapters
+or PII redaction, none of which this benchmark uses.
+
+**D018 | Gemini model pinning | Pin `gemini-3.6-flash`, version
+`3.6-flash-07-2026`. | `gemini-flash-latest`, which the first version used. | An
+alias is a moving target, and CLAUDE.md requires that a scoring rerun reproduce
+identical numbers. Our own results are safe either way because every response is
+cached, but anyone reproducing this benchmark later would silently get a
+different model behind the same name and no way to tell from the manifest. The
+two were also observed to differ: on the same clip, `gemini-flash-latest`
+answered in 5.9 s and `gemini-3.6-flash` in 16.9 s with a different transcript,
+so the alias is not simply a pointer to the newest version. Checked against
+`GET /v1beta/models` rather than assumed: `gemini-3.6-flash` is the newest
+stable flash release, and `gemini-2.5-flash` now returns 404 for newly created
+accounts, so a name from training data would have failed outright.
+
 **D016 | Whisper host | Run Whisper through Groq's OpenAI-compatible endpoint on
 `whisper-large-v3`, and drop the OpenAI configuration entirely. | Call OpenAI's
 `/v1/audio/transcriptions` on `whisper-1`, as SPEC section 4 names it. | Suwaid

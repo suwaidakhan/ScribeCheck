@@ -186,6 +186,58 @@ def _list_cost(provider_id: str, audio_seconds: float) -> float:
     return audio_seconds / 60 * float(config.PROVIDERS[provider_id]["usd_per_min"])
 
 
+def _json(response: requests.Response) -> dict:
+    """Parse a provider response, or fail in the one way the run understands.
+
+    A 200 carrying an HTML error page from a proxy is rare and real. Left
+    unguarded it raises JSONDecodeError, which is neither of the two exceptions
+    `_transcribe_with_backoff` catches, so it would escape and end a 400-clip
+    unattended run on one bad response.
+    """
+    try:
+        payload = response.json()
+    except ValueError as exc:
+        raise TranscriptionFailed(
+            f"response was not JSON: {response.text[:200]}"
+        ) from exc
+    if not isinstance(payload, dict):
+        raise TranscriptionFailed(
+            f"expected a JSON object, got {type(payload).__name__}"
+        )
+    return payload
+
+
+def _reported_number(payload: dict, key: str) -> float | None:
+    """A number a provider reported, or None if it is missing or unusable.
+
+    Providers hand us durations and timings we then do arithmetic on. A value
+    that will not convert would raise TypeError or ValueError, neither of
+    which `_transcribe_with_backoff` catches, so one odd response would end a
+    400-clip unattended run. None lets each caller fall back to its own
+    measurement instead.
+    """
+    raw = payload.get(key)
+    if raw is None:
+        return None
+    try:
+        value = float(raw)
+    except (TypeError, ValueError):
+        return None
+    return value if value > 0 else None
+
+
+def _reported_latency_ms(payload: dict, key: str, started: float) -> int:
+    """The provider's own processing time when it gives one, ours otherwise.
+
+    A latency figure is not worth losing a transcript over, so this falls back
+    rather than raising.
+    """
+    reported = _reported_number(payload, key)
+    if reported is not None:
+        return round(reported)
+    return round((time.monotonic() - started) * 1000)
+
+
 def transcribe_groq(audio_path: Path, provider_id: str) -> dict:
     """Whisper, hosted by Groq. See DECISIONS D016.
 
@@ -213,7 +265,7 @@ def transcribe_groq(audio_path: Path, provider_id: str) -> dict:
         )
     _check(response)
     return {
-        "text": response.json().get("text", ""),
+        "text": _json(response).get("text", ""),
         "latency_ms": round((time.monotonic() - started) * 1000),
         "cost_usd": 0.0,  # Free tier.
     }
@@ -235,12 +287,16 @@ def transcribe_deepgram(audio_path: Path, provider_id: str) -> dict:
         timeout=300,
     )
     _check(response)
-    payload = response.json()
+    payload = _json(response)
     try:
         text = payload["results"]["channels"][0]["alternatives"][0]["transcript"]
     except (KeyError, IndexError) as exc:
         raise TranscriptionFailed(f"unexpected Deepgram payload: {exc}") from exc
-    seconds = payload.get("metadata", {}).get("duration") or _wav_seconds(audio_path)
+    metadata = payload.get("metadata")
+    reported = (
+        _reported_number(metadata, "duration") if isinstance(metadata, dict) else None
+    )
+    seconds = reported if reported is not None else _wav_seconds(audio_path)
     return {
         "text": text,
         "latency_ms": round((time.monotonic() - started) * 1000),
@@ -249,45 +305,44 @@ def transcribe_deepgram(audio_path: Path, provider_id: str) -> dict:
 
 
 def transcribe_assemblyai(audio_path: Path, provider_id: str) -> dict:
+    """AssemblyAI's sync route: one request in, finished transcript out.
+
+    The async route this replaced uploaded, submitted, then polled every two
+    seconds until the job settled. It worked, but the latency it recorded was
+    mostly that sleep timer rather than anything AssemblyAI did, and M5 puts
+    that number in a column beside three providers that answer in one request.
+    Every clip here is 3 to 30 seconds of 16 kHz mono PCM16, comfortably inside
+    the sync route's 80 ms to 120 s and 40 MB limits. See DECISIONS D017.
+
+    Two shapes here are AssemblyAI-specific and easy to get wrong. The key goes
+    in the Authorization header raw, with no Bearer prefix, and the model is
+    named in an X-AAI-Model header rather than in the body.
+    """
     started = time.monotonic()
-    headers = {"authorization": _api_key(provider_id)}
-
-    upload = requests.post(
-        "https://api.assemblyai.com/v2/upload",
-        headers=headers,
-        data=audio_path.read_bytes(),
-        timeout=300,
-    )
-    _check(upload)
-
-    job = requests.post(
-        "https://api.assemblyai.com/v2/transcript",
-        headers=headers,
-        json={"audio_url": upload.json()["upload_url"]},
-        timeout=60,
-    )
-    _check(job)
-    job_id = job.json()["id"]
-
-    # AssemblyAI is asynchronous: submit, then poll until it settles.
-    while True:
-        poll = requests.get(
-            f"https://api.assemblyai.com/v2/transcript/{job_id}",
-            headers=headers,
-            timeout=60,
+    key = _api_key(provider_id)
+    with audio_path.open("rb") as handle:
+        response = requests.post(
+            "https://sync.assemblyai.com/transcribe",
+            headers={
+                "Authorization": key,  # Raw. A Bearer prefix 401s here.
+                "X-AAI-Model": str(config.PROVIDERS[provider_id]["model"]),
+            },
+            files={"audio": (audio_path.name, handle, "audio/wav")},
+            timeout=300,
         )
-        _check(poll)
-        payload = poll.json()
-        if payload["status"] == "completed":
-            break
-        if payload["status"] == "error":
-            raise TranscriptionFailed(payload.get("error", "unknown AssemblyAI error"))
-        time.sleep(2)
-
+    _check(response)
+    payload = _json(response)
+    # Bill against the duration AssemblyAI itself measured, the same way the
+    # Deepgram path uses metadata.duration. It is what the invoice will be
+    # based on, and it saves re-reading the file we just uploaded.
+    reported_ms = _reported_number(payload, "audio_duration_ms")
+    seconds = (
+        reported_ms / 1000 if reported_ms is not None else _wav_seconds(audio_path)
+    )
     return {
         "text": payload.get("text") or "",
-        "latency_ms": round((time.monotonic() - started) * 1000),
-        "cost_usd": _list_cost(provider_id, _wav_seconds(audio_path)),
+        "latency_ms": _reported_latency_ms(payload, "request_time_ms", started),
+        "cost_usd": _list_cost(provider_id, seconds),
     }
 
 
@@ -321,7 +376,7 @@ def transcribe_gemini(audio_path: Path, provider_id: str) -> dict:
         timeout=300,
     )
     _check(response)
-    payload = response.json()
+    payload = _json(response)
     try:
         text = payload["candidates"][0]["content"]["parts"][0]["text"]
     except (KeyError, IndexError) as exc:

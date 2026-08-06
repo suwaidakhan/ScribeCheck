@@ -91,14 +91,14 @@ PROVIDERS: dict[str, dict[str, object]] = {
     },
     "aai": {
         "vendor": "assemblyai",
-        "model": "universal",
+        "model": "universal-3-5-pro",
         "env_key": "ASSEMBLYAI_API_KEY",
         "usd_per_min": 0.0035,
         "free_tier": True,
     },
     "gemini": {
         "vendor": "google",
-        "model": "gemini-flash-latest",
+        "model": "gemini-3.6-flash",
         "env_key": "GOOGLE_API_KEY",
         "usd_per_min": 0.0,
         "free_tier": True,

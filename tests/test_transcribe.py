@@ -251,3 +251,93 @@ class TestGroqTranscriber:
         self._capture(monkeypatch, status=429)
         with pytest.raises(transcribe.RateLimited):
             transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")
+
+
+class TestAssemblyAiTranscriber:
+    """The sync route, not the upload-submit-poll one. See DECISIONS D017.
+
+    Two things here would silently corrupt a result rather than fail loudly.
+    AssemblyAI takes the raw key with no Bearer prefix, and it picks its own
+    default model when none is named, which would let the manifest record a
+    model that never ran.
+    """
+
+    def _capture(self, monkeypatch, payload=None, status=200):
+        sent = {}
+
+        class Response:
+            status_code = status
+            ok = status < 400
+            text = ""
+
+            def json(self):
+                if payload is not None:
+                    return payload
+                # Shape observed from the live sync API on 2026-08-06.
+                return {"text": "hello", "audio_duration_ms": 7280}
+
+        def fake_post(url, **kwargs):
+            sent["url"] = url
+            sent.update(kwargs)
+            return Response()
+
+        monkeypatch.setattr(transcribe.requests, "post", fake_post)
+        monkeypatch.setenv("ASSEMBLYAI_API_KEY", "test-key")
+        return sent
+
+    def test_uses_the_sync_endpoint(self, monkeypatch, audio_dir):
+        sent = self._capture(monkeypatch)
+        transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+        assert sent["url"] == "https://sync.assemblyai.com/transcribe"
+
+    def test_authenticates_with_the_raw_key_and_no_bearer(self, monkeypatch, audio_dir):
+        # A Bearer prefix here 401s. It is the documented top mistake.
+        sent = self._capture(monkeypatch)
+        transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+        assert sent["headers"]["Authorization"] == "test-key"
+        assert "Bearer" not in sent["headers"]["Authorization"]
+
+    def test_names_the_model_explicitly(self, monkeypatch, audio_dir):
+        # Omitting this lets the API choose, and the manifest would then record
+        # a model that never ran.
+        sent = self._capture(monkeypatch)
+        transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+        assert sent["headers"]["X-AAI-Model"] == config.PROVIDERS["aai"]["model"]
+
+    def test_returns_the_transcribed_text(self, monkeypatch, audio_dir):
+        self._capture(
+            monkeypatch,
+            payload={"text": "takes metformin daily", "audio_duration_ms": 7280},
+        )
+        result = transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+        assert result["text"] == "takes metformin daily"
+
+    def test_prefers_the_latency_the_api_reports(self, monkeypatch, audio_dir):
+        # request_time_ms is the provider's own processing time, which is the
+        # number M5 wants rather than one that includes our network round trip.
+        self._capture(
+            monkeypatch,
+            payload={"text": "x", "request_time_ms": 348.3, "audio_duration_ms": 7280},
+        )
+        result = transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+        assert result["latency_ms"] == 348
+
+    def test_falls_back_to_measured_latency(self, monkeypatch, audio_dir):
+        self._capture(monkeypatch, payload={"text": "x", "audio_duration_ms": 7280})
+        result = transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+        assert result["latency_ms"] >= 0
+
+    def test_a_missing_key_fails_before_any_request(self, monkeypatch, audio_dir):
+        monkeypatch.delenv("ASSEMBLYAI_API_KEY", raising=False)
+
+        def explode(*args, **kwargs):
+            raise AssertionError("called the API without a key")
+
+        monkeypatch.setattr(transcribe.requests, "post", explode)
+        with pytest.raises(transcribe.TranscriptionFailed):
+            transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+
+    def test_a_rate_limit_is_retryable(self, monkeypatch, audio_dir):
+        self._capture(monkeypatch, status=429)
+        with pytest.raises(transcribe.RateLimited):
+            transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
