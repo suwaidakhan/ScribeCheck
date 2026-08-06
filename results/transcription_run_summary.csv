@@ -1,2 +1,6 @@
-provider,model,clips_ok,clips_failed,cost_usd,median_latency_ms,stopped_on_cap
-gemini,gemini-3.5-flash-lite,400,0,0.0,4112,False
+provider,model,clips_ok,clips_failed,cost_usd,median_latency_ms,audio_hours
+whisper,whisper-large-v3,400,0,0.0,952,1.191
+dg-general,nova-3,400,0,0.551,752,1.191
+dg-medical,nova-3-medical,400,0,0.551,876,1.191
+aai,universal-3-5-pro,400,0,0.2505,518,1.191
+gemini,gemini-3.5-flash-lite,400,0,0.0,4112,1.191
