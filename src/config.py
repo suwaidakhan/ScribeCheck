@@ -98,7 +98,7 @@ PROVIDERS: dict[str, dict[str, object]] = {
     },
     "gemini": {
         "vendor": "google",
-        "model": "gemini-3.6-flash",
+        "model": "gemini-3.5-flash-lite",
         "env_key": "GOOGLE_API_KEY",
         "usd_per_min": 0.0,
         "free_tier": True,

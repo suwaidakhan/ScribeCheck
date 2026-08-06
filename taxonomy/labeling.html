@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScribeCheck failure taxonomy</title>
+<style>
+  :root { --bg:#fbfaf7; --fg:#1c1c1a; --line:#dcd8ce; --mark:#b23c17; --ok:#2f6b4f; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#16171a; --fg:#e8e6e1; --line:#33353a; --mark:#ff8a5c; --ok:#6fce9f; }
+  }
+  body { background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+         margin:0; padding:24px; }
+  header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line);
+           padding:12px 0; margin-bottom:16px; z-index:5; }
+  h1 { font-size:20px; margin:0 0 6px; }
+  .meta { font-size:13px; opacity:.75; }
+  .card { border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:14px; }
+  .tags { font-size:12px; text-transform:uppercase; letter-spacing:.05em; opacity:.7; margin-bottom:8px; }
+  .text { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14px; margin:6px 0; }
+  .label { font-size:12px; opacity:.7; }
+  mark { background:none; color:var(--mark); font-weight:700; }
+  audio { width:100%; margin:8px 0; }
+  select { font-size:15px; padding:6px; margin-right:10px; background:var(--bg); color:var(--fg);
+           border:1px solid var(--line); border-radius:5px; }
+  input[type=text] { font-size:15px; padding:6px; width:min(420px,90%); background:var(--bg);
+                     color:var(--fg); border:1px solid var(--line); border-radius:5px; }
+  button { font-size:15px; padding:9px 16px; border-radius:6px; border:1px solid var(--line);
+           background:var(--fg); color:var(--bg); cursor:pointer; }
+  .done { color:var(--ok); font-weight:600; }
+  .help { font-size:12px; opacity:.7; margin-top:4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>ScribeCheck failure taxonomy</h1>
+  <div class="meta">
+    <span id="progress">0</span> labeled.
+    <button id="export" style="float:right">Export CSV</button>
+  </div>
+</header>
+<div id="rows"></div>
+<script>
+const ROWS = [
+ {
+  "row_id": 1,
+  "clip_id": "950669fd990036359a84fc27a609d98b",
+  "provider": "aai",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "ulna styloid process, subsequent. TABLET, EXTENDED RELEASE, *ORAL* *REQUIP* XL, *ROPINIROLE* HYDROCHLORIDE, EQ 12MG BASE. Exposure",
+  "hyp": "ulna styloid process, subsequent. TABLET, EXTENDED RELEASE, *ORALLY* *REQUIPED* XL, *PROPRANOLOL* HYDROCHLORIDE, EQ 12MG BASE. Exposure",
+  "entity": "ropinirole",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 2,
+  "clip_id": "7ac2b7f21b9550f6de49f8047e0c0e19",
+  "provider": "dg-general",
+  "accent": "luo",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Long-term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated with neuroleptic",
+  "hyp": "*long* *hyphen* *term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated",
+  "entity": "haloperidol|chlorpromazine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 3,
+  "clip_id": "a52cc1bdf941a9b4d76061ddbda05072",
+  "provider": "dg-medical",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Quetiapine* *Fumarate* *25* *mg* *Tablet* *Sig:* *One* *1* *Tablet* *PO* *QHSonce* a day at bedtime *as*",
+  "hyp": "*glatropin* *humira* *twenty* *five* *milligram* *tablet* *civitrol* *one* *tablet* *is* *once* a day at bedtime",
+  "entity": "quetiapine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 4,
+  "clip_id": "af4fbadeeb6f189c5d29e6526fa0b02c",
+  "provider": "dg-medical",
+  "accent": "idoma",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Held* *captopril* *and* clonidine as *Farwar* md *parameters.*",
+  "hyp": "*head* *cap* *to* *praline* clonidine as *far* *wall* md *parameters*",
+  "entity": "captopril|clonidine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 5,
+  "clip_id": "7ac2b7f21b9550f6de49f8047e0c0e19",
+  "provider": "dg-medical",
+  "accent": "luo",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Long-term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated with neuroleptic",
+  "hyp": "*long* *hyphen* *term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated",
+  "entity": "haloperidol|chlorpromazine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 6,
+  "clip_id": "c0a9d8722ec57a9d7c0014132185a05a",
+  "provider": "gemini",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Her* *metoprolol* and *lisinopril* were stopped due to *hypotension.*",
+  "hyp": "*Our* *metropolo* and *Lisinopril* were stopped due to *hypertension.*",
+  "entity": "metoprolol|lisinopril",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 7,
+  "clip_id": "5b5cea61187384389906b36683ffa428",
+  "provider": "gemini",
+  "accent": "zulu",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Adverse* effects and drug *interactions* with *codeineare* similar to those reported for *morphine,* *althoughthey* *are* *less*",
+  "hyp": "*adverse* effects and drug *interaction* with *quinine* similar to those reported for *monotherapy* *chloroquine* *and* *all*",
+  "entity": "morphine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 8,
+  "clip_id": "c43d8faa6efe9020bdd669a67ba1e988",
+  "provider": "gemini",
+  "accent": "efik",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*SOLUTION,* *SUBCUTANEOUS* *RITUXAN* *HYCELA,* *RITUXIMAB;* *HYALURONIDASE* *(HUMAN* *RECOMBINANT),* *1600MG* and *26800UNITS/13.4ML*",
+  "hyp": "*Solution{comma}* *subcutaneous{comma}* *wituzan{comma}* *icella{comma}* *wituzima{comma}* *semicolon{comma}* *hyaluronidase{comma}* *open* *bracket{comma}* *human* *recombinant{comma}* *close* *bracket{comma}* *{comma}* *1,600* *mg*",
+  "entity": "rituximab|hyaluronidase",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 9,
+  "clip_id": "c0a9d8722ec57a9d7c0014132185a05a",
+  "provider": "whisper",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Her* *metoprolol* and lisinopril were stopped due to *hypotension.*",
+  "hyp": "*Parmetropole* and lisinopril were stopped due to *hypertension.*",
+  "entity": "metoprolol|lisinopril",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 10,
+  "clip_id": "8cb3809701786ccfebe73b788fdbf219",
+  "provider": "whisper",
+  "accent": "setswana",
+  "tier": "B",
+  "domain": "general",
+  "ref": "Rotimi *Yetunde* *Other* *Antimalarial* drugs include pyrimethamine, proguanil, *chlorproguanil,* and *trimethoprim*",
+  "hyp": "Rotimi *yetunde,* *other* *antimalarial* drugs include pyrimethamine, proguanil, *chlorpropuanil,* and *trimethropium.*",
+  "entity": "pyrimethamine|trimethoprim",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 11,
+  "clip_id": "c43d8faa6efe9020bdd669a67ba1e988",
+  "provider": "whisper",
+  "accent": "efik",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*SOLUTION,* *SUBCUTANEOUS* *RITUXAN* *HYCELA,* *RITUXIMAB;* *HYALURONIDASE* *(HUMAN* *RECOMBINANT),* *1600MG* and *26800UNITS/13.4ML*",
+  "hyp": "*Solution,* *subcontainers,* *vitruzan,* *isella,* *vitruzima,* *semicolon,* *hyaluronidase,* *human,* *recombinant,* *1600* *mg* and *26,800* *units,* *13.4* *ml.*",
+  "entity": "rituximab|hyaluronidase",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 12,
+  "clip_id": "2a2db36f700c4b370d82f111f4e23096",
+  "provider": "dg-general",
+  "accent": "etsako",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*The* following medication change was *made:* *-* *ADDED:* *Amoxicillin/Clavulanic* *acid:* take *1* tablet twice a day",
+  "hyp": "*the* following medication change was *made* *added* *amoxicillin* *clavulanic* *acid* take *one* tablet twice a day",
+  "entity": "amoxicillin|folate|thiamine|multivitamin",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 13,
+  "clip_id": "4524d44d0b4b586ba5f80bab94a36374",
+  "provider": "gemini",
+  "accent": "estako",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Metoprolol* *100mg* *Hospital* *Dekunle2.*",
+  "hyp": "*Methotrexate* *100* *mg,* *h\u00f4pital* *de* *Creil-sur-Oise.*",
+  "entity": "metoprolol",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 14,
+  "clip_id": "cf605b3aaadbd365452e997fbc78122d",
+  "provider": "whisper",
+  "accent": "efik",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*TABLET,* *CHEWABLE,* *ORAL* *VYVANSE,* *LISDEXAMFETAMINE* *DIMESYLATE,* *10MG*",
+  "hyp": "*Tablets,* *chewable,* *oral* *vitamins,* *desamphetamine,* *dimethylate,* *10* *mg.*",
+  "entity": "lisdexamfetamine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 15,
+  "clip_id": "695771856cc6a19aadcc9c02daeb816b",
+  "provider": "gemini",
+  "accent": "estako",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "foreign body of other specified part of *neck,* *sequela.* *TABLET,* *ORAL* *ADVIL* *CONGESTION* *RELIEF,* *IBUPROFEN;* *PHENYLEPHRINE*",
+  "hyp": "foreign body of other specified part of *neck* *Sequela.* *Tablets:* *oral* *at* *view* *congestion* *relief* *ibuprofen,*",
+  "entity": "ibuprofen|phenylephrine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 16,
+  "clip_id": "7ac2b7f21b9550f6de49f8047e0c0e19",
+  "provider": "whisper",
+  "accent": "luo",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "schizophrenia and must be treated with neuroleptic *drugs* *haloperidol,* *chlorpromazine.*",
+  "hyp": "schizophrenia and must be treated with neuroleptic *drug* *shallow* *periodo,* *chlorpromazine,* *full* *stop.*",
+  "entity": "haloperidol|chlorpromazine",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 17,
+  "clip_id": "bd6c36ca7dfb7303fc8ca6e11274a52f",
+  "provider": "gemini",
+  "accent": "isixhosa",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "For example, ketoconazole and *triazolam* compete for binding to the CYP3A4 active site and thus exhibit",
+  "hyp": "For example, ketoconazole and *trizalam* compete for binding to the CYP3A4 active site and thus exhibit",
+  "entity": "ketoconazole|triazolam",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 18,
+  "clip_id": "bd6c36ca7dfb7303fc8ca6e11274a52f",
+  "provider": "whisper",
+  "accent": "isixhosa",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "For example, *ketoconazole* and triazolam compete for binding to the CYP3A4 active site and thus exhibit",
+  "hyp": "For example, *coma,* *catechonozole,* and triazolam compete for binding to the CYP3A4 active site and thus",
+  "entity": "ketoconazole|triazolam",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 19,
+  "clip_id": "2a2db36f700c4b370d82f111f4e23096",
+  "provider": "whisper",
+  "accent": "etsako",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "The following medication change was *made:* *-* *ADDED:* *Amoxicillin/Clavulanic* *acid:* *take* *1* tablet twice a day",
+  "hyp": "The following medication change was *made.* *Added* *amozicillin,* *clavulanic* *acid.* *Take* *one* tablet twice a day",
+  "entity": "amoxicillin|folate|thiamine|multivitamin",
+  "flag": "DRUG-SUB candidate"
+ },
+ {
+  "row_id": 20,
+  "clip_id": "aeffc6466b2f3e6a60d1a381c6688d62",
+  "provider": "aai",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "general",
+  "ref": "Empty *weight* *:* approximately *9* *,* *800* lb *4* *,* *445* kg",
+  "hyp": "Empty *weight:* approximately *9,800* lb *4,445* kg",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 21,
+  "clip_id": "fb226674b17933ee5365ba61f4e6f578",
+  "provider": "aai",
+  "accent": "etche",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Amt:* *57ML* *OPTI240;* *60ML* *OPTI320* *CPT*",
+  "hyp": "*Amount:* *27* *mL* *Opti* *240* *60* *mL* *Opti* *320* *CPT.*",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 22,
+  "clip_id": "320840b5470cf91679cb154ecddc4d86",
+  "provider": "dg-general",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*ELEVATED* *INR:* *The* patient was *given* *8* units of fresh frozen plasma with correction of *INR.*",
+  "hyp": "*elevated* *i* *and* *half* *the* patient was *immune* *eighty* units of fresh frozen plasma with correction",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 23,
+  "clip_id": "47563df782e059f397a062dc9c49dedc",
+  "provider": "dg-general",
+  "accent": "ebira",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*NEURO:* *PT* *SEDATED* *FOR* *COMFORT* *ON* *FENTANYL* *500MCQ/HR* *VERSED* *15MG/HR* *AND* *MS* *GTT* *AT* *5MG/HR.*",
+  "hyp": "*neuro* *patient* *submitted* *for* *comfort* *on* *fentanyl* *five* *hundred* *mcq* *per* *hour* *vas* *fifty* *milligram* *per*",
+  "entity": "fentanyl",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 24,
+  "clip_id": "320840b5470cf91679cb154ecddc4d86",
+  "provider": "dg-medical",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*ELEVATED* *INR:* *The* patient was *given* *8* units of fresh frozen plasma with correction of *INR.*",
+  "hyp": "*elevated* *i* *and* *r* *the* patient was *immune* *eighty* units of fresh frozen plasma with correction",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 25,
+  "clip_id": "47563df782e059f397a062dc9c49dedc",
+  "provider": "dg-medical",
+  "accent": "ebira",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*NEURO:* *PT* *SEDATED* *FOR* *COMFORT* *ON* *FENTANYL* *500MCQ/HR* *VERSED* *15MG/HR* *AND* *MS* *GTT* *AT* *5MG/HR.*",
+  "hyp": "*neuro* *patient* *sedated* *for* *comfort* *on* *fentanyl* *five* *hundred* *mcq* *per* *hour* *vas* *fifty* *milligram* *per*",
+  "entity": "fentanyl",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 26,
+  "clip_id": "868cbb2849424d087eb7b0b2dd76e3c6",
+  "provider": "dg-medical",
+  "accent": "bassa",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Allergic* dermatitis of right lower *eyelid.* *TABLET,* *ORAL* *CARBIDOPA* *AND* *LEVODOPA,* *CARBIDOPA;* *LEVODOPA,* *25MG;250MG.* *Glaucoma* secondary",
+  "hyp": "*allergic* dermatitis of right lower *eyelid* *tablets* *oral* *carbidopa* *and* *levodopa* *carbidopa* *levodopa* *twenty* *five* *milligrams*",
+  "entity": "carbidopa|levodopa|carbidopa|levodopa",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 27,
+  "clip_id": "aeffc6466b2f3e6a60d1a381c6688d62",
+  "provider": "gemini",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*Empty* *weight* *:* approximately *9* *,* *800* *lb* *4* *,* *445* kg",
+  "hyp": "*MTW* *column* approximately *9,800* *IP* *4,445* kg",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 28,
+  "clip_id": "52ad387abe4206177fecb12004fc81c5",
+  "provider": "gemini",
+  "accent": "pidgin",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Took* *62* and *35cc* well with yellow nipple.",
+  "hyp": "*262* and *335* *cc* well with yellow nipple.",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 29,
+  "clip_id": "bde569d1c5436b9011e7291e0591791d",
+  "provider": "gemini",
+  "accent": "itsekiri",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*30* units of *lantus* given *riss* *scale* per *cvicu* protocol.",
+  "hyp": "*10* units of *Lantus* given *rescale* per *CVICU* protocol.",
+  "entity": "lantus",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 30,
+  "clip_id": "aeffc6466b2f3e6a60d1a381c6688d62",
+  "provider": "whisper",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "general",
+  "ref": "Empty weight *:* *approximately* *9* *,* *800* *lb* *4* *,* *445* *kg*",
+  "hyp": "Empty weight *kulu,* *opposed* *medley* *9,800* *IB,* *4,445* *kg.*",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 31,
+  "clip_id": "868cbb2849424d087eb7b0b2dd76e3c6",
+  "provider": "whisper",
+  "accent": "bassa",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "Allergic dermatitis of right lower eyelid. *TABLET,* *ORAL* *CARBIDOPA* *AND* *LEVODOPA,* *CARBIDOPA;* *LEVODOPA,* *25MG;250MG.* *Glaucoma* secondary",
+  "hyp": "Allergic dermatitis of right lower eyelid. *Tablet.* *Oral* *carbidopa* *and* *levodopa.* *Carbidopa,* *levodopa,* *25* *mg,* *150*",
+  "entity": "carbidopa|levodopa|carbidopa|levodopa",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 32,
+  "clip_id": "320840b5470cf91679cb154ecddc4d86",
+  "provider": "aai",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "ELEVATED INR: The patient was given *8* units of fresh frozen plasma with correction of INR.",
+  "hyp": "ELEVATED INR: The patient was given *80* units of fresh frozen plasma with correction of INR.",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 33,
+  "clip_id": "52ad387abe4206177fecb12004fc81c5",
+  "provider": "dg-general",
+  "accent": "pidgin",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Took* *62* and *35cc* well with yellow *nipple.*",
+  "hyp": "*two* *sixty* *two* and *three* *thirty* *five* *cc* well with yellow *nipple*",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 34,
+  "clip_id": "957f35f6f15f3598a944d8e025c18c1e",
+  "provider": "dg-medical",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Ebe* *Iebonaem* *113* days *old-* *CGA43wks.*",
+  "hyp": "*lebonium* *thirteen* days *old* *cga* *forty* *three* *weeks*",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 35,
+  "clip_id": "9d77d58566ed0e963ae1123e3ab50cee",
+  "provider": "dg-medical",
+  "accent": "idoma",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Flagyl* *500* *mg* *Tablet* *Hospital* *Oyatu:* *One* *1* *Tablet* *PO* three times a day for *4*",
+  "hyp": "*hundred* *milligram* *tablet* *hospital* *oya-2* *one* *tablet* *per* *oral* three times a day for *four* *days*",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 36,
+  "clip_id": "a52cc1bdf941a9b4d76061ddbda05072",
+  "provider": "gemini",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Quetiapine* *Fumarate* *25* mg *Tablet* *Sig:* *One* *1* *Tablet* *PO* *QHSonce* a day at bedtime as",
+  "hyp": "*Which* *has* *been* *twice* *in* *5* mg *tablets* *cell* *me* *show* *one* *tablet* *go* *this* *once*",
+  "entity": "quetiapine",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 37,
+  "clip_id": "eaa66b82d267fa11b54cf412eb32aab3",
+  "provider": "gemini",
+  "accent": "idoma",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*POx1* *40cc* and *BFx1* so far *this* *shift.*",
+  "hyp": "*POX140CC* and *BFX1* so far *the* *shift*",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 38,
+  "clip_id": "52ad387abe4206177fecb12004fc81c5",
+  "provider": "dg-medical",
+  "accent": "pidgin",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Took* *62* and *35cc* well with yellow *nipple.*",
+  "hyp": "*two* *sixty* *two* and *three* *thirty* *five* *cc* well with yellow *nipple*",
+  "entity": NaN,
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 39,
+  "clip_id": "a8c855fb76476df248ee0277b5d8b74a",
+  "provider": "gemini",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "Unspecified superficial injury of unspecified *elbow,* initial encounter. *TABLET,* *ORAL* *CIPROFLOXACIN* *HYDROCHLORIDE,* *CIPROFLOXACIN* *HYDROCHLORIDE,* *EQ* *750MG*",
+  "hyp": "Unspecified superficial injury of unspecified *elbow* initial encounter. *Tablet* *oral* *ciprofloxacin* *hydrochloride* *ciprofloxacin* *hydrochloride* *2750* *mg*",
+  "entity": "ciprofloxacin|ciprofloxacin",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 40,
+  "clip_id": "47563df782e059f397a062dc9c49dedc",
+  "provider": "gemini",
+  "accent": "ebira",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*NEURO:* *PT* *SEDATED* *FOR* *COMFORT* *ON* *FENTANYL* *500MCQ/HR* *VERSED* *15MG/HR* *AND* MS GTT *AT* *5MG/HR.*",
+  "hyp": "*Neurological* *patient* *sedated* *for* *comfort* *on* *Fentanyl* *500* *mcg/hr,* *Versed* *50* *mg/hr,* *and* MS GTT *at*",
+  "entity": "fentanyl",
+  "flag": "DOSE-VAL candidate"
+ },
+ {
+  "row_id": 41,
+  "clip_id": "f90956b98a371a04fb2d01be89fe11cf",
+  "provider": "aai",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
+  "hyp": "*Continue* *to* *suction* *thick* *tan* *secretions.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 42,
+  "clip_id": "f42411fa2e88c397f558c7be352de659",
+  "provider": "aai",
+  "accent": "setswana",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "If we *don't* find the gas leak quickly, it becomes difficult to find it at all.",
+  "hyp": "If we *dont* find the gas leak quickly, it becomes difficult to find it at all.",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 43,
+  "clip_id": "82faa4bc24f3ce811e8e07503edfbebb",
+  "provider": "dg-general",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Discharge* *Diagnosis:* *PrimaryMRSA* *sepsis* *with* *cervical* *abcsess* *and* *cervica* *osteomyelitis* *as* *well* *drained* *paraspinal* *abscess* *in*",
+  "hyp": "",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 44,
+  "clip_id": "7ecb769ffb1875b51a824aec75d2f79c",
+  "provider": "dg-general",
+  "accent": "kinyarwanda",
+  "tier": "B",
+  "domain": "general",
+  "ref": "*Im* *not* the first person to think he should *run* for higher *office,* by the *way.*",
+  "hyp": "*i'm* *one* *of* the first person to think he should *land* for higher *office* by the",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 45,
+  "clip_id": "82faa4bc24f3ce811e8e07503edfbebb",
+  "provider": "dg-medical",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Discharge* *Diagnosis:* *PrimaryMRSA* *sepsis* *with* *cervical* *abcsess* *and* *cervica* *osteomyelitis* *as* *well* *drained* *paraspinal* *abscess* *in*",
+  "hyp": "",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 46,
+  "clip_id": "a46605b3fdc92295cbd88bb861487e58",
+  "provider": "gemini",
+  "accent": "ijaw",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*Dr* Ewatomi *Safiyah* made *aware* *of* rising *Calcium* *with* *no* *new* *orders* received *at* *23* *May,*",
+  "hyp": "*Doctor* Ewatomi *Saphaya* made *our* *wedding* *the* rising *calcium.* *We* *don't* *know* *others* received *a* *23rd*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 47,
+  "clip_id": "7ecb769ffb1875b51a824aec75d2f79c",
+  "provider": "gemini",
+  "accent": "kinyarwanda",
+  "tier": "B",
+  "domain": "general",
+  "ref": "*Im* *not* the first person to think he should *run* for higher office, by the way.",
+  "hyp": "*I'm* *one* *of* the first person to think he should *learn* for higher office, by the",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 48,
+  "clip_id": "c2093acb790a4bbcaf0367cecfa15793",
+  "provider": "whisper",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Denies* chest *pain* dizziness or *lightheadedness;* *no* *palpitations.*",
+  "hyp": "*Deny* chest *pain,* dizziness or *light-sidedness.* *No* *power* *petitions.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 49,
+  "clip_id": "ce1c6816a2d6aece987ed5c0f8fb8c67",
+  "provider": "whisper",
+  "accent": "luhya",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Vasodilation,* *however,* *is* *brought* *about* *not* *by* *any* *muscular* *effort* *to* *widen* *a* *vessel* *but* *rather*",
+  "hyp": "*Kwenye* *kwele* *nyeshouweza* *kapa* *moja,* *hiko* *ya* *kisaribu* *zibundi* *kwa* *katika* *haifa* *kwa* *ya* *ushangi* *wa*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 50,
+  "clip_id": "9259dde6b27dc39fcc0779e36d0bec02",
+  "provider": "whisper",
+  "accent": "kikuyu",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Instruct* *patient* *to* *inhale* *slowly* *and* *as* *deeply* *as* *possible* *through* *the* *mouthpiece* *without* *using* *nose*",
+  "hyp": "*Ndiyoza* *wakati* *kuaweza* *kuhulio* *kwa* *hivyo.* *Na* *kwa* *hivyo* *ni* *kwa* *mawazo.* *Wakati* *kwa* *wakati* *kwa*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 51,
+  "clip_id": "1e1f4d7a25294e5853a6c798329b69b9",
+  "provider": "aai",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "general",
+  "ref": "She *never* lets me pick out her stuff, so she would see what she wants and",
+  "hyp": "she wants and just pick that out, *Langhorne* said.",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 52,
+  "clip_id": "a46605b3fdc92295cbd88bb861487e58",
+  "provider": "dg-general",
+  "accent": "ijaw",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*Dr* *Ewatomi* *Safiyah* made *aware* *of* rising *Calcium* with *no* new orders received at *23* *May,*",
+  "hyp": "*doctor* *ewatomi* *saphaya* made *away* *the* rising *calcium* with *two* new orders received at *twenty* *third*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 53,
+  "clip_id": "96c0239bebf9812f391113c433a60ac3",
+  "provider": "dg-medical",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*UO* *3cc/kg/hr* this shift *no* *stool.*",
+  "hyp": "*you* *owe* *three* *cc* *per* *kg* *per* *hour* this shift *nostril*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 54,
+  "clip_id": "63bd3c234d1d89a65ce8563f55787ac8",
+  "provider": "gemini",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*HR* *100-160's* *no* *murmur* noted.",
+  "hyp": "*HR10216* *is* *Nomama* noted.",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 55,
+  "clip_id": "a46605b3fdc92295cbd88bb861487e58",
+  "provider": "whisper",
+  "accent": "ijaw",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*Dr* *Ewatomi* *Safiyah* made aware *of* rising *Calcium* *with* *no* *new* *orders* *received* at *23* May,",
+  "hyp": "*Dr.* *Ewatumi* *Safaya* made aware *the* rising *calcium* *we* *don't* *know* *others* *receive* at *22* May,",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 56,
+  "clip_id": "1a91bdf81acf149c03a3c48254cc5273",
+  "provider": "whisper",
+  "accent": "luhya",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Unlike* *quinidine,* *disopyramide* *does* *not* *increase* *the* plasma *concentration* *of* *digoxin* *in* *patients* *receiving* *a* *maintenance*",
+  "hyp": "*Kama* *pia* *kwenye* *kuma,* *pia* *kwenye* *pira* *ni* *kukua* *kusimu* *ya* plasma *kwa* *hivyo* *kwa* *mtu*",
+  "entity": "digoxin",
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 57,
+  "clip_id": "1e1f4d7a25294e5853a6c798329b69b9",
+  "provider": "dg-general",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*She* *never* *lets* me pick out her *stuff,* so she would see what she wants and",
+  "hyp": "*let* me pick out her *stuff* *comma* so she would see what she wants and just",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 58,
+  "clip_id": "1e1f4d7a25294e5853a6c798329b69b9",
+  "provider": "dg-medical",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*She* *never* *lets* me pick out her *stuff,* so she would see what she wants and",
+  "hyp": "*let* me pick out her *stuff* *comma* so she would see what she wants and just",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 59,
+  "clip_id": "1e1f4d7a25294e5853a6c798329b69b9",
+  "provider": "gemini",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*She* *never* *lets* me pick out *her* *stuff,* so *she* would see what she *wants* and",
+  "hyp": "*Let's* me pick out *our* *staff,* *comma,* so *you* would see what she *owns* and just",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 60,
+  "clip_id": "96c0239bebf9812f391113c433a60ac3",
+  "provider": "whisper",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*UO* *3cc/kg/hr* this shift *no* *stool.*",
+  "hyp": "*UO3CC* *per* *kg* *per* *hour* this shift *nose* *tool.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 61,
+  "clip_id": "4dd5b78a61fa2551f8ec92ce5c9c0de6",
+  "provider": "whisper",
+  "accent": "kiswahili",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*However,* *a* *lab* *may* *want* *to* *prepare* *their* *own* *inhouse* *probe* *if* *a* *probe* *is* *not*",
+  "hyp": "*Kwa* *hivyo,* *maaweza* *kuhudhukua* *kutafutia* *kutafutia* *kutafutia* *kutafutia* *kutafutia* *kutafutia.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 62,
+  "clip_id": "f90956b98a371a04fb2d01be89fe11cf",
+  "provider": "dg-general",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
+  "hyp": "*continue* *to* *suction* *thick* *tan* *secretions*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 63,
+  "clip_id": "f90956b98a371a04fb2d01be89fe11cf",
+  "provider": "dg-medical",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
+  "hyp": "*continue* *to* *suction* *thick* *tan* *secretions*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 64,
+  "clip_id": "96c0239bebf9812f391113c433a60ac3",
+  "provider": "gemini",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*UO* *3cc/kg/hr* *this* shift *no* *stool.*",
+  "hyp": "*UO3CC* *package* *para* *sa* shift *nos* *stool*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 65,
+  "clip_id": "c18453be6b19c1812bdbeb7e32666683",
+  "provider": "whisper",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*CT* *02/08/2029:* *impression:* no femoral fracture or *dislocation* diffuse subcutaneous edema and possible edema of the",
+  "hyp": "*I'm* *sorry,* *I'm* *sorry.* *Computed* *tomography,* *2nd* *of* *August,* *2029.* *Impression,* no femoral fracture or *dislocation,*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 66,
+  "clip_id": "89329d8ccf699d749378e316d5da474d",
+  "provider": "whisper",
+  "accent": "luganda",
+  "tier": "B",
+  "domain": "general",
+  "ref": "*You* *can* *make* *it* *big* *without* *a* *record* *label* *but* *you* *just* *have* *to* *know* *how*",
+  "hyp": "*Kwa* *hivyo,* *kuhitajiweza* *kwa* *kwa* *hivyo,* *lakini* *kutoka* *kufanya* *kufanya.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 67,
+  "clip_id": "beddeac62f5277f00a937c79f65eaa98",
+  "provider": "dg-general",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*not* candidate for bedside *PICC.*",
+  "hyp": "*north* candidate for bedside *picc*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 68,
+  "clip_id": "399eeb18cb0fb018270ccd9ea1861256",
+  "provider": "dg-medical",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*No* one passenger moves from the door to the *rear,* but the crowding and transfer of",
+  "hyp": "passenger moves from the door to the *rear* *comma* but the crowding and transfer of energy",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 69,
+  "clip_id": "f90956b98a371a04fb2d01be89fe11cf",
+  "provider": "gemini",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
+  "hyp": "*continue* *to* *sanction* *thick* *tan* *secretions*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 70,
+  "clip_id": "f90956b98a371a04fb2d01be89fe11cf",
+  "provider": "whisper",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
+  "hyp": "*continue* *to* *sanction* *thick* *tan* *secretions.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 71,
+  "clip_id": "c55c2f342f2c47bf07bc91edf2aa07db",
+  "provider": "whisper",
+  "accent": "luhya",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*It* *should* *not* *be* *used* *initially40* *Drugs* *Used* *in* *Gastrointestinal* *Disorders4835.*",
+  "hyp": "*Itiweza* *kwenye* *kutoka* *kwa* *kwa* *kwa* *kwa* *kwa.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 72,
+  "clip_id": "c18453be6b19c1812bdbeb7e32666683",
+  "provider": "gemini",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*CT* *02/08/2029:* *impression:* no femoral fracture or *dislocation* diffuse subcutaneous edema and possible edema of the",
+  "hyp": "*Is* *this* *examination* *good* *even?* *Um* *computed* *tomography* *2nd* *of* *um* *August* *2029* *impression,* no femoral",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 73,
+  "clip_id": "1e1f4d7a25294e5853a6c798329b69b9",
+  "provider": "whisper",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "general",
+  "ref": "*She* *never* *lets* me pick out her stuff, so she would see what she wants and",
+  "hyp": "*Let* me pick out her stuff, so she would see what she wants and just pick",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 74,
+  "clip_id": "beddeac62f5277f00a937c79f65eaa98",
+  "provider": "gemini",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*not* candidate for bedside *PICC.*",
+  "hyp": "*nurse* candidate for bedside *PICC*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 75,
+  "clip_id": "36c14ff38c73d6ebc90db41430b058d1",
+  "provider": "whisper",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*GI:* *ABDOMEN* *SOFT* *NON-TENDER* *APPETITE* *FAIR* *BUT* *IMPROVING* *NO* *STOOL*",
+  "hyp": "*GI,* *abdomen* *soft,* *non-tender.* *Appetite* *fair,* *but* *improving.* *Nose* *too.*",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 76,
+  "clip_id": "c2093acb790a4bbcaf0367cecfa15793",
+  "provider": "gemini",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Denies* chest *pain* dizziness or *lightheadedness;* no palpitations.",
+  "hyp": "*dinice* chest *pain.* dizziness or *lightheadedness.* no palpitations.",
+  "entity": NaN,
+  "flag": "NEG-FLIP candidate"
+ },
+ {
+  "row_id": 77,
+  "clip_id": "ee9c796e757ac3a2493c10bd9d7029c5",
+  "provider": "aai",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
+  "hyp": "*No* *spits* *mass* *aspirate.ccc.*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 78,
+  "clip_id": "5a34597c9b5e97c136c6b15e1f47350b",
+  "provider": "aai",
+  "accent": "luganda",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "No *such* *diuretic* *exists.*",
+  "hyp": "No *directly* *exist.*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 79,
+  "clip_id": "a118dd3124494bfe59ab23ed58e83735",
+  "provider": "aai",
+  "accent": "idah",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "She was on heparin at 250 *units/hr* *dopa* at 5 *mcg/kg* and *TPN* at *42cc/hr.*",
+  "hyp": "She was on heparin at 250 *units* *per* *hour* *dopamine* at 5 *microgram* *per* *kilogram* and",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 80,
+  "clip_id": "ee9c796e757ac3a2493c10bd9d7029c5",
+  "provider": "dg-general",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
+  "hyp": "*no* *spits* *mass* *aspirate* *dot* *c* *c* *c*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 81,
+  "clip_id": "eaa66b82d267fa11b54cf412eb32aab3",
+  "provider": "dg-general",
+  "accent": "idoma",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*POx1* *40cc* and *BFx1* *so* *far* *this* *shift.*",
+  "hyp": "*p* *o* *x* *one* *forty* *c* *c* and *b* *f* *x* *one* *sofa* *deshift*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 82,
+  "clip_id": "8976dc7ac0cf57b7d29b4c988b7f1253",
+  "provider": "dg-general",
+  "accent": "benin",
+  "tier": "C",
+  "domain": "general",
+  "ref": "*IzuOjukwu* *OkeyOgunjioforAMVCA* *AMVCA8* *pic.twitter.com3qOcOcftj6*",
+  "hyp": "*izu* *ojuku* *oke* *ogunjiofo* *amvca* *a* *m* *v* *c* *a* *eight* *pic* *dot* *twitter* *dot* *com*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 83,
+  "clip_id": "ee9c796e757ac3a2493c10bd9d7029c5",
+  "provider": "dg-medical",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
+  "hyp": "*nose* *pits* *mass* *aspirate* *dot* *c* *c* *c*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 84,
+  "clip_id": "efde0eff1bca67a8c55def3095b09e12",
+  "provider": "dg-medical",
+  "accent": "twi",
+  "tier": "B",
+  "domain": "general",
+  "ref": "*I* *dont* care if *youre* *dip* fishing *in* *Ninilchik,* if *youre* not eating this right *nowyoure*",
+  "hyp": "*i* *don't* care if *you* *are* *deep* fishing *a* *menial* *chick* *comma* if *you* *are* not",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 85,
+  "clip_id": "8976dc7ac0cf57b7d29b4c988b7f1253",
+  "provider": "dg-medical",
+  "accent": "benin",
+  "tier": "C",
+  "domain": "general",
+  "ref": "*IzuOjukwu* *OkeyOgunjioforAMVCA* *AMVCA8* *pic.twitter.com3qOcOcftj6*",
+  "hyp": "*izu* *ojuku* *oke* *ogunjio* *four* *amvca* *amvca* *eight* *pic* *dot* *twitter* *dot* *com* *three* *q* *o*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 86,
+  "clip_id": "39bf3e3ee7075614072deb7a5280ab60",
+  "provider": "gemini",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*No* acute distress *Eyes* */* *Conjunctiva:* *PERRL*",
+  "hyp": "*no* acute distress *eyes/* *conjunctiva* *;* *semicolon* *p* *e* *r* *r* *l*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 87,
+  "clip_id": "04a041c8c7f0c63c42e21c23b4739a33",
+  "provider": "gemini",
+  "accent": "luganda",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*They* *are* *fungicidal* *at* *high* *concentrations.*",
+  "hyp": "*DAFungicide* *Water* *High* *Concentration* *{full* *stop}*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 88,
+  "clip_id": "f5cb123d9ff58506553397ea7d69d50a",
+  "provider": "gemini",
+  "accent": "etche",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*6.* *Calcitriol* 0.5 *mcg* *Capsule* *Sig* *:* One *(* *1* *)* *Capsule* *PO* *EVERY* *OTHER* *DAY*",
+  "hyp": "*Kwame.* *Na,* *na,* *na,* *na,* *na.* *Go* *ahead.* *Cause* *it* *try* *all* 0.5 *mg* *capsule.* One",
+  "entity": "calcitriol",
+  "flag": "high WER"
+ },
+ {
+  "row_id": 89,
+  "clip_id": "ee9c796e757ac3a2493c10bd9d7029c5",
+  "provider": "whisper",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
+  "hyp": "*no* *speech* *mass* *a* *spirit* *dot* *CCC*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 90,
+  "clip_id": "dce11a83cfa477b7e54bace09a6c72ab",
+  "provider": "whisper",
+  "accent": "setswana",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*Protection* *of* *the* *host* *immune* *mechanism* *mightincrease* *the* *efcacy* *of* *other* *drugs* *that* *inhibit* *viralreplication.*",
+  "hyp": "*Mwisho* *ya* *kwaalisha* *ya* *kweka* *lakini* *ya* *msingi,* *kumekuwa* *kwenye* *uweza* *ya* *kubwa* *ya* *kubwa* *ya*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 91,
+  "clip_id": "795fbbcc55dad655ff683752f4b1030c",
+  "provider": "whisper",
+  "accent": "brass",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Sequential* *dosing* *is* *usually* *for* *10* *or* *12* *days* *each* *calendarmonth.*",
+  "hyp": "*\u09b8\u09c7\u0996\u09c7\u0999\u09cd\u09b7\u09be* *\u09a6\u09cb\u099c\u09bf\u09a8* *\u0987\u09b8* *\u09ef\u09cb* *\u099f\u09c7\u09a8* *\u0993* *\u099f\u09cd\u09b0\u09c7\u0995* *\u09a6\u09c7\u0987\u099c* *\u0987\u0995\u09cd\u09b7* *\u0995\u09be\u09b2\u09c7\u0982\u09a1\u09be* *\u09ae\u09be\u0982\u099f\u0964*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 92,
+  "clip_id": "8132758125fa0e3156821052a383f9ef",
+  "provider": "aai",
+  "accent": "hausa",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*Encounter* *for* *supervision* of other *normal* *pregnancy,* first *trimester.* *TABLET,* *ORAL-28* *CYCLAFEM* *7/7/7,* *ETHINYL* *ESTRADIOL;* *NORETHINDRONE,*",
+  "hyp": "*Subluxation* of other first *phalangeal* *tubercle,* fracture of lateral *formula*",
+  "entity": "estradiol|norethindrone",
+  "flag": "high WER"
+ },
+ {
+  "row_id": 93,
+  "clip_id": "3ac068335822c731d143a71b517e63fc",
+  "provider": "aai",
+  "accent": "isizulu",
+  "tier": "B",
+  "domain": "general",
+  "ref": "A post shared by *BellaNaijaStyle* *bellanaijastyleBut* *OwoseniMakanjuola* does not believe anyone should jettison modesty in the",
+  "hyp": "A post shared by *belle_naija_style* *belle_naija_style* *But* *OSN* *Makajula* does not believe anyone should jettison modesty",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 94,
+  "clip_id": "18361ec4ecc20db368a75ee828e415cc",
+  "provider": "aai",
+  "accent": "jaba",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "Neuro checks *Q:* *4* *Pain:* *Fentanyl* gtt *Cardiovascular:* *Loongy* *Ahnoowah* *-* *pt* *appears* *to* *be* *volume*",
+  "hyp": "Neuro checks *cure* *for* *pain* *fentanyl* gtt *cardiovascular* *lungi* *Anuwa* *Olooloolooloo*",
+  "entity": "fentanyl",
+  "flag": "high WER"
+ },
+ {
+  "row_id": 95,
+  "clip_id": "25dead43f9b4f15ff2360caf740a560c",
+  "provider": "dg-general",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*SOLUTION,* *INTRAMUSCULAR* *HYDROXYPROGESTERONE* *CAPROATE,* *HYDROXYPROGESTERONE* *CAPROATE,* *1250MG/5ML* *(250MG/ML)*",
+  "hyp": "*solution* *intramuscular* *hydroxyprogesterone* *caproate* *hydroxyprogesterone* *caproate* *one* *thousand* *two* *hundred* *and* *fifty* *milligram* *per* *five* *mil*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 96,
+  "clip_id": "5a34597c9b5e97c136c6b15e1f47350b",
+  "provider": "dg-general",
+  "accent": "luganda",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "*No* *such* *diuretic* *exists.*",
+  "hyp": "*no* *directly* *exist* *full* *stop*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 97,
+  "clip_id": "146112e1981f61c27d28910341447898",
+  "provider": "dg-general",
+  "accent": "afo",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*Cont* monitor *MS* *Lactulose* *enems2.*",
+  "hyp": "*continue* monitor *m* *s* *lactulose* *e* *n* *e* *m* *s* *two*",
+  "entity": "lactulose",
+  "flag": "high WER"
+ },
+ {
+  "row_id": 98,
+  "clip_id": "25dead43f9b4f15ff2360caf740a560c",
+  "provider": "dg-medical",
+  "accent": "yoruba",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "*SOLUTION,* *INTRAMUSCULAR* *HYDROXYPROGESTERONE* *CAPROATE,* *HYDROXYPROGESTERONE* *CAPROATE,* *1250MG/5ML* *(250MG/ML)*",
+  "hyp": "*solution* *intramuscular* *hydroxyprogesterone* *caproate* *hydroxyprogesterone* *caproate* *one* *thousand* *two* *hundred* *and* *fifty* *milligram* *per* *five* *mil*",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 99,
+  "clip_id": "81801908431abd57e0f026230d6c8459",
+  "provider": "dg-medical",
+  "accent": "igala",
+  "tier": "B",
+  "domain": "general",
+  "ref": "*The* *Womens* *WorldTour* calendar is *also* *scheduled* *to* *return* with *Strade* *Bianche* on *August* *1,* followed",
+  "hyp": "*q* *and* *so* *what* *the* calendar is *associated* with *the* on *august* *first* *comma* followed by",
+  "entity": NaN,
+  "flag": "high WER"
+ },
+ {
+  "row_id": 100,
+  "clip_id": "c43d8faa6efe9020bdd669a67ba1e988",
+  "provider": "dg-medical",
+  "accent": "efik",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "*SOLUTION,* *SUBCUTANEOUS* *RITUXAN* *HYCELA,* *RITUXIMAB;* *HYALURONIDASE* *(HUMAN* *RECOMBINANT),* *1600MG* and *26800UNITS/13.4ML*",
+  "hyp": "*comma* *subcutaneous* *rituxan* *hicellar* *comma* *rituxan* *semicolon* *high* *alluron* *needles* *open* *bracket* *human* *recombinant* *close* *bracket*",
+  "entity": "rituximab|hyaluronidase",
+  "flag": "high WER"
+ }
+];
+const CODES = ["DRUG-SUB", "DRUG-DEL", "DOSE-VAL", "DOSE-UNIT", "NEG-FLIP", "TERM-CORRUPT", "PHON-ACCENT", "BENIGN"];
+const SEVERITIES = ["S1", "S2", "S3"];
+const state = {};
+
+function markup(text) {
+  return text.replace(/\*([^*]+)\*/g, "<mark>$1</mark>");
+}
+
+document.getElementById("rows").innerHTML = ROWS.map(r => `
+  <div class="card" id="card-${r.row_id}">
+    <div class="tags">#${r.row_id} &middot; ${r.provider} &middot; ${r.accent} &middot;
+      tier ${r.tier} &middot; ${r.domain} &middot; ${r.flag}</div>
+    <audio controls preload="none" src="../data/audio/${r.clip_id}.wav"></audio>
+    <div class="text"><span class="label">reference&nbsp;</span>${markup(r.ref)}</div>
+    <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(r.hyp)}</div>
+    <div>
+      <select data-row="${r.row_id}" data-field="failure_code">
+        <option value="">code...</option>
+        ${CODES.map(c => `<option value="${c}">${c}</option>`).join("")}
+      </select>
+      <select data-row="${r.row_id}" data-field="severity">
+        <option value="">severity...</option>
+        ${SEVERITIES.map(s => `<option value="${s}">${s}</option>`).join("")}
+      </select>
+      <input type="text" data-row="${r.row_id}" data-field="note" placeholder="note (optional)">
+      <span class="done" id="done-${r.row_id}"></span>
+    </div>
+  </div>`).join("");
+
+document.getElementById("rows").addEventListener("input", e => {
+  const row = e.target.dataset.row;
+  if (!row) return;
+  state[row] = state[row] || {};
+  state[row][e.target.dataset.field] = e.target.value;
+  const filled = state[row].failure_code && state[row].severity;
+  document.getElementById("done-" + row).textContent = filled ? "labeled" : "";
+  document.getElementById("progress").textContent =
+    Object.values(state).filter(v => v.failure_code && v.severity).length;
+});
+
+document.getElementById("export").addEventListener("click", () => {
+  const header = ["row_id","clip_id","provider","accent","tier","domain",
+                  "ref_excerpt","hyp_excerpt","entity_expected","entity_transcribed",
+                  "auto_flag","failure_code","severity","note"];
+  const escape = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const lines = [header.join(",")];
+  for (const r of ROWS) {
+    const s = state[r.row_id] || {};
+    lines.push([r.row_id, r.clip_id, r.provider, r.accent, r.tier, r.domain,
+                r.ref, r.hyp, r.entity, "", r.flag,
+                s.failure_code || "", s.severity || "", s.note || ""].map(escape).join(","));
+  }
+  const url = URL.createObjectURL(new Blob([lines.join("\n")], {type:"text/csv"}));
+  const link = document.createElement("a");
+  link.href = url; link.download = "failure_taxonomy.csv"; link.click();
+  URL.revokeObjectURL(url);
+});
+</script>
+<p class="help">Codes &mdash; DRUG-SUB: one real drug transcribed as a different real drug; DRUG-DEL: drug name dropped or corrupted into a non-word; DOSE-VAL: numeric value changed; DOSE-UNIT: unit changed, value intact; NEG-FLIP: negation lost or inverted; TERM-CORRUPT: clinical term corrupted into a plausible-reading wrong term; PHON-ACCENT: error traceable to accent phonology (verify by listening); BENIGN: error with no clinical meaning change</p>
+<p class="help">Severity &mdash; S1: could change a clinical action if unreviewed (wrong drug, wrong value, flipped negation); S2: misleading, likely caught by a reader; S3: cosmetic</p>
+</body>
+</html>

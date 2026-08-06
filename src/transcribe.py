@@ -140,7 +140,15 @@ def run_provider(
 def _transcribe_with_backoff(
     transcriber, audio_path: Path, provider_id: str, max_retries: int
 ) -> dict | None:
-    """Call the transcriber, backing off on rate limits. None means give up."""
+    """Call the transcriber, backing off on anything transient.
+
+    Every exception that can reach here must be handled, because this is the
+    only thing standing between one bad response and the end of a 2,000-call
+    unattended run. The first live run proved the point: it died at clip 64 on
+    a `ConnectionError: Connection reset by peer`, which requests raises before
+    any response exists, so it was neither of the two types this used to catch.
+    Across 2,000 calls to five vendors a reset is routine, not an edge case.
+    """
     for attempt in range(max_retries):
         try:
             return transcriber(audio_path, provider_id)
@@ -148,6 +156,15 @@ def _transcribe_with_backoff(
             if attempt == max_retries - 1:
                 print(
                     f"  {audio_path.stem}: still rate limited after {max_retries} tries."
+                )
+                return None
+            time.sleep(2**attempt)
+        except requests.exceptions.RequestException as exc:
+            # Reset, timeout, DNS blip, TLS hiccup. Transient by nature, so
+            # worth the same backoff a rate limit gets rather than a failure.
+            if attempt == max_retries - 1:
+                print(
+                    f"  {audio_path.stem}: network still failing: {type(exc).__name__}"
                 )
                 return None
             time.sleep(2**attempt)

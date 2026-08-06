@@ -1,0 +1,2 @@
+provider,model,clips_ok,clips_failed,cost_usd,median_latency_ms,stopped_on_cap
+gemini,gemini-3.5-flash-lite,400,0,0.0,4112,False

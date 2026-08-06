@@ -137,6 +137,61 @@ is still transcribed correctly, while a different drug appearing far away in a
 long clip is not evidence that this mention was swapped. Applied identically to
 all five configurations.
 
+**D014 | duplicate-pairing check | Split the overnight run's integrity check 4
+into "expected" and "suspicious", and halt only on the second. | Halt on any
+identical transcript paired with two different audio files, as
+`prompts/00-overnight-run.md` states it. | Read literally, that check fires on
+AfriSpeech's own design. The corpus has many speakers read the same prompt, and
+this manifest already contains one such pair: "TABLET, ORAL TADALAFIL,
+TADALAFIL, 5MG" read by two different speakers, in etsako and ikulu, at 4.4 and
+4.0 seconds. Halting on it would have ended an unattended run on a false
+positive, with hours of downloading behind it and nothing wrong. The two shapes
+that are the indexing bug this check exists to find still halt: one
+speaker credited with the same transcript twice, and two manifest rows resolving
+to the same audio file. Both are reported in `docs/integrity_check.md` either
+way, so the deviation is visible rather than assumed.
+
+**D015 | speech-rate bounds | Flag a clip whose words-per-second falls outside
+0.25 to 4 times this corpus's median rate, computed from the manifest at run
+time. | The absolute 1.0 to 5.0 words per second named in
+`prompts/00-overnight-run.md`. | Measured on the full 6,319-clip test split, the
+median rate is 1.67 words per second and 12.2 percent of the split falls below
+1.0, rising to 17.2 percent among clinical clips, where speakers read long drug
+names carefully. An absolute floor of 1.0 therefore expects 2.46 flags in a
+20-clip check whose halt threshold is 2, which makes halting a clean run close
+to a coin flip. It did halt on the first run, on three clips at 0.62, 0.73 and
+0.89 words per second, none of which had anything wrong with them. The
+overnight prompt states the intent plainly, that the range should catch a
+transcript-audio pairing bug rather than an unusually slow speaker, and the
+absolute numbers do not serve that intent on this corpus. The replacement flags
+1.3 percent of the split, keeps the ceiling meaningful, and is derived from the
+data rather than chosen, so it cannot drift out of step again if the sample
+changes. A genuinely mispaired transcript is wrong by a much larger factor than
+this window allows.
+
+**D016 | Whisper host | Run Whisper through Groq's OpenAI-compatible endpoint on
+`whisper-large-v3`, and drop the OpenAI configuration entirely. | Call OpenAI's
+`/v1/audio/transcriptions` on `whisper-1`, as SPEC section 4 names it. | Suwaid
+asked for a free replacement for the one paid slot. OpenAI has no free tier for
+audio and needs a USD 5 minimum top-up; Groq serves the same model family with
+no card, 2,000 requests a day and 7,200 audio seconds an hour, which covers this
+run's 400 requests and 4,290 audio seconds inside a single hour. Two things this
+changes about the results, and both belong in the writeup rather than being
+quietly absorbed.
+
+First, the model is not the same version. OpenAI's `whisper-1` serves Whisper
+large-v2. Groq serves large-v3, which is newer and generally more accurate. So
+the quality numbers describe large-v3, and any comparison against a published
+OpenAI Whisper WER is not like for like.
+
+Second, and more likely to mislead, M5 measures cost per audio hour and median
+latency. Those now describe Groq's serving of Whisper, not OpenAI's. Groq is
+built for fast inference and is priced well below OpenAI, so this configuration
+will probably look both faster and cheaper than the same model at OpenAI. The
+writeup must attribute that column to Groq and must not report it as an OpenAI
+result. The quality columns are the model's; the speed and price columns are the
+host's.
+
 **D017 | AssemblyAI route and model | Call the sync endpoint
 `sync.assemblyai.com/transcribe` and name `universal-3-5-pro` explicitly in the
 `X-AAI-Model` header. | The async `/v2/transcript` route with no model
@@ -177,57 +232,30 @@ so the alias is not simply a pointer to the newest version. Checked against
 stable flash release, and `gemini-2.5-flash` now returns 404 for newly created
 accounts, so a name from training data would have failed outright.
 
-**D016 | Whisper host | Run Whisper through Groq's OpenAI-compatible endpoint on
-`whisper-large-v3`, and drop the OpenAI configuration entirely. | Call OpenAI's
-`/v1/audio/transcriptions` on `whisper-1`, as SPEC section 4 names it. | Suwaid
-asked for a free replacement for the one paid slot. OpenAI has no free tier for
-audio and needs a USD 5 minimum top-up; Groq serves the same model family with
-no card, 2,000 requests a day and 7,200 audio seconds an hour, which covers this
-run's 400 requests and 4,290 audio seconds inside a single hour. Two things this
-changes about the results, and both belong in the writeup rather than being
-quietly absorbed.
+**D019 | Gemini model, forced by quota | Benchmark `gemini-3.5-flash-lite`,
+version `3.5-flash-lite-07-2026`, and label the row as the Flash Lite tier
+everywhere it appears. | `gemini-3.6-flash`, pinned under D018, or dropping the
+Gemini configuration. | The free tier will not run a full-size model over 400
+clips, and the limit is not a throttle that patience solves. Measured from the
+API's own quota response: `GenerateRequestsPerDayPerProjectPerModel-FreeTier =
+20`. Twenty requests per day, per model. The first attempt reached 17 of 400
+before every remaining clip failed after five backoffs.
 
-First, the model is not the same version. OpenAI's `whisper-1` serves Whisper
-large-v2. Groq serves large-v3, which is newer and generally more accurate. So
-the quality numbers describe large-v3, and any comparison against a published
-OpenAI Whisper WER is not like for like.
+`gemini-3.5-flash` had quota left but delivered one clip every two minutes,
+which is 13 hours for the sample and still exposed to the same daily ceiling.
+`gemini-flash-latest` was already exhausted at 20. `gemini-2.0-flash` returned
+429 immediately. `gemini-3.5-flash-lite` ran 8 of 8 with no rate limiting at
+roughly 20 clips a minute, and completed all 400 in about half an hour with
+zero failures and zero give-ups.
 
-Second, and more likely to mislead, M5 measures cost per audio hour and median
-latency. Those now describe Groq's serving of Whisper, not OpenAI's. Groq is
-built for fast inference and is priced well below OpenAI, so this configuration
-will probably look both faster and cheaper than the same model at OpenAI. The
-writeup must attribute that column to Groq and must not report it as an OpenAI
-result. The quality columns are the model's; the speed and price columns are the
-host's.
+This is a real change to what the Gemini column means and it must not be
+smoothed over in the writeup. Flash Lite is Google's small tier, so it is not
+comparable to nova-3-medical or universal-3-5-pro as a like-for-like model
+choice. What it is comparable on is the question a reader will actually ask,
+which is what Google's free tier gives you at this volume, and the answer is
+Flash Lite or nothing. Every table and chart names the model rather than the
+vendor for exactly this reason.
 
-**D015 | speech-rate bounds | Flag a clip whose words-per-second falls outside
-0.25 to 4 times this corpus's median rate, computed from the manifest at run
-time. | The absolute 1.0 to 5.0 words per second named in
-`prompts/00-overnight-run.md`. | Measured on the full 6,319-clip test split, the
-median rate is 1.67 words per second and 12.2 percent of the split falls below
-1.0, rising to 17.2 percent among clinical clips, where speakers read long drug
-names carefully. An absolute floor of 1.0 therefore expects 2.46 flags in a
-20-clip check whose halt threshold is 2, which makes halting a clean run close
-to a coin flip. It did halt on the first run, on three clips at 0.62, 0.73 and
-0.89 words per second, none of which had anything wrong with them. The
-overnight prompt states the intent plainly, that the range should catch a
-transcript-audio pairing bug rather than an unusually slow speaker, and the
-absolute numbers do not serve that intent on this corpus. The replacement flags
-1.3 percent of the split, keeps the ceiling meaningful, and is derived from the
-data rather than chosen, so it cannot drift out of step again if the sample
-changes. A genuinely mispaired transcript is wrong by a much larger factor than
-this window allows.
-
-**D014 | duplicate-pairing check | Split the overnight run's integrity check 4
-into "expected" and "suspicious", and halt only on the second. | Halt on any
-identical transcript paired with two different audio files, as
-`prompts/00-overnight-run.md` states it. | Read literally, that check fires on
-AfriSpeech's own design. The corpus has many speakers read the same prompt, and
-this manifest already contains one such pair: "TABLET, ORAL TADALAFIL,
-TADALAFIL, 5MG" read by two different speakers, in etsako and ikulu, at 4.4 and
-4.0 seconds. Halting on it would have ended an unattended run on a false
-positive, with hours of downloading behind it and nothing wrong. The two shapes
-that are the indexing bug this check exists to find still halt: one
-speaker credited with the same transcript twice, and two manifest rows resolving
-to the same audio file. Both are reported in `docs/integrity_check.md` either
-way, so the deviation is visible rather than assumed.
+The 17 responses already cached from `gemini-3.6-flash`, and the 4 from
+`gemini-3.5-flash`, were deleted rather than kept. Mixing three models inside
+one provider column would have produced a number that describes no system.

@@ -341,3 +341,61 @@ class TestAssemblyAiTranscriber:
         self._capture(monkeypatch, status=429)
         with pytest.raises(transcribe.RateLimited):
             transcribe.transcribe_assemblyai(audio_dir / "c1.wav", "aai")
+
+
+class TestNetworkFailuresAreRetried:
+    """A dropped connection must not end the run.
+
+    Learned the hard way: the first live run died at clip 64 of 2,000 on
+    `ConnectionError: Connection reset by peer`. That is raised by requests
+    before any response exists, so it is neither TranscriptionFailed nor
+    RateLimited, and it escaped the backoff handler and killed the process.
+    Over 2,000 calls to five vendors a reset is not an edge case, it is
+    Tuesday.
+    """
+
+    def test_a_connection_reset_is_retried_not_fatal(self, manifest, audio_dir, tmp_path):
+        import requests as rq
+
+        calls = []
+
+        def flaky(audio_path, provider_id):
+            calls.append(audio_path.stem)
+            if len(calls) == 1:
+                raise rq.exceptions.ConnectionError("Connection reset by peer")
+            return {"text": "ok", "latency_ms": 1, "cost_usd": 0.0}
+
+        summary = run_provider("whisper", manifest, flaky, audio_dir, tmp_path)
+        assert summary["clips_ok"] == 3
+        assert summary["clips_failed"] == 0
+
+    def test_a_timeout_is_retried(self, manifest, audio_dir, tmp_path):
+        import requests as rq
+
+        seen = []
+
+        def slow(audio_path, provider_id):
+            seen.append(audio_path.stem)
+            if len(seen) == 1:
+                raise rq.exceptions.ReadTimeout("timed out")
+            return {"text": "ok", "latency_ms": 1, "cost_usd": 0.0}
+
+        assert run_provider("whisper", manifest, slow, audio_dir, tmp_path)["clips_ok"] == 3
+
+    def test_a_permanently_dead_connection_gives_up_on_that_clip_only(
+        self, manifest, audio_dir, tmp_path
+    ):
+        import requests as rq
+
+        def always_down(audio_path, provider_id):
+            if audio_path.stem == "c2":
+                raise rq.exceptions.ConnectionError("down")
+            return {"text": "ok", "latency_ms": 1, "cost_usd": 0.0}
+
+        summary = run_provider(
+            "whisper", manifest, always_down, audio_dir, tmp_path,
+            max_rate_limit_retries=2,
+        )
+        assert summary["clips_ok"] == 2
+        assert summary["clips_failed"] == 1
+        assert not cached_path("whisper", "c2", tmp_path).exists()

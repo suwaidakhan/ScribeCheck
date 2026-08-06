@@ -1,0 +1,59 @@
+400 clips, 71.5 audio minutes.
+
+Projected cost (list price):
+  whisper     USD  0.00
+  dg-general  USD  0.55
+  dg-medical  USD  0.55
+  aai         USD  0.25
+  gemini      USD  0.00
+  TOTAL       USD  1.35
+  Cap: USD 20.00
+
+--- whisper (whisper-large-v3) ---
+  ok 400, failed 0, USD 0.0000, median 972 ms
+
+--- dg-general (nova-3) ---
+  ok 400, failed 0, USD 0.5510, median 752 ms
+
+--- dg-medical (nova-3-medical) ---
+  ok 400, failed 0, USD 0.5510, median 876 ms
+
+--- aai (universal-3-5-pro) ---
+  ok 400, failed 0, USD 0.2505, median 518 ms
+
+--- gemini (gemini-3.6-flash) ---
+  a353deca19dba9aaadeba0044ccefe20: still rate limited after 5 tries.
+  a8c855fb76476df248ee0277b5d8b74a: still rate limited after 5 tries.
+  b4c2f327368753233244635f8bd0e980: still rate limited after 5 tries.
+  b89670db369c7e025fb0d74ca94533af: still rate limited after 5 tries.
+  c0a9d8722ec57a9d7c0014132185a05a: still rate limited after 5 tries.
+  c18453be6b19c1812bdbeb7e32666683: still rate limited after 5 tries.
+  c68f2256b87f8a4adc634437ca9b0f0e: still rate limited after 5 tries.
+  c6e4a13479f20b955c13a901233174be: still rate limited after 5 tries.
+  f1c88ce543440298faaed9f743d579de: still rate limited after 5 tries.
+  f5d36926fb98abbddd16fabda29e3a0f: still rate limited after 5 tries.
+  f921ed1237445f75f1a9bf01f51d67b5: still rate limited after 5 tries.
+  00a8fbb3c1ab981f953251ab74953aa7: still rate limited after 5 tries.
+  00cb23d4474de886b096a4121ad06467: still rate limited after 5 tries.
+  0e3380e30506ef3de8547f5a1851253f: still rate limited after 5 tries.
+  179596c3ae11859ebda92d8ca8c757d5: still rate limited after 5 tries.
+  1dda8dca0b084c03fc5ea2a901de6043: still rate limited after 5 tries.
+  36c14ff38c73d6ebc90db41430b058d1: still rate limited after 5 tries.
+  39bf3e3ee7075614072deb7a5280ab60: still rate limited after 5 tries.
+  3dfd04ecb574ea226cdc07a88e9b43d7: still rate limited after 5 tries.
+  49361322979184b1e0b395c76128bed1: still rate limited after 5 tries.
+  5726844dc6ed872cbd29dced93713dd1: still rate limited after 5 tries.
+  681828fe9911e1c031e3a1023f5cba16: still rate limited after 5 tries.
+  6b06a665f4acd27ba438a1e8410936ab: still rate limited after 5 tries.
+  6b6bd6a9b36dbd20ca8ba0b48a0e83c0: still rate limited after 5 tries.
+  6beb2687f186291440c994f823236222: still rate limited after 5 tries.
+  7abb65293b6eb423ce5ca2b5a9f238f2: still rate limited after 5 tries.
+  813cbfeecdbdffe46ec94b654e54df4a: still rate limited after 5 tries.
+  83a7819ff8d4e56d1cb5c58d5ea14a28: still rate limited after 5 tries.
+  875b9f741ca6fe9ce531dae23c363556: still rate limited after 5 tries.
+  a52cc1bdf941a9b4d76061ddbda05072: still rate limited after 5 tries.
+  aeffc6466b2f3e6a60d1a381c6688d62: still rate limited after 5 tries.
+  b53fd41101f96b2aea36486ef2cf32d1: still rate limited after 5 tries.
+  bba103cc3c5381ab96a3534523d83143: still rate limited after 5 tries.
+  bd7164ebfc3bc1eb03c9bc65c4eee3ea: still rate limited after 5 tries.
+  beddeac62f5277f00a937c79f65eaa98: still rate limited after 5 tries.
