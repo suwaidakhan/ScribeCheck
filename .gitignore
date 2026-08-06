@@ -1,0 +1,20 @@
+# Secrets
+.env
+
+# Bulk data, never committed
+data/audio/
+data/cache/
+data/tarballs/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# macOS
+.DS_Store

@@ -1,0 +1,2 @@
+row_id,clip_id,provider,accent,tier,domain,ref_excerpt,hyp_excerpt,entity_expected,entity_transcribed,auto_flag,failure_code,severity,note
+1,,,,,,,,,,,,,

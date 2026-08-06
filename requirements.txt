@@ -1,0 +1,22 @@
+# ScribeCheck. Pinned against a clean Python 3.13.7 install, 2026-08-05.
+# Install:  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+pandas==3.0.5
+numpy==2.5.1
+soundfile==0.14.0
+soxr==1.1.0
+requests==2.34.2
+python-dotenv==1.2.2
+tqdm==4.70.0
+jiwer==4.0.0
+whisper_normalizer==0.1.15
+matplotlib==3.11.1
+pytest==9.1.1
+
+# SPEC's requirements list also named `datasets` and `librosa`. Neither is
+# imported anywhere in this repo and both are left out on purpose.
+#   datasets: AfriSpeech-200 is a loading-script dataset and the library dropped
+#             script execution in v3.0, so it cannot load this dataset at all.
+#             Audio is fetched by direct tarball download instead. DECISIONS D001.
+#   librosa:  used for one resample call, which soxr does without pulling numba.
+#             DECISIONS D004.
