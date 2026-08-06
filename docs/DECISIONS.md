@@ -3,7 +3,8 @@
 Every judgment call that changes a result or deviates from SPEC.md. One entry each:
 decision, alternative, reason.
 
-Format: `YYYY-MM-DD | area | decision | alternative | reason`
+Format: `**Dnnn | area | decision | alternative | reason**`, grouped under a
+dated section heading.
 
 ---
 
@@ -120,3 +121,50 @@ audio with a transcript verified against another's. `audio_paths` and
 `path` is kept alongside it, because locating the file inside the tarball needs
 the full path. Caught by the manifest's own duplicate-clip_id check, which is
 the same failure signature the overnight run's integrity check 4 looks for.
+
+**D013 | entity alignment window | Look for a reference entity in the
+hypothesis within 5 tokens of its proportionally aligned position, and treat a
+drug found anywhere in the clip as correct while requiring a substitution
+candidate to fall inside the window. | Search the whole hypothesis for
+everything, or use absolute token positions. | SPEC M4 names a 5-token window
+for negation and M2 says a substitution is a different lexicon term "in its
+aligned vicinity" without defining it, so one definition is set here and used
+for both. Proportional rather than absolute alignment matters because a
+hypothesis that dropped three words early on would otherwise push every later
+entity out of its window and turn ordinary deletions into false substitutions.
+The asymmetry is deliberate: a drug transcribed correctly but in the wrong place
+is still transcribed correctly, while a different drug appearing far away in a
+long clip is not evidence that this mention was swapped. Applied identically to
+all five configurations.
+
+**D015 | speech-rate bounds | Flag a clip whose words-per-second falls outside
+0.25 to 4 times this corpus's median rate, computed from the manifest at run
+time. | The absolute 1.0 to 5.0 words per second named in
+`prompts/00-overnight-run.md`. | Measured on the full 6,319-clip test split, the
+median rate is 1.67 words per second and 12.2 percent of the split falls below
+1.0, rising to 17.2 percent among clinical clips, where speakers read long drug
+names carefully. An absolute floor of 1.0 therefore expects 2.46 flags in a
+20-clip check whose halt threshold is 2, which makes halting a clean run close
+to a coin flip. It did halt on the first run, on three clips at 0.62, 0.73 and
+0.89 words per second, none of which had anything wrong with them. The
+overnight prompt states the intent plainly, that the range should catch a
+transcript-audio pairing bug rather than an unusually slow speaker, and the
+absolute numbers do not serve that intent on this corpus. The replacement flags
+1.3 percent of the split, keeps the ceiling meaningful, and is derived from the
+data rather than chosen, so it cannot drift out of step again if the sample
+changes. A genuinely mispaired transcript is wrong by a much larger factor than
+this window allows.
+
+**D014 | duplicate-pairing check | Split the overnight run's integrity check 4
+into "expected" and "suspicious", and halt only on the second. | Halt on any
+identical transcript paired with two different audio files, as
+`prompts/00-overnight-run.md` states it. | Read literally, that check fires on
+AfriSpeech's own design. The corpus has many speakers read the same prompt, and
+this manifest already contains one such pair: "TABLET, ORAL TADALAFIL,
+TADALAFIL, 5MG" read by two different speakers, in etsako and ikulu, at 4.4 and
+4.0 seconds. Halting on it would have ended an unattended run on a false
+positive, with hours of downloading behind it and nothing wrong. The two shapes
+that are the indexing bug this check exists to find still halt: one
+speaker credited with the same transcript twice, and two manifest rows resolving
+to the same audio file. Both are reported in `docs/integrity_check.md` either
+way, so the deviation is visible rather than assumed.
