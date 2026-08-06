@@ -64,12 +64,16 @@ DATASET_CITATION = (
 # before any run starts. Actual cost is read back from the API response wherever
 # the provider reports it. See docs/DECISIONS.md D006.
 PROVIDERS: dict[str, dict[str, object]] = {
+    # Whisper served by Groq rather than OpenAI. Same model family, no card,
+    # no spend. Two things this changes about the results, both in D016:
+    # the model is large-v3 where OpenAI's `whisper-1` is large-v2, and the
+    # latency and cost-per-hour in M5 belong to Groq's serving, not OpenAI's.
     "whisper": {
-        "vendor": "openai",
-        "model": "whisper-1",
-        "env_key": "OPENAI_API_KEY",
-        "usd_per_min": 0.006,
-        "free_tier": False,
+        "vendor": "groq",
+        "model": "whisper-large-v3",
+        "env_key": "GROQ_API_KEY",
+        "usd_per_min": 0.0,
+        "free_tier": True,
     },
     "dg-general": {
         "vendor": "deepgram",

@@ -16,10 +16,18 @@ not, and both outcomes are reportable.
 
 ## What is measured
 
-Five system configurations across four vendors: OpenAI Whisper, Deepgram nova-3,
-Deepgram nova-3-medical, AssemblyAI, and Gemini Flash. Deepgram appears twice
-because the general-against-medical delta is a pricing and product finding in
-itself.
+Five system configurations across four vendors: Whisper large-v3 hosted by Groq,
+Deepgram nova-3, Deepgram nova-3-medical, AssemblyAI, and Gemini Flash. Deepgram
+appears twice because the general-against-medical delta is a pricing and product
+finding in itself.
+
+Whisper runs through Groq rather than OpenAI because every configuration here
+sits on a free tier, which keeps the benchmark reproducible by anyone without a
+card. Two consequences, both stated again wherever the numbers appear: the model
+is large-v3 where OpenAI's `whisper-1` serves large-v2, and the cost and latency
+columns for that row describe Groq's serving rather than OpenAI's. The quality
+columns belong to the model, the speed and price columns belong to the host.
+See `docs/DECISIONS.md` D016.
 
 400 clips, 71.5 minutes, 86 accents, drawn from the AfriSpeech-200 test split
 under seed 42 and stratified into three accent tiers by how well represented

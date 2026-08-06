@@ -14,6 +14,7 @@ import json
 
 import pandas as pd
 import pytest
+from src import config, transcribe
 from src.transcribe import (
     RateLimited,
     TranscriptionFailed,
@@ -72,16 +73,20 @@ class Recorder:
 
 class TestProjectCost:
     def test_multiplies_audio_minutes_by_list_price(self, manifest):
-        # 60 seconds of audio at USD 0.006 per minute.
-        assert project_cost(manifest, "whisper") == pytest.approx(0.006)
+        # 60 seconds of audio at USD 0.0077 per minute.
+        assert project_cost(manifest, "dg-general") == pytest.approx(0.0077)
 
     def test_a_free_tier_provider_projects_zero(self, manifest):
         assert project_cost(manifest, "gemini") == 0.0
 
+    def test_the_whisper_slot_is_free_now_that_groq_hosts_it(self, manifest):
+        # Was USD 0.006/min at OpenAI. See DECISIONS D016.
+        assert project_cost(manifest, "whisper") == 0.0
+
     def test_scales_with_the_number_of_clips(self, manifest):
         doubled = pd.concat([manifest, manifest], ignore_index=True)
-        assert project_cost(doubled, "whisper") == pytest.approx(
-            2 * project_cost(manifest, "whisper")
+        assert project_cost(doubled, "dg-general") == pytest.approx(
+            2 * project_cost(manifest, "dg-general")
         )
 
 
@@ -173,3 +178,76 @@ class TestRunProvider:
         summary = run_provider("dg-medical", manifest, Recorder(), audio_dir, tmp_path)
         assert summary["provider"] == "dg-medical"
         assert summary["model"] == "nova-3-medical"
+
+
+class TestGroqTranscriber:
+    """The free replacement for the paid OpenAI slot.
+
+    Groq serves OpenAI's Whisper model on an OpenAI-compatible endpoint, so the
+    request shape is nearly identical and the easy mistake is leaving it pointed
+    at api.openai.com, where the same key would simply 401. These assert on the
+    arguments actually sent rather than on a return value a stub could fake.
+    """
+
+    def _capture(self, monkeypatch, payload=None, status=200):
+        sent = {}
+
+        class Response:
+            status_code = status
+            ok = status < 400
+            text = ""
+
+            def json(self):
+                return payload if payload is not None else {"text": "hello"}
+
+        def fake_post(url, **kwargs):
+            sent["url"] = url
+            sent.update(kwargs)
+            return Response()
+
+        monkeypatch.setattr(transcribe.requests, "post", fake_post)
+        monkeypatch.setenv("GROQ_API_KEY", "test-key")
+        return sent
+
+    def test_calls_groq_and_not_openai(self, monkeypatch, audio_dir):
+        sent = self._capture(monkeypatch)
+        transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")
+        assert sent["url"] == "https://api.groq.com/openai/v1/audio/transcriptions"
+        assert "openai.com" not in sent["url"]
+
+    def test_sends_the_configured_model(self, monkeypatch, audio_dir):
+        sent = self._capture(monkeypatch)
+        transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")
+        assert sent["data"]["model"] == config.PROVIDERS["whisper"]["model"]
+
+    def test_authenticates_with_a_bearer_token(self, monkeypatch, audio_dir):
+        sent = self._capture(monkeypatch)
+        transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")
+        assert sent["headers"]["Authorization"] == "Bearer test-key"
+
+    def test_returns_the_transcribed_text(self, monkeypatch, audio_dir):
+        self._capture(monkeypatch, payload={"text": "takes metformin daily"})
+        result = transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")
+        assert result["text"] == "takes metformin daily"
+
+    def test_costs_nothing_because_the_tier_is_free(self, monkeypatch, audio_dir):
+        self._capture(monkeypatch)
+        result = transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")
+        assert result["cost_usd"] == 0.0
+
+    def test_a_missing_key_fails_before_any_request(self, monkeypatch, audio_dir):
+        monkeypatch.delenv("GROQ_API_KEY", raising=False)
+
+        def explode(*args, **kwargs):
+            raise AssertionError("called the API without a key")
+
+        monkeypatch.setattr(transcribe.requests, "post", explode)
+        with pytest.raises(transcribe.TranscriptionFailed):
+            transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")
+
+    def test_a_rate_limit_is_retryable_rather_than_fatal(self, monkeypatch, audio_dir):
+        # Groq's free tier is capped per hour, so 429 is expected traffic here,
+        # not an error. It must reach the orchestrator's backoff.
+        self._capture(monkeypatch, status=429)
+        with pytest.raises(transcribe.RateLimited):
+            transcribe.transcribe_groq(audio_dir / "c1.wav", "whisper")

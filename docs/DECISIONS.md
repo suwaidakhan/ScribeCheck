@@ -137,6 +137,29 @@ is still transcribed correctly, while a different drug appearing far away in a
 long clip is not evidence that this mention was swapped. Applied identically to
 all five configurations.
 
+**D016 | Whisper host | Run Whisper through Groq's OpenAI-compatible endpoint on
+`whisper-large-v3`, and drop the OpenAI configuration entirely. | Call OpenAI's
+`/v1/audio/transcriptions` on `whisper-1`, as SPEC section 4 names it. | Suwaid
+asked for a free replacement for the one paid slot. OpenAI has no free tier for
+audio and needs a USD 5 minimum top-up; Groq serves the same model family with
+no card, 2,000 requests a day and 7,200 audio seconds an hour, which covers this
+run's 400 requests and 4,290 audio seconds inside a single hour. Two things this
+changes about the results, and both belong in the writeup rather than being
+quietly absorbed.
+
+First, the model is not the same version. OpenAI's `whisper-1` serves Whisper
+large-v2. Groq serves large-v3, which is newer and generally more accurate. So
+the quality numbers describe large-v3, and any comparison against a published
+OpenAI Whisper WER is not like for like.
+
+Second, and more likely to mislead, M5 measures cost per audio hour and median
+latency. Those now describe Groq's serving of Whisper, not OpenAI's. Groq is
+built for fast inference and is priced well below OpenAI, so this configuration
+will probably look both faster and cheaper than the same model at OpenAI. The
+writeup must attribute that column to Groq and must not report it as an OpenAI
+result. The quality columns are the model's; the speed and price columns are the
+host's.
+
 **D015 | speech-rate bounds | Flag a clip whose words-per-second falls outside
 0.25 to 4 times this corpus's median rate, computed from the manifest at run
 time. | The absolute 1.0 to 5.0 words per second named in

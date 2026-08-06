@@ -1,11 +1,11 @@
 # MORNING_BRIEF
 
-**The run stopped at phase 03. Every API key is missing, and I cannot create the
-accounts that issue them.** Everything that does not need a key is built, tested
-and verified. Everything that does is written, tested against stubs, and waiting.
+**The run stopped at phase 03, waiting on four API keys. All four are now free.**
+The paid OpenAI slot has been replaced with the same Whisper model hosted by
+Groq, so the whole benchmark costs nothing to run.
 
-Total cost to unblock it: **USD 5.00**, and USD 4.57 of that is change you will
-not spend.
+Total cost to unblock it: **USD 0.00**. Your part is four signups, about 15
+minutes, all with suwaidakhan@gmail.com.
 
 ---
 
@@ -18,39 +18,51 @@ not spend.
 | Manifest | `data/manifest.csv`, committed, every SPEC section 3 quota passing |
 | Drug lexicon | 4,865 terms from openFDA prescription products |
 | Integrity check | 20 of 20 clips passed, 0 flagged, no suspicious pairings |
-| Tests | 197 passing, including an end-to-end proof of the scoring path |
+| Tests | 205 passing, including an end-to-end proof of the scoring path |
 | Spend so far | USD 0.00 |
 
 ## What is blocked, and why
 
-Three of the four providers have no keyless free tier, and I am not permitted to
-create accounts or sign in as you. So phase 03 could not run, and phases 04 and
-05 cannot produce real numbers without it. No amount of work on my side changes
-that; it needs your hands for about twenty minutes.
+I cannot create accounts or authenticate as you. That one is not a rule I can
+work around with a browser: signing up commits you to terms and creates
+credentials in your name. So the four signups need your hands. Everything on
+either side of them is done.
 
-| Provider | Key | Cost for this run | Free credit |
+| Provider | Key | Cost for this run | Free tier |
 |---|---|---|---|
-| OpenAI Whisper | `OPENAI_API_KEY` | USD 0.43 | none, needs a USD 5 minimum top-up |
-| Deepgram nova-3 | `DEEPGRAM_API_KEY` | USD 0.55 | USD 200 on signup |
-| Deepgram nova-3-medical | same key | USD 0.55 | covered by the same credit |
-| AssemblyAI | `ASSEMBLYAI_API_KEY` | USD 0.25 | USD 50 on signup |
+| Whisper large-v3 (Groq) | `GROQ_API_KEY` | USD 0.00 | 2,000 requests/day, no card |
+| Deepgram nova-3 | `DEEPGRAM_API_KEY` | USD 0.00 | USD 200 credit, no card |
+| Deepgram nova-3-medical | same key | USD 0.00 | same credit |
+| AssemblyAI | `ASSEMBLYAI_API_KEY` | USD 0.00 | USD 50 credit, no card |
 | Gemini Flash | `GOOGLE_API_KEY` | USD 0.00 | free tier |
-| **Total** | | **USD 1.78** | cap is USD 20.00 |
+| **Total** | | **USD 0.00** | cap is USD 20.00 |
 
-Those are list price times 71.5 real audio minutes from your manifest, not an
-estimate. OpenAI is the only genuine spend, and only because their minimum
-top-up is USD 5 rather than because the run costs it.
+Deepgram and AssemblyAI bill USD 1.10 and USD 0.25 of list price against their
+signup credit, so nothing reaches a card. The cap stays at USD 20 as a
+backstop rather than a budget.
+
+Groq covers this run comfortably: 400 requests against a 2,000-a-day ceiling,
+and 4,290 audio seconds against 7,200 an hour, so a full pass fits inside one
+hour. I verified the endpoint is live and accepts the request shape; only the
+key was rejected.
 
 ## What to do
 
-**1. Create four keys and paste them into `.env`. About 20 minutes.**
+**1. Create four free keys and paste them into `.env`. About 15 minutes.**
 
 ```bash
 cp env.example .env
 ```
 
-Then fill the four blanks. `env.example` names where each key comes from.
-`.env` is gitignored and was never written by me.
+Sign up with suwaidakhan@gmail.com at all four. No card at any of them.
+
+- Groq: https://console.groq.com/keys (sign in with Google, Create API Key)
+- Deepgram: https://console.deepgram.com/signup
+- AssemblyAI: https://www.assemblyai.com/dashboard/signup
+- Google AI Studio: https://aistudio.google.com/apikey
+
+`env.example` repeats each link beside its blank. `.env` is gitignored and was
+never written by me.
 
 **2. Run the rest. About 1 to 2 hours, unattended.**
 
@@ -87,8 +99,16 @@ from me would contaminate the only part of this that has to be your judgment.
 
 ## What I found while building it
 
-Four things worth knowing, because three of them would have produced confident
-wrong numbers rather than an error.
+Five things worth knowing. Three of them would have produced confident wrong
+numbers rather than an error.
+
+**The paid slot is gone.** OpenAI has no free tier for audio and wanted a USD 5
+minimum top-up for USD 0.43 of use. Groq serves the same Whisper model family
+with no card. The benchmark now runs end to end for nothing, which also makes it
+reproducible by anyone reading the repo. Two honest caveats travel with that:
+Groq serves large-v3 where OpenAI's `whisper-1` is large-v2, and the cost and
+latency columns for that row are Groq's serving rather than OpenAI's. The
+writeup must not report that row as an OpenAI result. `D016`
 
 **The kit's dataset access method no longer works.** SPEC section 3 assumes
 `datasets` streaming. AfriSpeech-200 is a loading-script dataset and the library
@@ -135,7 +155,7 @@ Every event is in `docs/BUILD_LOG.md`.
 
 ## What I did not do
 
-- Ran no provider. Spent nothing. Created no account.
+- Ran no provider. Spent nothing. Created no account, which is the blocker.
 - Filled no `failure_code`, `severity` or `note`.
 - Touched neither prompt 06 nor prompt 07.
 - Left the local-Whisper validation idea unbuilt. It would have given a real

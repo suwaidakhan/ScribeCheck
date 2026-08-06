@@ -186,12 +186,24 @@ def _list_cost(provider_id: str, audio_seconds: float) -> float:
     return audio_seconds / 60 * float(config.PROVIDERS[provider_id]["usd_per_min"])
 
 
-def transcribe_openai(audio_path: Path, provider_id: str) -> dict:
+def transcribe_groq(audio_path: Path, provider_id: str) -> dict:
+    """Whisper, hosted by Groq. See DECISIONS D016.
+
+    Groq exposes an OpenAI-compatible route, so the request shape is the one
+    OpenAI documents. The host is the whole point of the change though: pointed
+    at api.openai.com this would authenticate against the wrong service and bill
+    an account that has no free tier, which is what the tests pin down.
+
+    The free tier is capped per hour rather than per month, so a 429 here is
+    ordinary traffic. `_check` turns it into RateLimited and the orchestrator
+    backs off, which is why a 400-clip run needs no pacing of its own.
+    """
     started = time.monotonic()
+    key = _api_key(provider_id)  # Before opening the file, so a missing key is cheap.
     with audio_path.open("rb") as handle:
         response = requests.post(
-            "https://api.openai.com/v1/audio/transcriptions",
-            headers={"Authorization": f"Bearer {_api_key(provider_id)}"},
+            "https://api.groq.com/openai/v1/audio/transcriptions",
+            headers={"Authorization": f"Bearer {key}"},
             files={"file": (audio_path.name, handle, "audio/wav")},
             data={
                 "model": config.PROVIDERS[provider_id]["model"],
@@ -200,11 +212,10 @@ def transcribe_openai(audio_path: Path, provider_id: str) -> dict:
             timeout=300,
         )
     _check(response)
-    seconds = _wav_seconds(audio_path)
     return {
         "text": response.json().get("text", ""),
         "latency_ms": round((time.monotonic() - started) * 1000),
-        "cost_usd": _list_cost(provider_id, seconds),
+        "cost_usd": 0.0,  # Free tier.
     }
 
 
@@ -324,7 +335,7 @@ def transcribe_gemini(audio_path: Path, provider_id: str) -> dict:
 
 
 TRANSCRIBERS = {
-    "openai": transcribe_openai,
+    "groq": transcribe_groq,
     "deepgram": transcribe_deepgram,
     "assemblyai": transcribe_assemblyai,
     "google": transcribe_gemini,
