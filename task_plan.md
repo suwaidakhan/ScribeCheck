@@ -221,3 +221,25 @@ quietly, which is the rule it would have broken.
 Suwaid's hands. Real projected spend is USD 1.78, of which USD 0.43 is genuinely
 out of pocket, inflated to USD 5.00 only by OpenAI's minimum top-up. See
 `MORNING_BRIEF.md`.
+
+---
+
+## 13. Publication, 2026-08-06
+
+Published at https://github.com/suwaidakhan/ScribeCheck, public.
+
+The audit ran before the push rather than after, because a leaked key stays in
+history and a stale document is read by everyone who arrives. It found four
+things. No secrets, confirmed by searching every blob in every commit for all
+four live keys rather than checking the working tree. A personal email address
+in two files that a stranger would read. No LICENSE, which left the code
+all-rights-reserved and unusable by anyone. And `MORNING_BRIEF.md`, which still
+said "Ran no provider. Spent nothing." That was true at 04:20 and would have
+been the second file a visitor opened.
+
+Every published number was recomputed from `results/headline.csv` rather than
+retyped, which caught the nova-3-medical delta: 8.97 points, so 9.0 rather than
+the 8.9 first written.
+
+Verified as a stranger sees it, by cloning the public URL fresh: no `.env`, no
+audio, no cache, 220 tests passing with no keys present.
