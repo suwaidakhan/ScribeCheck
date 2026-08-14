@@ -322,6 +322,103 @@ and it makes the honest caveats in the writeup countable.
 
 ---
 
+## W11. Drug accuracy is recall only, which rewards inventing drugs
+
+**Severity: high, and it points the wrong way for a safety benchmark.**
+
+**Observed.** M2 is computed over reference mentions. A provider that outputs a
+drug name never spoken is not penalised anywhere. Entity-level F1, standard in
+named-entity evaluation, scores both directions.
+
+**Blast radius.** Drug names appearing in output that are absent from the
+reference: gemini 7, dg-medical 4, aai 4, whisper 1, dg-general 1.
+
+A system that hallucinates plausible drug names scores the same as one that
+stays silent, and a silent system is safer. The metric is backwards on exactly
+the axis the project cares about.
+
+**Options.**
+
+1. Report precision beside recall, and an F1. The counts above already exist.
+   **Recommended.**
+2. Report hallucinated drug mentions as their own headline number. Arguably the
+   more alarming figure for a clinical reader.
+
+---
+
+## W12. Confidence intervals treat clips as independent when they are not
+
+**Severity: medium, and it makes the intervals too narrow.**
+
+**Observed.** 400 clips come from 247 speakers. 99 speakers contribute more than
+one clip, one contributes 7, and 252 of 400 clips sit in a multi-clip speaker
+group. The Wilson intervals in RESULTS treat every clip as an independent draw.
+
+**Research findings.** Naive per-utterance bootstrap understates variance when
+utterances share a speaker; the documented fix is blockwise bootstrap resampling
+by speaker rather than by clip.
+
+**Effect on the current conclusion.** The tier intervals are wider than
+reported, which strengthens rather than weakens the existing "this sample cannot
+answer the equity question" statement. The conclusion holds; the reasoning
+behind it should be stated correctly.
+
+**Option.** Bootstrap by speaker block and report the wider intervals.
+
+---
+
+## W13. No significance test on the headline gap
+
+**Severity: medium. First thing a technical reviewer asks.**
+
+**Observed.** The 62.8 against 74.5 drug-accuracy gap is reported as a raw
+difference. The five providers are scored on the same 145 mentions, which is a
+matched-pairs design, and no paired test is reported.
+
+**Option.** McNemar's test on the paired correct and incorrect vectors already
+sitting in `per_clip_scores.csv`. The gap is large and plausibly survives, but
+it has not been shown.
+
+---
+
+## W14. Prior art exists and is close
+
+**Severity: high for the writeup, not for the code.**
+
+**Observed.** Afonja, Olatunji and Ogun, "Performant ASR Models for Medical
+Entities in Accented Speech", Interspeech 2024, arXiv 2406.12387, evaluates
+medical entity accuracy on the AfriSpeech-200 clinical subset and reports
+medical WER improving 25 to 34 percent where overall WER barely moved. That is
+the same corpus and close to the same finding.
+
+Adedeji, Joshi and Doohan, "The Sound of Healthcare", arXiv 2402.07658, defines
+Medical Concept WER and shows commercial systems separating far more on it than
+on overall WER.
+
+**Why it matters.** The writeup currently reads as though the WER-against-entity
+gap is a novel observation. It is a replication on new providers, which is
+honest and still worth publishing, but claiming novelty without citing these
+would be the fastest way to lose a technically literate reader.
+
+**Option.** Cite both, and position ScribeCheck as what it is: an independent
+replication across five current commercial systems, with a harm-classification
+layer and a cost and latency comparison that neither paper has.
+
+---
+
+## W15. The severity scale rates potential, not realised, harm
+
+**Severity: low, and it is a framing fix rather than a defect.**
+
+**Observed.** NCC MERP's nine categories turn on whether an error reached the
+patient and what happened next. S1 to S3 are scored from a transcript with no
+downstream encounter to observe, so they rate the capacity to cause harm.
+
+**Option.** Say so in the writeup. Describing S1 as a harm rating invites a
+reader who knows NCC MERP to call it a category error.
+
+---
+
 ## What the research says the project already gets right
 
 Recorded so the PRD is not only a list of faults.
@@ -338,7 +435,7 @@ Recorded so the PRD is not only a list of faults.
   control, and the right one.
 - **Save and resume.** Table stakes on every serious platform, and present.
 - **NCC MERP is correctly not used.** Its nine harm categories are anchored on
-  what actually happened to a patient. There is no chart here to check, so only
+  what happened to a patient in reality. There is no chart here to check, so only
   its ordinal logic transfers, which S1 to S3 already carries.
 
 ---
@@ -353,6 +450,9 @@ The first three are scoring and display fixes with no API cost.
 headline around drug accuracy, which is unaffected by W1 and W9 alike.
 
 **Before calling the taxonomy sound.** W4 option 1, W5, W7 option 1, W8.
+
+**Before the writeup.** W11, W13, W14, W15. W11 is the one that changes a
+number; the rest change what the numbers are allowed to claim.
 
 **Explicitly out of scope.** Rebuilding this as a Label Studio or Argilla
 deployment. The single self-contained HTML page is the right shape for 100 rows
