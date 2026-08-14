@@ -179,3 +179,63 @@ def has_entity(text: str, lexicon: set[str]) -> bool:
         or find_dose_pairs(text)
         or find_negations(text)
     )
+
+
+# Words a speaker voiced as punctuation and the provider transcribed literally.
+# 112 of the 400 clips contain at least one, and every vendor renders them
+# differently: Deepgram writes "open bracket", Gemini writes "{comma}", which
+# the normalizer reduces to "comma". Multi-word forms come first so "open
+# bracket" is removed whole rather than leaving "bracket" behind.
+SPOKEN_PUNCTUATION: tuple[str, ...] = (
+    "open parenthesis",
+    "close parenthesis",
+    "open bracket",
+    "close bracket",
+    "open quote",
+    "close quote",
+    "open paren",
+    "close paren",
+    "question mark",
+    "exclamation mark",
+    "new paragraph",
+    "forward slash",
+    "new line",
+    "next line",
+    "full stop",
+    "semicolon",
+    "apostrophe",
+    "backslash",
+    "paragraph",
+    "unquote",
+    "bracket",
+    "hyphen",
+    "period",
+    "comma",
+    "colon",
+    "quote",
+    "slash",
+    "dash",
+)
+
+_SPOKEN_PUNCTUATION_RE = re.compile(
+    rf"(?<!\w)(?:{'|'.join(re.escape(p) for p in SPOKEN_PUNCTUATION)})(?!\w)"
+)
+
+
+def strip_spoken_punctuation(text: str) -> str:
+    """Drop punctuation the speaker said aloud, which is not content.
+
+    A dictating clinician says "no fever comma no cough", and the provider
+    writes the word. It is neither an error nor content, but it counts as an
+    inserted word, so it inflates WER. That was cosmetic while WER was only
+    reported; it stopped being cosmetic once WER became the collapse
+    classifier, where 38 of 118 transcripts were being called total failures on
+    the strength of transcribed brackets.
+
+    The word "colon" is the known cost. An inflamed colon and a spoken colon
+    are the same token and telling them apart needs context this does not have,
+    so the anatomical sense is removed too. That is the right trade only
+    because the alternative, leaving every punctuation word in, misclassified
+    32 percent of the collapse set.
+    """
+    return re.sub(r"\s+", " ", _SPOKEN_PUNCTUATION_RE.sub(" ", text)).strip()

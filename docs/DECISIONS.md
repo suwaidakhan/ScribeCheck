@@ -275,3 +275,68 @@ failure says so in the header rather than losing the work silently. A
 `needs_listen` flag was added alongside, because most rows are judgeable from
 the text diff and only accent-phonology calls require audio, so the sheet can be
 worked without headphones and the audio-dependent rows revisited.
+
+**D021 | collapsed transcripts | A transcript at WER 0.8 or above emits one
+`ASR-COLLAPSE` finding instead of one finding per lost entity. It stays in the
+entity metrics, which still count every loss inside it. | Label it per entity as
+before, or exclude collapsed transcripts from the metrics entirely. | 118 of
+2,000 transcripts collapse, and they were generating 57 percent of all DOSE-MISS
+findings, 25 percent of DRUG-DEL, and 42 of the 150 sheet rows. One clip,
+`8132758125fa0e31`, collapsed for all five providers and contributed 10 rows on
+its own. Asking a human which of ten codes describes a missing dose in a
+hypothesis reading `so radiation of other force damaged tubular fracture of lotr
+is formula` is a question with no honest answer, and the WER column already
+records the fact. Excluding them from the metrics instead was rejected because a
+drug lost to a collapse is still lost, and dropping the worst 5.9 percent would
+flatter every provider. The collapse rate is reported separately: AAI 0.5
+percent against Whisper 9.5, a 19-fold spread, and flat across accent tiers, so
+it is a robustness result rather than an equity one.
+
+**D022 | lexicon components | Emit single-word components of multi-word generic
+names, filtered harder than brand-only terms: the English dictionary applies to
+every component with no exception, plus letters-only and the blocklist. | Keep
+whole generic names only. | `find_drug_mentions` compares whole tokens, so no
+multi-word entry can ever match anything: 2,306 of 5,347 entries are inert and
+the lexicon was functionally half its stated size. `insulin glargine` was
+present while `glargine` and `insulin` were not, so a reference reading `14
+glargine sig 22 units` produced no drug mention at all and an insulin mangled
+into `nicaragine` scored as nothing. Components are weaker evidence than a whole
+generic name, so they are filtered harder rather than equally; the asymmetry the
+lexicon already used for brand names is extended, not broken.
+
+**D023 | INN names | Add a committed list of 468 International Nonproprietary
+Names, `data/drug_lexicon_inn.txt`, merged at build and never dictionary
+filtered. | Rely on openFDA alone, or fetch DrugCentral at build time. | openFDA
+is the US National Drug Code directory and carries United States Adopted Names,
+so paracetamol is only listed as acetaminophen and rifampicin as rifampin. An
+African clinical corpus was being measured against a US formulary, with
+chloroquine, quinine, proguanil, amodiaquine, sulfadoxine, primaquine,
+ethambutol and piperaquine all absent. Committed rather than fetched because a
+network dependency at build time would make the denominator depend on a remote
+service being up. The list also carries `insulin` back after the dictionary
+filter drops it, which keeps the filter intact instead of punching a hole in it.
+
+**D024 | blocklist additions | 43 terms added to `COLLISION_BLOCKLIST`, six of
+them found by measuring the new terms against real transcripts: cells,
+dehydrated, delayed, chewable, ethinyl, dimesylate. | Ship the expanded lexicon
+unmeasured. | The same method that caught `pain` appearing in 91 clips as a
+supposed drug. `dehydrated alcohol` and `delayed release` are whole generic
+names, so the dictionary filter never sees their components. `ethinyl` and
+`dimesylate` are halves of names that never stand alone, and counting `ethinyl
+estradiol` as two mentions would inflate the denominator by counting one drug
+twice. `clavulanic` was kept because `acid` is dictionary-filtered, so
+`clavulanic acid` correctly yields one mention. After the pass, all 21 newly
+added terms that match a real transcript are genuine drugs. Effect on the
+sample: 145 drug mentions to 175, across 102 clips to 109.
+
+**D025 | openFDA is not reproducible, recorded as a known defect | The committed
+`data/drug_lexicon.txt` is the canonical artifact; a rebuild with `--force` is
+not guaranteed to reproduce it. | Claim determinism the build does not have. |
+Two openFDA fetches minutes apart returned 1,904 and 1,935 brand-only terms. The
+public tier's `skip` paging has no stable sort, so the same query returns a
+different subset each run. Scoring reruns are deterministic because they read
+the committed lexicon, so the guardrail in CLAUDE.md holds for every published
+number; what does not hold is that a future `--force` reproduces it. Recorded
+here rather than fixed, because the fix is to commit the raw openFDA snapshot
+and build from that, which is a change to the fetch path and not to any number
+in the current results.

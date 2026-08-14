@@ -1,18 +1,11 @@
 kind,expected,heard,ref_index,clip_id,provider,accent,tier,domain
 DRUG-DEL,pimozide,,5,1ab41137caf537cf2d196c3914d95b48,aai,isizulu,B,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,aai,swahili,A,general
-DRUG-DEL,omnipaque,,20,21dcea0a9c98e415d126fa38c3e09e72,aai,swahili,A,clinical
 DOSE-MISS,3 hours,,3,233b65fe511818e326eff9bffdc2bf6f,aai,hausa,A,clinical
 DOSE-UNIT,40 meq,40 mcg,16,27984ad90703cedf54d2c84bfc6e1a3c,aai,hausa,A,clinical
 DOSE-VAL,8 units,80 units,6,320840b5470cf91679cb154ecddc4d86,aai,hausa,A,clinical
 DRUG-DEL,morphine,,12,5b5cea61187384389906b36683ffa428,aai,zulu,B,clinical
-DRUG-DEL,estradiol,,17,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
-DRUG-DEL,norethindrone,,18,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
-DOSE-MISS,0.5 mg,,25,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
-DOSE-MISS,0.75 mg,,27,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
+ASR-COLLAPSE,encounter for supervision of other normal pregnancy 1st trimester tablet oral 28 cyclafem 7 7,subluxation of other 1st phalangeal tubercle fracture of lateral formula,0,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
 DRUG-DEL,imatinib,,10,927f85be5b655d2292720b02da67a9f2,aai,pidgin,B,clinical
 DRUG-SUB,ropinirole,propranolol,14,950669fd990036359a84fc27a609d98b,aai,hausa,A,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,aai,idah,C,clinical
@@ -20,19 +13,21 @@ DRUG-DEL,quetiapine,,0,a52cc1bdf941a9b4d76061ddbda05072,aai,igbo,A,clinical
 DOSE-VAL,445 kg,4445 kg,7,aeffc6466b2f3e6a60d1a381c6688d62,aai,igbo,A,general
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,aai,hausa,A,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,aai,hausa,A,clinical
-DRUG-DEL,senna,,0,cdad5949ae6301810466710c9fa591b7,aai,gbagyi,C,clinical
-DRUG-DEL,lisdexamfetamine,,4,cf605b3aaadbd365452e997fbc78122d,aai,efik,C,clinical
-DOSE-MISS,3.6 ml,,3,ee9c796e757ac3a2493c10bd9d7029c5,aai,yoruba,A,clinical
+DRUG-SUB,vyvanse,methamphetamine,3,cf605b3aaadbd365452e997fbc78122d,aai,efik,C,clinical
+DRUG-SUB,lisdexamfetamine,methamphetamine,4,cf605b3aaadbd365452e997fbc78122d,aai,efik,C,clinical
+ASR-COLLAPSE,nospits max aspirate 3.6 cc,no spits mass aspirate ccc,0,ee9c796e757ac3a2493c10bd9d7029c5,aai,yoruba,A,clinical
 NEG-FLIP,not,,3,f42411fa2e88c397f558c7be352de659,aai,setswana,B,clinical
 DRUG-DEL,calcitriol,,1,f5cb123d9ff58506553397ea7d69d50a,aai,etche,C,clinical
 DOSE-UNIT,0.5 mcg,0.5 mg,2,f5cb123d9ff58506553397ea7d69d50a,aai,etche,C,clinical
 NEG-FLIP,not,,1,f90956b98a371a04fb2d01be89fe11cf,aai,yoruba,A,clinical
 DOSE-VAL,57 ml,27 ml,1,fb226674b17933ee5365ba61f4e6f578,aai,etche,C,clinical
-DRUG-DEL,reglan,,0,00f29afe5b9419051ece6254c7671140,dg-general,ijaw,A,clinical
+ASR-COLLAPSE,reglan given to advance tube,rare gland giving to advanced tube,0,00f29afe5b9419051ece6254c7671140,dg-general,ijaw,A,clinical
 DRUG-DEL,ceftriaxone,,4,11caa8fa466d48bcc966b305b18a3141,dg-general,ogoni,C,clinical
+ASR-COLLAPSE,cont monitor ms lactulose enems 2,continue monitor m s lactulose e n e m s 2,0,146112e1981f61c27d28910341447898,dg-general,afo,C,clinical
 DRUG-DEL,fentanyl,,5,18361ec4ecc20db368a75ee828e415cc,dg-general,jaba,C,clinical
 DRUG-DEL,digoxin,,10,1a91bdf81acf149c03a3c48254cc5273,dg-general,luhya,B,clinical
 DRUG-DEL,pimozide,,5,1ab41137caf537cf2d196c3914d95b48,dg-general,isizulu,B,clinical
+DRUG-DEL,glargine,,11,1ab41137caf537cf2d196c3914d95b48,dg-general,isizulu,B,clinical
 DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,dg-general,igbo,A,clinical
 DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,dg-general,igbo,A,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,dg-general,swahili,A,general
@@ -42,64 +37,72 @@ DOSE-MISS,5 ml,,8,25dead43f9b4f15ff2360caf740a560c,dg-general,yoruba,A,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,dg-general,xhosa,B,clinical
 DOSE-UNIT,40 meq,40 mg,16,27984ad90703cedf54d2c84bfc6e1a3c,dg-general,hausa,A,clinical
 DRUG-DEL,multivitamin,,35,2a2db36f700c4b370d82f111f4e23096,dg-general,etsako,C,clinical
+ASR-COLLAPSE,powder intravenous xerava eravacycline dihydrochloride eq 50 mg base vial,barda intravenous ceraba edavax cyclin dehydrochloride eq 50 milligram base per vi al,0,2eaf4bbff8454dc9f957c29a33be26e5,dg-general,eleme,C,clinical
 DOSE-VAL,8 units,80 units,6,320840b5470cf91679cb154ecddc4d86,dg-general,hausa,A,clinical
+DRUG-DEL,milrinone,,1,3e15362de5160160b9b6dc4a1b7b5173,dg-general,idah,C,clinical
 DRUG-DEL,labetalol,,7,3fd85b94085df416782fb04d0f9da75a,dg-general,kinyarwanda,B,clinical
+DRUG-DEL,amnesteem,,15,44fce3c7ec19dff506083c8a906750a3,dg-general,ijaw,A,clinical
 DOSE-VAL,15 mg,50 mg,11,47563df782e059f397a062dc9c49dedc,dg-general,ebira,B,clinical
 DOSE-VAL,35 ml,335 ml,3,52ad387abe4206177fecb12004fc81c5,dg-general,pidgin,B,clinical
+ASR-COLLAPSE,uo 45 60 cc hr,u 045 to 60 cc per hour,0,5726844dc6ed872cbd29dced93713dd1,dg-general,igbo,A,clinical
 DRUG-DEL,morphine,,12,5b5cea61187384389906b36683ffa428,dg-general,zulu,B,clinical
+DRUG-DEL,agrylin,,14,5f64f9fc4a594adc778f0a2700d116e6,dg-general,yoruba,A,clinical
 DOSE-MISS,60 ml,,3,68d7b378f686a4ea235df042be92df7c,dg-general,yoruba,A,clinical
 DRUG-DEL,meprobamate,,6,6b6bd6a9b36dbd20ca8ba0b48a0e83c0,dg-general,igbo,A,clinical
+ASR-COLLAPSE,bilateral dp pt pulses dopplerable,my lateral dppt pulses doppler ago,0,725b8d8321a1685407b896624a741d82,dg-general,urhobo,B,clinical
 DRUG-DEL,haloperidol,,18,7ac2b7f21b9550f6de49f8047e0c0e19,dg-general,luo,C,clinical
 NEG-FLIP,not,,1,7ecb769ffb1875b51a824aec75d2f79c,dg-general,kinyarwanda,B,general
-DRUG-DEL,estradiol,,17,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
-DRUG-DEL,norethindrone,,18,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
-DOSE-MISS,0.5 mg,,25,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
-DOSE-MISS,0.75 mg,,27,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
+ASR-COLLAPSE,encounter for supervision of other normal pregnancy 1st trimester tablet oral 28 cyclafem 7 7,survivation of other 1st damages to blood fracture of lodzius formula,0,8132758125fa0e3156821052a383f9ef,dg-general,hausa,A,clinical
 DRUG-DEL,nitroglycerin,,1,824c7c4c945e6189c231341493d25e5d,dg-general,sepedi,C,clinical
-NEG-FLIP,not,,20,82faa4bc24f3ce811e8e07503edfbebb,dg-general,yoruba,A,clinical
-NEG-FLIP,not,,22,82faa4bc24f3ce811e8e07503edfbebb,dg-general,yoruba,A,clinical
-DOSE-MISS,22 units,,3,868ed2786d8b2dedffe5b5358c2c529d,dg-general,agatu,C,clinical
-DOSE-MISS,130 ml,,2,8a9cea52e9b59a3a21705dc3c2885d04,dg-general,nyandang,C,clinical
+ASR-COLLAPSE,discharge diagnosis primarymrsa sepsis with cervical abcsess and cervica osteomyelitis as well drained paraspinal abscess,,0,82faa4bc24f3ce811e8e07503edfbebb,dg-general,yoruba,A,clinical
+DRUG-DEL,glargine,,1,868ed2786d8b2dedffe5b5358c2c529d,dg-general,agatu,C,clinical
+ASR-COLLAPSE,izuojukwu okeyogunjioforamvca amvca 8 pic twitter com 3 qococftj 6,izu ojuku oke ogunjiofo amvca a m v c a 8 pic dot twitter dot,0,8976dc7ac0cf57b7d29b4c988b7f1253,dg-general,benin,C,general
+ASR-COLLAPSE,fen tf 130 cc k d of bm 32 with promod pe 32 with promod,f e n t f 130 c c k t of b m 32 with,0,8a9cea52e9b59a3a21705dc3c2885d04,dg-general,nyandang,C,clinical
 DRUG-DEL,trimethoprim,,10,8cb3809701786ccfebe73b788fdbf219,dg-general,setswana,B,general
 DRUG-DEL,imatinib,,10,927f85be5b655d2292720b02da67a9f2,dg-general,pidgin,B,clinical
-DRUG-DEL,labetalol,,0,95db94bcf9a5dca2090b618996026b61,dg-general,mada,C,clinical
+ASR-COLLAPSE,labetalol 10 20 mg iv q 4 h prn sbp 140 order date 21 at,larvetlo 10 to 20 milligram intravenous q 4 h as a 20 systolic blood pressure,0,95db94bcf9a5dca2090b618996026b61,dg-general,mada,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,dg-general,idah,C,clinical
 NEG-FLIP,no,,9,a46605b3fdc92295cbd88bb861487e58,dg-general,ijaw,A,general
 DRUG-DEL,quetiapine,,0,a52cc1bdf941a9b4d76061ddbda05072,dg-general,igbo,A,clinical
+ASR-COLLAPSE,sleeping and abg at 300,sleeping and a b g at 0300,0,a7046fce47c40b1fd7e5e841203d129f,dg-general,urhobo,B,clinical
 DRUG-DEL,lumefantrine,,9,a8b08dfb2d86e274967be71c137de2c2,dg-general,idoma,B,general
+DRUG-DEL,piperaquine,,10,a8b08dfb2d86e274967be71c137de2c2,dg-general,idoma,B,general
 DRUG-DEL,temazepam,,9,aa3d0d5b66d4e3ae1d00cd720b8a0fb7,dg-general,mwaghavul,C,clinical
 DRUG-DEL,temazepam,,9,aa3d0d5b66d4e3ae1d00cd720b8a0fb7,dg-general,mwaghavul,C,clinical
+ASR-COLLAPSE,will cont to monitor dng,will continue to monitor d and g,0,b29c9ccbdadf5706af0da73171953752,dg-general,ijaw,A,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,dg-general,hausa,A,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,dg-general,hausa,A,clinical
 DOSE-MISS,5 ml,,9,b89670db369c7e025fb0d74ca94533af,dg-general,hausa,A,clinical
 DRUG-DEL,estradiol,,18,b9fbfa440d2ba2a19ff2e1f37ee2edf4,dg-general,yoruba,A,clinical
+DRUG-DEL,ethynodiol,,19,b9fbfa440d2ba2a19ff2e1f37ee2edf4,dg-general,yoruba,A,clinical
 NEG-FLIP,not,,0,beddeac62f5277f00a937c79f65eaa98,dg-general,igbo,A,clinical
-DRUG-DEL,levothyroxine,,1,bfeb15fa6cda5bc99eca0dfa907afdfd,dg-general,igarra,C,clinical
-DOSE-MISS,50 mcg,,2,bfeb15fa6cda5bc99eca0dfa907afdfd,dg-general,igarra,C,clinical
+ASR-COLLAPSE,9 levothyroxine 50 mcg tablet sig one one tablet po dailydaily.10,9 low 101560 tablets 11 tablet 4 d b 10,0,bfeb15fa6cda5bc99eca0dfa907afdfd,dg-general,igarra,C,clinical
 DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,dg-general,swahili,A,clinical
 DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,dg-general,swahili,A,clinical
 DRUG-DEL,rituximab,,4,c43d8faa6efe9020bdd669a67ba1e988,dg-general,efik,C,clinical
 DRUG-DEL,hyaluronidase,,5,c43d8faa6efe9020bdd669a67ba1e988,dg-general,efik,C,clinical
+ASR-COLLAPSE,but have been wnl,both have been w n l,0,c80332f56b08b4af535215343ffdb008,dg-general,ijaw,A,clinical
 DRUG-DEL,venlafaxine,,3,ce44e5e5a82a4afd35c8538c0c3cbeee,dg-general,igbo,A,clinical
-DRUG-DEL,sucralfate,,9,cee69f2a5332655a8e0bf4626e3c67c5,dg-general,ibibio,B,clinical
-DRUG-DEL,lisdexamfetamine,,4,cf605b3aaadbd365452e997fbc78122d,dg-general,efik,C,clinical
-DOSE-MISS,40 ml,,2,eaa66b82d267fa11b54cf412eb32aab3,dg-general,idoma,B,clinical
+ASR-COLLAPSE,she was started on nadolol hospital ekwutosinammaduibegi ppi and sucralfate,she was started on nadolon hospital echo to sinam madhui beggin ppi and sukral fate,0,cee69f2a5332655a8e0bf4626e3c67c5,dg-general,ibibio,B,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,dg-general,ibibio,B,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,dg-general,ibibio,B,clinical
+DRUG-SUB,vyvanse,methamphetamine,3,cf605b3aaadbd365452e997fbc78122d,dg-general,efik,C,clinical
+DRUG-SUB,lisdexamfetamine,methamphetamine,4,cf605b3aaadbd365452e997fbc78122d,dg-general,efik,C,clinical
+ASR-COLLAPSE,pox one 40 cc and bfx one so far this shift,p 0 x 140 c c and b f x one sofa deshift,0,eaa66b82d267fa11b54cf412eb32aab3,dg-general,idoma,B,clinical
 DRUG-DEL,meloxicam,,0,ec18809717922ca38ceeb713515fbcff,dg-general,sesotho,C,clinical
 DRUG-DEL,erythromycin,,0,ee52a0bb537315a9e13798dc8dfbd627,dg-general,idoma,B,clinical
-DOSE-MISS,3.6 ml,,3,ee9c796e757ac3a2493c10bd9d7029c5,dg-general,yoruba,A,clinical
+ASR-COLLAPSE,nospits max aspirate 3.6 cc,no spits mass aspirate dot c c c,0,ee9c796e757ac3a2493c10bd9d7029c5,dg-general,yoruba,A,clinical
 DRUG-DEL,zosyn,,2,f1c88ce543440298faaed9f743d579de,dg-general,hausa,A,clinical
 DOSE-UNIT,0.5 mcg,0.5 mg,2,f5cb123d9ff58506553397ea7d69d50a,dg-general,etche,C,clinical
 NEG-FLIP,not,,1,f90956b98a371a04fb2d01be89fe11cf,dg-general,yoruba,A,clinical
 DOSE-MISS,57 ml,,1,fb226674b17933ee5365ba61f4e6f578,dg-general,etche,C,clinical
 DOSE-MISS,60 ml,,5,fb226674b17933ee5365ba61f4e6f578,dg-general,etche,C,clinical
 DRUG-DEL,dantrolene,,0,fbb74c6452c0cd8839a84a8e8a6edeab,dg-general,akan,C,clinical
-DRUG-DEL,reglan,,0,00f29afe5b9419051ece6254c7671140,dg-medical,ijaw,A,clinical
 DRUG-DEL,ceftriaxone,,4,11caa8fa466d48bcc966b305b18a3141,dg-medical,ogoni,C,clinical
+ASR-COLLAPSE,cont monitor ms lactulose enems 2,continue monitor ms lactulose e n e m s 2,0,146112e1981f61c27d28910341447898,dg-medical,afo,C,clinical
 DRUG-DEL,digoxin,,10,1a91bdf81acf149c03a3c48254cc5273,dg-medical,luhya,B,clinical
 DRUG-DEL,pimozide,,5,1ab41137caf537cf2d196c3914d95b48,dg-medical,isizulu,B,clinical
+DRUG-DEL,glargine,,11,1ab41137caf537cf2d196c3914d95b48,dg-medical,isizulu,B,clinical
 DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,dg-medical,igbo,A,clinical
 DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,dg-medical,igbo,A,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,dg-medical,swahili,A,general
@@ -107,189 +110,200 @@ DOSE-MISS,4 l,,5,20d0b5e49fb27db230bccda1d2c38946,dg-medical,delta,C,clinical
 DOSE-MISS,5 ml,,8,25dead43f9b4f15ff2360caf740a560c,dg-medical,yoruba,A,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,dg-medical,xhosa,B,clinical
 DOSE-UNIT,40 meq,40 mg,16,27984ad90703cedf54d2c84bfc6e1a3c,dg-medical,hausa,A,clinical
+ASR-COLLAPSE,powder intravenous xerava eravacycline dihydrochloride eq 50 mg base vial,barda intravenous cereva edaravax cyclin dihydrochloride eq 50 milligram base per v i a l,0,2eaf4bbff8454dc9f957c29a33be26e5,dg-medical,eleme,C,clinical
 DOSE-VAL,8 units,80 units,6,320840b5470cf91679cb154ecddc4d86,dg-medical,hausa,A,clinical
 NEG-FLIP,no,,0,399eeb18cb0fb018270ccd9ea1861256,dg-medical,swahili,A,clinical
+DRUG-DEL,amnesteem,,15,44fce3c7ec19dff506083c8a906750a3,dg-medical,ijaw,A,clinical
 DOSE-VAL,15 mg,50 mg,11,47563df782e059f397a062dc9c49dedc,dg-medical,ebira,B,clinical
 DOSE-VAL,35 ml,335 ml,3,52ad387abe4206177fecb12004fc81c5,dg-medical,pidgin,B,clinical
 DRUG-DEL,morphine,,12,5b5cea61187384389906b36683ffa428,dg-medical,zulu,B,clinical
-DOSE-MISS,60 ml,,3,68d7b378f686a4ea235df042be92df7c,dg-medical,yoruba,A,clinical
+DRUG-DEL,agrylin,,14,5f64f9fc4a594adc778f0a2700d116e6,dg-medical,yoruba,A,clinical
+ASR-COLLAPSE,u 0 30 60 ml hr all night,,0,68d7b378f686a4ea235df042be92df7c,dg-medical,yoruba,A,clinical
 DRUG-DEL,meprobamate,,6,6b6bd6a9b36dbd20ca8ba0b48a0e83c0,dg-medical,igbo,A,clinical
 DRUG-DEL,haloperidol,,18,7ac2b7f21b9550f6de49f8047e0c0e19,dg-medical,luo,C,clinical
-DRUG-DEL,estradiol,,17,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
-DRUG-DEL,norethindrone,,18,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
-DOSE-MISS,0.5 mg,,25,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
-DOSE-MISS,0.75 mg,,27,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
-NEG-FLIP,not,,20,82faa4bc24f3ce811e8e07503edfbebb,dg-medical,yoruba,A,clinical
-NEG-FLIP,not,,22,82faa4bc24f3ce811e8e07503edfbebb,dg-medical,yoruba,A,clinical
+ASR-COLLAPSE,encounter for supervision of other normal pregnancy 1st trimester tablet oral 28 cyclafem 7 7,so radiation of other force damaged tubular fracture of lotr is formula,0,8132758125fa0e3156821052a383f9ef,dg-medical,hausa,A,clinical
+ASR-COLLAPSE,discharge diagnosis primarymrsa sepsis with cervical abcsess and cervica osteomyelitis as well drained paraspinal abscess,,0,82faa4bc24f3ce811e8e07503edfbebb,dg-medical,yoruba,A,clinical
 DOSE-VAL,250 mg,150 mg,15,868cbb2849424d087eb7b0b2dd76e3c6,dg-medical,bassa,C,clinical
-DOSE-MISS,22 units,,3,868ed2786d8b2dedffe5b5358c2c529d,dg-medical,agatu,C,clinical
+DRUG-DEL,glargine,,1,868ed2786d8b2dedffe5b5358c2c529d,dg-medical,agatu,C,clinical
+ASR-COLLAPSE,izuojukwu okeyogunjioforamvca amvca 8 pic twitter com 3 qococftj 6,izu ojuku oke ogunjio 4 amvca amvca 8 pic dot twitter dot com 3 q,0,8976dc7ac0cf57b7d29b4c988b7f1253,dg-medical,benin,C,general
+ASR-COLLAPSE,fen tf 130 cc k d of bm 32 with promod pe 32 with promod,f e n g f 130 cc k t of b m 32 with promot,0,8a9cea52e9b59a3a21705dc3c2885d04,dg-medical,nyandang,C,clinical
 DRUG-DEL,imatinib,,10,927f85be5b655d2292720b02da67a9f2,dg-medical,pidgin,B,clinical
+ASR-COLLAPSE,8 prednisone 10 mg q day,it is prednisone 10 milligram quantity per day,0,94a84a0f3f82fccfb5d198d9398ac92d,dg-medical,ijaw,A,clinical
 DOSE-VAL,113 days,13 days,2,957f35f6f15f3598a944d8e025c18c1e,dg-medical,hausa,A,clinical
-DRUG-DEL,labetalol,,0,95db94bcf9a5dca2090b618996026b61,dg-medical,mada,C,clinical
+ASR-COLLAPSE,labetalol 10 20 mg iv q 4 h prn sbp 140 order date 21 at,lavatolol 10 to 20 milligram intravenous q 4 h as a 20 minute systolic blood,0,95db94bcf9a5dca2090b618996026b61,dg-medical,mada,C,clinical
 NEG-FLIP,no,,7,96c0239bebf9812f391113c433a60ac3,dg-medical,swahili,A,clinical
 DOSE-VAL,500 mg,100 mg,1,9d77d58566ed0e963ae1123e3ab50cee,dg-medical,idoma,B,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,dg-medical,idah,C,clinical
 DRUG-SUB,quetiapine,humira,0,a52cc1bdf941a9b4d76061ddbda05072,dg-medical,igbo,A,clinical
+ASR-COLLAPSE,sleeping and abg at 300,sleeping and a b g at 0300,0,a7046fce47c40b1fd7e5e841203d129f,dg-medical,urhobo,B,clinical
 DRUG-DEL,lumefantrine,,9,a8b08dfb2d86e274967be71c137de2c2,dg-medical,idoma,B,general
+DRUG-DEL,piperaquine,,10,a8b08dfb2d86e274967be71c137de2c2,dg-medical,idoma,B,general
 DRUG-DEL,captopril,,1,af4fbadeeb6f189c5d29e6526fa0b02c,dg-medical,idoma,B,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,dg-medical,hausa,A,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,dg-medical,hausa,A,clinical
 DOSE-MISS,5 ml,,9,b89670db369c7e025fb0d74ca94533af,dg-medical,hausa,A,clinical
+DRUG-DEL,ethynodiol,,19,b9fbfa440d2ba2a19ff2e1f37ee2edf4,dg-medical,yoruba,A,clinical
 DOSE-MISS,30 units,,0,bde569d1c5436b9011e7291e0591791d,dg-medical,itsekiri,C,clinical
 DRUG-DEL,levothyroxine,,1,bfeb15fa6cda5bc99eca0dfa907afdfd,dg-medical,igarra,C,clinical
 DOSE-MISS,50 mcg,,2,bfeb15fa6cda5bc99eca0dfa907afdfd,dg-medical,igarra,C,clinical
 DRUG-DEL,rituximab,,4,c43d8faa6efe9020bdd669a67ba1e988,dg-medical,efik,C,clinical
 DRUG-DEL,hyaluronidase,,5,c43d8faa6efe9020bdd669a67ba1e988,dg-medical,efik,C,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,dg-medical,ibibio,B,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,dg-medical,ibibio,B,clinical
 DRUG-DEL,lisdexamfetamine,,4,cf605b3aaadbd365452e997fbc78122d,dg-medical,efik,C,clinical
-DOSE-MISS,4 hours,,4,ea252ca5cac42505a2bd8a34e4c85b1f,dg-medical,bagi,C,clinical
+ASR-COLLAPSE,oob to chair x 4 hours w 0 incident,,0,ea252ca5cac42505a2bd8a34e4c85b1f,dg-medical,bagi,C,clinical
 DOSE-MISS,40 ml,,2,eaa66b82d267fa11b54cf412eb32aab3,dg-medical,idoma,B,clinical
 DRUG-DEL,meloxicam,,0,ec18809717922ca38ceeb713515fbcff,dg-medical,sesotho,C,clinical
-DOSE-MISS,3.6 ml,,3,ee9c796e757ac3a2493c10bd9d7029c5,dg-medical,yoruba,A,clinical
-DRUG-DEL,zosyn,,2,f1c88ce543440298faaed9f743d579de,dg-medical,hausa,A,clinical
+ASR-COLLAPSE,nospits max aspirate 3.6 cc,nose pits mass aspirate dot c c c,0,ee9c796e757ac3a2493c10bd9d7029c5,dg-medical,yoruba,A,clinical
+DRUG-SUB,zosyn,vancomycin,2,f1c88ce543440298faaed9f743d579de,dg-medical,hausa,A,clinical
 DOSE-UNIT,0.5 mcg,0.5 mg,2,f5cb123d9ff58506553397ea7d69d50a,dg-medical,etche,C,clinical
 NEG-FLIP,not,,1,f90956b98a371a04fb2d01be89fe11cf,dg-medical,yoruba,A,clinical
 DOSE-MISS,57 ml,,1,fb226674b17933ee5365ba61f4e6f578,dg-medical,etche,C,clinical
 DOSE-MISS,60 ml,,5,fb226674b17933ee5365ba61f4e6f578,dg-medical,etche,C,clinical
 DRUG-DEL,dantrolene,,0,fbb74c6452c0cd8839a84a8e8a6edeab,dg-medical,akan,C,clinical
-DRUG-DEL,reglan,,0,00f29afe5b9419051ece6254c7671140,gemini,ijaw,A,clinical
-DRUG-DEL,iron,,2,06e79ca6e3f2bc5a6aefbd7be5f1f8e4,gemini,hausa,A,clinical
-DRUG-DEL,tadalafil,,2,0700cda752bd76a9e0094aa81371a166,gemini,etsako,C,clinical
-DRUG-DEL,tadalafil,,2,0700cda752bd76a9e0094aa81371a166,gemini,etsako,C,clinical
+ASR-COLLAPSE,reglan given to advance tube,red land giving to advanced tube,0,00f29afe5b9419051ece6254c7671140,gemini,ijaw,A,clinical
+ASR-COLLAPSE,they are fungicidal at high concentrations,dafungicide water high concentration,0,04a041c8c7f0c63c42e21c23b4739a33,gemini,luganda,B,clinical
+ASR-COLLAPSE,remains on iron and trivisol,riemenschneider on travisol,0,06e79ca6e3f2bc5a6aefbd7be5f1f8e4,gemini,hausa,A,clinical
+ASR-COLLAPSE,tablet oral tadalafil tadalafil 5 mg,tablet ora tada la fi tada la fi 5 mg,0,0700cda752bd76a9e0094aa81371a166,gemini,etsako,C,clinical
 DRUG-DEL,ceftriaxone,,4,11caa8fa466d48bcc966b305b18a3141,gemini,ogoni,C,clinical
 DOSE-MISS,2 days,,4,121b405d54487b5f413f30decd198810,gemini,berom,C,general
-DOSE-MISS,2 hours,,7,16c2e642a0c9b3dc37e4b944aeeb2de0,gemini,angas,C,clinical
+ASR-COLLAPSE,initial intrapartum antibiotic dose given less than 2 hours prior to delivery,mais je souhaite interrompre antibiote du divin de ca 2 h prior to delivery,0,16c2e642a0c9b3dc37e4b944aeeb2de0,gemini,angas,C,clinical
 DRUG-DEL,pimozide,,5,1ab41137caf537cf2d196c3914d95b48,gemini,isizulu,B,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,gemini,swahili,A,general
 DOSE-MISS,4 l,,5,20d0b5e49fb27db230bccda1d2c38946,gemini,delta,C,clinical
-DRUG-DEL,cerebrum,,7,21db7f42514ac22490b63d6887cba22f,gemini,isizulu,B,clinical
 DRUG-DEL,atovaquone,,0,22347a0c96066c23a0b4037028963e8c,gemini,kinyarwanda,B,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,gemini,xhosa,B,clinical
+ASR-COLLAPSE,fen abd benign weight today 1630 down 80 gm on 80 cc kg d pe,f e n a b d b 9 way today 1630 down 80 gm on,0,2724a2c5e5300779ab3ada65f742cd32,gemini,kanuri,C,clinical
 DOSE-MISS,40 meq,,16,27984ad90703cedf54d2c84bfc6e1a3c,gemini,hausa,A,clinical
+ASR-COLLAPSE,powder intravenous xerava eravacycline dihydrochloride eq 50 mg base vial,pada intra venous serava eravax cycline dehydrochloride 50 milligram base per vial,0,2eaf4bbff8454dc9f957c29a33be26e5,gemini,eleme,C,clinical
 DOSE-MISS,8 units,,6,320840b5470cf91679cb154ecddc4d86,gemini,hausa,A,clinical
-DRUG-SUB,metoprolol,methotrexate,0,4524d44d0b4b586ba5f80bab94a36374,gemini,estako,C,clinical
+ASR-COLLAPSE,no acute distress eyes conjunctiva perrl,no acute distress eyes conjunctiva p e r r l,0,39bf3e3ee7075614072deb7a5280ab60,gemini,igbo,A,clinical
+ASR-COLLAPSE,nf cyclosporine 0.05 ou hospital ogbalay 7,n f cyclosporin 0.05% ou hospital agbarho teaching,0,3c5572142e8029ffb07a9bbe17542aed,gemini,khana,C,clinical
+ASR-COLLAPSE,metoprolol 100 mg hospital dekunle 2,methotrexate 100 mg hopital de creil sur oise,0,4524d44d0b4b586ba5f80bab94a36374,gemini,estako,C,clinical
 DOSE-VAL,15 mg,50 mg,11,47563df782e059f397a062dc9c49dedc,gemini,ebira,B,clinical
 DOSE-VAL,35 ml,335 ml,3,52ad387abe4206177fecb12004fc81c5,gemini,pidgin,B,clinical
 DOSE-MISS,2 l,,4,58fb549d14b07c3aae8b252439917dce,gemini,idoma,B,clinical
-DRUG-SUB,morphine,artesunate,12,5b5cea61187384389906b36683ffa428,gemini,zulu,B,clinical
+DRUG-SUB,morphine,chloroquine,12,5b5cea61187384389906b36683ffa428,gemini,zulu,B,clinical
+DRUG-DEL,agrylin,,14,5f64f9fc4a594adc778f0a2700d116e6,gemini,yoruba,A,clinical
 NEG-FLIP,no,,4,63bd3c234d1d89a65ce8563f55787ac8,gemini,swahili,A,clinical
 DOSE-MISS,60 ml,,3,68d7b378f686a4ea235df042be92df7c,gemini,yoruba,A,clinical
 DRUG-DEL,phenylephrine,,16,695771856cc6a19aadcc9c02daeb816b,gemini,estako,C,clinical
 DOSE-VAL,200 mg,400 mg,18,695771856cc6a19aadcc9c02daeb816b,gemini,estako,C,clinical
 DRUG-DEL,pyrimethamine,,6,6afed7fe39a177c3d510b925d8267a94,gemini,swahili,A,general
+ASR-COLLAPSE,pt w tachycardia and hypotension,patience with talkie cordials and hypertension,0,6d8bcf78963a218d83e6514022c3bfbd,gemini,nembe,B,clinical
+ASR-COLLAPSE,bilateral dp pt pulses dopplerable,vai lacarao dppc causes toplarigo,0,725b8d8321a1685407b896624a741d82,gemini,urhobo,B,clinical
 NEG-FLIP,not,,1,7ecb769ffb1875b51a824aec75d2f79c,gemini,kinyarwanda,B,general
-DRUG-DEL,estradiol,,17,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
-DRUG-DEL,norethindrone,,18,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
-DOSE-MISS,0.5 mg,,25,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
-DOSE-MISS,0.75 mg,,27,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
+ASR-COLLAPSE,encounter for supervision of other normal pregnancy 1st trimester tablet oral 28 cyclafem 7 7,solvatation of other 1st transmit tobulate fraction of low trust formula,0,8132758125fa0e3156821052a383f9ef,gemini,hausa,A,clinical
 DRUG-DEL,nitroglycerin,,1,824c7c4c945e6189c231341493d25e5d,gemini,sepedi,C,clinical
+DRUG-DEL,glargine,,1,868ed2786d8b2dedffe5b5358c2c529d,gemini,agatu,C,clinical
 DOSE-MISS,130 ml,,2,8a9cea52e9b59a3a21705dc3c2885d04,gemini,nyandang,C,clinical
 DRUG-DEL,imatinib,,10,927f85be5b655d2292720b02da67a9f2,gemini,pidgin,B,clinical
+ASR-COLLAPSE,8 prednisone 10 mg q day,it is prednison 10 mg quantity per day,0,94a84a0f3f82fccfb5d198d9398ac92d,gemini,ijaw,A,clinical
 NEG-FLIP,no,,7,96c0239bebf9812f391113c433a60ac3,gemini,swahili,A,clinical
 DRUG-DEL,zosyn,,4,9a375dac7ab12b6d59cffdb932f4d50b,gemini,hausa,A,clinical
 DRUG-DEL,cefotaxime,,8,9b7de9c3315540a63648b9c1212db787,gemini,jaba,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,gemini,idah,C,clinical
+DRUG-DEL,lopressor,,3,a3b4630a9a8ccf82303417432c662d3f,gemini,berom,C,clinical
 NEG-FLIP,no,,9,a46605b3fdc92295cbd88bb861487e58,gemini,ijaw,A,general
 DRUG-DEL,quetiapine,,0,a52cc1bdf941a9b4d76061ddbda05072,gemini,igbo,A,clinical
 DOSE-VAL,25 mg,5 mg,2,a52cc1bdf941a9b4d76061ddbda05072,gemini,igbo,A,clinical
 DRUG-DEL,lumefantrine,,9,a8b08dfb2d86e274967be71c137de2c2,gemini,idoma,B,general
+DRUG-DEL,piperaquine,,10,a8b08dfb2d86e274967be71c137de2c2,gemini,idoma,B,general
 DOSE-VAL,750 mg,2750 mg,15,a8c855fb76476df248ee0277b5d8b74a,gemini,hausa,A,clinical
 DRUG-DEL,temazepam,,9,aa3d0d5b66d4e3ae1d00cd720b8a0fb7,gemini,mwaghavul,C,clinical
 DRUG-DEL,temazepam,,9,aa3d0d5b66d4e3ae1d00cd720b8a0fb7,gemini,mwaghavul,C,clinical
 DOSE-VAL,445 kg,4445 kg,7,aeffc6466b2f3e6a60d1a381c6688d62,gemini,igbo,A,general
-DRUG-DEL,captopril,,1,af4fbadeeb6f189c5d29e6526fa0b02c,gemini,idoma,B,clinical
-DRUG-DEL,clonidine,,3,af4fbadeeb6f189c5d29e6526fa0b02c,gemini,idoma,B,clinical
+ASR-COLLAPSE,held captopril and clonidine as farwar md parameters,head to head compatibility including the spf md parameters,0,af4fbadeeb6f189c5d29e6526fa0b02c,gemini,idoma,B,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,gemini,hausa,A,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,gemini,hausa,A,clinical
-DRUG-DEL,ranitidine,,2,bb3702b2a7ae80986cc8dcd132ff2928,gemini,kalabari,C,clinical
+ASR-COLLAPSE,start taking ranitidine zantac instead to prevent heartburn 3,statins can reduce the risk of heart bone 3,0,bb3702b2a7ae80986cc8dcd132ff2928,gemini,kalabari,C,clinical
 DRUG-DEL,triazolam,,4,bd6c36ca7dfb7303fc8ca6e11274a52f,gemini,isixhosa,C,clinical
 DOSE-VAL,30 units,10 units,0,bde569d1c5436b9011e7291e0591791d,gemini,itsekiri,C,clinical
 NEG-FLIP,not,,0,beddeac62f5277f00a937c79f65eaa98,gemini,igbo,A,clinical
-DRUG-DEL,levothyroxine,,1,bfeb15fa6cda5bc99eca0dfa907afdfd,gemini,igarra,C,clinical
-DOSE-MISS,50 mcg,,2,bfeb15fa6cda5bc99eca0dfa907afdfd,gemini,igarra,C,clinical
+DRUG-DEL,prazosin,,7,bfd411fa6e39fb7fb11f7264221e139a,gemini,ekene,C,clinical
+DRUG-DEL,prazosin,,7,bfd411fa6e39fb7fb11f7264221e139a,gemini,ekene,C,clinical
+ASR-COLLAPSE,9 levothyroxine 50 mcg tablet sig one one tablet po dailydaily.10,me le gusta oir sin titubear juan me hablas,0,bfeb15fa6cda5bc99eca0dfa907afdfd,gemini,igarra,C,clinical
+DRUG-DEL,lopressor,,6,c0a962e9ab1e4b0165f645072d036ce7,gemini,ebira,B,clinical
 DRUG-DEL,metoprolol,,1,c0a9d8722ec57a9d7c0014132185a05a,gemini,hausa,A,clinical
 NEG-FLIP,no,,5,c18453be6b19c1812bdbeb7e32666683,gemini,hausa,A,clinical
 NEG-FLIP,denies,,0,c2093acb790a4bbcaf0367cecfa15793,gemini,igbo,A,clinical
+DRUG-DEL,foscarnet,,7,c361cf1ef4cfa79c13cac6ea5f92ff83,gemini,swahili,A,clinical
 DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,gemini,swahili,A,clinical
 DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,gemini,swahili,A,clinical
 DRUG-DEL,rituximab,,4,c43d8faa6efe9020bdd669a67ba1e988,gemini,efik,C,clinical
-DRUG-DEL,senna,,0,cdad5949ae6301810466710c9fa591b7,gemini,gbagyi,C,clinical
 DRUG-DEL,sucralfate,,9,cee69f2a5332655a8e0bf4626e3c67c5,gemini,ibibio,B,clinical
-DRUG-DEL,lisdexamfetamine,,4,cf605b3aaadbd365452e997fbc78122d,gemini,efik,C,clinical
+DRUG-SUB,diltiazem,hydrocloride,8,cf42ee5d7ae6579d20f480a8cf8dc00f,gemini,ibibio,B,clinical
+DRUG-SUB,diltiazem,hydrocloride,8,cf42ee5d7ae6579d20f480a8cf8dc00f,gemini,ibibio,B,clinical
+ASR-COLLAPSE,tablet chewable oral vyvanse lisdexamfetamine dimesylate 10 mg,comprimes trouble oral vivance dees en fetamine dimethylate comate 10 mg,0,cf605b3aaadbd365452e997fbc78122d,gemini,efik,C,clinical
 DOSE-VAL,40 ml,140 ml,2,eaa66b82d267fa11b54cf412eb32aab3,gemini,idoma,B,clinical
 DRUG-DEL,erythromycin,,0,ee52a0bb537315a9e13798dc8dfbd627,gemini,idoma,B,clinical
-DOSE-MISS,3.6 ml,,3,ee9c796e757ac3a2493c10bd9d7029c5,gemini,yoruba,A,clinical
+ASR-COLLAPSE,nospits max aspirate 3.6 cc,nospiicmassaspirates ccc,0,ee9c796e757ac3a2493c10bd9d7029c5,gemini,yoruba,A,clinical
 DRUG-DEL,zosyn,,2,f1c88ce543440298faaed9f743d579de,gemini,hausa,A,clinical
-DRUG-DEL,calcitriol,,1,f5cb123d9ff58506553397ea7d69d50a,gemini,etche,C,clinical
-DOSE-UNIT,0.5 mcg,0.5 mg,2,f5cb123d9ff58506553397ea7d69d50a,gemini,etche,C,clinical
+ASR-COLLAPSE,6 calcitriol 0.5 mcg capsule sig one capsule po every other day,kwame na na na na na go ahead because it try all 0.5 mg capsule,0,f5cb123d9ff58506553397ea7d69d50a,gemini,etche,C,clinical
 NEG-FLIP,not,,1,f90956b98a371a04fb2d01be89fe11cf,gemini,yoruba,A,clinical
-DOSE-MISS,57 ml,,1,fb226674b17933ee5365ba61f4e6f578,gemini,etche,C,clinical
-DOSE-MISS,60 ml,,5,fb226674b17933ee5365ba61f4e6f578,gemini,etche,C,clinical
-DRUG-DEL,reglan,,0,00f29afe5b9419051ece6254c7671140,whisper,ijaw,A,clinical
-DOSE-MISS,5 mg,,4,0700cda752bd76a9e0094aa81371a166,whisper,etsako,C,clinical
-DRUG-DEL,ativan,,17,0781b542e2bb0461fb14d4e1880ba8a7,whisper,obolo,C,clinical
+ASR-COLLAPSE,amt 57 ml opti 240 60 ml opti 320 cpt,amounts to $7842.16 up to $320 cpt,0,fb226674b17933ee5365ba61f4e6f578,gemini,etche,C,clinical
+ASR-COLLAPSE,reglan given to advance tube,rare gland given to advanced youth,0,00f29afe5b9419051ece6254c7671140,whisper,ijaw,A,clinical
+ASR-COLLAPSE,tablet oral tadalafil tadalafil 5 mg,tablet ora tadalafi tadalafi 5 minute war,0,0700cda752bd76a9e0094aa81371a166,whisper,etsako,C,clinical
 DRUG-DEL,colchicine,,5,10d8ca94d220675578dbbe3e9fb05ce7,whisper,zulu,B,clinical
 DRUG-DEL,ceftriaxone,,4,11caa8fa466d48bcc966b305b18a3141,whisper,ogoni,C,clinical
-NEG-FLIP,not,,4,1a91bdf81acf149c03a3c48254cc5273,whisper,luhya,B,clinical
-DRUG-DEL,digoxin,,10,1a91bdf81acf149c03a3c48254cc5273,whisper,luhya,B,clinical
+ASR-COLLAPSE,unlike quinidine disopyramide does not increase the plasma concentration of digoxin in patients receiving a,kama pia kwenye kuma pia kwenye pira ni kukua kusimu ya plasma kwa hivyo kwa,0,1a91bdf81acf149c03a3c48254cc5273,whisper,luhya,B,clinical
+DRUG-DEL,glargine,,11,1ab41137caf537cf2d196c3914d95b48,whisper,isizulu,B,clinical
 DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,whisper,igbo,A,clinical
 DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,whisper,igbo,A,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,whisper,swahili,A,general
 DOSE-MISS,4 l,,5,20d0b5e49fb27db230bccda1d2c38946,whisper,delta,C,clinical
-DRUG-DEL,omnipaque,,20,21dcea0a9c98e415d126fa38c3e09e72,whisper,swahili,A,clinical
 DRUG-DEL,atovaquone,,0,22347a0c96066c23a0b4037028963e8c,whisper,kinyarwanda,B,clinical
 DOSE-MISS,3 hours,,3,233b65fe511818e326eff9bffdc2bf6f,whisper,hausa,A,clinical
+ASR-COLLAPSE,isolette turned off,i select thundoff,0,23af1c6428d96f4537acf845c51b9085,whisper,ijaw,A,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,whisper,xhosa,B,clinical
 DOSE-MISS,40 meq,,16,27984ad90703cedf54d2c84bfc6e1a3c,whisper,hausa,A,clinical
 DRUG-DEL,multivitamin,,35,2a2db36f700c4b370d82f111f4e23096,whisper,etsako,C,clinical
 DRUG-DEL,levonorgestrel,,10,2c417f9512707188cc0f0aba9d9a80ef,whisper,mada,C,clinical
 DRUG-DEL,levonorgestrel,,10,2c417f9512707188cc0f0aba9d9a80ef,whisper,mada,C,clinical
 NEG-FLIP,no,,9,36c14ff38c73d6ebc90db41430b058d1,whisper,igbo,A,clinical
+ASR-COLLAPSE,a plan trial off cpap today complate 7 day course for omphalitis cont feeding adv,a plain tray of tpap today completes 7 days course for opalipis continue feeding a,0,395b59676aa6355fae06bacef67fc140,whisper,khana,C,clinical
+ASR-COLLAPSE,no acute distress eyes conjunctiva perrl,no acute distress eyes conjunctiva p e r r l,0,39bf3e3ee7075614072deb7a5280ab60,whisper,igbo,A,clinical
 DRUG-DEL,cyclosporine,,1,3c5572142e8029ffb07a9bbe17542aed,whisper,khana,C,clinical
+ASR-COLLAPSE,increased milrinone to 0.5 mcg kg min as ordered at 1830,increase male renin to 0.5 microgram per kilogram per minute as ordered at 6.30,0,3e15362de5160160b9b6dc4a1b7b5173,whisper,idah,C,clinical
 DRUG-DEL,labetalol,,7,3fd85b94085df416782fb04d0f9da75a,whisper,kinyarwanda,B,clinical
+DRUG-DEL,amnesteem,,15,44fce3c7ec19dff506083c8a906750a3,whisper,ijaw,A,clinical
 DRUG-DEL,isotretinoin,,16,44fce3c7ec19dff506083c8a906750a3,whisper,ijaw,A,clinical
-DRUG-DEL,metoprolol,,0,4524d44d0b4b586ba5f80bab94a36374,whisper,estako,C,clinical
-NEG-FLIP,not,,15,4dd5b78a61fa2551f8ec92ce5c9c0de6,whisper,kiswahili,B,clinical
-DOSE-MISS,200 days,,6,4e3b6e2d9fcb97c87a269b1e0747e762,whisper,swahili,A,general
-DOSE-MISS,240 days,,17,4e3b6e2d9fcb97c87a269b1e0747e762,whisper,swahili,A,general
+ASR-COLLAPSE,metoprolol 100 mg hospital dekunle 2,meto prolog 100 mg hospital deep wave zoom,0,4524d44d0b4b586ba5f80bab94a36374,whisper,estako,C,clinical
+ASR-COLLAPSE,however a lab may want to prepare their own inhouse probe if a probe is,kwa hivyo maaweza kuhudhukua kutafutia kutafutia kutafutia kutafutia kutafutia kutafutia,0,4dd5b78a61fa2551f8ec92ce5c9c0de6,whisper,kiswahili,B,clinical
+ASR-COLLAPSE,the duration of lactation is about 200 days and the young leave the burrow between,kwa hivyo kutoka ya kwao ya kwao kwa hivyo kutoka ya kwao kutoka ya kwao,0,4e3b6e2d9fcb97c87a269b1e0747e762,whisper,swahili,A,general
 DOSE-MISS,2 l,,4,58fb549d14b07c3aae8b252439917dce,whisper,idoma,B,clinical
 DRUG-DEL,morphine,,12,5b5cea61187384389906b36683ffa428,whisper,zulu,B,clinical
 DOSE-MISS,60 ml,,3,68d7b378f686a4ea235df042be92df7c,whisper,yoruba,A,clinical
 DRUG-DEL,pyrimethamine,,6,6afed7fe39a177c3d510b925d8267a94,whisper,swahili,A,general
+DRUG-DEL,chlorproguanil,,8,6afed7fe39a177c3d510b925d8267a94,whisper,swahili,A,general
 DRUG-DEL,trimethoprim,,10,6afed7fe39a177c3d510b925d8267a94,whisper,swahili,A,general
 DRUG-DEL,meprobamate,,6,6b6bd6a9b36dbd20ca8ba0b48a0e83c0,whisper,igbo,A,clinical
-DOSE-MISS,12 days,,7,795fbbcc55dad655ff683752f4b1030c,whisper,brass,C,clinical
+ASR-COLLAPSE,pt w tachycardia and hypotension,be shared with tachycardia and papal tension,0,6d8bcf78963a218d83e6514022c3bfbd,whisper,nembe,B,clinical
+ASR-COLLAPSE,sequential dosing is usually for 10 or 12 days each calendarmonth,স খ ঙষ দ জ ন ইস 9 ট ন ও টর ক দ ইজ,0,795fbbcc55dad655ff683752f4b1030c,whisper,brass,C,clinical
 DRUG-DEL,haloperidol,,18,7ac2b7f21b9550f6de49f8047e0c0e19,whisper,luo,C,clinical
-DRUG-DEL,estradiol,,17,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
-DRUG-DEL,norethindrone,,18,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
-DOSE-MISS,0.035 mg,,19,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
-DOSE-MISS,0.5 mg,,25,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
-DOSE-MISS,0.75 mg,,27,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
+ASR-COLLAPSE,encounter for supervision of other normal pregnancy 1st trimester tablet oral 28 cyclafem 7 7,surveys of otafos tamismith toplat fracture of lodz is formula,0,8132758125fa0e3156821052a383f9ef,whisper,hausa,A,clinical
 DRUG-DEL,nitroglycerin,,1,824c7c4c945e6189c231341493d25e5d,whisper,sepedi,C,clinical
 DOSE-VAL,250 mg,150 mg,15,868cbb2849424d087eb7b0b2dd76e3c6,whisper,bassa,C,clinical
-DOSE-MISS,22 units,,3,868ed2786d8b2dedffe5b5358c2c529d,whisper,agatu,C,clinical
-NEG-FLIP,without,,5,89329d8ccf699d749378e316d5da474d,whisper,luganda,B,general
+DRUG-DEL,glargine,,1,868ed2786d8b2dedffe5b5358c2c529d,whisper,agatu,C,clinical
+ASR-COLLAPSE,you can make it big without a record label but you just have to know,kwa hivyo kuhitajiweza kwa kwa hivyo lakini kutoka kufanya kufanya,0,89329d8ccf699d749378e316d5da474d,whisper,luganda,B,general
+ASR-COLLAPSE,izuojukwu okeyogunjioforamvca amvca 8 pic twitter com 3 qococftj 6,izu ojuku oke ogunjofo amvca amvca 8 pic twitter com 3 qoc oc ft j,0,8976dc7ac0cf57b7d29b4c988b7f1253,whisper,benin,C,general
 DOSE-MISS,130 ml,,2,8a9cea52e9b59a3a21705dc3c2885d04,whisper,nyandang,C,clinical
 DRUG-DEL,trimethoprim,,10,8cb3809701786ccfebe73b788fdbf219,whisper,setswana,B,general
-NEG-FLIP,without,,13,9259dde6b27dc39fcc0779e36d0bec02,whisper,kikuyu,C,clinical
+ASR-COLLAPSE,instruct patient to inhale slowly and as deeply as possible through the mouthpiece without using,ndiyoza wakati kuaweza kuhulio kwa hivyo na kwa hivyo ni kwa mawazo wakati kwa wakati,0,9259dde6b27dc39fcc0779e36d0bec02,whisper,kikuyu,C,clinical
 DRUG-DEL,imatinib,,10,927f85be5b655d2292720b02da67a9f2,whisper,pidgin,B,clinical
-DRUG-DEL,prednisone,,1,94a84a0f3f82fccfb5d198d9398ac92d,whisper,ijaw,A,clinical
-DRUG-DEL,ropinirole,,14,950669fd990036359a84fc27a609d98b,whisper,hausa,A,clinical
+ASR-COLLAPSE,8 prednisone 10 mg q day,it is pretty soon 10 milligram quantity per day,0,94a84a0f3f82fccfb5d198d9398ac92d,whisper,ijaw,A,clinical
+ASR-COLLAPSE,nondisplaced fracture of unspecified ulna styloid process subsequent tablet extended release oral requip xl ropinirole,faktura wakafu kwa kwa hivyo ya kutoka kwa kwa hivyo kwa hivyo tablet kutoka mwisho,0,950669fd990036359a84fc27a609d98b,whisper,hausa,A,clinical
 DRUG-DEL,labetalol,,0,95db94bcf9a5dca2090b618996026b61,whisper,mada,C,clinical
 NEG-FLIP,no,,7,96c0239bebf9812f391113c433a60ac3,whisper,swahili,A,clinical
+ASR-COLLAPSE,the terms for the male of a given animal species,ita am swa di mail of e given an e mawa spay she,0,98aa283c0ebaafc5a1021d01ba1bdb5b,whisper,igala,B,general
 DRUG-DEL,zosyn,,4,9a375dac7ab12b6d59cffdb932f4d50b,whisper,hausa,A,clinical
 DRUG-DEL,cefotaxime,,8,9b7de9c3315540a63648b9c1212db787,whisper,jaba,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,whisper,idah,C,clinical
+DRUG-DEL,lopressor,,3,a3b4630a9a8ccf82303417432c662d3f,whisper,berom,C,clinical
 NEG-FLIP,no,,9,a46605b3fdc92295cbd88bb861487e58,whisper,ijaw,A,general
-DRUG-DEL,quetiapine,,0,a52cc1bdf941a9b4d76061ddbda05072,whisper,igbo,A,clinical
+ASR-COLLAPSE,quetiapine fumarate 25 mg tablet sig one one tablet po qhsonce a day at bedtime,what is your pain from my 25 mg tablet c litro my tablet is one,0,a52cc1bdf941a9b4d76061ddbda05072,whisper,igbo,A,clinical
 DRUG-DEL,lumefantrine,,9,a8b08dfb2d86e274967be71c137de2c2,whisper,idoma,B,general
+DRUG-DEL,piperaquine,,10,a8b08dfb2d86e274967be71c137de2c2,whisper,idoma,B,general
 DOSE-MISS,750 mg,,15,a8c855fb76476df248ee0277b5d8b74a,whisper,hausa,A,clinical
 DRUG-DEL,propofol,,10,a9a96ccbe9944292c08bc630aaee1d78,whisper,idoma,B,clinical
 DRUG-DEL,temazepam,,9,aa3d0d5b66d4e3ae1d00cd720b8a0fb7,whisper,mwaghavul,C,clinical
@@ -299,27 +313,35 @@ DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,whisper,hausa,A,clinical
 DRUG-DEL,cetirizine,,4,b89670db369c7e025fb0d74ca94533af,whisper,hausa,A,clinical
 DOSE-MISS,5 ml,,9,b89670db369c7e025fb0d74ca94533af,whisper,hausa,A,clinical
 DRUG-DEL,estradiol,,18,b9fbfa440d2ba2a19ff2e1f37ee2edf4,whisper,yoruba,A,clinical
+DRUG-DEL,ethynodiol,,19,b9fbfa440d2ba2a19ff2e1f37ee2edf4,whisper,yoruba,A,clinical
 DRUG-DEL,ketoconazole,,2,bd6c36ca7dfb7303fc8ca6e11274a52f,whisper,isixhosa,C,clinical
 DRUG-DEL,lantus,,3,bde569d1c5436b9011e7291e0591791d,whisper,itsekiri,C,clinical
-DRUG-DEL,levothyroxine,,1,bfeb15fa6cda5bc99eca0dfa907afdfd,whisper,igarra,C,clinical
-DOSE-MISS,50 mcg,,2,bfeb15fa6cda5bc99eca0dfa907afdfd,whisper,igarra,C,clinical
-DOSE-MISS,6 days,,15,c08715672b66e97854b8d32304a36be0,whisper,kiswahili,B,clinical
+ASR-COLLAPSE,9 levothyroxine 50 mcg tablet sig one one tablet po dailydaily.10,9 1050 in sitchita day one one chabdes 4 10 10 10,0,bfeb15fa6cda5bc99eca0dfa907afdfd,whisper,igarra,C,clinical
+ASR-COLLAPSE,in spite of these other protections the stomach s epithelial cells live only 3 to,kwa hivyo ya kutoka hili ya mkono juma a kwa kwa naia kufuja kwa kamaa,0,c08715672b66e97854b8d32304a36be0,whisper,kiswahili,B,clinical
 DOSE-MISS,5 mg,,3,c0a962e9ab1e4b0165f645072d036ce7,whisper,ebira,B,clinical
+DRUG-DEL,lopressor,,6,c0a962e9ab1e4b0165f645072d036ce7,whisper,ebira,B,clinical
 DRUG-DEL,metoprolol,,1,c0a9d8722ec57a9d7c0014132185a05a,whisper,hausa,A,clinical
 NEG-FLIP,no,,5,c18453be6b19c1812bdbeb7e32666683,whisper,hausa,A,clinical
 NEG-FLIP,denies,,0,c2093acb790a4bbcaf0367cecfa15793,whisper,igbo,A,clinical
 DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,whisper,swahili,A,clinical
 DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,whisper,swahili,A,clinical
 DRUG-DEL,rituximab,,4,c43d8faa6efe9020bdd669a67ba1e988,whisper,efik,C,clinical
-NEG-FLIP,not,,2,c55c2f342f2c47bf07bc91edf2aa07db,whisper,luhya,B,clinical
-DRUG-DEL,senna,,0,cdad5949ae6301810466710c9fa591b7,whisper,gbagyi,C,clinical
-NEG-FLIP,not,,5,ce1c6816a2d6aece987ed5c0f8fb8c67,whisper,luhya,B,clinical
+ASR-COLLAPSE,it should not be used initially 40 drugs used in gastrointestinal disorders 4835,itiweza kwenye kutoka kwa kwa kwa kwa kwa,0,c55c2f342f2c47bf07bc91edf2aa07db,whisper,luhya,B,clinical
+ASR-COLLAPSE,vasodilation however is brought about not by any muscular effort to widen a vessel but,kwenye kwele nyeshouweza kapa moja hiko ya kisaribu zibundi kwa katika haifa kwa ya ushangi,0,ce1c6816a2d6aece987ed5c0f8fb8c67,whisper,luhya,B,clinical
 DRUG-DEL,venlafaxine,,3,ce44e5e5a82a4afd35c8538c0c3cbeee,whisper,igbo,A,clinical
-DRUG-DEL,sucralfate,,9,cee69f2a5332655a8e0bf4626e3c67c5,whisper,ibibio,B,clinical
+ASR-COLLAPSE,she was started on nadolol hospital ekwutosinammaduibegi ppi and sucralfate,she was started on nadolo hospital equal to sinan madwi begging ppi and suko alphae,0,cee69f2a5332655a8e0bf4626e3c67c5,whisper,ibibio,B,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,whisper,ibibio,B,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,whisper,ibibio,B,clinical
+DRUG-SUB,vyvanse,vitamins,3,cf605b3aaadbd365452e997fbc78122d,whisper,efik,C,clinical
 DRUG-SUB,lisdexamfetamine,vitamins,4,cf605b3aaadbd365452e997fbc78122d,whisper,efik,C,clinical
+ASR-COLLAPSE,this causes a fall in blood pressure whose magnitude depends on the concentration of histamine,hali mungu ya kusumia kitu kwa kwamba kutoka kukunguni ya kifungu ya histamine na kufanya,0,d025ca163e46bd07f76b54c80e2d7562,whisper,luhya,B,clinical
+DRUG-DEL,clomipramine,,2,d5df2d0d9bc0b327323e86a090a5afaf,whisper,ebira,B,clinical
+ASR-COLLAPSE,protection of the host immune mechanism mightincrease the efcacy of other drugs that inhibit viralreplication,mwisho ya kwaalisha ya kweka lakini ya msingi kumekuwa kwenye uweza ya kubwa ya kubwa,0,dce11a83cfa477b7e54bace09a6c72ab,whisper,setswana,B,clinical
+DRUG-DEL,lurasidone,,2,ea0178f69e36f46afc081864d2b648e0,whisper,ibibio,B,clinical
+DRUG-DEL,lurasidone,,2,ea0178f69e36f46afc081864d2b648e0,whisper,ibibio,B,clinical
 DRUG-DEL,meloxicam,,0,ec18809717922ca38ceeb713515fbcff,whisper,sesotho,C,clinical
 DRUG-DEL,erythromycin,,0,ee52a0bb537315a9e13798dc8dfbd627,whisper,idoma,B,clinical
-DOSE-MISS,3.6 ml,,3,ee9c796e757ac3a2493c10bd9d7029c5,whisper,yoruba,A,clinical
+ASR-COLLAPSE,nospits max aspirate 3.6 cc,no speech mass a spirit dot ccc,0,ee9c796e757ac3a2493c10bd9d7029c5,whisper,yoruba,A,clinical
 DRUG-DEL,zosyn,,2,f1c88ce543440298faaed9f743d579de,whisper,hausa,A,clinical
 DRUG-DEL,calcitriol,,1,f5cb123d9ff58506553397ea7d69d50a,whisper,etche,C,clinical
 DOSE-UNIT,0.5 mcg,0.5 mg,2,f5cb123d9ff58506553397ea7d69d50a,whisper,etche,C,clinical

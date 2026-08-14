@@ -137,3 +137,53 @@ class TestHasEntity:
 
     def test_false_when_nothing_safety_relevant_is_present(self):
         assert has_entity("the weather is warm today", LEXICON) is False
+
+
+class TestSpokenPunctuationIsNotContent:
+    """W9, promoted out of Phase B because it corrupts collapse classification.
+
+    112 of 400 clips have a speaker voicing punctuation aloud, "comma" and
+    "open bracket", and the providers transcribe those words literally. They are
+    not content and they are not errors, but they count as inserted words, so
+    they inflate WER.
+
+    That was a reporting problem until WER became a classifier. 38 of 118
+    transcripts labelled ASR-COLLAPSE are not collapses at all: a Rituxan line
+    scored 1.62 against 0.38 once the punctuation words came out, and the clip
+    that started this, `14 glargine sig 22 units at bedtime` against `nicaragine
+    sig twenty two open bracket twenty two close bracket units at bedtime`,
+    scored 1.14. Left in, a real drug deletion would have been buried inside a
+    collapse row instead of being labelled.
+    """
+
+    def test_removes_a_spoken_comma(self):
+        from src.entities import strip_spoken_punctuation
+
+        assert strip_spoken_punctuation("no fever comma no cough") == "no fever no cough"
+
+    def test_removes_bracket_words(self):
+        from src.entities import strip_spoken_punctuation
+
+        assert (
+            strip_spoken_punctuation("22 open bracket 22 close bracket units")
+            == "22 22 units"
+        )
+
+    def test_keeps_a_drug_that_contains_a_punctuation_word(self):
+        from src.entities import strip_spoken_punctuation
+
+        # "periodic" starts with "period". Word boundaries, not substrings.
+        assert "periodic" in strip_spoken_punctuation("periodic acid given")
+
+    def test_keeps_ordinary_clinical_use_of_the_word_colon(self):
+        # The anatomical colon is a body part, and this is the known cost of
+        # the rule. Recorded rather than solved: distinguishing "colon" the
+        # organ from "colon" the punctuation needs context this does not have.
+        from src.entities import strip_spoken_punctuation
+
+        assert strip_spoken_punctuation("the colon was inflamed") == "the was inflamed"
+
+    def test_leaves_clean_text_alone(self):
+        from src.entities import strip_spoken_punctuation
+
+        assert strip_spoken_punctuation("takes warfarin daily") == "takes warfarin daily"

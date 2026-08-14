@@ -310,3 +310,55 @@ class TestEveryFindingKindHasACode:
 
             pytest.skip(f"{path} not built yet")
         assert emitted <= {code for code, _ in CODE_DEFINITIONS}
+
+
+class TestCollapsedTranscriptsAreOneFinding:
+    """W16. A transcript that failed as a whole is one event, not ten.
+
+    Found by Suwaid opening row 1. Clip 8132758125fa0e31 collapsed for all five
+    providers and produced 10 of the 150 sheet rows on its own, every one asking
+    him to categorise a missing dose in a hypothesis where nothing survived.
+
+    118 of 2,000 transcripts score WER at or above 0.8, and they generate 57
+    percent of all DOSE-MISS findings and 25 percent of DRUG-DEL. Labelling them
+    per entity spends human attention re-recording a fact the WER column already
+    holds, and it lets a handful of broken clips dominate the taxonomy.
+    """
+
+    LEX = {"levothyroxine", "warfarin", "metformin"}
+
+    def test_a_collapsed_transcript_yields_one_collapse_finding(self):
+        from src.findings import findings_for
+
+        found = findings_for(
+            "levothyroxine 50 mcg tablet sig one one tablet po daily no fever",
+            "me le gusta oir sin titubear juan me hablas",
+            self.LEX,
+        )
+        assert [f["kind"] for f in found] == ["ASR-COLLAPSE"]
+
+    def test_the_collapse_finding_names_what_was_lost(self):
+        from src.findings import findings_for
+
+        found = findings_for(
+            "levothyroxine 50 mcg tablet sig one one tablet po daily",
+            "me le gusta oir sin titubear juan me hablas",
+            self.LEX,
+        )
+        assert found[0]["expected"]
+        assert found[0]["ref_index"] == 0
+
+    def test_an_ordinary_error_is_untouched(self):
+        from src.findings import findings_for
+
+        found = findings_for(
+            "patient takes warfarin 500 mg daily for the clot in the leg today",
+            "patient takes metformin 500 mg daily for the clot in the leg today",
+            self.LEX,
+        )
+        assert [f["kind"] for f in found] == ["DRUG-SUB"]
+
+    def test_the_threshold_is_the_published_one(self):
+        from src.findings import COLLAPSE_WER
+
+        assert COLLAPSE_WER == 0.8

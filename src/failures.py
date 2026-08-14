@@ -13,6 +13,7 @@ from __future__ import annotations
 import difflib
 import html
 import json
+import re
 import sys
 
 import pandas as pd
@@ -35,6 +36,11 @@ PRIORITY = [
 
 SHEET_COLUMNS = [
     "finding_id",
+    # `detector` or `human`. The errors the labeller finds that the detector
+    # never reported are the detector's measured false-negative rate, which is
+    # a better artifact than the sheet on its own, so the export has to keep
+    # them apart rather than blend them.
+    "source",
     "clip_id",
     "provider",
     "accent",
@@ -66,6 +72,10 @@ CODE_DEFINITIONS = [
     ("NEG-FLIP", "negation lost or inverted"),
     ("TERM-CORRUPT", "clinical term corrupted into a plausible-reading wrong term"),
     ("PHON-ACCENT", "error traceable to accent phonology (verify by listening)"),
+    (
+        "ASR-COLLAPSE",
+        "the whole transcription failed, this is not an entity-level error",
+    ),
     ("BENIGN", "a real error, but no clinical meaning changes"),
     ("NO-ERROR", "the detector was wrong, nothing is wrong with this transcription"),
 ]
@@ -198,12 +208,45 @@ def drug_evidence(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
     from src.entities import find_drug_mentions
     from src.score import normalize
 
-    ref = normalize(str(reference))
-    hyp = normalize(str(hypothesis))
+    ref = normalize(unmark(str(reference)))
+    hyp = normalize(unmark(str(hypothesis)))
     return {
         "expected": find_drug_mentions(ref, lexicon),
         "heard_known": find_drug_mentions(hyp, lexicon),
     }
+
+
+def unmark(text: str) -> str:
+    """Strip the page's own highlight marks back off the text.
+
+    The judged entity arrives wrapped as `[[metformin]]`, which is not a token
+    any lexicon contains, so the drug lookup silently returned nothing for the
+    one word the labeller most needed named. The line exists to separate
+    DRUG-SUB from DRUG-DEL and it was blank on exactly those rows.
+    """
+    return (
+        re.sub(r"\[\[(?:[\d,]+\|)?", "", str(text)).replace("]]", "").replace("*", "")
+    )
+
+
+def marked_reference(reference: str, positions: list[int]) -> str:
+    """Number every judged entity in the full reference to match its finding.
+
+    A card can carry ten findings against one sentence. Reading order does not
+    identify them, because the sheet is a stratified sample and arrives ordered
+    by kind, so the highlight has to say which finding below is asking about it.
+    A position of -1 marks nothing, which is what ASR-COLLAPSE wants: the thing
+    that failed is the sentence, not a word in it.
+    """
+    tokens = reference.split()
+    numbers: dict[int, list[int]] = {}
+    for number, index in enumerate(positions, start=1):
+        if 0 <= index < len(tokens):
+            numbers.setdefault(index, []).append(number)
+    for index, found in numbers.items():
+        label = ",".join(str(number) for number in found)
+        tokens[index] = f"[[{label}|{tokens[index]}]]"
+    return " ".join(tokens)
 
 
 def excerpt(marked: str, width: int = EXCERPT_WIDTH) -> str:
@@ -263,22 +306,32 @@ def build() -> pd.DataFrame:
     selected = select_findings(population, target=SHEET_SIZE, seed=config.SEED)
 
     sheet_rows = []
+    whole: dict[tuple[str, str], list[str]] = {}
+    judged: dict[tuple[str, str], list[int]] = {}
     for finding_id, (_, row) in enumerate(selected.iterrows(), start=1):
         reference = normalize(str(manifest.loc[row["clip_id"], "transcript"]))
         hypothesis = normalize(str(transcripts[(row["provider"], row["clip_id"])]))
         shown_ref, shown_hyp = excerpt_around(
             reference, hypothesis, int(row["ref_index"])
         )
+        # The card shows the transcript once, so it is collected per clip and
+        # provider here, along with the position of every entity a finding on
+        # that card is asking about.
+        pair = (row["provider"], row["clip_id"])
+        whole.setdefault(pair, [reference, hypothesis])
+        judged.setdefault(pair, []).append(
+            -1 if row["kind"] == "ASR-COLLAPSE" else int(row["ref_index"])
+        )
         sheet_rows.append(
             {
                 "finding_id": finding_id,
+                "source": "detector",
                 "clip_id": row["clip_id"],
                 "provider": row["provider"],
                 "accent": row["accent"],
                 "tier": row["tier"],
                 "domain": row["domain"],
                 "kind": row["kind"],
-                "weight": float(row["weight"]),
                 "expected": row["expected"],
                 "heard": row["heard"],
                 "weight": round(float(row["weight"]), 4),
@@ -292,20 +345,28 @@ def build() -> pd.DataFrame:
             }
         )
 
+    texts = {
+        pair: (marked_reference(reference, judged[pair]), hypothesis)
+        for pair, (reference, hypothesis) in whole.items()
+    }
+
     sheet = pd.DataFrame(sheet_rows, columns=SHEET_COLUMNS)
     config.TAXONOMY.mkdir(parents=True, exist_ok=True)
     sheet.to_csv(config.TAXONOMY / "failure_taxonomy.csv", index=False)
     config.RESULTS.mkdir(parents=True, exist_ok=True)
     population.to_csv(config.RESULTS / "all_findings.csv", index=False)
-    _write_labeling_page(sheet, manifest)
+    _write_labeling_page(sheet, texts)
 
     print(f"Wrote {len(sheet)} rows to {config.TAXONOMY / 'failure_taxonomy.csv'}")
+    print(f"{len(sheet)} findings on {len(texts)} transcripts, one card each")
     print(f"Wrote {config.RESULTS / 'all_findings.csv'} ({len(population)} findings)")
     print(f"Wrote {config.TAXONOMY / 'labeling.html'}")
     print("\nSampling, so a rate can be computed from the labels:")
     for kind, group in selected.groupby("kind"):
         n = len(population[population.kind == kind])
-        print(f"  {kind:10s} {len(group):3d} of {n:3d}   weight {group.weight.iloc[0]:.2f}")
+        print(
+            f"  {kind:10s} {len(group):3d} of {n:3d}   weight {group.weight.iloc[0]:.2f}"
+        )
     print_instructions()
     return sheet
 
@@ -324,11 +385,15 @@ def _cached_text() -> dict[tuple[str, str], str]:
 
 def print_instructions() -> None:
     """SPEC prompt 05 task 4: 8 lines or fewer, definitions verbatim."""
-    print("\nLabeling, 100 rows, about 3 to 4 hours:")
+    print("\nLabeling, about 3 to 4 hours:")
     print(
-        "  Open taxonomy/labeling.html, play each clip, read reference against hypothesis."
+        "  Open taxonomy/labeling.html. One card per recording: play it, read it once,"
+        " then judge each finding listed under it."
     )
-    print("  Pick one code and one severity per row, then Export to download the CSV.")
+    print(
+        "  Pick one code and one severity per finding. Anything wrong that has no"
+        " finding, add with 'Add an error I found'. Then Export."
+    )
     print(
         "  Codes: "
         + "; ".join(f"{code} {meaning}" for code, meaning in CODE_DEFINITIONS)
@@ -343,8 +408,21 @@ def print_instructions() -> None:
     print("  Save the export over taxonomy/failure_taxonomy.csv when finished.")
 
 
-def _write_labeling_page(sheet: pd.DataFrame, manifest: pd.DataFrame) -> None:
-    """A single self-contained page: audio, diff, dropdowns, CSV export."""
+def _write_labeling_page(
+    sheet: pd.DataFrame,
+    texts: dict[tuple[str, str], tuple[str, str]] | None = None,
+) -> None:
+    """A card per recording: audio, transcript once, every finding under it.
+
+    The sheet is one row per finding, which is right for the CSV and wrong for
+    the screen. Clip 8132758125fa0e31 arrived as rows 1, 7, 10, 12, 19, 24, 25,
+    59, 83 and 88, so the same reference was read ten times before ten separate
+    dropdowns. Grouping keeps the per-finding judgment and drops the rereading.
+
+    `texts` carries the full transcript for a clip and provider, already marked
+    with the numbered entities. Without it the card falls back to the first
+    finding's excerpt, which is worse but still labellable.
+    """
     try:
         lexicon = load_lexicon()
     except Exception:
@@ -352,36 +430,50 @@ def _write_labeling_page(sheet: pd.DataFrame, manifest: pd.DataFrame) -> None:
         # label. Losing the whole page over it would be worse.
         lexicon = set()
 
-    payload = []
-    for _, row in sheet.iterrows():
-        # Read the evidence off the excerpts, which are what the labeller sees
-        # and which centre on the changed words by construction.
-        plain = lambda text: str(text).replace("*", "")
-        evidence = drug_evidence(
-            plain(row["ref_excerpt"]), plain(row["hyp_excerpt"]), lexicon
+    cards = []
+    for (clip_id, provider), group in sheet.groupby(
+        ["clip_id", "provider"], sort=False
+    ):
+        findings = []
+        for position, (_, row) in enumerate(group.iterrows(), start=1):
+            # Read the evidence off the excerpts, which centre on the changed
+            # words by construction.
+            evidence = drug_evidence(row["ref_excerpt"], row["hyp_excerpt"], lexicon)
+            findings.append(
+                {
+                    "finding_id": int(row["finding_id"]),
+                    "position": position,
+                    "source": row["source"],
+                    "kind": row["kind"],
+                    "flag": row["auto_flag"],
+                    "weight": float(row["weight"]),
+                    "expected": row["expected"],
+                    "heard_entity": row["heard"],
+                    "ref_excerpt": row["ref_excerpt"],
+                    "hyp_excerpt": row["hyp_excerpt"],
+                    "expected_drugs": evidence["expected"],
+                    "heard_drugs": evidence["heard_known"],
+                }
+            )
+        first = group.iloc[0]
+        shown = (texts or {}).get(
+            (provider, clip_id), (first["ref_excerpt"], first["hyp_excerpt"])
         )
-        payload.append(
+        cards.append(
             {
-                "finding_id": int(row["finding_id"]),
-                "clip_id": row["clip_id"],
-                "provider": row["provider"],
-                "accent": row["accent"],
-                "tier": row["tier"],
-                "domain": row["domain"],
-                "ref": row["ref_excerpt"],
-                "hyp": row["hyp_excerpt"],
-                "flag": row["auto_flag"],
-                "kind": row["kind"],
-                "weight": float(row["weight"]),
-                "expected": row["expected"],
-                "heard_entity": row["heard"],
-                "expected_drugs": evidence["expected"],
-                "heard_drugs": evidence["heard_known"],
+                "clip_id": clip_id,
+                "provider": provider,
+                "accent": first["accent"],
+                "tier": first["tier"],
+                "domain": first["domain"],
+                "ref": shown[0],
+                "hyp": shown[1],
+                "findings": findings,
             }
         )
 
     (config.TAXONOMY / "labeling.html").write_text(
-        _LABELING_TEMPLATE.replace("__ROWS__", json.dumps(payload, indent=1))
+        _LABELING_TEMPLATE.replace("__CARDS__", json.dumps(cards, indent=1))
         .replace("__CODES__", json.dumps([code for code, _ in CODE_DEFINITIONS]))
         .replace(
             "__SEVERITIES__", json.dumps([code for code, _ in SEVERITY_DEFINITIONS])
@@ -417,17 +509,20 @@ _LABELING_TEMPLATE = r"""<!doctype html>
   h1 { font-size:20px; margin:0 0 6px; }
   .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:13px; }
   .status { color:var(--muted); flex:1; min-width:220px; }
-  .card { border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:14px; }
+  .card { border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:18px; }
   .card.done { border-color:var(--ok); }
   .tags { font-size:12px; text-transform:uppercase; letter-spacing:.05em; opacity:.7; margin-bottom:8px; }
   .text { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:14px; margin:6px 0; }
   .label { font-size:12px; opacity:.7; }
   mark { background:none; color:var(--mark); font-weight:700; }
   audio { width:100%; margin:8px 0; }
+  .legacy { background:#fff4e5; border:1px solid #e0a458; border-radius:6px;
+            padding:12px 14px; margin:0 0 14px; line-height:1.5; }
+  .legacy button { margin-left:6px; }
   select, input[type=text] { font-size:15px; padding:6px; background:var(--bg); color:var(--fg);
            border:1px solid var(--line); border-radius:5px; }
   select { margin-right:10px; }
-  input[type=text] { width:min(360px,80%); }
+  input[type=text] { width:min(320px,80%); }
   button { font-size:14px; padding:7px 13px; border-radius:6px; border:1px solid var(--line);
            background:var(--panel); color:var(--fg); cursor:pointer; }
   button.primary { background:var(--fg); color:var(--bg); }
@@ -439,9 +534,17 @@ _LABELING_TEMPLATE = r"""<!doctype html>
   .drugs b { color:var(--mark); }
   mark.judged { color:var(--bg); background:var(--mark); padding:1px 5px;
                 border-radius:3px; font-weight:700; }
+  mark.judged sup { color:var(--bg); opacity:.85; }
   .caveat { display:block; font-family:-apple-system,BlinkMacSystemFont,sans-serif;
             font-size:11px; color:var(--muted); margin-top:4px; }
-  .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:4px; }
+  .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; }
+  .finding { border-left:3px solid var(--line); padding:8px 0 8px 12px; margin:12px 0; }
+  .finding.done { border-left-color:var(--ok); }
+  .human-finding { border-left-style:dashed; }
+  .entity { font-size:14px; }
+  .entity b { color:var(--mark); }
+  .entity sup { font-weight:700; margin-right:3px; }
+  .add-human { margin-top:8px; }
 </style>
 </head>
 <body>
@@ -449,7 +552,8 @@ _LABELING_TEMPLATE = r"""<!doctype html>
   <h1>ScribeCheck failure taxonomy</h1>
   <div class="bar">
     <span class="status">
-      <strong id="progress">0</strong> of <strong id="total">0</strong> labeled.
+      <strong id="progress">0</strong> of <strong id="total">0</strong> findings labeled,
+      <strong id="found">0</strong> added by hand.
       <span id="saved"></span>
     </span>
     <button id="next">Next unlabeled</button>
@@ -459,6 +563,7 @@ _LABELING_TEMPLATE = r"""<!doctype html>
     <input type="file" id="file" accept=".csv" hidden>
   </div>
   <div class="help">
+    One card per recording. Play it, read it once, then judge each finding under it.
     Work saves to this browser automatically as you type, so you can close the tab
     and pick up here. Export writes the CSV you keep; Import restores from one, which
     is how you move to another browser or machine.
@@ -468,17 +573,75 @@ _LABELING_TEMPLATE = r"""<!doctype html>
 <p class="help">Codes &mdash; __CODE_HELP__</p>
 <p class="help">Severity &mdash; __SEVERITY_HELP__</p>
 <script>
-const ROWS = __ROWS__;
+const CARDS = __CARDS__;
 const CODES = __CODES__;
 const SEVERITIES = __SEVERITIES__;
-const STORAGE_KEY = "scribecheck-labels-v1";
+const STORAGE_KEY = "scribecheck-labels-v2";
 
-// Keyed on clip and provider rather than row number, so labels survive the
-// sheet being regenerated. Row order is a presentation detail; the pair is the
-// identity of the thing being judged.
-const keyOf = (r) => r.clip_id + "|" + r.provider + "|" + r.finding_id;
+// A card is one recording through one provider, which is the thing being
+// listened to. Findings hang off it.
+const cardKey = (c) => c.clip_id + "|" + c.provider;
 
-let state = {};
+// Keyed on what the finding is rather than where it sits in the sheet. Row
+// numbers shift every time the sheet is regenerated; the clip, the provider,
+// the kind and the expected entity do not, so labels survive a rebuild.
+let counter = 0;
+const byUid = {};
+for (const c of CARDS) {
+  const seen = {};
+  for (const f of c.findings) {
+    const base = cardKey(c) + "|" + f.kind + "|" + f.expected;
+    seen[base] = (seen[base] || 0) + 1;
+    f.key = base + "|" + seen[base];
+    f.uid = "u" + ++counter;
+    byUid[f.uid] = f;
+  }
+}
+
+let state = {};   // one entry per detector finding, by finding key
+let human = {};   // errors the detector never reported, by card key
+
+// Row identity changed when the sheet moved to one card per transcript, so
+// labels written by the previous page are keyed on a `finding_id` that no
+// longer means the same finding. Applying them automatically would attach a
+// human judgment to whichever error now happens to hold that number, which is
+// worse than losing them. They are surfaced for rescue instead, and remapped
+// offline where the mapping can be checked against the old sheet in git.
+const LEGACY_STORAGE_KEY = "scribecheck-labels-v1";
+
+function rescueLegacyLabels() {
+  let legacy;
+  try {
+    legacy = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "null");
+  } catch (e) {
+    return;
+  }
+  const count = Object.keys((legacy && legacy.labels) || {}).length;
+  if (!count) return;
+
+  const bar = document.createElement("div");
+  bar.className = "legacy";
+  bar.innerHTML =
+    "<strong>" + count + " label" + (count === 1 ? "" : "s") +
+    " from the previous version of this sheet are still in this browser.</strong> " +
+    "They are not shown above, because row numbers changed and applying them " +
+    "blind would attach your judgment to the wrong error. Download them and " +
+    "send the file to be remapped. ";
+  const button = document.createElement("button");
+  button.textContent = "Download the old labels";
+  button.addEventListener("click", () => {
+    const url = URL.createObjectURL(
+      new Blob([JSON.stringify(legacy, null, 2)], { type: "application/json" })
+    );
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "scribecheck-labels-v1-rescue.json";
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+  bar.appendChild(button);
+  document.body.insertBefore(bar, document.body.firstChild);
+}
 
 function load() {
   try {
@@ -486,12 +649,14 @@ function load() {
     if (!raw) return null;
     const saved = JSON.parse(raw);
     state = saved.labels || {};
+    human = saved.human || {};
     return saved.at || null;
   } catch (e) {
     // A corrupt entry must not take the page down with it: an unusable
     // restore is recoverable, a blank screen is not.
     console.warn("could not restore saved labels", e);
     state = {};
+    human = {};
     return null;
   }
 }
@@ -499,7 +664,7 @@ function load() {
 function save() {
   const at = new Date().toISOString();
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ at, labels: state }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ at, labels: state, human }));
     showSaved(at);
   } catch (e) {
     // Private browsing and a full quota both land here. Say so plainly rather
@@ -515,35 +680,23 @@ function showSaved(at) {
     "Saved " + d.toLocaleTimeString() + ".";
 }
 
-function isDone(k) {
-  return Boolean(state[k] && state[k].failure_code && state[k].severity);
-}
-
-function refresh() {
-  let n = 0;
-  for (const r of ROWS) {
-    const k = keyOf(r);
-    const card = document.getElementById("card-" + r.finding_id);
-    const tag = document.getElementById("done-" + r.finding_id);
-    if (isDone(k)) {
-      n++;
-      card.classList.add("done");
-      tag.textContent = "labeled";
-    } else {
-      card.classList.remove("done");
-      tag.textContent = "";
-    }
-  }
-  document.getElementById("progress").textContent = n;
-  document.getElementById("total").textContent = ROWS.length;
-}
+const isDone = (saved) => Boolean(saved && saved.failure_code && saved.severity);
 
 function markup(text) {
-  // [[x]] is the entity this row is asking about. *x* is an ordinary diff.
+  // [[3|word]] is an entity a finding below is asking about, numbered to match
+  // it. [[word]] is the same thing unnumbered. *word* is an ordinary diff mark.
   return String(text)
+    .replace(/\[\[([\d,]+)\|([^\]]+)\]\]/g,
+             '<mark class="judged">$2<sup>$1</sup></mark>')
     .replace(/\[\[([^\]]+)\]\]/g, '<mark class="judged">$1</mark>')
     .replace(/\*([^*]+)\*/g, "<mark>$1</mark>");
 }
+
+// The inverse of markup(), for text going into the CSV rather than the page.
+const unmark = (t) => String(t)
+  .replace(/\[\[(?:[\d,]+\|)?/g, "")
+  .replace(/\]\]/g, "")
+  .replace(/\*/g, "");
 
 const escapeHtml = (s) =>
   String(s).replace(/[&<>"']/g, (c) =>
@@ -554,9 +707,9 @@ const escapeHtml = (s) =>
 // DRUG-SUB from DRUG-DEL: a drug replaced by another real drug reads as a
 // valid sentence, a drug replaced by a non-word does not. Deliberately states
 // the fact and suggests neither a code nor a severity.
-function drugLine(r) {
-  const expected = r.expected_drugs || [];
-  const heard = r.heard_drugs || [];
+function drugLine(f) {
+  const expected = f.expected_drugs || [];
+  const heard = f.heard_drugs || [];
   if (!expected.length && !heard.length) return "";
   const survived = expected.filter((d) => heard.includes(d));
   const arrived = heard.filter((d) => !expected.includes(d));
@@ -570,100 +723,260 @@ function drugLine(r) {
               arrived.map(escapeHtml).join(", ") + "</b>");
   if (expected.length && !heard.length)
     bits.push("no known drug in what was heard");
-  return `<div class="drugs"><span class="label">drugs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>` +
+  return `<div class="drugs"><span class="label">drugs&nbsp;</span>` +
          bits.join(" &middot; ") +
          `<span class="caveat">checked against the openFDA prescription directory, ` +
          `which is partial: a word missing from it is probably not a drug, not certainly</span></div>`;
 }
 
-document.getElementById("rows").innerHTML = ROWS.map((r) => `
-  <div class="card" id="card-${r.finding_id}">
-    <div class="tags">#${r.finding_id} &middot; ${escapeHtml(r.provider)} &middot; ${escapeHtml(r.accent)}
-      &middot; tier ${escapeHtml(r.tier)} &middot; ${escapeHtml(r.domain)} &middot; ${escapeHtml(r.flag)}</div>
-    <audio controls preload="none" src="../data/audio/${encodeURIComponent(r.clip_id)}.wav"></audio>
-    <div class="text"><span class="label">reference&nbsp;</span>${markup(escapeHtml(r.ref))}</div>
-    <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(escapeHtml(r.hyp))}</div>
-    <div class="drugs"><span class="label">this row&nbsp;</span>
-      <b>${escapeHtml(r.kind)}</b> &middot; expected <b>${escapeHtml(r.expected)}</b>${
-        r.heard_entity ? " &middot; heard <b>" + escapeHtml(r.heard_entity) + "</b>"
+const options = (values, chosen) => values.map((v) =>
+  `<option value="${v}"${v === chosen ? " selected" : ""}>${v}</option>`).join("");
+
+// The same four controls for a detector finding and a human one. `attrs`
+// carries whichever identity the input handler needs to route the change to.
+function controls(attrs, saved) {
+  return `
+      <div class="controls">
+        <select ${attrs} data-field="failure_code">
+          <option value="">code...</option>${options(CODES, saved.failure_code)}
+        </select>
+        <select ${attrs} data-field="severity">
+          <option value="">severity...</option>${options(SEVERITIES, saved.severity)}
+        </select>
+        <input type="text" ${attrs} data-field="note" placeholder="note (optional)"
+               value="${escapeHtml(saved.note || "")}">
+        <label class="listen">
+          <input type="checkbox" ${attrs} data-field="needs_listen"${
+            saved.needs_listen ? " checked" : ""}> needs a listen
+        </label>
+      </div>`;
+}
+
+function findingHtml(f) {
+  const saved = state[f.key] || {};
+  return `
+    <div class="finding${isDone(saved) ? " done" : ""}" id="finding-${f.uid}">
+      <div class="entity"><sup>${f.position}</sup><b>${escapeHtml(f.kind)}</b>
+        &middot; expected <b>${escapeHtml(f.expected)}</b>${
+        f.heard_entity ? " &middot; heard <b>" + escapeHtml(f.heard_entity) + "</b>"
                        : " &middot; nothing recognisable in its place"}
-      <span class="caveat">one error per row. Judge only the highlighted entity;
-        other differences on the line belong to their own rows.</span></div>
-    <div class="controls">
-      <select data-row="${r.finding_id}" data-field="failure_code">
-        <option value="">code...</option>
-        ${CODES.map((c) => `<option value="${c}">${c}</option>`).join("")}
-      </select>
-      <select data-row="${r.finding_id}" data-field="severity">
-        <option value="">severity...</option>
-        ${SEVERITIES.map((s) => `<option value="${s}">${s}</option>`).join("")}
-      </select>
-      <input type="text" data-row="${r.finding_id}" data-field="note" placeholder="note (optional)">
-      <label class="listen">
-        <input type="checkbox" data-row="${r.finding_id}" data-field="needs_listen"> needs a listen
-      </label>
-      <span class="done-tag" id="done-${r.finding_id}"></span>
-    </div>
-  </div>`).join("");
+        <span class="done-tag" id="done-${f.uid}">${isDone(saved) ? "labeled" : ""}</span>
+        <span class="caveat">${f.kind === "ASR-COLLAPSE"
+          ? "Nothing is highlighted because nothing survived. The question is whether"
+            + " this recording produced anything usable, not which entity failed."
+          : "Judge only the highlighted entity marked " + f.position
+            + ". The other errors on this recording are their own findings here."
+        }</span></div>
+      ${drugLine(f)}
+      ${controls('data-uid="' + f.uid + '"', saved)}
+    </div>`;
+}
 
-const byRowId = {};
-for (const r of ROWS) byRowId[r.finding_id] = r;
+// Not gated on the detector. The errors it missed are the reason this control
+// exists, so every card carries it whatever the detector did or did not say.
+function humanHtml(ck, rec) {
+  const attrs = `data-ck="${escapeHtml(ck)}" data-hid="${escapeHtml(rec.id)}"`;
+  return `
+    <div class="finding human-finding${isDone(rec) ? " done" : ""}">
+      <div class="entity"><b>found by hand</b>
+        <span class="caveat">an error the detector never reported. These become its
+          measured false-negative rate, so they export as their own rows.</span></div>
+      <div class="controls">
+        <input type="text" ${attrs} data-field="expected" placeholder="what was expected"
+               value="${escapeHtml(rec.expected || "")}">
+        <input type="text" ${attrs} data-field="heard" placeholder="what was heard"
+               value="${escapeHtml(rec.heard || "")}">
+        <button class="remove-human" ${attrs}>remove</button>
+      </div>
+      ${controls(attrs, rec)}
+    </div>`;
+}
 
-function restoreInputs() {
-  for (const el of document.querySelectorAll("[data-row]")) {
-    const r = byRowId[el.dataset.row];
-    const saved = state[keyOf(r)];
-    if (!saved) continue;
-    const v = saved[el.dataset.field];
-    if (v === undefined) continue;
-    if (el.type === "checkbox") el.checked = Boolean(v);
-    else el.value = v;
-  }
+function cardHtml(c, index) {
+  const n = c.findings.length;
+  return `
+  <div class="card" id="card-${index}">
+    <div class="tags">${escapeHtml(c.provider)} &middot; ${escapeHtml(c.accent)}
+      &middot; tier ${escapeHtml(c.tier)} &middot; ${escapeHtml(c.domain)}
+      &middot; ${escapeHtml(String(c.clip_id).slice(0, 12))}
+      &middot; ${n} finding${n === 1 ? "" : "s"}</div>
+    <audio controls preload="none" src="../data/audio/${encodeURIComponent(c.clip_id)}.wav"></audio>
+    <div class="text"><span class="label">reference&nbsp;</span>${markup(escapeHtml(c.ref))}</div>
+    <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(escapeHtml(c.hyp))}</div>
+    ${c.findings.map((f) => findingHtml(f)).join("")}
+    <div class="human-rows" id="human-${index}"></div>
+    <button class="add-human" data-card="${index}">+ Add an error I found</button>
+    <span class="caveat">Anything wrong on this recording that has no finding above.
+      Free text, and it does not have to match anything the detector saw.</span>
+  </div>`;
+}
+
+function renderHuman(index) {
+  const host = document.getElementById("human-" + index);
+  if (!host) return;
+  const ck = cardKey(CARDS[index]);
+  host.innerHTML = (human[ck] || []).map((rec) => humanHtml(ck, rec)).join("");
+}
+
+function render() {
+  document.getElementById("rows").innerHTML =
+    CARDS.map((c, i) => cardHtml(c, i)).join("");
+  CARDS.forEach((c, i) => renderHuman(i));
+  refresh();
+}
+
+function refresh() {
+  let done = 0, total = 0, found = 0;
+  CARDS.forEach((c, i) => {
+    let cardDone = 0;
+    for (const f of c.findings) {
+      total++;
+      const labeled = isDone(state[f.key]);
+      if (labeled) { done++; cardDone++; }
+      const tag = document.getElementById("done-" + f.uid);
+      if (tag) tag.textContent = labeled ? "labeled" : "";
+    }
+    found += (human[cardKey(c)] || []).length;
+    const card = document.getElementById("card-" + i);
+    if (!card) return;
+    if (c.findings.length && cardDone === c.findings.length) card.classList.add("done");
+    else card.classList.remove("done");
+  });
+  document.getElementById("progress").textContent = done;
+  document.getElementById("total").textContent = total;
+  document.getElementById("found").textContent = found;
 }
 
 document.getElementById("rows").addEventListener("input", (e) => {
-  const rowId = e.target.dataset.row;
-  if (!rowId) return;
-  const r = byRowId[rowId];
-  const k = keyOf(r);
-  state[k] = state[k] || {};
-  state[k][e.target.dataset.field] =
-    e.target.type === "checkbox" ? e.target.checked : e.target.value;
+  const field = e.target.dataset.field;
+  if (!field) return;
+  const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+  if (e.target.dataset.uid) {
+    const f = byUid[e.target.dataset.uid];
+    state[f.key] = Object.assign({}, state[f.key], { [field]: value });
+  } else if (e.target.dataset.ck) {
+    const rec = (human[e.target.dataset.ck] || []).find(
+      (r) => r.id === e.target.dataset.hid);
+    if (!rec) return;
+    rec[field] = value;
+  } else {
+    return;
+  }
   save();
   refresh();
 });
 
+const newId = () =>
+  "h" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+
+function addHuman(index) {
+  const ck = cardKey(CARDS[index]);
+  human[ck] = (human[ck] || []).concat({
+    id: newId(), expected: "", heard: "", failure_code: "", severity: "",
+    note: "", needs_listen: false,
+  });
+  save();
+  renderHuman(index);
+  refresh();
+}
+
+function removeHuman(ck, hid) {
+  human[ck] = (human[ck] || []).filter((r) => r.id !== hid);
+  save();
+  const index = CARDS.findIndex((c) => cardKey(c) === ck);
+  if (index >= 0) renderHuman(index);
+  refresh();
+}
+
+document.getElementById("rows").addEventListener("click", (e) => {
+  if (e.target.classList.contains("add-human")) {
+    addHuman(Number(e.target.dataset.card));
+  } else if (e.target.classList.contains("remove-human")) {
+    removeHuman(e.target.dataset.ck, e.target.dataset.hid);
+  }
+});
+
 document.getElementById("next").addEventListener("click", () => {
-  const target = ROWS.find((r) => !isDone(keyOf(r)));
-  if (!target) {
-    alert("All " + ROWS.length + " rows are labeled.");
+  const index = CARDS.findIndex((c) => c.findings.some((f) => !isDone(state[f.key])));
+  if (index < 0) {
+    alert("Every finding is labeled.");
     return;
   }
-  document.getElementById("card-" + target.finding_id)
+  document.getElementById("card-" + index)
     .scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
-// Must stay in the same order as the row built below, or the export writes
-// values under the wrong headings.
-const HEADER = ["finding_id","clip_id","provider","accent","tier","domain",
-                "kind","expected","heard","weight","ref_excerpt","hyp_excerpt",
-                "auto_flag","needs_listen","failure_code","severity","note"];
+// One list, so a heading and its value cannot drift apart. They were two
+// hand-maintained lists once, they drifted, and every exported column shifted.
+const COLUMNS = [
+  ["finding_id",   (c, f) => f.finding_id],
+  ["source",       (c, f) => f.source],
+  ["clip_id",      (c) => c.clip_id],
+  ["provider",     (c) => c.provider],
+  ["accent",       (c) => c.accent],
+  ["tier",         (c) => c.tier],
+  ["domain",       (c) => c.domain],
+  ["kind",         (c, f) => f.kind],
+  ["expected",     (c, f) => f.expected],
+  ["heard",        (c, f) => f.heard_entity],
+  ["weight",       (c, f) => f.weight],
+  // A detector finding exports its own excerpt, which marks the entity it
+  // asked about. A human one has no such entity, so it exports the whole
+  // transcript with the marks stripped: the numbers refer to findings that are
+  // not this row.
+  ["ref_excerpt",  (c, f) => f.ref_excerpt === undefined ? unmark(c.ref) : f.ref_excerpt],
+  ["hyp_excerpt",  (c, f) => f.hyp_excerpt === undefined ? unmark(c.hyp) : f.hyp_excerpt],
+  ["auto_flag",    (c, f) => f.flag],
+  ["needs_listen", (c, f, s) => s.needs_listen ? "yes" : ""],
+  ["failure_code", (c, f, s) => s.failure_code || ""],
+  ["severity",     (c, f, s) => s.severity || ""],
+  ["note",         (c, f, s) => s.note || ""],
+];
+const HEADER = COLUMNS.map((col) => col[0]);
 
-document.getElementById("export").addEventListener("click", () => {
+// A human-found error takes the shape of a detector finding so it exports
+// through the same columns, and `source` is what tells them apart. It carries
+// no inclusion weight because it came from no sampled stratum.
+function humanFinding(rec) {
+  return {
+    finding_id: rec.id,
+    source: "human",
+    kind: "HUMAN",
+    expected: rec.expected || "",
+    heard_entity: rec.heard || "",
+    weight: "",
+    flag: "found by the labeller",
+  };
+}
+
+const HUMAN_FIELDS = ["expected", "heard", "failure_code", "severity", "note"];
+const touched = (rec) =>
+  HUMAN_FIELDS.some((f) => String(rec[f] || "").trim()) || Boolean(rec.needs_listen);
+
+function exportLines() {
   const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const lines = [HEADER.join(",")];
-  for (const r of ROWS) {
-    const s = state[keyOf(r)] || {};
-    lines.push([r.finding_id, r.clip_id, r.provider, r.accent, r.tier, r.domain,
-                r.kind, r.expected, r.heard_entity, r.weight,
-                r.ref, r.hyp, r.flag,
-                s.needs_listen ? "yes" : "",
-                s.failure_code || "", s.severity || "", s.note || ""].map(esc).join(","));
+  for (const c of CARDS) {
+    for (const f of c.findings)
+      lines.push(COLUMNS.map((col) => esc(col[1](c, f, state[f.key] || {}))).join(","));
+    for (const rec of human[cardKey(c)] || [])
+      if (touched(rec))
+        lines.push(COLUMNS.map((col) => esc(col[1](c, humanFinding(rec), rec))).join(","));
   }
+  return lines;
+}
+
+document.getElementById("export").addEventListener("click", () => {
+  const lines = exportLines();
   const url = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/csv" }));
   const link = document.createElement("a");
   link.href = url;
-  link.download = "failure_taxonomy.csv";
+  // Timestamped, because a fixed name means the browser either overwrites the
+  // previous export or silently appends "(1)", and in both cases the labeller
+  // cannot tell which file holds which session's work. One export was already
+  // lost to this.
+  const stamp = new Date().toISOString().slice(0, 16).replace(/[-:]/g, "").replace("T", "-");
+  link.download = "failure_taxonomy-" + stamp + ".csv";
   link.click();
   URL.revokeObjectURL(url);
 });
@@ -689,6 +1002,45 @@ function parseCsv(text) {
   return rows.filter((r) => r.length > 1);
 }
 
+// Rebuilds the same keys the page generates, so a file exported before the
+// sheet was regenerated still reattaches to its findings.
+function importRows(rows) {
+  const head = rows[0];
+  const col = (name) => head.indexOf(name);
+  const iClip = col("clip_id"), iProv = col("provider"), iCode = col("failure_code");
+  if (iClip < 0 || iProv < 0 || iCode < 0) return null;
+  const iSrc = col("source"), iKind = col("kind"), iExp = col("expected"),
+        iHeard = col("heard"), iSev = col("severity"), iNote = col("note"),
+        iListen = col("needs_listen");
+  const at = (r, i) => (i >= 0 ? r[i] || "" : "");
+  const labels = {}, found = {}, seen = {};
+  let restored = 0, skipped = 0, added = 0;
+  for (const r of rows.slice(1)) {
+    const clip = r[iClip], prov = r[iProv];
+    if (!clip || !prov) { skipped++; continue; }
+    const ck = clip + "|" + prov;
+    const entry = {
+      failure_code: r[iCode] || "",
+      severity: at(r, iSev),
+      note: at(r, iNote),
+      needs_listen: at(r, iListen) === "yes",
+    };
+    if (at(r, iSrc) === "human") {
+      found[ck] = (found[ck] || []).concat(Object.assign(
+        { id: newId(), expected: at(r, iExp), heard: at(r, iHeard) }, entry));
+      added++;
+      continue;
+    }
+    const base = ck + "|" + at(r, iKind) + "|" + at(r, iExp);
+    seen[base] = (seen[base] || 0) + 1;
+    if (entry.failure_code || entry.severity || entry.note || entry.needs_listen) {
+      labels[base + "|" + seen[base]] = entry;
+      restored++;
+    }
+  }
+  return { labels, found, restored, skipped, added };
+}
+
 document.getElementById("import").addEventListener("click", () =>
   document.getElementById("file").click());
 
@@ -699,56 +1051,38 @@ document.getElementById("file").addEventListener("change", (e) => {
   reader.onload = () => {
     const rows = parseCsv(String(reader.result));
     if (!rows.length) { alert("That file has no rows."); return; }
-    const head = rows[0];
-    const col = (name) => head.indexOf(name);
-    const iClip = col("clip_id"), iProv = col("provider"), iCode = col("failure_code");
-    if (iClip < 0 || iProv < 0 || iCode < 0) {
+    const result = importRows(rows);
+    if (!result) {
       alert("That does not look like a ScribeCheck export: no clip_id, provider and failure_code columns.");
       return;
     }
-    const iSev = col("severity"), iNote = col("note"), iListen = col("needs_listen");
-    let restored = 0, skipped = 0;
-    for (const r of rows.slice(1)) {
-      const clip = r[iClip], prov = r[iProv];
-      if (!clip || !prov) { skipped++; continue; }
-      const k = clip + "|" + prov;
-      const entry = {
-        failure_code: r[iCode] || "",
-        severity: iSev >= 0 ? r[iSev] || "" : "",
-        note: iNote >= 0 ? r[iNote] || "" : "",
-        needs_listen: iListen >= 0 && r[iListen] === "yes",
-      };
-      if (entry.failure_code || entry.severity || entry.note || entry.needs_listen) {
-        state[k] = entry;
-        restored++;
-      }
-    }
+    state = result.labels;
+    human = result.found;
     save();
-    restoreInputs();
-    refresh();
-    alert("Restored " + restored + " labeled rows." +
-          (skipped ? " Skipped " + skipped + " rows with no clip_id or provider." : ""));
+    render();
+    alert("Restored " + result.restored + " labeled findings and " + result.added +
+          " added by hand." +
+          (result.skipped ? " Skipped " + result.skipped +
+                            " rows with no clip_id or provider." : ""));
   };
   reader.readAsText(file);
   e.target.value = "";
 });
 
 document.getElementById("clear").addEventListener("click", () => {
-  const n = ROWS.filter((r) => isDone(keyOf(r))).length;
+  const n = Object.keys(state).length +
+            Object.values(human).reduce((total, rows) => total + rows.length, 0);
   if (!confirm("Delete all " + n + " labels saved in this browser? Export first if you want them.")) return;
   state = {};
+  human = {};
   localStorage.removeItem(STORAGE_KEY);
-  for (const el of document.querySelectorAll("[data-row]")) {
-    if (el.type === "checkbox") el.checked = false;
-    else el.value = "";
-  }
+  render();
   document.getElementById("saved").textContent = "Cleared.";
-  refresh();
 });
 
 const restoredAt = load();
-restoreInputs();
-refresh();
+render();
+rescueLegacyLabels();
 if (restoredAt) showSaved(restoredAt);
 </script>
 </body>

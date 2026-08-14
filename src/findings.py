@@ -20,10 +20,16 @@ metrics. This module adds detail; it does not replace the numbers.
 
 from __future__ import annotations
 
+import jiwer
 import pandas as pd
 from rapidfuzz.distance import Levenshtein
 
-from src.entities import find_dose_pairs, find_drug_mentions, find_negations
+from src.entities import (
+    find_dose_pairs,
+    find_drug_mentions,
+    find_negations,
+    strip_spoken_punctuation,
+)
 
 # Shared with score.py. Kept here rather than imported to avoid a cycle, and
 # asserted equal in the tests so the two cannot drift apart.
@@ -176,6 +182,10 @@ def excerpt_around(
     marks around it, because a row that shows six changed words needs to say
     which one it is asking about.
     """
+    reference, hypothesis = (
+        strip_spoken_punctuation(reference),
+        strip_spoken_punctuation(hypothesis),
+    )
     ref_tokens, hyp_tokens = _tokens(reference), _tokens(hypothesis)
     marked_ref = list(ref_tokens)
     if 0 <= ref_index < len(marked_ref):
@@ -241,12 +251,73 @@ def select_findings(
     return pd.concat(picked).reset_index(drop=True)
 
 
+# Every kind this module can emit. Declared rather than inferred so the test
+# that checks each one has a selectable code cannot pass by omission: adding a
+# kind without adding its dropdown option is what shipped the DOSE-MISS defect,
+# where labelling a row silently did nothing because a select rejects a value
+# with no matching option.
+FINDING_KINDS = frozenset(
+    {
+        "DRUG-SUB",
+        "DRUG-DEL",
+        "DOSE-VAL",
+        "DOSE-UNIT",
+        "DOSE-MISS",
+        "NEG-FLIP",
+        "ASR-COLLAPSE",
+    }
+)
+
+# A transcript at or above this WER did not produce a usable sentence. The
+# value matches the collapse rate reported in RESULTS, so the sheet and the
+# headline are describing the same set of transcripts. See W16.
+COLLAPSE_WER = 0.8
+
+
+def collapse_finding(reference: str, hypothesis: str) -> dict:
+    """The whole transcript failed, recorded once.
+
+    `expected` carries the head of the reference rather than a single entity,
+    because the thing that was lost is the sentence. The labeller is being
+    asked one question, whether this recording produced anything usable, and
+    not to categorise each drug and dose inside a hypothesis where nothing
+    survived.
+    """
+    head = " ".join(_tokens(reference)[:EXCERPT_WIDTH])
+    return {
+        "kind": "ASR-COLLAPSE",
+        "expected": head,
+        "heard": " ".join(_tokens(hypothesis)[:EXCERPT_WIDTH]),
+        "ref_index": 0,
+    }
+
+
 def findings_for(reference: str, hypothesis: str, lexicon: set[str]) -> list[dict]:
     """Every finding in one clip, ordered by where it appears in the reference.
 
     Ordered because the sheet shows them in reading order and because a stable
     order makes the selection reproducible under a seed.
+
+    A collapsed transcript short-circuits to a single finding. The entity
+    losses inside it are real and `score.py` still counts every one of them
+    towards drug and dose accuracy; what changes is that a human is asked about
+    the recording once instead of once per entity. Clip 8132758125fa0e31
+    otherwise contributed 10 of 150 sheet rows by itself.
     """
+    # Punctuation the speaker voiced aloud is removed before anything is
+    # judged, and `excerpt_around` removes it again from the same inputs, so
+    # the positions in a finding and the text the labeller reads cannot drift.
+    # Without this, 38 of 118 transcripts were classified as total failures on
+    # the strength of transcribed brackets, and the real drug deletion in
+    # `14 glargine sig 22 units at bedtime` was buried inside one of them.
+    reference, hypothesis = (
+        strip_spoken_punctuation(reference),
+        strip_spoken_punctuation(hypothesis),
+    )
+
+    if reference.strip() and jiwer.wer(reference, hypothesis) >= COLLAPSE_WER:
+        return [collapse_finding(reference, hypothesis)]
+
     found = (
         drug_findings(reference, hypothesis, lexicon)
         + dose_findings(reference, hypothesis)

@@ -1,234 +1,249 @@
+(daunorubicin
+(pl 146 plastic)
 (sotradecol) sodium tetradecyl sulfate
+.alpha.-lipoic acid
 .alpha.-tocopherol
 .alpha.-tocopherol acetate
 .alpha.-tocopherol succinate
 .beta.-carotene
-.insulin aspart protamine
+.beta.-sitosterol
+0.05% clobetasol propionate cream
 0.05% clobetasol propionate cream usp
-0.1 mg/day
+0.12% chlorhexidine gluconate
+0.12% oral rinse
 0.12% oral rinse solution
-0.2 mg/day
-0.25% bupivacaine hcl
-0.3 mg/day
-0.5% lidocaine hcl
 0.9% sodium chloride
+1% lidocaine hci
 1.1% sodium fluoride
-1.1% sodium fluoride prescription dental cream
-10 g/15 ml
+1.1% sodium fluoride toothpaste
+1.1% sodium fluoride with 5% potassium nitrate toothpaste
 10 mg
 100 mg
+15 mg
 150 mg
 2% lidocaine hci
-2-docosahexanoyl-sn-glycero-3-phosphoserine calcium
-2-icosapentoyl-sn-glycero-3-phosphoserine calcium
+2-dipalmitoyl-sn-glycero-3-phospho-(1'-rac-glycerol)
 2.7% sodium fluoride gel
 20 mg
 200 meq/100 ml
+25 mg
 25 mg / 200 mg
-25% potassium nitrate)
-267 mg
-3% sodium chloride
+25% dextrose infant
+3-butanediol monohydrate
 350 mg
-40% oxygen/nitrogen mix
 400 meq/100 ml
 400 mg
 5 mg
 50 mg
+50% dextrose
+50% magnesium sulfate
 500 mg
-6% hetastarch in 0.9% sodium chloride
-60 second taste strawberry
-68ga-dotatate
+60 second fluoride gel
+7.5% sodium bicarbonate
 750 mg
 8.4% sodium bicarbonate
-aagylur
+800 mg
 abacavir
 abacavir sulfate
+abaloparatide
 abatacept
 abemaciclib
-abigale
-abilify asimtufii
+abeparvovec
+abilify
 abilify maintena
 abiraterone
 abiraterone acetate
+abirtega
+abraxane
 abrilada
 abrocitinib
-absorica ld
-acalabrutinib
+absorica
+acamprosate
 acamprosate calcium
-acamprosate calcium enteric-coated
+acanya
 acarbose
+accentrate pnv
 acclean chlorhexidine gluconate 0.12% oral rinse
 acclean foam fluoride 60 second application
-acd blood-pack units (pl 146 plastic)
-acd-a
+acebutolol
 acebutolol hydrochloride
-aceclidine
-aceclidine hydrochloride
+acellular
+acellular tissue engineered vessel
+acenocoumarol
+acetadote
 acetaminophen
-acetaminophen tablets
 acetazolamide
+acetazolamide extended-release
 acetazolamide sodium
 acetic acid
 acetic acid otic
 aceticum acidum
+acetohydroxamic
 acetohydroxamic acid
-acetyl l-tyrosine
-acetylcholine chloride
 acetylcysteine
-aciphex
+aciclovir
+acidophilus
+acids
+acidum
 acitretin
-aclidinium bromide
+aclidinium
 acoltremon
-acthar
-acticlate cap
-actimmune
-activella
+actemra
+actemra actpen
 actonel
-acular ls
-acuvail
+actoplus met
+actos
+acular
+acunol
 acyclovir
 acyclovir sodium
 acyclovir suspension
 aczone
-adagrasib
 adalimumab
-adalimumab-aaty
-adalimumab-adaz
+adalimumab-aacf
 adalimumab-adbm
 adalimumab-afzb
 adalimumab-aqvh
-adalimumab-atto
 adalimumab-bwwd
 adalimumab-fkjp
 adalimumab-ryvk
-adamas
 adapalene
-adcirca
+adapalene gel usp
+adasuve
 adderall
-additive system
-addyi
+adderall xr
+adefovir
 adefovir dipivoxil
+adempas
 adenine
 adenosine
+aditiva
 admelog
-adrenal gland
-adrenalin (epinephrine)
-adrenalin vials
-adrenalin(r)
-adrenocorticotrophin
-adreview
+adrenalin (epinephrine in sodium chloride)
+adrenaline
+adrenalinum
+adsol
 adsol preservation
+adsol preservation kit
+adsol preservation solution
 adsol red cell preservation
+adsol red cell preservation solution system in plastic container (pl 146 plastic)
 advair diskus
 advair hfa
-adzenys xr-odt
+adzynma
 aesculus hippocastanum
 afamelanotide
-aficamten
-afinitor
+afatinib
+affodel
+afirmelle
 aflibercept
-aflibercept-ayyh
-aflibercept-mrbb
-afrezza
-agalsidase beta
-agamree
-agaricus musc
-agnus
-ahzantive
-aimovig
+aflibercept-jbvf
+aflora
+agaricus muscarius
+aggrastat
+aggregated
+agrylin
+air 90% carbon dioxide 10%
 air compressed
-air compressed (medical air usp)
 air polymer-type a intrauterine foam
-airduo respiclick
-airsupra
-akeega
-aklief
-alacort
+ajovy
+ak-fluor
+akovaz
+akynzeo
+alafenamide
 alanine
 albendazole
-albenza
+albumin aggregated
+albumin human
+albuminex
 albuterol
 albuterol sulate hfa
 albuterol sulfate
 albuterol sulfate hfa
+albuterol sulfate inhalation
 albuterol sulfate inhalation solution
-alcaftadine
-alcaine
+alclometasone
 alclometasone dipropionate
 aldactone
-aldurazyme
-alemtuzumab
+aldesleukin
+alecensa
+alectinib
+alectinib hydrochloride
 alendronate
 alendronate sodium
-alendronate sodium tablet
-aletris
-aletris farinosa root
-alfalfa
-alfuzosin hcl
+alfuzosin
 alfuzosin hydrochloride
-alfuzosin hydrochloride extended release
-alglucosidase alfa
-alhemo
 alimta
 alirocumab
-alitretinoin
-allium sat
-allogeneic thymocyte-depleted thymus tissue-agdc
-allogenic thymocyte-depleted thymus tissue-agdc
+aliskiren
+aliskiren hemifumarate
+allday 5000
+allday 5000 sensitive
 allopurinol
-allopurinol sodium
-allzital
 almotriptan
 almotriptan malate
-aloe
-aloe vera leaf
+aloe ferox leaf
 alogliptin
 alogliptin benzoate
+alosetron
 alosetron hydrochloride
 alpelisib
+alpha lipoic acid
+alpha-lipoicum acidum
+alpha-pro
+alpha-tocopherol
 alpha-tocopherol acetate
+alphagan p
 alprazolam
+alprazolam c-iv
+alprazolam extended release
 alprazolam odt c-iv
+alprazolam xr
 alprostadil
+altavera
+alteplase
 altreno
+altuviiio
+aluminium chloride hexahydrate
 aluminum chloride
-alunbrig
-alvaiz
-alvesco
 alvimopan
 alyacen 1/35
+alyacen 7/7/7
 alyftrek
 alymsys
 amanita muscaria fruiting body
 amantadine
 amantadine hcl
 amantadine hydrochloride
+ambelvist
 ambien
+ambien cr
 ambrisentan
 amcinonide
-ameluz
-american ginseng
-amerithroid
-amifampridine phosphate
+amidate(tm) etomidate
+amidotrizoate
 amifostine
+amifostine trihydrate
 amikacin
 amikacin sulfate
+amiloride
 amiloride hydrochloride
 amiloride hydrochloride anhydrous
 aminocaproic acid
+aminolevulinic
 aminolevulinic acid hydrochloride
 aminophylline
 aminophylline dihydrate
-aminosyn ii
-amiodarone hci
+aminosyn-pf
+amiodarone
 amiodarone hydrochloride
+amisulpride
+amitiza
+amitriptyline
 amitriptyline hcl
 amitriptyline hydrochloride
-amitza
-amivantamab
-amivantamab-vmjw
-amjevita
 amlodipine
+amlodipine benzoate
 amlodipine besylate
 amlodipine besylate 10 mg
 amlodipine besylate 2.5 mg
@@ -239,450 +254,432 @@ ammonia
 ammonia n 13
 ammonia n-13
 ammonium lactate
+amnesteem
+amodiaquine
 amoxapine
 amoxicillin
-amoxicillin 500 mg
 amoxicillin oral susp
-amoxicillin sodium
 amoxicillin/clav pot
 amoxicillin/clav pot oral susp
 amoxil
+amoxycillin
+amphadase
 amphetamine
 amphetamine aspartate
 amphetamine aspartate monohydrate
-amphetamine extended-release
 amphetamine sulfate
+amphetamine sulfate extended-release
 amphetamine sulfate tablets
+amphotericin
+amphotericin b
 ampicillin
+ampicillin injection
 ampicillin sodium
 ampicillin trihydrate
 ampyra
-amrix
-amvuttra
 amygdalus persica
-amyvid
-amzeeq
-anacardium orientale
-anacaulase-bcdb
 anagrelide
 anagrelide hydrochloride
 anagrelide hydrochloride anhydrous
+anakinra
 analpram hc
-anas barbarie hepatis et cordis extractum
-anas platyrhynchos feather
-anasplatyrhynchosfeather
 anastrozole
 anastrozole tablets
 ancobon
+andexanet
 andexanet alfa
 andexxa
 anectine
 anemone pulsatilla
-angelica sin
-angelica sinensis root
 angeliq
-angiotensin ii
-anhydrous
 anhydrous citric acid
+anhydrous dextrose
 anidulafungin
 anifrolumab
 anifrolumab-fnia
-animal antigen
+animalis
 anktiva
-annovera
-anoro ellipta
-anser anser feather
-anseranserfeather
 ansuvimab
-anthim
-anthracinum
-anti-thymocyte globulin (rabbit)
-anticoagulant citrate dextrose (acd)
+anti-inhibitor coagulant complex
+anticholium
 anticoagulant citrate dextrose a
 anticoagulant citrate dextrose a acd-a
-anticoagulant citrate dextrose solution formula a
 anticoagulant citrate phosphate dextrose (cpd)
-anticoagulant citrate phosphate dextrose (cpd) blood-pack units in pl 146 plastic
 anticoagulant citrate phosphate dextrose (cpd) solution
 anticoagulant citrate phosphate dextrose adenine
 anticoagulant sodium citrate
-antimony arsenate
-anusol hc
-apadaz
+anticoagulant sodium citrate solution
+antihemophilic
+antihemophilic factor (recombinant)
+antiseptic skin cleanser
+antiseptic surgical scrub
+anucort-hc
+apadamtase
+apadamtase alfa
+apalutamide
 aphexda
+api grade perfluoropropance
 api grade perfluoropropane
-apidra
-apidra solostar
-apil mel
-apis mellifera
+apiole (parsley)
+apiolum
 apixaban
-aplenzin
-aplisol
-apocynum cannabinum
-apocynum cannabinum root
+apokyn
 apomorphine hydrochloride
-apomorphine hydrocloride
-appetite support
-apraclonidine
-apraclonidine hydrochloride
-apraclonidine hydrochloride ophthalmic solution
-apremilast
 aprepitant
-apretude
-apri 28 day
-apriso
 aprocitentan
-aptiom
-aqneursa
-aquasol a parenteral
-aralia quin (ginseng)
+aqvesme
 aranelle
-aranesp
 arava
-arcalyst
-arestin
+arctostaphylos uva-ursi leaf
+arformoterol
 arformoterol tartrate
+arformoterol tartrate inhalation
 arformoterol tartrate inhalation solution
-arg nit
 argatroban
 arginine
 arginine hydrochloride
-aricept
-aridol bronchial challenge test kit
-arikayce
+arimidex
+arimoclomol
 arimoclomol citrate
 aripiprazole
+aripiprazole lauroxil
 aripiprazole oral
-arixtra
-armlupeg
+aripiprazole orally disintegrating
+aristada
+aristada initio
 armodafinil
-arnica
+armour thyroid
 arnica montana
-arnica montana extract
-arnica montana flower
-arnuity ellipta
-aromasin
+arnica montana whole
+aromatica
+arpraziquantel
 arranon
+arsenic triiodide
 arsenic trioxide
-arsenictrioxide
-arsenicum alb
-arsenicum album
+arsenicum
+arsenicum iodatum
 artemether
-artemisia cina pre-flowering top
+artemisinin
 artesunate
 arthrotec
+articaine
+articaine hcl
 articaine hydrochloride
-as-3
-asceniv
+arvense
+arynta
+as-5 red cell preservative
 asciminib
 asciminib hydrochloride
-asclera
+ascomp with codeine
+ascor
 ascorbate
 ascorbic acid
 asenapine
 asenapine maleate
+asfotase
+asfotase alfa
 ashlyna
-asmanex
-asmanex hfa
-asorbic acid
+asparaginase
+asparaginase erwinia chrysanthemi (recombinant)-rywn
+asparagus
+asparagus officinalis
+aspart
 aspartic acid
+asparto
+aspidosperma quebracho-blanco bark
 aspirin
+asprin
 aspruzyo sprinkle
-atacicept
+astagraf xl
+atacand
+atacand hct
 atazanavir
 atazanavir sulfate
 atelvia
 atenolol
-atenolol 29300-411
-ativan
+atezolizumab
 atmeksi
+atnaa atropine
 atogepant
 atoltivimab
+atoltivimab-ebgn
 atomoxetine
 atomoxetine hydrochloride
+atoncy
 atorvastatin
 atorvastatin calcium
 atorvastatin calcium propylene glycol solvate
 atorvastatin calcium trihydrate
 atovaquone
 atovaquone oral suspension
+atracurium
 atracurium besylate
-atrasentan
-atrasentan hydrochloride
+atralin
 atropa belladonna
+atropen auto-injector
+atropine
 atropine sulfate
-atrovent hfa
-ats-lpl filters
-aubagio
-aubra eq
-augtyro
+atropine sulfate injection
+atropine sulfate monohydrate
+attero
+augmentin
 aukelso
 auranofin
-auryxia
-auto-injector
-auvi-q
+aurovela 1.5/30
+aurovela 1/20
+aurovela 24 fe
+aurovela fe
+aurovela fe 1/20
+austedo
+austedo xr
+auvelity
+avacincaptad
 avacincaptad pegol
 avacincaptad pegol sodium
-avaclyr
 avacopan
-avalglucosidase alfa
-avalglucosidase alfa-ngpt
 avalide
-avanafil
-avance nerve graft
-avant
 avapro
+avar ls
+avar-e
+avar-e ls
 avatrombopag
 avatrombopag maleate
-aveed
-avena
-avena sativa flowering top
-averi
-avgemsi
+aviane
 avibactam
-avibactam sodium
-avmapki fakzynja co-pack
-avopef
-avsola
-avtozma
-avutometinib potassium
-avycaz
-axatilimab
-axatilimab-csfr
+avlayah
+avoca flexible caustic applicator
+avonex
+avonex pen
+awiqli
+axetil
 axitinib
-axtle
+axumin
+ayuna
 azacitidine
+azacitidine for
 azactam
-azasan
 azathioprine
+azathioprine sodium
 azelaic acid
 azelaic acid gel
 azelastine
 azelastine hydrochloride
-azilsartan kamedoxomil
-azilsartan medoxomil
+azilect
 azithromycin
 azithromycin dihydrate
 azithromycin monohydrate
-azopt
-azstarys
+azmiro
+azor
 aztreonam
-azulfidine en-tabs
+azulfidine
 azurette
-bacillus anthracis immunoserum rabbit
+babybig
+bacillus calmette-guerin
+bacillus calmette-guerin substrain tice live antigen
 bacitracin zinc
 baclofen
 bacteriostatic sodium chloride
 bacteriostatic water
-bactrim
-bactrim ds
-bafiertam
-balanced salt solution
 balanced salt solution enriched with bicarbonate
-balcoltra
+baloxavir
+baloxavir marboxil
+balsalazide
 balsalazide disodium
-banophen
-baptisia
-baptisia tinctoria
-baptisia tinctoria root
+balversa
 baqsimi
 baraclude
+barhemsys
 baricitinib
-barium carbonate
-barium iodide
-baryta
-baryta carb
-baryta carbonica
-baryta iodata
+barium sulfate
+basaglar kwikpen
 basiliximab
-bazedoxifene acetate
+baxdela
+beclometasone
+beclomethasone
 beclomethasone dipropionate
-beclomethasone dipropionate hfa
 beclomethasone dipropionate/formoterol fumarate/glycopyrrolate
+bedaquiline
+bedaquiline fumarate
+beizray
+belantamab
 belantamab mafodotin
 belatacept
-belbuca
-belimumab
-belrapzo
+belladonna
 belsomra
-belumosudil
-belzutifan
-bempedoic acid
+benazepril
 benazepril hydrochloride
+bendamustine
 bendamustine hydrochloride
-bendeka
-benlysta
+benicar
+benicar hct
+benoxinate
 benoxinate hydrochloride
-benzhydrocodone
-benzhydrocodone hydrochloride
+benralizumab
+benserazide
+benzalkonium
+benzalkonium chloride
+benzamycin
+benznidazole
 benzocaine
 benzoic acid
+benzoicum
+benzoicum acidum
 benzonatate
-benzonatate 100 mg
-benzonatate 200 mg
 benzoyl peroxide
 benzoyl peroxide clindamycin phosphate
-benzoyl peroxide topical
+benzoyl peroxide gel
+benzphetamine
 benzphetamine hydrochloride
+benztropine
 benztropine mesylate
-benzylpenicilloyl polylysine
-beovu
+benzylpenicillin
+bepotastine
 bepotastine besilate
 bepotastine besilate ophthalmic solution 1.5%
 bepotastine besylate
-bepreve
 beractant
+berahyaluronidase
 berahyaluronidase alfa
 berahyaluronidase alfa-pmph
-berber vulg
+berberis vulgaris
 berberis vulgaris root bark
+berdazimer
+berus
 besifloxacin
+besilate
 besivance
-besremi
-besremi pen
 beta carotene
+beta vulgaris root fructooligosaccharides
 betadine
 betaine
-betaine capsule
-betalido kit
-betaloan suik
+betamethasone
 betamethasone acetate
 betamethasone dipropionate
-betamethasone dipropionate usp
 betamethasone sodium phosphate
 betamethasone valerate
+betamethasone valerate foam
 betapace
 betapace af
-betaseron
+betasept
+betaxolol
 betaxolol hydrochloride
+bethanechol
 bethanechol chloride
-bethkis
 betiatide
+betoptic s
 bevacizumab
-bevacizumab-adcd
-bevacizumab-awwb
-bevacizumab-bvzr
 bevacizumab-maly
 bevacizumab-nwgd
-bevespi aerosphere
-bexagliflozin
 bexarotene
 beyaz
+beyfortus
+bezlotoxumab
 bicalutamide
-bicillin c-r 900/300
-bicillin cr
-bicillin l-a
-biltricide
+bicisate
+bicisate dihydrochloride
+bictegravir
+bictegravir sodium
+bidil
+bifidobacterium
+bifidobacterium animalis lactis bl04
+biktarvy
 bimatoprost
-binimetinib
+binosto
+bionara ultra
+biorphen
 biotin
+biperiden
+bisacodyl
+bisglycinate
+bismuth subcitrate potassium
 bisoprolol
 bisoprolol fumarate
+bisulfate
 bivalirudin
-bivigam
-bkemv
+bizengri
 bl-c kit
-black pepper
+black cohosh
 blatta orientalis
-blattaorientalis
 blenrep
 bleomycin
 bleomycin sulfate
 blinatumomab
-blincyto
-blisovi 24 fe
-blisovi fe 1.5/30
-blisovi fe 1/20
-blood collection system
+bloxiverz
 blt-25 kit
-blueberry
-blujepa
-bm bio7
-bondlido
-bonsity
-boostervite
-borax
-boron
+bludigo
+blue agave inulin (agave tequilana)
+bomyntra
+boncresa
+bonjesta
+bordetella
+bordetella pertussis infected
 bortezomib
-bos taurus hair
-bos taurus skin
+boruzu
+bos taurus hypothalamus
 bosaya
 bosentan
-bostaurushair
-bostaurusskin
 bosulif
 bosutinib
 bosutinib monohydrate
 botox
 botox cosmetic
 botulinum toxin type a
-braftovi
-brekiya
-bremelanotide
-bremelanotide acetate
-brensocatib
-brenzavvy
-breo ellipta
+bp vit 3
+breathing air
 brevibloc
-brevital sodium
 brexpiprazole
 breyna
 breztri
 bridion
-briellyn
-brigatinib
 brilinta
+brilliant blue g
 brimonidine
 brimonidine tartrate
-brimonidine tartrate ophthalmic solution
-brimonidine tartrate/timolol maleate
-brimonidine tartrate/timolol maleate ophthalmic solution
-brinsupri
+brineura
 brinzolamide
-brisdelle
+briumvi
 brivaracetam
-brixadi
-broccoli sprout
+brivaracetam injection
+brivaracetam oral solution
 brodalumab
-brolucizumab
-bromelain
 bromfenac
-bromfenac 0.075%
-bromfenac 0.09%
 bromfenac ophthalmic solution
 bromfenac sodium
+bromocriptine
 bromocriptine mesylate
 brompheniramine
 brompheniramine maleate
-bromsite 0.075%
 brukinsa
-bruselix bruising
-bruselix cream
-bruselix gel
-bryonia
-bryonia alba root
+bryhali
+brynovin
 bss plus
 budesonide
 budesonide inhalation
+budesonide inhalation suspension
 bufo bufo cutaneous gland
 bufo rana
+bulevirtide
+bulevirtide acetate
 bumetanide
+bumex
 bupivacaine
 bupivacaine hci
-bupivacaine hcl
 bupivacaine hydrochloride
-bupivacaine hydrochloride injection
-bupivacaine hydrochloride with dextrose
+bupivacaine hydrochloride anhydrous
+bupivacaine hydrochloride in dextrose
+bupivacine
 bupivacine hydrochloride
+bupivicaine
+bupivicaine hydrochloride
+bupivilog kit
 buprenorphine
 buprenorphine hcl
 buprenorphine hydrochloride
-buprenorphine sublingual
-buprenorphine sublingual c-iii
+buprenorphine transdermal system
 bupropion
-bupropion hcl er
+bupropion hcl
 bupropion hcl er (xl)
-bupropion hydrobromide
+bupropion hcl er(sr)
 bupropion hydrochloride
 bupropion hydrochloride (sr)
 bupropion hydrochloride (xl)
@@ -690,458 +687,467 @@ bupropion hydrochloride sr
 bupropion hydrochloride xl
 burkhart
 burkhart neutral ph
-burosumab
 buspirone
 buspirone hcl
 buspirone hydrochloride
 busulfan
+butal/apap/caff
 butalbital
-butalbital/acetaminophen/caffeine
-butamben
-butorphanol tartrate
+butrans
+byetta
 byfavo
+bylvay
+bynfezia pen
 byooviz
-byqlovi
-bystolic
-c20h10na2o5 fluorescein sodium ophthalmic strips
-cabazitaxel
-cabenuva
+bysanti
+c1 esterase inhibitor recombinant
 cabergoline
-cablivi
-cabotegravir
-cabotegravir sodium
+cabometyx
+cabozantinib
+cabozantinib s-malate
 cabtreo
 caduet
+cafeine
 cafergot
 caffeine
-cairina moschata heart/liver autolysate
-calc phos
-calcarea carbonica
+caffeine citrate
+caffeine citrate oral solution
+calamine
+calcarea fluorica
+calcareum
 calcifediol
 calcipotriene
-calcipotriene monohydrate
+calcipotriene cream
+calcipotriol
+calcitonin
 calcitonin salmon
 calcitriol
 calcitriol capsules 0.25 mcg
-calcitriol capsules 0.5 mcg
 calcium acetate
-calcium ascorbate
 calcium carbonate
 calcium chloride
+calcium chloride dihydrate
 calcium chloride injection
 calcium citrate
+calcium corbonate
+calcium fluoride
 calcium folinate
-calcium formate
 calcium gluconate
-calcium gluconate in sodium chloride
 calcium gluconate monohydrate
+calcium oxybate
 calcium pantothenate
-calendula officinalis
-calendula officinalis flowering top
-calquence
-cambia
-camcevi
+calcium sulfide
+caldolor
+calfactant
+calyxra
 camila
-campath
-camphor
-camrese
-camzyos
+camptosar
+canadensis
 canagliflozin
-canasa
+canakinumab
 cancidas
 candesartan
 candesartan cilexetil
+candida
 candida albicans
-cangrelor
-canis lupus familiaris hair
-canis lupus familiaris skin
-canisfamiliarishair
-canislupusfamiliarisskin
+cannabidiol
 cantharidin
+cantharis
 capecitabine
-caplacizumab
-caplyta
-caprelsa
+capecitabine 150mg
+capecitabine 500mg
+capmatinib
+capmatinib hydrochloride
 capsaicin
-capsicum
-capsicum annum
 captopril
-carafate
-carbamazepin
+carbachol
+carbaglu
 carbamazepine
 carbamazepine er
+carbatrol
+carbetocin
 carbidopa
 carbidopa hydrate
-carbidopa levodopa
-carbidopa tablets
 carbidopa-levodopa
+carbimazole
+carbinoxamine
 carbinoxamine maleate
-carbinoxamine maleate extended-release oral suspension
-carbon dioxide air mixture
-carbon dioxide oxygen mixture
-carbon dioxide-air mixture
-carbon dioxide-oxygen mixture
-carbon dioxide-oxygen-nitrogen mixture
-carbon dioxide/oxygen mix
+carbocaine
+carbogen
+carbon dioxide compressed
+carbon dioxide oxygen mix
 carboplatin
+carboprost
 carboprost tromethamine
-cardamyst
-cardioplegic
-cardioplegic solution
-cardizem la
+carboxymaltose
+carboxymethylcellulose
+carboxymethylcellulose sodium
+cardiogen-82
+cardiolite
+cardizem
+cardizem cd
 cardura
-cardura xl
+carduus marianus
 carfilzomib
-cariprazine
+carglumic
+carglumic acid
 carisoprodol
 carisoprodol tablets
 carmustine
-carnitor
-carnitor sf
-carteolol hydrochloride
 cartia xt
+cartilago
+cartilago suis
 carvedilol
 carvedilol phosphate
+casodex
+caspofungin
 caspofungin acetate
-cat hair
+catapres-tts-2
+catapres-tts-3
+cathartica
+caverject
 caverject impulse
-cavia porcellus hair
-cavia porcellus skin
-caviaporcellushair
-caviaporcellusskin
-ceanothus
-ceanothus americanus
-ceanothus americanus leaf
+cayston
+cedazuridine
 cefaclor
 cefadroxil
+cefalexin
 cefazolin
 cefazolin sodium
 cefdinir
-cefdinir monohydrate
 cefepime
 cefepime hydrochloride
+cefiderocol
+cefiderocol sulfate tosylate
 cefixime
-cefixime 400 mg
+cefotan
 cefotaxime
 cefotaxime sodium
 cefotetan
 cefotetan disodium
 cefoxitin
 cefoxitin sodium
+cefpodoxime
 cefpodoxime proxetil
 cefprozil
+ceftaroline
 ceftaroline fosamil
 ceftazidime
 ceftolozane
-ceftolozane sulfate
 ceftriaxone
 ceftriaxone sodium
 cefuroxime
 cefuroxime axetil
 cefuroxime sodium
-celebrex
 celecoxib
-celecoxib 200 mg
-celexa
+celestone soluspan
 cellcept
-celontin
 cemiplimab
-cemiplimab-rwlc
-cenegermin
-cenegermin-bkbj
-centella asiatica
+cenobamate
 cephalexin
 cequa
-cerdelga
-cerebrum
-cerebyx
-ceretec
-cerezyme
 ceritinib
-cesamet
-cetacaine anesthetic
-cetacaine topical anesthetic
+cerliponase
+cerliponase alfa
+cervidil
 cetirizine
 cetirizine hydrochloride
-cetirizine hydrochloride oral solution
+cetrorelix
 cetrorelix acetate
-cetrorelix acetate for injection
-cetuximab
 cevimeline
 cevimeline hydrochloride
-chamomilla
 chantix
-charlotte 24fe
-chaste tree
-chateal eq
-chelidonium maj
-chelidonium majus
-chemet
-chenopodium anthelminticum
 chimaphila umbellata
-chininum sulphuricum
-chionanthus virginicus bark
-chirhostim
-chirhostim 40
 chlorambucil
+chloramphenicol
+chloramphenicol sodium succinate
+chlordiazepoxide
 chlordiazepoxide hcl
 chlordiazepoxide hydrochloride
+chlorhexidine
 chlorhexidine gluconate
 chlorhexidine gluconate 0.12% oral rinse
 chlorhexidine gluconate oral rinse
-chlorhexidine gluconate surgical combo kit
-chloroprocaine hci
+chloroprocaine
 chloroprocaine hydrochloride
-chloroprocaine hydrochloride ophthalmic gel
+chloroquine
 chloroquine phosphate
 chlorothiazide
 chlorothiazide sodium
+chloroxylenol
+chlorphenamine
+chlorpheniramine
 chlorpheniramine maleate
 chlorpheniramine polistirex
 chlorpheniramine polistirex extended-release
+chlorproguanil
 chlorpromazine
-chlorpromazine hci
 chlorpromazine hydrochloride
+chlortetracycline
 chlorthalidone
-chlorthalidone chlorthalidone
+chlorthalidone tablet
 chlorzoxazone
 cholecalciferol
 cholesterinum
 cholestyramine
 cholestyramine for oral suspension
+cholestyramine light
+cholestyramine powder for suspension
+choleystyramine
+choleystyramine light
 choline bitartrate
-chromagen
+choline c 11
+choline c-11
+choline fenofibrate
+choriogonadotropin
+choriogonadotropin alfa
+chorionic gonadotropin
 chromic chloride
 chromium
 chromium nicotinate
-chrysopogon zizanioides root
+chronagesic
+chrysanthemi
 cialis
 cibinqo
 ciclesonide
 ciclopirox
 ciclopirox olamine
+ciclosporin
+cidofovir
+cidofovir dihydrate
 cilastatin
 cilastatin sodium
+cilexetil
 cilostazol
-ciloxan
-cimerli
+cimduo
 cimetidine
 cimetidine hydrochloride
-cina
+cimicifuga
 cinacalcet
 cinacalcet hydrochloride
-cinchona
-cinchona bark
-cinchona officinalis
-cinchona officinalis bark
-cinqair
+cinnamic acid
+cinnamomum
+cinnamon
+cipaglucosidase
 cipaglucosidase alfa
 cipaglucosidase alfa-atga
-cipro
+cipotrex
 cipro hc
 ciprofloxacin
 ciprofloxacin hcl
 ciprofloxacin hydrochloride
 ciprofloxacin in dextrose
+ciprofloxacin otic
+ciprofloxacin tablets
 ciprofolxacin
+cisatracurium
 cisatracurium besylate
 cisplatin
 citalopram
 citalopram hydrobromide
-citharacanthus spinicrus
-citranatal 90 dha
-citranatal assure
 citric acid
 citric acid monohydrate
-citrus bioflavonoids
+citrtae
 cladribine
 claravis
-clarinex
+clariscan
 clarithromycin
 claviceps purpurea sclerotium
+clavulanate
 clavulanate potassium
+clavulanic
 clavulanic acid
+cleancare chlorhexidine gluconate 0.12% oral rinse
+clemastine
+clemastine fumarate
 clematis erecta
 clematis recta flowering top
+clenpiq
+cleocin
+cleocin hydrochloride
 cleocin pediatric
 cleocin phosphate
+cleocin t
 clesrovimab
-clevidipine
-clevipidine
-cleviprex
+clidinium
 clidinium bromide
-cligavyx
 climara
 climara pro
-clindacare
-clindacin
-clindacin etz
-clindacin p
+clindagel
 clindamycin
 clindamycin hcl
 clindamycin hydrochloride
 clindamycin in 5 percent dextrose
-clindamycin in percent dextrose
 clindamycin palmitate hydrochloride
 clindamycin palmitate hydrochloride (pediatric)
-clindamycin phoaphate topical solution usp
-clindamycin phoaphate topical usp
 clindamycin phosphate
-clindamycin phosphate 1.2%
+clindamycin phosphate 1%
+clindamycin phosphate gel usp
 clindamycin phosphate topical
-clindamycin phosphate topical solution usp
-clindamycin phosphate topical usp
+clindamycin phosphate usp
 clindamycin phosphate/benzoyl peroxide/adapalene
-clindesse
 clinimix
 clinimix e
-clinolipid
+clinisol
 clobazam
+clobetasol
 clobetasol propionate
 clobetasol propionate (emollient)
-clobetasol propionate anda
+clobetasol propionate cream
 clobetasol propionate cream usp
+clobetasol propionate emollient formulation
+clobetasol propionate ointment
 clobetasol propionate ointment usp
+clobetasol propionate usp
 clobezin
-clocortolone pivalate
-clodan
 clofarabine
-clomid
+clofazimine
+clofenax
+clomifene
+clomiphene
 clomiphene citrate
 clomiphene citrtae
+clomipramine
 clomipramine hydrochloride
+clomipramine hydrochloride capsules
 clonazepam
 clonidine
-clonidine hci
 clonidine hydrochloride
+clonidine hydrochloride oral
 clonidine transdermal system
-clonidine transdermal system usp
 clopidogrel
 clopidogrel bisulfate
+clorazepate
 clorazepate dipotassium
+clotic (clotrimazole) otic solution
 clotrimazole
 clotrimazole topical solution usp
+cloxacillin
 clozapine
-clozaril
-coagulation factor ix recombinant
-coartem
-cobaltous chloride
-cobamamide
+cnj-016
+coagadex
+coagulation factor ix (recombinant)
+coagulation factor x human
+cobalamin
+cobalefol
+cobalt
+cobaltum
+cobaltum metallicum
 cobenfy
 cobicistat
-cocarboxylase
-cocarboxylase (thiamine pyrophosphate)
+cobimetinib
+cobimetinib fumarate
+cocaine hydrochloride
+cocaine hydrochloride nasal
 codeine
 codeine phosphate
 codeine sulfate
 colchiceine
 colchicine
 colchicine tablets 0.5 mg
-colchicum autumnale bulb
-colcrys
+colecalciferol
+colesevelam
 colesevelam hcl
 colesevelam hydrochloride
 colestid
+colestipol
 colestipol hydrochloride
 colibacillinum
 colistimethate
 colistimethate sodium
-collagenase clostridium histolyticum
-coly-mycin m
-combivent respimat
-combivir
+colistin
+collavera
+collinsonia canadensis
+collinsonia canadensis root
+columvi
+combination omega-3 softgel/mineral capsule
 combogesic
+cometriq
 comfrey root
-compare2 black elderberry cold
-compressed gas
-compressed oxygen
+communis
+complera
+compressed u.s.p.
 compro
 concept dha
 concept ob
-concerta
-concizumab
-condurango
-condylox
+conestat
+conestat alfa
+conexxence
 conjugated
 conjugated estrogens
-conjugated estrogens/bazedoxifene
 conjupri
 constulose
-contrave extended-release
-conzip
+copaxone
+copiktra
 copper
-copper histidinate
+copper cu 64 dotatate
+copper oxodotreotide cu-64
+coral snake (micrurus fulvius) immune globulin antivenin (equine)
+corbonate
 cordran
-coreg
-coreg cr
-corlanor
+cornutum
+corphena
 cortef
-cortenema
 corticotropin
+cortisone acetate
 cortrosyn
 corvert
 cosentyx
-cosibelimab
 cosyntropin
-cotempla xr-odt
-coxanto
-cp2d
-cp2d/as-3 anticoagulant
-cp2d/as-3 triple with sampling system
-cpd2/as-3 triple blood bag with in line rcm1
+cotellic
+cotrimoxazole
+coumarin
+coumarinum
+cpd/adsol
 cpda-1
-crataegus oxyacantha
 creon
-cresemba
-crestor
-crexont
+crinone
+crisaborole
+crispum
 crizotinib
+crofelemer
+cromolyn
 cromolyn sodium
-crotalus cascavella
-crotalus durissus terrificus venom
-crotalus horridus
-crotalus horridus horridus venom
-crotamiton
-crotan
-crude
 cryselle
-crysvita
-cucurbita
 cupric chloride
 cupric oxide
 cupric sulfate
-cuprous oxide
-cuprum oxydatum nigrum
-curosurf
+cuprimine
+cuvposa
 cuvrior
 cyanocobalamin
+cyclizine
 cyclobenzaprine
 cyclobenzaprine hcl
 cyclobenzaprine hcl er
 cyclobenzaprine hydrochloride
 cyclogyl
+cyclopentolate
 cyclopentolate hydrochloride
 cyclophosphamide
 cyclophosphamide anhydrous
 cyclophosphamide for injection
-cyclophosphamide injection
-cycloset
+cycloserine
 cyclosporine
-cyclosporine ophthalmic solution
-cyklokapron
+cyclosporine modified
 cyltezo
+cymbalta
+cynodon dactylon
+cynodon dactylon pollen
+cyonanz
+cypionate
+cyproheptadine
 cyproheptadine hydrochloride
+cyproheptadine hydrochloride solution
 cyramza
-cyred eq
-cystadrops
-cystaran
-cysteamine bitartrate
-cysteamine hydrochloride
+cystadane
 cysteine hydrochloride
-cysto-conray ii
-cystografin dilute
+cystografin
+cysview
+cytalux
 cytarabine
-cytomel
+cytarabine) liposome
+cytisine
 cytotec
 dabigatran
 dabigatran etexilate
@@ -1149,112 +1155,145 @@ dabigatran etexilate mesylate
 dabrafenib
 dabrafenib mesylate
 dacarbazine
+daclatasvir
+dacomitinib
 dactinomycin
+dactylis glomerata
+dactylis glomerata pollen
+dactylon
 dalbavancin
 dalbavancin hydrochloride
 dalfampridine
+dalteparin
 dalteparin sodium
+dalvance
 danazol
-dantrium
+danicopan
 dantrolene
 dantrolene sodium
+danziten
 dapagliflozin
+dapagliflozin 2
 dapagliflozin propanediol
-daphne mezereum bark
 daprodustat
 dapsone
-dapsone gel
+dapsone 100 mg
+dapsone 100mg
+dapsone 25 mg
+dapsone 25mg
+dapsone tablets
 daptomycin
 daptomycin in sodium chloride
-dapzura rt
-daratumumab
-darbepoetin alfa
+daraprim
+darby apf bubble gum
+darby apf mint
+darby apf strawberry
+daridorexant
 darifenacin
 darifenacin hydrobromide
 darolutamide
 darunavir
-darunavir 600 mg
-darunavir 800 mg
-darunavir dihydrate
+darunavir 600
 darunavir ethanolate
 darunavir hydrate
-darzalex
-darzalex faspro
-darzalex iv
+darunavir propylene glycolate
 dasatinib
-dash chlorhexidine gluconate 0.12% oral rinse
-datopotamab deruxtecan
-datroway
-datscan
-daunorubicin hydrochloride
-davimet with fluoride
-davimet with iron
-davimet-m
-daxxify
-daybue
-daybue stix
-daysee
-dayvigo
+dasetta 1/35
+dasetta 7/7/7
+dasiglucagon
+daunorubicin
+daurismo
+davimet
+ddavp
+decanoate
 decitabine
-deconimo reconstitution
-defactinib hydrochloride
+decnupaz
+defencath
 deferasirox
+deferasirox oral
 deferasirox oral granules
 deferasorox
 deferiprone
 deferoxamine
 deferoxamine mesylate
+defibrotide
+defibrotide sodium
+definity
+definity rt
+defitelio
 deflazacort
+deflazacort oral
 deflazacort oral suspension
+degarelix
+degludec
 dehydrated alcohol
+delafloxacin
+delafloxacin meglumine
+delamanid
+delandistrogene
+delandistrogene moxeparvovec-rokl
 delayed release tablets 10 mg/10 mg
-delestrogen
 delflex
 delphinium staphisagria seed
-delstrigo
 demeclocycline
 demeclocycline hydrochloride
+demser
+denavir
+denileukin
+denileukin diftitox
+denileukin diftitox-cxdl
 denosumab
-denosumab-bmwo
-denosumab-desu
 denosumab-kyqq
-denosumab-qbde
+denosumab-mobz
+denta 5000 plus
+denta 5000 plus sensitive
+dentagel
+denti-care denti-rinse neutral sodium fluoride oral rinse
+deoxycholic
+deoxycholic acid
 depakote
-depemokimab
+depakote er
+depakote sprinkles
 depen
 depo-medrol
-depo-provera
-depo-subq provera
 depo-testosterone
 derma-smoothe/fs
-dermacinrx clorhexacin
-dermacinrx lidotral
-dermacinrx purefoltin
-dermacinrx surgical combopak
+dermacinrx phn pak
+dermacinrx therazole pak
+dermacure
+dermatophagoides
 dermatophagoides farinae
 dermatophagoides pteronyssinus
+dermavyx
+dermotic
+descovy
 desferal
+desflurane
+desipramine
 desipramine hcl
 desipramine hydrochloride
 desloratadine
+desloratadine oral solution
+desmopressin
 desmopressin acetate
 desogestrel
 desogestrel/ethinyl estradiol
 desonide
-desonide 0.05%
-desonide ointment
 desoximetasone
 desvenlafaxine
 desvenlafaxine er
 desvenlafaxine succinate
-detrol
-deucravacitinib
+detectnet
+deuruxolitinib
+deuruxolitinib phosphate
+deutetrabenazine
 deutivacaftor
 dexamethasone
-dexamethasone 1.5 mg
 dexamethasone sodium phosphate
-dexamethasone suspension/ drops
-dexedrine spansule
+dexatran
+dexchlorpheniramine
+dexchlorpheniramine maleate
+dexilant
 dexlansoprazole
 dexlansoprazole delayed release
 dexmedetomidine
@@ -1262,7 +1301,6 @@ dexmedetomidine hcl
 dexmedetomidine hydrochloride
 dexmedetomidine hydrochloride in 0.9% sodium chloride
 dexmedetomidine hydrochloride in sodium chloride
-dexmedetomidine in dextrose
 dexmethylphenidate
 dexmethylphenidate hydrochloride
 dexmethylphenidate hydrochloride extended-release
@@ -1270,154 +1308,180 @@ dexpanthenol
 dexrazoxane
 dexrazoxane for injection
 dexrazoxane hydrochloride
+dextran 40
+dextroamphetamine
 dextroamphetamine saccharate
 dextroamphetamine sulfate
 dextroamphetamine sulfate extended-release
 dextromethorphan
 dextromethorphan hydrobromide
-dextromethorphan hydrobromide oral
-dextrose anhydrous
-dextrose in lactated ringers
+dextromethorphan hydrobromide oral solution
 dextrose monohydrate
-dhivy
-diamond
+dezaparvovec
+diabecin hr
+diacomit
+dialyvite
+dialyvite 5000
+dialyvite supreme d
 dianeal low calcium with dextrose
+dianeal pd-2 with dextrose
+diatrizoate
 diatrizoate meglumine
 diatrizoate sodium
-diatrol
 diazepam
 diazepam oral
-diazepam oral solution (concentrate)
 diazoxide
 dibasic
+dibasic anhydrous
 dibasic potassium phosphate
 dibasic sodium phosphate
-dibasic trihydrate
 dichlorphenamide
+diclegis
 diclofenac
-diclofenac 1%
 diclofenac epolamine
-diclofenac epolamine 1.3% patch
 diclofenac potassium
-diclofenac potassium 25 mg
 diclofenac potassium tablets
 diclofenac sodium
 diclofenac sodium 1.5%
+diclofenac sodium d/r
 diclofenac sodium delayed release
 diclofenac sodium dr
-diclofenac sodium er
 diclofenac sodium gel
 diclofenac sodium misoprostol
 diclofenac sodium topical
 diclofenac sodium topical gel
-diclofenac sodium topical solution
-diclofenac sodium/misoprostol
-diclofenac sodium/misoprostol diclofenac-sodium-misoprostol
-diclona
-diclox patch 30ct
+diclolidol kit
+dicloxacillin
 dicloxacillin sodium
 dicyclomine
 dicyclomine hydrochloride
+diethylcarbamazine
+diethylpropion
 diethylpropion hydrochloride
 diethylpropion hydrochloride er
-difelikefalin
-difelikefalin acetate
 difenoxin
 difenoxin hydrochloride
-differin
-dificid
+diflorasone
+diflorasone diacetate
 diflunisal
 difluprednate
 difluprednate ophthalmic
-difluprednate ophthalmic emulsion
-digenyx
+diftitox
+digitalis
+digitalis purpurea
+digitalis purpurea whole
 digoxin
-dihydrocodeine bitartrate
+dihydroartemisinin
+dihydroergotamine
 dihydroergotamine mesylate
-dilantin-125
+dihydroergotamine mesylate nasal
 dilaudid
+diloxanide
+diltiazem
 diltiazem hci
 diltiazem hcl er
 diltiazem hydrochloride
 diltiazem hydrochloride extended release
 diltiazem hydrochloride extended-release
-diltiazem hydrochloride extended-release tablets
-diltiazem hydrochloride in sodium chloride
 diluent
-dimenhydrinate
+dimeglumine
+dimercaprol
 dimethicone
 dimethyl fumarate
-dimethyl-fumarate
+dimethyl fumarate kit
+dimethyl sulfoxide
 dinoprostone
-dinutuximab
-diosmin
+dinucleotide
+dioica
 diovan
 diovan hct
 diphenhydramine
 diphenhydramine hcl
 diphenhydramine hydrochloride
+diphenoxylate
 diphenoxylate hydrochloride
-diprivan
+dipivoxil
 dipyridamole
+diroximel
+diroximel fumarate
+disintegrating
+disoproxil
+disopyramide
 disopyramide phosphate
+distearoylphosphatidylcholine
 disulfiram
-diuril
+ditosylate
+divalproex
 divalproex sodium
 divalproex sodium d/r
-divigel
-dl- alpha- tocopherol acetate
+divalproex sodium er
 dobutamine
 dobutamine hydrochloride
+dobutamine hydrochloride in dextrose
 dobutamine in dextrose
 docetaxel
 docetaxel anhydrous
-docivyx
+doconexant
 doconexent
-docosahexaenoic acid
-docusate sodium
+doctors choice
 dofetilide
-dojolvi
+dofetilide 0.125mg
+dofetilide 0.25mg
+dofetilide 0.5mg
+dolasetron
 dolishale
+dolobid
+dolutegravir
 dolutegravir sodium
 donanemab
 donanemab-azbt
 donepezil
 donepezil hydrochloride
 donepezil hydrochlorides extended-release
-donnatal
-donor human stool spores (ethanol treated)
+donor human stool
+dopamine
 dopamine hci
+dopamine hci in 5% dextrose
 dopamine hydrochloride
 dopamine hydrochloride in dextrose
+dopram
 doptelet
 doptelet sprinkle
 doravirine
-doryx mpc
-dorzolamide hcl
+dordaviprone
+dorzolamide
 dorzolamide hydrochloride
-dorzolamide hydrochloride ophthalmic
-doubledex kit
-dovato
+dostarlimab
+dotarem
+dotatate
+dotremin
+dotti
+doxapram
 doxapram hydrochloride
 doxazosin
 doxazosin mesylate
 doxepin
 doxepin hcl
 doxepin hydrochloride
+doxepn
 doxepn hydrochloride
 doxercalciferol
 doxil
 doxorubicin
 doxorubicin hydrochloride
 doxorubicin hydrochloride liposome
-doxy 100(tm) doxycycline
-doxycyclate hyclate
+doxy 100
+doxyclycline
+doxyclycline hyclate
 doxycycline
 doxycycline anhydrous
 doxycycline hyclate
 doxycycline hyclate delayed release
 doxycycline monohydrate
+doxylamine
 doxylamine succinate
+draximage dtpa
+draximage maa
 drizalma sprinkle
 dronabinol
 dronedarone
@@ -1426,150 +1490,185 @@ drospirenone
 drospirenone/ethinyl estradiol/levomefolate calcium
 droxia
 droxidopa
-dryopteris filix-mas root
-duaklir pressair
-duavee
+dry eye test
+duetact
 dulaglutide
+dulcamara
 duloxetine
 duloxetine d/r
 duloxetine delayed-release
+duloxetine dr
 duloxetine hcl
 duloxetine hcl dr
 duloxetine hydrochloride
+duodote
 dupilumab
 dupixent
-durezol
+duramorph
 durvalumab
-durysta
+durvalumab injection
 dutasteride
+duvelisib
 duvyzat
-dyanavel xr
-dyclonine hydrochloride
-dyclopro
 dymista
-dyrenium
-dysphania ambrosioides
+dyural 80-lm
+dyural lm kit
+e-z-disk
+e-z-hd
+e-z-paque
+e-z-paste
+e.e.s
 e.e.s 400
-ebanga
-ecallantide
-echinacea (angustifolia)
-echinacea angustifolia
-echinacea angustifolia whole
-echinacea purpurea
-echothiophate iodide for ophthalmic solution
+ebglyss
+econazole
 econazole nitrate
 ecoza
 eculizumab
-eculizumab-aeeb
+eculizumab-aagh
 edaravone
-edetate calcium disodium
+edecrin
+edisylate
 edluar
-edotreotide gallium ga-68
+edoxaban
+edurant
+edurant ped
 ee tablets
 efavirenz
-effexor xr
-effient
-eflapegrastim
-eflapegrastim-xnst
+effer-k 10 meq cherry vanilla
+effer-k 10 meq unflavored
+effer-k 20 meq orange cream
+effer-k 20 meq unflavored
+effer-k cherry berry
+effer-k lemon citrus
+effer-k orange
+effer-k unflavored
+efinaconazole
+eflornithine
+eflornithine hydrochloride
 efudex
-elacestrant
-elagolix
-elagolix sodium
-elapegademase
-elapegademase-lvlr
+egaten
+egg phospholipids
+egrifta wr
+ekterly
+elafibranor
+elaprase
+elatior
+elbasvir
+elcys
+electrolyte no. 48
 electrolytes
-elelyso
 elemar patch
-elepsia xr 1000 mg
-elepsia xr 1500 mg
+elements
+elestrin
+eletriptan
+eletriptan hbr
 eletriptan hydrobromide
+elevidys
 elexacaftor
-eligard
-eliglustat
+elfabrio
+elinest
 elinzanetant
 eliquis
 eliquis 30-day starter pack
+eliquis sprinkle
 elitek
 ellence
-elmiron
+elliotts b
+elosulfase
+elosulfase alfa
 elotuzumab
-elranatamab
-elranatamab-bcmm
-elrexfio
 eltrombopag
-eltrombopag choline
 eltrombopag olamine
-eluxadoline
-elzonris
+elucirem
+elvitegravir
+elyxyb - celecoxib
 emapalumab
 emapalumab-lzsg
+embriva
+emerphed
+emerphed pfs
 emgality
+emicizumab
 empagliflozin
-empaveli
 empliciti
 emrelis
-emrosi
+emsam
 emtricitabine
 emtricitabine/tdf
+emtriva
+emzahh
+enacarbil
 enalapril
 enalapril maleate
 enalapril maleate oral solution
 enalaprilat
-enalaprilat dihydrate
-enasidenib mesylate
-enbrace hr
-encorafenib
+endari
 endocet
+endometrin
 enflonsia
-enhertu
-enjaymo
-enoby
+engineered
+enilloring
+enlicitide
+enlicitide decanoate
+enoxaparin
 enoxaparin sodium
 enoxiluv kit
-enskyce
+enriched
+ensacove
+ensartinib
+ensartinib hydrochloride
+ensitrelvir
 entacapone
 entecavir
 entecavir anhydrous
+entero vu 24%
+entrectinib
 entresto
+entyvio
+entyvio pen
 enulose
-envarsus xr
 enzalutamide
+eohilia
+eovist
+epaned
+epclusa
+ephedrine
 ephedrine sulfate
-epiduo forte
+epidermidis
+epidiolex
 epifoam
-epinastine hydrochloride
 epinephrine
-epinephrine 0.15 pediatrics
-epinephrine 0.3 adults
 epinephrine bitartrate
 epinephrine bitartrate injection
-epinephrine pediatrics
-epinephrine)
+epinephrine in sodium chloride
+epinephrine professional
+epioxa cross-linking
 epipen
+epirubicin
 epirubicin hydrochloride
-epivir
 eplerenone
-eplontersen
 epoetin
-epoetin alfa
 epoetin alfa-epbx
-epogen
+epolamine
 epoprostenol
-epoprostenol sodium
-epsolay
+eprontia
 eptifibatide
-equus caballus dander
-equus caballus hair
-equuscaballusdander
-equuscaballushair
+eptinezumab
+eptinezumab-jjmr
+epysqli
+equetro
+equisetum arvense
+equisetum arvense top
 eraxis
-erbitux
-erenumab
-erenumab-aooe
+erdafitinib
 ergocalciferol
 ergocalciferol capsules
+ergometrine
 ergotamine tartrate
+eribulin
 eribulin mesylate
+erivedge
+erleada
 erlotinib
 erlotinib hydrochloride
 errin
@@ -1577,950 +1676,1060 @@ ertapenem
 ertapenem sodium
 ertugliflozin
 ertugliflozin pidolate
+ery-tab
 erythrocin lactobionate
 erythromycin
 erythromycin ethylsuccinate
 erythromycin lactobionate
 erythromycin topical solution 2%
-erzofri extended-release
+erythropoietin
 esbriet
 escherichia coli
 escitalopram
+escitalopram oral
+escitalopram oral solution
 escitalopram oxalate
-esketamine hydrochloride
+eslicarbazepine
 eslicarbazepine acetate
+esmolol
 esmolol hydrochloride
 esmolol hydrochloride in sodium chloride
-esmolol hydrochloride in water
+esomeprazole
 esomeprazole dr
 esomeprazole magnesium
 esomeprazole magnesium delayed release capsules
 esomeprazole magnesium dihydrate
+esomeprazole magnesium dr
 esomeprazole magnesium trihydrate
 esomeprazole sodium
+esomeprazole strontium
 estarylla
-estazolam
 esterified
 esterified estrogens
-estetrol
-estrace
+esters
 estradiol
 estradiol / norethindrone acetate
+estradiol gel
+estradiol gel 0.1%
 estradiol hemihydrate
+estradiol transdermal
 estradiol transdermal system
 estradiol vaginal
+estradiol vaginal cream
 estradiol vaginal inserts
 estradiol valerate
 estradiol valerate/dienogest
 estradiol/norethindrone acetate
-estratest f.s.
-estrogel
+estring
 estrogens
+estrone
+esylate
 eszopiclone
-etelcalcetide
-etelcalcetide hydrochloride
-ethacrynate sodium
+etabonate
+etanercept
+eteplirsen
+etexilate
+ethacrynic
 ethacrynic acid
+ethambutol
 ethambutol hydrochloride
-ethinly estradiol
+ethamolin
+ethanolamine oleate
+ethanolate
 ethinyl estradiol
-ethinyl estradiol tablet
 ethinyl estradiol tablets
 ethinyl estradiol vaginal
-ethinyl estradiol vaginal ring
+ethinylestradiol
+ethiodized
+ethiodized oil
+ethionamide
 ethosuximide
+ethylsuccinate
+ethynodiol
 ethynodiol diacetate
-ethyol
 etodolac
 etodolac er
 etomidate
 etomidate injection
 etonogestrel
+etonogestrel/ethinyl estradiol
+etopophos
 etoposide
+etoposide phosphate
+etranacogene
 etranacogene dezaparvovec
-etrasimod
-etrasimod arginine
 etravirine
-etripamil
-etuvetidigene autotemcel
-eulexin
-eurax
+etyqa
+eucrisa
+europaeus
 evamist
-evdi
-evenity
+evara
+evekeo
 everolimus
+everolimus tablets
 eversmile ipr glide
-evexithroid
 evista
-evotaz
-evoxac
-exdensur
-exelderm
-exelon
+evrysdi
 exem foam
 exemestane
-exforge
+exenatide
 exforge hct
 exjade
+exparel
 extended - release dipyridamole
 extended - release dipyridamole capsules
 extended phenytoin sodium
 extended-release dipyridamole
 extraneal
-eylea
-eylea hd
-eysuvis
+exxua
 ezetimibe
-fabior
-fabrazyme
-fam-trastuzumab deruxtecan-nxki
+fabhalta
+fagus sylvatica
+fagus sylvatica flowering top
+falmina
 famciclovir
 famotidine
-fareston
-farxiga
-favlyxa
+fanapt
+farinae
+fasenra
+fc-vwf-xten fusion protein-ehtl
 febuxostat
-fecal microbiota spores
-fedratinib hydrochloride
+febuxostat tablets 40 mg
+febuxostat tablets 80 mg
+feiba
 felbamate
 felbatol
-felis catus hair
-feliscatushair
 felodipine
+felodipine extended-release tablets
 felopdipine
-fem glandular
-fem repair non-preg
 femara
-femynor
 fenofibrate
+fenofibric
 fenofibric acid
-fenofibric acid delayed-release
+fenoprofen
 fenoprofen calcium
-fenopron tm
 fenovar
-fensolvi
 fentanyl
 fentanyl citrate
 fentanyl system
-fentanyl transdermal
-feraheme
-ferr phos
-ferralet 90
+ferabright
+ferox
 ferric carboxymaltose
 ferric carboxymaltose injection
 ferric citrate
-ferriprox
+ferric ferrocyanide
+ferric oxyhydroxide
+ferric subsulfate
 ferrlecit
-ferrosoferric phosphate
 ferrous asparto glycinate
 ferrous bisglycinate
-ferrous cysteine glycinate
 ferrous fumarate
+ferrous fumarate tablet
 ferrous fumarate tablets
 ferrous gluconate
-ferrum phos
 ferumoxytol
 ferumoxytol non-stoichiometric magnetite
+fesoterodine
 fesoterodine fumarate
+festuca elatior
+fetroja
 fetzima
-fexmid
+fexinidazole
+fexofenadine
 fezolinetant
 fiasp
+fibrinogen
+fibrinogen human
 fidaxomicin
 filgrastim
 filgrastim-aafi
-filgrastim-laha
-filgrastim-sndz
 filgrastim-txid
-filix mas
-filkri
 film coated
-finafloxacin
 finasteride
-finazol
 finerenone
 fingolimod
 fingolimod hcl
 fingolimod hydrochloride
-fingolimod lauryl sulfate
-finzala
-firdapse
-firvanq
-fitusiran
-flarex
+fioricet
+fioricet with codeine
+firazyr
+firmagon
 flavalta
-flavin adenine dinucleotide
+flavoxate
+flavoxate hydrochloride
+flecainide
 flecainide acetate
 flecainide acetate tablet
-flibanserin
+fleqsuvy
+floravita
+floravita mini
+florbetaben
 florbetaben f 18
 florbetaben f-18
-florbetapir f 18
-florbetapir f-18
 floriva
+flortaucipir
 flortaucipir f-18
-flotrex
-flovent diskus
-flovent hfa
-flu immune
-flu relief
+flos
+flotufolastat
+flotufolastat f-18
+floxuridine
+fluciclovine
+fluciclovine f-18
+flucloxacillin
 fluconazole
 flucytosine
+fludarabine
 fludarabine phosphate
+fludeoxyglucose
 fludeoxyglucose f 18
 fludeoxyglucose f-18
 fludeoxyglucose f18
+fludrocortisone
 fludrocortisone acetate
 flumazenil
 flunisolide
+fluocinol pak
+fluocinolone
 fluocinolone acetonide
+fluocinolone acetonide oil
+fluocinolone acetonide topical
 fluocinolone acetonide topical solution usp
 fluocinonide
-fluocinonide cream
 fluocinonide topical solution usp
+fluopar
 fluorescein
 fluorescein sodium
-fluoride
-fluoride treatment
-fluoridex
-fluorometholone acetate
+fluorica
+fluorimax 5000
+fluorimax 5000 sensitive
+fluorodopa
+fluorodopa f-18
+fluorodopa f18
+fluorometholone
+fluorometholone ophthalmic suspension
 fluorouracil
 fluorouracil cream
 fluoxetine
 fluoxetine hcl
 fluoxetine hydrochloride
+fluphenazine
 fluphenazine decanoate
 fluphenazine hydrochloride
 fluphenazine hydrochoride
 flurandrenolide
+flurazepam
+flurazepam hydrochloride
+flurbiprofen
 flurbiprofen sodium
+flurpiridaz
+flurpiridaz f-18
 flutamide
-flutemetamol f-18
+fluticasone
 fluticasone furoate
+fluticasone furoate ellipta
 fluticasone propionate
 fluticasone propionate diskus
 fluticasone propionate hfa
-fluticasone propionate spray
 fluvastatin
 fluvastatin sodium
+fluvoxamine
 fluvoxamine maleate
 fluvoxamine maleate extended-release
-focalin
+flyrcado
+fml forte
 focalin xr
 focinvez
+foetidus
+folartex
 folate
-folditam
+folate sodium
+folaten
+folcyteine
+folic
 folic acid
-folixapure
-folixate
-foltamin
+folinate
+folixia
+folliculinum
+follitropin
+follitropin alfa
+foltira
+folvyris
+folyra
 fomepizole
+fondaparinux
 fondaparinux sodium
-forfivo xl
+for solution
 formoterol
 formoterol fumarate
 formoterol fumarate dihydrate
 formoterol fumarate inhalation solution
 forteo
-fosamprenavir calcium
+fosamil
 fosaprepitant
 fosaprepitant dimeglumine
-foscarbidopa
-foscarbidopa/foslevodopa
+foscarnet
 foscarnet sodium
 foscavir
-fosdenopterin hydrobromide
+fosfomycin
 fosfomycin tromethamine
+fosinopirl
+fosinopirl sodium
 fosinopril
 fosinopril sodium
-foslevodopa
+fosnetupitant
+fosphenytoin
 fosphenytoin sodium
-fostemsavir tromethamine
-fotivda
+fosrenol
+fostamatinib
 foundayo
 fragmin
-frenna ac
-frindovyx
+fraxinus americana
+fraxinus americana bark
+fremanezumab
+fremanezumab-vfrm
 frovatriptan
 frovatriptan succinate
-fruquintinib
-fruzaqla
-fucus vesiculosus
+fructooligosaccharides
+frusemide
 fulphila
 fulvestrant
-furoscix
+fumaric acid
+funiculus umbilicalis suis
+fuoxetine
 furosemide
-furosemide injection 80 mg/ 10 ml
-fyarro
-fyavolv
-fycompa
+futibatinib
 fylnetra
-ga-68-dotatoc
+gaba 300-ezs
 gabapentin
-gadobenate dimeglumine
+gabapentin enacarbil
+gabarone
+gadavist
 gadobutrol
-gadodiamide
 gadopiclenol
+gadoquatrane
+gadoterate
 gadoterate meglumine
 gadoteridol
+gadoxetate
+gadoxetate disodium
 galafold
 galantamine
 galantamine hydrobromide
 galcanezumab
 galcanezumab-gnlm
-gallium ga-68 gozetotide
-gallium ga-68 psma-11
-gallus gallus feather
-gallusgallusfeather
+gallic acid monohydrate
+gallicum
+gallicum acidum
+gallium chloride ga-67
+gallium citrate ga-67
+galsulfase
 galzin
-gamboge
-gambogia
 gamifant
 ganciclovir
 ganciclovir sodium
+ganirelix
 ganirelix acetate
-garlic
+garzulys
+gastrografin
 gatifloxacin
-gedatolisib
+gatifloxacin anhydrous
+gatifloxacin ophthalmic solution 0.5%
+gattex
+gaunfacine
+gavreto
 gefitinib
-gelsemium sempervirens
-gelsemium sempervirens root
+gelato apf
+gelato neutral ph
+gelato perio maintenance rinse
 gemcitabine
 gemcitabine hydrochloride
-gemcitabine intravesical
 gemfibrozil
-gemtesa
+gemtuzumab
+gemtuzumab ozogamicin
 gengraf
 genosyl
 genotropin
+gentak
 gentamicin
 gentamicin sulfate
 gentamicin sulfate in sodium chloride
 gentamicin sulfate opth solution
-gentiana lutea root
+genvoya
 geodon
-gepotidacin
-gepotidacin mesylate
+gepirone
+gepirone hydrochloride
+gestyra
 gilenya
+gilotrif
 gilteritinib
 gilteritinib fumarate
-gimoti
+gingimed
 givinostat
-givlaari
-givosiran sodium
+glandula
 glandula suprarenalis suis
+glargine
+glasdegib
+glatiramer
 glatiramer acetate
-glatiramer acetate injection
-glatopa
 glecaprevir
 gleevec
+gleostine
+gliadel
+glibenclamide
+gliclazide
 glimepiride
-glimepiride 3 mg
 glipizide
+glofitamab
+glomerata
+gloperba
+glostrips
 glucagon
-glucagon hydrochloride
-glucagon injection
+gluconolactone
+glumetza
 glutamic acid
-glutamic acide
 glutamine
 glutathione
 glyburide
 glyburide-metformin hydrochloride
 glycate
+glycerol phenylbutyrate
+glycerol phenylbutyrate oral
+glycinate
 glycine
-glycopegylated
 glycopyrrolate
+glycopyrrolate oral solution
 glycopyrronium
-glycopyrronium tosylate
-glycyrrhiza glabra
-glydo
-glydo- lidocaine hydrochloride jelly
-glyxambi
-goldenseal
+glyrx-pf
+gocovri
+gohibic
 golimumab
+golodirsen
+golytely
 gomekli
-gonorrheal urethral secretion human
+gonal-f
+goprelto
+goserelin
+goserelin acetate
+gozellix
 gozetotide
+grafapex
 grafco applicator 15 cm
 grafco applicator 30 cm
-grafco applicator 45 cm
-grafco silver nitrate (75% silver nitrate
-gralise
-gramicidin
-granatum
 granisetron
 granisetron hydrochloride
 granisol
-granix
-graphite
-graphites
+granules
+grazoprevir
+grazoprevir anhydrous
+green peppercorn
 griseofulvin
-griseofulvin microsize
+griseofulvin (microsize)
+grisofulvin
 guaifenesin
 guanfacine
 guanfacine er
 guanfacine extended-release
 guanfacine hydrochloride
-guselkumab
-gvoke hypopen 0.5 mg auto-injector
-gvoke hypopen 1 mg auto-injector
-gvoke kit
-gvoke pfs 1 mg pre-filled syringe
-gymnema sylvestre leaf
-hagenia abyssinica flower
-hailey 24 fe
-hair stim
-halaven
+guttatus
+hadlima
+haemolyticus
+hailey 1.5/30
+hailey fe 1.5/30
+hailey fe 1/20
 halcinonide
-halcinonide cream
 halcinonide topical
-haldol decanoate
+halcinonide topical solution
+halobetasol
 halobetasol propionate
 halog
 haloperidol
 haloperidol decanoate
 haloperidol lactate
-hamamelis
 hamamelis virginiana
 hamamelis virginiana root bark/stem bark
-hawthorn leaf with flower
-healthy start weight
-helium/oxygen mix
-helium/oxygen mixture 70/30
-helium/oxygen mixture 80/20
-hemady
+harvoni
+heliox
+helium oxygen mixture
+helleborus niger
+helleborus niger root
+hemabate
+hemangeol
 hemgenix
-hemin
-hemmorex-hc
+hemiclor
+hemifumarate
+hemipentahydrate
+hemlibra
+hemox a
+hepar sulphuris calcareum
+heparin
 heparin sodium
-heparin sodium in dextrose
 heparin sodium in sodium chloride
-hepatitis b immune globulin (human)
+hepcludex
 heptahydrate
-hercessi
-herzuma
-hesperidin
-hesperidin methyl chalcone
-hesperidin methylchalcone
+hepzato kit
+herceptin
+hernexeos
 hetastarch
 hetastarch in sodium chloride
+hetlioz
+hetlioz lq
+hexacetonide
+hexafluoride
+hexaminolevulinate
+hexaminolevulinate hydrochloride
+hexatrione 2%
 hextend
-histamine
-histamine phosphate
-histamine positive skin test control
+hicon
+hippocastanum
 histidine
-histrelin acetate
+homatropine
 homatropine methylbromide
-homatropine methylbromide oral solution
 homosalate
+horizant
 horse chestnut
 house dust mite
 hulio
 humalog
 humalog junior kwikpen
 humalog kwikpen
-humalog mix50/50 kwikpen
-human hepatitis b virus immune globulin
+humalog mix75/25
+humalog mix75/25 kwikpen
+human albumin microspheres
+human botulinum neurotoxin a/b immune globulin
 human immunoglobulin g
-human peripheral nerve tissue
-human secretin
-humatin
+human sputum
+human thrombin
+human vaccinia virus immune globulin
+humatrope
 humira
+humulin r u-500 kwikpen
 hyaluronidase
 hyaluronidase (human recombinant)
-hyaluronidase-fihj (human recombinant)
-hyaluronidase-lpuj (human recombinant)
-hyaluronidase-nvhy
+hyaluronidase-tqjs
+hyaluronidase-zzxf
 hycamtin
+hydchloride
+hydralazine
 hydralazine hydrochloride
-hydrastis
-hydrea
+hydralyn
+hydravex
+hydro-q
+hydrochloide
 hydrochlorothiazide
 hydrochlorothiazide tablets
-hydrocodone apap
+hydrocloride
+hydrocodone
 hydrocodone bitartrate
 hydrocodone polistirex
 hydrocodone/apap
 hydrocortisone
-hydrocortisone 1 percent with peptides
-hydrocortisone 2%
 hydrocortisone 2.5%
 hydrocortisone acetate
-hydrocortisone acetate 1%
+hydrocortisone acetate 0.5% cream
 hydrocortisone acetate cream
 hydrocortisone acetate pramoxine hcl
-hydrocortisone butyrate
+hydrocortisone acetate1% cream
 hydrocortisone cream
+hydrocortisone lotion
 hydrocortisone otic
 hydrocortisone otic suspension
-hydrocortisone rectal suspension (retention)
 hydrocortisone sodium succinate
 hydrocortisone valerate
 hydrocortisone valerate cream
 hydrofluoric acid
-hydrofluoricum acidum
-hydromet
+hydromorphone
 hydromorphone hydrochloride
 hydroquinone
 hydroquinone 4%
-hydroxate gel
+hydroquinone cream
 hydroxocobalamin
-hydroxocobalamin acetate
+hydroxycarbamide
+hydroxychloroquine
 hydroxychloroquine sulfate
 hydroxym
-hydroxym cream
+hydroxyprogesterone
 hydroxyprogesterone caproate
 hydroxyurea
 hydroxyzine
 hydroxyzine dihydrochloride
 hydroxyzine hcl
 hydroxyzine hydrochloride
+hydroxyzine hydrochloride oral
 hydroxyzine pamoate
-hylenex recombinant
+hyftor
 hympavzi
+hyoscyamine er
 hyoscyamine sulfate
-hyoscyamine sulfate 0.125 mg
 hyoscyamine sulfate odt
 hyoscyamine sulfate sl
 hyoscyamine sulfate sublingual
 hyoscyamine sulfate tab
 hyosyne
-hypericum
-hypericum perforatum
-hyperpolarized
-hyrimoz
+hypothalamus
 hyrnuo
-i. v. fat emulsion
+hysingla er
 i.v. fat emulsion
+ibandronate
 ibandronate sodium
 ibrance
-ibtrozi
+ibrutinib
+ibuorofen
+ibupak
 ibuprofen
 ibuprofen famotidine
 ibuprofen lysine
-ibuprofen tablets
+ibuprofen oral
+ibutilide
 ibutilide fumarate
-ic-green
 icatibant
 icatibant acetate
-iclusig
+iclevia
+icodec
 icodextrin
 icosapent
 icosapent ethyl
-icotrokinra
-icotyde
+icosapent ethyl capsules
+idacio
 idamycin pfs
+idarubicin
 idarubicin hydrochloride
-idarucizumab
-idhifa
+idelalisib
+idose tr
+idursulfase
+idvynso
 ifosfamide
 igalmi
 ignatia
-iheezo
+ignatii
+ilaris
 ilevro
 illuccix
 iloperidone
-imaavy
+ilumya
+iluvien
 imatinib
 imatinib mesylate
-imcivree
-imdelltra (amg757)
+imatinib mesylate 400 mg
+imbruvica
+imetelstat
 imetelstat sodium
-imfinzi
-imiglucerase
 imipenem
-imipenem anhydrous
+imipramine
 imipramine hydrochloride
 imipramine pamoate
 imiquimod
-imitrex
-imjudo
-imlygic
-immphentiv
-immune globulin intravenous (human) 10%
-impavido
-impoyz
-imuldosa
+imlunestrant
+immunoglobulin
+imuran
 inbrija
+incassia
 inclisiran
 inclisiran sodium
 incobotulinumtoxina
-incruse ellipta
+inconstans
+increlex
 indapamide
-inderal la
-indium dtpa in 111
-indium in 111 oxyquinoline
-indium in-111 oxyquinoline
-indium in-111 pentetate disodium
-indocin
+inderal xl
+indigotindisulfonate
+indigotindisulfonate sodium
+indium in -111 pentetreotide
+indocyanine
 indocyanine green
+indole
+indolum
+indometacin
 indomethacin
-inebilizumab
-infant 4.2% sodium bicarbonate
-infant dextrose
+infasurf
 infed
-inflamex
-inflammacin
+inflatherm
+inflectra
 infliximab
-infliximab-axxq
 infliximab-dyyb
-infumorph 200
-infumorph 500
-injectafer
-injury hp
-inlexzo
+infuvite adult
+infuvite pediatric
+ingrezza
+ingrezza sprinkle
+inluriyo
 inlyta
-inmazeb
+innopran xl
 inosine
-inpefa
-inrebic
-inspra
+inqovi
+insulin
 insulin aspart
+insulin aspart injection
+insulin aspart mix 70/30
+insulin aspart protamine
+insulin aspart-fsan
 insulin aspart-xjhz
 insulin degludec
-insulin detemir
+insulin diluting medium for garzulys
 insulin diluting medium for kirsty
+insulin diluting medium for novolog
 insulin glargine
-insulin glargine solostar
+insulin glargine u-300
+insulin glargine u-300 max
+insulin glargine-aglr
+insulin glargine-aldy
 insulin glargine-yfgn
-insulin glulisine
 insulin human
+insulin icodec
+insulin icodec-abae
 insulin lispro
-insulin lispro injectable suspension mix75/25 kwikpen
-insulin lispro junior kwikpen
-insulin lispro protamine
+insulin lispro kwikpen
 insulin lispro-aabc
 integra f
 integra plus
-interferon beta-1b
-interferon gamma-1b
+intelence
+intensol
+interferon
+interferon beta-1a
+intersol
+intracameral
 intralipid
-intrinsic factor
-invega
-invega hafyera
-invega sustenna
-invega trinza
+intrauterine
+introvale
+intuniv
+inulin
+invanz
 inveltys
-invokamet
-invokamet xr
 invokana
-inzirqo
-iobenguane i-123
+iodatum
 iodine
 iodixanol
+iodoquinol
+ioflupane
+ioflupane i 123
 ioflupane i-123
 iohexol
 iomeprol
 iomeprol injection
 iomeron
-iomervu
 ionite apf
-ionite apf foam
 ionite apf neutral
-ionite h
-ionite r
-ionosol mb
 iopamidol
-iopidine 1%
 iopromide
-iothalamate meglumine
 ioversol
+ipilimumab
+ipratropium
 ipratropium bromide
-ipratropium bromide inhalation
-ipratroprium bromide
+iptacopan
+iptacopan hydrochloride
+iqirvo
 irbesartan
-iressa
+irinotecan
+irinotecan hydrochloide
 irinotecan hydrochloride
-iris 60 second apf
 iron
 iron dextran
+iron pentacarbonyl
 iron sucrose
 isatuximab
-isavuconazonium sulfate
 isentress
+isibloom
+islatravir
+islatravir anhydrous
 isoflurane
 isoleucine
-isolyte p in dextrose
-isolyte s
-isolyte s ph 7.4
 isoniazid
 isopropyl alcohol
+isoproterenol
 isoproterenol hydrochloride
 isopto atropine
+isosorbide
 isosorbide dinitrate
 isosorbide mononitrate
+isosulfan
 isosulfan blue
 isotretinoin
-isovue 250
+isovue 200
 isovue 300
 isovue 370
-isovue-m
-isradipine
-istalol
-istodax
-istradefylline
-isturisa
 itraconazole
-itraconazole oral
 itvisma
 ivabradine
 ivabradine hydrochloride
 ivacaftor
 ivermectin
-ivra
-ixabepilone
-ixazomib
-ixazomib citrate
+iwilfin
 ixekizumab
-ixempra
+ixinity
 izervay
-jakafi
-jakafi xr
-jalyn
+jadenu
+jaimiess
 jantoven
 janumet
 janumet xr
 januvia
 jardiance
-jasmiel
-jatenzo
+jascayd
+javadin
 jaypirca
-jaythari
-jencycla
-jentadueto xr
+jaythari oral suspension
+jemperli
+jentadueto
 jesduvroq
-jevtana
-jideytro
+jeuveau
+jinteli
 jobevne
+joenja
 jolessa
 jornay pm extended-release
 journavx
-jubbonti
-jubereq
-juluca
+jublia
+juleber
 junel 21 day
+junel fe 1.5/30
+junel fe 1/20
+junel fe 24
+junel fe 28 day
+juniperus communis
+juniperus communis whole
+juniperus virginiana
+juniperus virginiana twig
+just right 5000
 juxtapid
 jynarque
-kabiven
-kalbitor
-kale
 kaletra
-kali brom
-kali iod
-kali mur
-kali phos
-kalmia latifolia leaf
+kalliga
 kalydeco
-kanjinti
-kapspargo
+kanamycin
+karbinal er
+kariva
+katerzia
+kazano
 kelnor 1/35
 kenalog
 kenalog-40
-kengreal
-keralyt
+kenalog-80
+kepivance
 kerendia
-kerosene
-kesimpta
-ketalar
+ketamine
 ketamine hydrochloride
 ketoconazole
 ketoconazole cream
-ketodan
+ketoconazole foam
 ketoprofen
-ketorocaine lm kit
+ketorolac
 ketorolac tromethamine
-keveyis
 kevzara
 keytruda qlex
-kionex
-kisqali
+kidney (suis)
+kidney drainage
+kids choice
+kimyrsa
+kineret
+kinesiology tape
+kinevac
+kisqali femara co-pack
 kisunla
 kit for the preparation of gallium ga 68 gozetotide
 kit for the preparation of gallium ga 68 gozetotide injection
-kit for the preparation of technetium tc 99m mebrofenin
+kit for the preparation of technetium tc 99m albumin aggregated
 kit for the preparation of technetium tc 99m medronate
-kit for the preparation of technetium tc 99m-labeled carbon inhalation aerosol
-kit for the preparation of technetium tc99m mertiatide
+kit for the preparation of technetium tc 99m pentetate
+kit for the preparation of technetium tc 99m red blood cells
 kit for the preparation of technetium tc99m pyrophosphate
+kit for the preparation of technetium tc99m sestamibi
 kit for the prepartion of technetium tc99m sulfur colloid
-kitabis pak
-klisyri
+klaron
+klayesta
+klonopin
 klor-con
 klor-con m
 klor-con/ef
-konvomep
-korsuva
-koselugo
-kourzeq
-kousso
-krameria lappacea root
-krazati
-kreosotum
+kloxxado
+kolorz neutral fluoride foam triple mint
+kolorz sixty second fluoride blue raspberry
+kolorz sixty second fluoride cherry cheesecake
+kolorz sixty second fluoride cotton candy
+kolorz sixty second fluoride foam blue raspberry
+kolorz sixty second fluoride foam cherry cheesecake
+kolorz sixty second fluoride foam cotton candy
+kolorz sixty second fluoride foam triple mint
+kolorz sixty second fluoride pina colada
+kolorz sixty second fluoride triple mint
+komzifti
+korlym
+kristalose
 kurvelo
+kuvan
+kybella
 kyleena
 kymbee
 kyprolis
-kyxata
-kyzatrex
-l-ascorbic acid
+l- arginine
 l-glutamine
 labetalol
 labetalol hcl
+labetalol hcl in dextrose
+labetalol hcl in sodium chloride
 labetalol hydrochloride
-lachesis
-lachesis muta venom
-lachesis mutus
 lacosamide
 lacosamide oral solution
 lactated ringers
-lactated ringers irrigation
 lactic acid
+lacticaseibacillus
+lacticaseibacillus paracasei lpc-37
+lacticaseibacillus rhamnosus
+lactiplantibacillus
+lactiplantibacillus plantarum
+lactis
+lactobacillus acidophilus
+lactobacillus acidophilus la 14
+lactobionate
 lactulose
-lactulose crystalline
-lactulose solution
-lactulose solution usp
 lamictal
 lamictal odt
 lamictal xr
 lamivudine
-lamotirigine
+lamivudine oral
 lamotrigine
+lamotrigine chewable dispersible
 lamotrigine er
 lamotrigine extended release
 lamotrigine extended-release
-lampit
-lanadelumab
-lanadelumab-flyo
-landiolol
-landiolol hydrochloride
-lanoxin
+lamotrigine kit
+lamzede
+langlara
+lanreotide
 lanreotide acetate
 lansoprazole
 lansoprazole dr
 lanthanum carbonate
 lantus
-lantus solostar
 lapatinib
 lapatinib ditosylate
-lapine t-lymphocyte immune globulin
-laronidase
+larin 1.5/30
+larin fe 1.5/30
+larin fe 1/20
+larix decidua
+larix decidua flowering top
 larotrectinib
-lasix onyu
+lasix
 lasmiditan
-lastacaft
 latanoprost
-latanoprostene bunod
-latanoprostene bunod ophthalmic solution
-latisse
+latanoprost ophthalmic solution
 latrodectus mactans
-latuda
-lazcluze
-lazertinib
-lecanemab
-lecanemab autoinjector
-lecanemab-irmb
+lauroxil
+lebrikizumab
+lebrikizumab-lbkz
+lecithin
 lederle leucovorin
 ledipasvir
-ledum palustre twig
+lefamulin
+lefamulin acetate
 lefluniclo
 leflunomide
-lemborexant
-lemtrada
+lenacapavir
+lenacapavir sodium
 lenalidomide
-lentocilin
-lenvatinib
-lenvima
-leqembi
+leniolisib
+leniolisib phosphate
+leqselvi
 leqvio
-lescol xl
-lessina
+lerochol
+lerodalcibep
+lerodalcibep-liga
+lessonia
+lessonia nigrescens
+letairis
 letermovir
 letrozole
 letrozole tablets
 leucine
 leucovorin
 leucovorin calcium
-leukeran
-leukotrap rc pl system
-leukotrap wb system - cp2d
+leukine
 leuprolide
 leuprolide acetate
-leuprolide acetate depot
-leuprolide mesylate
-levacetylleucine
+leuprorelin
 levalbuterol
 levalbuterol hydrochloride
-levalbuterol inhalation solution
+levalbuterol tartrate
+levalbuterol tartrate hfa inhalation
+levamisole
 levamlodipine
 levamlodipine maleate
-levemir
+levbid
 levetiracetam
 levetiracetam er
+levetiracetam extended-release
 levetiracetam in sodium chloride
 levetiracetam injection
+levetiracetam levetiracetam
 levetiracetam solution
-levobunolol hydrochloride
 levocarnitine
-levocarnitine oral
+levocetirizine
 levocetirizine dihydrochloride
 levodopa
 levofloxacin
-levofloxacin in 5% dextrose
-levoketoconazole
 levoleucovorin
 levoleucovorin calcium
 levoleucovorin injection
+levomefolate
 levomefolate calcium
 levomefolate glucosamine
 levomefolate magnesium
+levomefolic
 levomefolic acid
+levomilnacipran
 levomilnacipran hydrochloride
 levonest
 levonorgestrel
 levonorgestrel / ethinyl estradiol
 levonorgestrel/ethinyl estradiol
-levora
+levophed
+levorphanol
 levorphanol tartrate
 levothyroxine
 levothyroxine sodium
 levothyroxine sodium anhydrous
-levoxyl
-lexette
-libtayo
-lido bdk
+levsin
+levsin sl
+levulan kerastick
+lexapro
+lidexa
+lidexagel 5%
+lidicaine
 lidocaine
-lidocaine 4.5%
 lidocaine 5%
-lidocaine 5% gel
 lidocaine 5% patch
 lidocaine hci
-lidocaine hci 3.88%
 lidocaine hcl
 lidocaine hcl - hydrocortisone acetate
-lidocaine hcl 4.12 %
-lidocaine hcl 5 %
-lidocaine hcl 5%
+lidocaine hcl - hydrocortisone acetate with aloe
+lidocaine hcl 3%
 lidocaine hydrochloride
 lidocaine hydrochloride anhydrous
 lidocaine patch
+lidocaine patch 5%
 lidocaine viscous
-lidocort
-lidolog kit
+lidocan
+lidocan iii
+lidocan iv
+lidocan v
+lidocan vi
+lidocan vii
+lidoderm
+lidogel
+lidomax
+lidopure patch
 lidothol
+lidothol es patch
 lidothol gel
-lidotral 3.88 percent plus hydrocortisone 1 percent cream
-lidotral 3.88% roll on
-lidotral 5 percent
-lidotral 5 percent roll on gel
-lidotral 5% gel
-lidotral five percent
-lidotral five percent with menthol
-lidotral two percent
-lidox 5 patch
+lidotran
+lidovara
+lidoxryl
+lifitegrast
+lifyorli
+lignocaine
 lignospan forte
+lignospan standard
 likmez
-lilium
-lilium lancifolium bulb
+liletta
+limosilactobacillus
+limosilactobacillus fermentum
+limosilactobacillus reuteri
 linaclotide
 linagliptin
 lincocin
@@ -2528,201 +2737,230 @@ lincomycin
 lincomycin hydrochloride
 linerixibat
 linezolid
-linvoseltamab
 linzess
-liomny
+lioresal (baclofen)
 liothyronine
 liothyronine sodium
-lipitor
-lipofen
-liquical plus
+lipfendra
+lipiodol
+lipoic
+liposomal
 liraglutide
 lisdexamfetamine
 lisdexamfetamine dimesylate
-lisdexamfetamine dimesylate capsules
+lisdexamfetamine dimesylate oral
 lisinopril
 lisinopril/hctz
-litfulo
+lispro
 lithium
 lithium carbonate
-lithium carbonate er
+lithium carbonate lithium carbonate
 lithium citrate
-lithobid
 lithostat
-livalo
-live-brpk
-liver gland
+livdelzi
+livita adults
+livita children
+lixisenatide
+llevofloxacin
+lmd in dextrose
+lmd in sodium chloride
 lmr plus
 lo loestrin fe
+lo simpesse
+lo-zumandimine
 locametz
 lodoco
-loestrin 21 day
-loestrin fe 28 day
+lodosyn
+lofena
 lofexidine
 lofexidine hydrochloride
-lomaira
+lojaimiess
+lolium pratense pollen
+lomitapide
 lomitapide mesylate
 lomotil
 lomustine
-lonafarnib
 lonapegsomatropin
 lonapegsomatropin-tcgd
+loncastuximab
 loncastuximab tesirine
+lonsurf
+loperamide
 loperamide hydrochloride
+lopid
 lopinavir
 lopreeza
-loqtorzi
+lopressor
 loratadine
 lorazepam
 lorbrena
-loreev xr
 lorlatinib
+loryna
 losartan
 losartan potassium
+losartan potassium 100 mg
+losartan potassium 25 mg
 losartan potassium 50 mg
 losartan potassium tablets
 losortan potassium
-lotemax
-lotemax sm
+lotensin
+lotensin hct
+loteprednol
 loteprednol etabonate
 lotrel
 lotronex
 lovastatin
 lovenox
-low-ogestrel
-lowbush blueberry
 loxapine
 loxapine succinate
-loxosceles reclusa
 lubiprostone
+lucemyra
 luliconazole
 lumacaftor
-lumakras
-lumasiran
-lumasiran sodium
-lumateperone
+lumason
+lumavex
 lumefantrine
+lumicain
+lumigan
 lumisight
-lumizyme
-lumvoa
-lunesta
-lunsotogene parvec
-lunsotogene parvec-cwha
+lumryz
+lunavira
+lunsumio
+lunsumio velo
 lupron depot
 lupron depot-ped
-lurasidone hcl
+lurasidone
 lurasidone hydrochloride
-luspatercept
-lutathera
+lurbinectedin
+lusutrombopag
+lutein
 lutera
-lutetium lu 177 dotatate
-lutetium oxodotreotide lu-177
-lutrate depot
+lutetium lu 177 vipivotide tetraxetan
+lutetium lu-177 vipivotide tetraxetan
 luzu
-lycopodium
-lycopodium clavatum spore
-lycopus virginicus
-lyleq
+lybalvi
+lyllana
+lymphir
 lynavoy
 lynkuet
-lynparza
+lyophilized
 lyrica
-lyrica cr
 lysine
 lysine acetate
-lysine hydrochloride
+lysodren
+lytgobi
+lytta vesicatoria
 lyumjev
-lyumjev junior kwikpen
-lyvispah
-m-natal plus
-macimorelin
-macimorelin acetate
+lyumjev kwikpen
+lyumjev tempo pen
 macitentan
-macrilen
-macrobid
-macrodantin
+macrocrystals
+mactans
+mafenide
+mafenide acetate
+mafodotin
 maftivimab
-mag phos
-magnesium acetate
-magnesium ascorbate
+maftivimab-ebgn
+magnesium carbonate
 magnesium chloride
 magnesium citrate
-magnesium l-threonate
 magnesium oxide
-magnesium phosphate
+magnesium oxybate
 magnesium sulfate
-magnesium sulfate bowel prep kit
+magnesium sulfate anhydrous
 magnesium sulfate heptahydrate
+magnesium sulfate in 5% dextrose
 magnesium sulfate in dextrose
 magnesium sulfate in water
+magnesium sulfate in water for
+magnesium sulfate oral
+major oral rinse
+majorana
+malarone
+malvin
+manganese
+manganese chloride
 manganese sulfate
+manganum
+manganum metallicum
 mannitol
 maraviroc
+marboxil
 marcaine
+marcaine spinal
 marcaine with epinephrine
-marinol
-marsdenia condurango bark
+mardex 25 kit
+margenza
+margetuximab
+margetuximab-cmkb
+marianus
+marlissa
 marstacimab
 marstacimab-hncq
-marvona suik
-matricaria chamomilla
-matulane
-mavacamten
+marvona-25 suik
+matervia
+matzim la
 mavyret
-maxidex
 maxitrol
 mayzent
-mb caps
-md gastroview
 measles virus
 mebendazole
-mebrofenin
+mecamylamine
+mecamylamine hydrochloride
+mecasermin
+mechlorethamine
+mechlorethamine hydrochloride
 meclizine
 meclizine hydrochloride
 meclizine hydrocloride
-meclofenamate sodium
-medical air
-medical oxygen compressed
-medorrhinum
-medrol
-medroloan ii suik
+medical gasseous oxygen cylinders
+medronate
+medronic
+medronic acid
+medroxyprogesterone
 medroxyprogesterone acetate
-medroxyprogesterone acetate injectable suspension
+mefenamic
 mefenamic acid
+mefloquine
 mefloquine hydrochloride
+megestrol
 megestrol acetate
-mektovi
-meleagris gallopavo feather
-meleagrisgallopavofeather
+mekinist
+melarsoprol
+melodetta 24 fe
 meloxicam
 melphalan
-melphalan hcl
 melphalan hydrochloride
+melphalan hydrochloride injection
 memantine
 memantine hydrochloride
-memantine hydrochloride oral
-menatrol
+membraneblue
+menopur
 menostar
+menotropins
 menthol
+menthol / camphor gel
+meperidine
+meperidine hydrochloride
+mepivacaine
 mepivacaine hydrochloride
-mepolizumab
 meprobamate
 mepron
-mepsevii
 mercaptopurine
-mercurius solubilis
 meropenem
-meropenem anhydrous
+meropenem-vaborbactam
+mertiatide
 mesalamine
 mesalamine rectal
+mesalazine
 mesna
+mesna injection
 mesnex
-mesocricetus auratus hair
-mesocricetus auratus skin
-mesocricetusauratushair
-mesocricetusauratusskin
+mestinon
+metadate cd
+metallicum
+metavex
 metaxalone
-metered
 metformin
 metformin er 500 mg
 metformin er 750 mg
@@ -2730,518 +2968,565 @@ metformin hcl
 metformin hydrochloride
 metformin hydrochloride er
 metformin hydrochloride extended release
-metformin hydrochloride extended-release 500mg
 metformin hydrochloride extended-release tablets
 metformin hydrochloride oral solution
 metformin hydrochloride tablet
 metformin hydrochloride tablets
+methacholine
+methacholine chloride
+methacholine chloride inhalation solution
 methadone
 methadone hydrochloride
-methadone hydrocloride dye-free
-methadose sugar-free
+methamphetamine
 methamphetamine hydrochloride
 methazolamide
 methenamine
 methenamine hippurate
 methenamine mandelate
+methergine
 methimazole
 methionine
+methocarb 500-ezs
 methocarbamol
 methocarbamol tablets
+methohexital
 methohexital sodium
 methotrexate
 methotrexate sodium
-methsuximide
+methscopolamine
+methscopolamine bromide
 methyl salicylate
+methylbromide
 methylcobalamin
 methyldopa
 methylene blue
+methylergometrine
 methylergonovine
 methylergonovine maleate
-methylnaltrexone bromide
+methylin
 methylphenidate
-methylphenidate extended-release
+methylphenidate hcl
 methylphenidate hydrochloride
 methylphenidate hydrochloride (la)
 methylphenidate hydrochloride cd
+methylphenidate hydrochloride extended release
 methylphenidate hydrochloride extended-release
-methylphenidate transdermal system
 methylprednisolone
 methylprednisolone acetate
 methylprednisolone sodium succinate
+methylsulfate
 methyltestosterone
 metoclopramide
 metoclopramide hydrochloride
 metolazone
+metopirone
 metoprolol
 metoprolol succinate
 metoprolol succinate er
 metoprolol succinate er tablets
 metoprolol tartrate
-metoprolol tartrate injection
+metoroprolol
 metoroprolol tartrate
+metreleptin
 metronidazole
 metronidazole oral
+metronidazole topical
 metronidazole vaginal
+metronidazole vaginal gel
+metyrapone
 metyrosine
+mexiletine
 mexiletine hydrochloride
-mezereum
-miacalcin
 micafungin
 micafungin in sodium chloride
 micafungin sodium
-micardis hct
 miconazole
 miconazole nitrate
 microgestin 1.5/30
 microgestin 1/20
-microgestin 24 fe
 microgestin fe 1.5/30
 microgestin fe 1/20
+microspheres
+microvara
 midazolam
 midazolam hydrochloride
+midazolam in 0.8% sodium chloride
 midazolam in sodium chloride
+midodrine
 midodrine hydrochloride
-miebo
+mifepristone
+migalastat
 migalastat hydrochloride
+miglitol
 miglustat
-migranow
-mili
+milk thistle
+milnacipran
 milnacipran hydrochloride
+milophene
+milrinone
 milrinone lactate
-milrinone lactate in 5% dextrose
 milrinone lactate in dextrose
+milsaperidone
 miltefosine
-mimvey
-mineral
-minerals
+mimulus guttatus
+mimulus guttatus flowering top
+mini
+minocin
 minocycline
 minocycline hydrochloride
-minocycline hydrochloride extended-release
+minovia
+minovia mini
 minoxidil
-minzoya
-miochol e
 miplyffa
 mirabegron
-mirabgeorn
 mirdametinib
 mirena
 mirikizumab
 mirikizumab-mrkz
 mirtazapine
 misoprostol
+mitapivat
+mitigare
 mitomycin
-mitosol
+mitotane
 mitoxantrone
 mitoxantrone hydrochloride
 mixed salts of a single entity amphetamine product xr
-mlk kit f2
 modafinil
+modeyso
+modfied
+moexipril
 moexipril hydrochloride
-mogamulizumab
-mogamulizumab-kpkc
+mofetil
+molindone
+molindone hydrochloride
 molybdenum
-momelotinib
-momelotinib dihydrochloride monohydrate
 mometasone
 mometasone furoate
-monjuvi
+mometasone furoate monohydrate
 mono-linyah
 monobasic
 monobasic potassium phosphate
 monobasic sodium phosphate
-monohydrate
-monomethyl fumarate
+monsels solution
 montelukast
 montelukast sodium
 morbillinum
+morgani
+morganii
 morphine
 morphine sulfate
-morphine sulfate er
 morphine sulfate extended release
 morphine tincture
+mosunetuzumab
+motegrity
 motixafortide
 motixafortide acetate
 motofen
 motpoly xr
 mounjaro
 mounjaro kwikpen
-moviprep
+movantik
+moxidectin
 moxifloxacin
-moxifloxacin 0.5%
 moxifloxacin hydrochloride
 moxifloxacin hydrochloride monohydrate
 moxifloxacin hydrochloride tablets
 moxifloxacin ophthalmic
 moxifloxacin ophthalmic solution
+ms contin
 mucus relief
+mulpleta
 multaq
-multi-specialty kit
-multi-vitamin with fluoride
-multihance
-multiple electrolytes ph 5.5
-multiple electrolytes ph 7.4
-multiple vitamins (adult) single dose
-multiple vitamins (pediatric) pharmacy bulk package
-multitol-m
+multiple vitamins injection
+multitam
+multitrace -4 pediatric
+multitrace-5
 multivitamin
 multivitamin with fluoride
-multivitamin/mineral
-multivitamins
+multrys
 mupirocin
 mupirocin calcium
 mupirocin ointment
-mus musculus hair
-mus musculus skin
-musmusculuasskin
-musmusculushair
-mutamycin
-mvasi
-mycamine
-mycapssa
+muscaria
+muscarius
+myalept
+mycophenilic
 mycophenilic acid
+mycophenolate
 mycophenolate mofetil
-mycophenolate mofetil hydrochloride
 mycophenolate sodium
+mycophenolic
 mycophenolic acid
 mycostatin
-mycozyl hc
-mycozyl hc cream gel
-mydriacyl
+mydayis
 myfembree
 myfortic
-myleran
-myoview
-myqorzo
+myhibbin
+mylotarg
+myobloc
 myrbetriq
-myrrh
-myrrha
-n-acetyl-tyrosine
-n-acetyltyrosine
-n.o.s.
-nabi-hb
-nabilone
+mysoline
+mytesi
+myxredlin
 nabumetone
+nabumetone 1000 mg
+nabumetone 500 mg
+nabumetone 750 mg
 nadh
+nadide
+nadidum
 nadolol
+nadroparin
 nafcillin
 nafcillin sodium
+naftifine
+naftifine hydrochloride
+naftin
+naglazyme
+nalbuphine
 nalbuphine hydrochloride
+nalmefene
 nalmefene hydrochloride
-nalocet
+naloxegol
+naloxegol oxalate
 naloxone
 naloxone hci
 naloxone hcl
 naloxone hydrochloride
 naloxone hydrochloride dihydrate
-naloxone hydrochloride injection
+naloxone hydrochloride nasal
+naloxone sublingual film
+naltrexone
 naltrexone hydrochloride
+nalxone
+nalxone hydrochloride
 namzaric
-naprelan
+naphthalene
+naphthalinum
+naprotin
 naproxen
 naproxen sodium
 naratriptan
 naratriptan hydrochloride
 narcan
 narcan naloxone hci
-naropin
-nat carb
-nat phos
-nat sulf.
-natacyn
+narsoplimab
+nascobal
 natalizumab
-natalizumab-sztn
 natamycin
 natazia
 nateglinide
-natesto nasal gel
 natroba
-natrum muriaticum
-natrum sulphuricum
+natrum
+natrum oxalaceticum
 navepegritide
-navitrux
 ndac
+nebibolol
 nebivolol
 nebivolol hydrochloride
+nebupent
 necon
 nedosiran
 nedosiran sodium
+nefazodone
 nefazodone hydrochloride
 nelarabine
-nelfinavir mesylate
-neo-synalar
+neobenz micro plus pack
 neomycin
 neomycin polymyxin b sulfates
 neomycin sulfate
-neoprofen
 neoral
 neostigmine
 neostigmine methylsulfate
 nepafenac
-netspot
-neuac
-neulasta
-neupogen
+nerandomilast
+neratinib
+neratinib maleate anhydrous
+nereus
+nerlynx
+nesacaine
+nesacaine mpf
+nesina
+netarsudil
+netarsudil mesylate
+netilmicin
+netupitant
 neuraceq
-neurontin
-neurozyl
-nevanac
+neurolite
+neutra maxx 5000
+neutramaxx 5000 plus turbo
+neutramaxx 5000 tcp
 nevirapine
+nevirapine hemihydrate
 nexavar
-nexiclon xr
-nexletol
-nexlizet
-nexobrid
-nextstellis
-nexviazyme
+nexesta fe
+nexium
+nexterone
+nexterone (amiodarone hci)
 ngenla
 nh3n13
 niacin
 niacinamide
 nicardipine
 nicardipine hydrochloride
-nicardipine hydrochloride in sodium chloride
-nicomide
+nickel sulfate
+niclosamide
+nicotinamide
+nicotinamide adenine dinucleotide
+nicotinamidum
+nicotinate
 nifedipine
-niferex
+nifedipine er
 nifurtimox
-night vitals
-nikki
-niktimvo
+niger
+nigrescens
+nigrum
 nilotinib
 nilotinib hydrochloride monohydrate
 nilutamide
 nimodipine
-ninlaro
 nintedanib
 nintedanib capsules
 nintedanib esylate
-nipocalimab
-nipocalimab-aahu
+nipent
+nipride rtu
 niraparib
 niraparib tosylate
-niraparib tosylate monohydrate
 nirmatrelvir
 nirogacestat
+nirsevimab
 nisoldipine
 nitazoxanide
-nithiodote
 nitisinone
+nitric acid
 nitric oxide
+nitricum
+nitricum acidum
 nitro-bid
+nitro-dur
 nitrofurantion
 nitrofurantion macrocrystals
 nitrofurantoin
 nitrofurantoin (macrocrystals)
 nitrofurantoin (monohydrate/macrocrystals)
 nitrofurantoin macrocrystals
+nitrofurantoin mono
 nitrofurantoin monohydrate
-nitrofurantoin monohydrate macrocrystalline
 nitrofurantoin monohydrate/ macrocrystalline
 nitrofurantoin monohydrate/macrocrystal
 nitrofurantoin monohydrate/macrocrystalline
-nitrofurantoin monohydrate/macrocrystals
-nitrogen nf
 nitrogen oxygen mix
 nitroglycerin
 nitroglycerin in dextrose
 nitroglycerin lingual
 nitroglycerin tablet
-nitrolingual
+nitroglycerin transdermal infusion system
 nitrostat
 nitrous oxide
-nitrous oxide oxygen mix
-nityr
-niva thyroid
 nivestym
 nivolumab
+nizatidine
+nogapendekin
 nogapendekin alfa inbakicept-pmln
+non-proprietary name
 nora be
+noradrenaline
 norco
+norditropin
 norelgestromin
+norepinephrine
 norepinephrine bitartrate
-norepinephrine bitartrate in sodium chloride
 norethindrone
 norethindrone acetate
 norethindrone acetate/ethinyl estradiol
-norgesic
+norethisterone
 norgestimate
 norgestrel
-normosol-m
-normosol-r
+norixa
+norixa mini
 norpace
 norpace cr
+norpramin
+north american coral snake antivenin (equine)
+northera
 nortrel 21 day
 nortrel 28 day
 nortrel 7/7/7 (28 day regimen)
-nortriptyline hcl
+nortriptyline
 nortriptyline hydrochloride
-norvasc
+norvexa
+norvexa mini
 norvir
-nourianz
 novolog
 novolog mix 70/30
+noxafil
 noxivent
+np thyroid 120
 np thyroid 15
 np thyroid 30
 np thyroid 60
-nplate
-nrg hemo-stat
-nu-derm blender skin lightener
-nu-derm clear skin bleaching
-nu-derm sunfader skin lightener with sunscreen (spf 15) paba free
-nu-derm system normal-oily skin transformation
+np thyroid 90
 nubeqa
-nucala
-nucynta
-nucynta er
-nulibry
+nuedexta
+nufymco
+nulev
 nulojix
-nuplazid
-nurtec odt
+numbrino
+nupro chlorhexidine gluconate
+nusinersen
+nutralyn
+nutrilipid i.v. fat emulsion
 nuvaring
-nuvigil
-nux vom
-nyamyc
-nymyo
-nypozi txid
+nuvessa
+nuzyra
+nylia 1/35
+nymalize
+nypozi
 nystatin
+nystatin cream
+nystatin ointment
+nystatin oral suspension
+nystatin topical powder
 nystop
-obagi c rx system c clarifying serum
-obagi-c rx system c-clarifying serum normal to oily skin lightening serum with vitamin c
-obagi-c rx system c-therapy night skin lightening with vitamins c
-obiltoxaximab
-ocimum sanc
-ocimum tenuiflorum top
-octinoxate
+nyvepria
+obagi nu-derm system normal-dry skin transformation
+obagi nu-derm system normal-dry skin transformation kit
+obagi nu-derm system normal-oily skin transformation
+obagi nu-derm system normal-oily skin transformation trial
+occidentalis
+ocrelizumab
+ocrevus
+ocrevus zunovo
 octisalate
+octreoscan
 octreotide
 octreotide acetate
+ocuflox
+odefsey
 odesivimab
 odesivimab-ebgn
-ofatumumab
+odevixibat
+odomzo
+ofev
+officinale
 ofloxacin
-ofloxacin ophthalmic solution usp
+ofloxacin ophth soln
 ofloxacin otic
-ofloxacin otic solution
 ogivri
 ogsiveo
-ohm mouthwash
-ohm parasites
-ohm pituitarum complex
-ohm tonic syrup
-ohm venous aid
-ojjaara
+ojemda
+olamine
 olanzapine
-olaparib
-olipudase alfa
-olipudase alfa-rpcp
-olive oil
+olanzapine intramuscular
+olanzapine pamoate
+oliceridine
+olinvyk
+olmesartan
 olmesartan medoxomil
 olmesartan medoxomil / amlodipine besylate / hydrochlorothiazide
+olmesartan medoxomil amlodipine
 olmesartan medoxomil-hydrochlorothiazide
+olmesartran
 olmesartran medoxomil
-olodaterol
-olodaterol hydrochloride
-olodaterol respimat inhalation spray
+olopatadine
 olopatadine hydrochloride
 olpruva
 olumiant
+olutasidenib
+omadacycline
+omalizumab
+omaveloxolone
+omega-3 fatty acids
 omega-3-acid ethyl ester
 omega-3-acid ethyl esters
 omeprazole
 omeprazole dr
 omeprazole magnesium
-omeprazole sodium bicarbonate
 omeprazole/bicarbonate
-omeprazole/sodiium bicarbonate
-omeprazole/sodium bicarbonate
-omidenepag isopropyl
-omlonti
-omnaris
-omnipaque
-omniscan
-omnitrope
+omidria
 omvoh
 onabotulinumtoxina
+onapgo
+onasemnogene
 onasemnogene abeparvovec
 onasemnogene abeparvovec-brve
 onasemnogene abeparvovec-xioi
 ondansetron
 ondansetron hydrochloride
-ondansetron tablets
 onexton
-ongentys
-onpattro
+onfi
+onivyde
 ontralfy
-onureg
-onyda xr
+oophorinum
 opdivo
-opdivo qvantig
+opdualag
 opfolda
-opicapone
+ophth
+opipza
 opium
 opium tincture deodorized
+opsumit
+opsynvi
+opth
+opthalmic
+optiray 300
 optiray 320
 optiray 350
-opvee
-opzelura
+optison perflutren protein-type a microspheres
 orabloc
-oracit
 oral semaglutide
-orange juice
-orapaz
-orapred odt
-oravig
+oralone
+orbactiv
 orencia
-orenitram
+orfadin
 orforglipron
 orforglipron calcium
 orgovyx
-orilissa
+orientalis
+origanum majorana
+origanum marjorana
+oritavancin
+oritavancin diphosphate
 orkambi
-ormalvi
+orlistat
+orphenadrine
 orphenadrine citrate
-orphengesic forte
-orserdu
+orphenadrine citrate er
 orthaphen
 orthrexo
-orudis
-oryctolagus cuniculus hair
-oryctolagus cuniculus skin
-oryctolaguscuniculushair
-oryctolaguscuniculusskin
-oscimin
+orvex
+oseltamavir
 oseltamavir phosphate
-oseltamivir acid
+oseltamivir
 oseltamivir phosphate
 oseltamivir phosphate for oral suspension
-osenvelt
-osilodrostat
-osilodrostat phosphate
-osmitrol
-ospomyv
-osvyrti
-otarmeni
-otezla
-otrexup
+oseni
+oshih
+osimertinib
+ospemifene
+osphena
+otulfi
+ovace
 ovace plus
-ovis aries whole
-ovisarieswhole
+ovaceplus plus
 oxacillin
 oxacillin sodium
-oxalic acid dihydrate
+oxalacetate
+oxalaceticum
 oxaliplatin
+oxamniquine
 oxaprozin
-oxaydo
 oxazepam
-oxbryta
 oxcarbazepine
-oxervate
+oxiconazole
 oxiconazole nitrate
-oxistat
-oxlumo
-oxybenzone
+oxidronate
+oxidronate disodium
+oxodotreotide
+oxtellar xr
+oxybate
+oxybates
 oxybutynin
 oxybutynin chloride
 oxybutynin chloride extended release
@@ -3250,266 +3535,278 @@ oxycodone hcl
 oxycodone hydchloride
 oxycodone hydrochloride
 oxycodone/apap
-oxygen 64889-0001
-oxygen carbon dioxide
+oxycontin
+oxygen compressed
 oxygen compressed gas
-oxygen compressed u.s.p
-oxygen compressed un 1072 refrigerated un 1073
-oxygen nitrogen mixture
+oxygen gas
 oxygen refrigerated liquid
-oxygen refrigerated liquid u.s.p
-oxygen size 400
-oxygen size b
-oxygen size c
-oxygen size d
-oxygen size e
-oxygen size f
-oxygen size h
-oxygen size m
-oxygen size t
-oxygen-carbon dioxide mixture
-oxygen-helium mixture
-oxygen-nitrogen mixture
+oxygenium
+oxyhydroxide
+oxymetazoline
 oxymetazoline hydrochloride
+oxymetazoline hydrochloride ophthalmic
+oxymorphone
 oxymorphone hydrochloride
-oxyquinoline sulfate
+oxytetracycline
 oxytocin
-oxytrol
-oyster shell calcium carbonate
-ozanimod hydrochloride
 ozempic
+oziltus
 ozobax ds
+ozogamicin
 pacerone
 paclitaxel
 paclitaxel (aibumin-bound)
+paclitaxel 100mg per vial
+paclitaxel paclitaxel
+paclitaxel protein bound particles albumin bound
+paclitaxel protein-bound particles
 paclitaxel protein-bound particles for injectable suspension (albumin-bound)
-paeonia officinalis
-paeonia officinalis root
-pain relief
+pacritinib
+pafolacianine
+pafolacianine injection
+pafolacianine sodium
 palbociclib
+palifermin
 paliperidone
-paliperidone palmitate
+palivizumab
 palonosetron
 palonosetron hydrochloride
 palopegteriparatide
-palsonify
-paltusotine
-paltusotine hydrochloride
-pamidronate disodium
-pancreaze
+palovarotene
+palynziq
+pamelor
+pamoate
 pancrelipase
 pancrelipase amylase
 pancrelipase lipase
 pancrelipase protease
-panhematin
-panitumumab
-panretin
 pantoprazole
 pantoprazole sodium
 pantoprazole sodium delayed-release
+pantoprazole sodium delayed-release delayed release
 pantoprazole sodium dr
-pantoprazole sodium in 0.9% sodium chloride
+pantoprazole sodium granules
+pantoprazole sodium i.v.
+pantoprazole sodium injection
 pantothenic acid
 papaverine hydrochloride
-papzimeos
-paragard t 380a
+paracasei
+paracetamol
 paricalcitol
-parnate
-paromomycin sulfate
+paromomycin
 paroxetine
 paroxetine hydrochloride
 paroxetine hydrochloride anhydrous
 paroxetine hydrochloride hemihydrate
 paroxetine mesylate
-parsabiv
-pasireotide
-passiflora
-passiflora incarnata top
-patisiran
-patisiran sodium
-pavblu
+particles
+patiromer
+paxil
+paxil cr
 paxlovid
-paxlyte
 pazopanib
 pazopanib hydrochloride
-pcxx anticaries no flavor ne g
-pcxx bubblegum apf g
-pcxx cool peppermint apf g
-pcxx creme de menthe apf g
-pcxx grape apf g
-pcxx marshmallow apf g
-pcxx neutral rns grape
-pcxx neutral rns strawberry
-pcxx peppermint apf f
-pcxx peppermint neutral gl
-pcxx raspberry neutral gl
-pcxx strawberry apf f
-pcxx vanilla orange neutral gl
-pcxx vanilla orange one minute fm
-pcxx watermelon apf g
-pcxx watermelon neutral gl
-pediculus capitis
-pediculus humanus var. capitis
+pediatric 8.4% sodium bicarbonate
+pediatric infuvite multiple vitamins
 pedmark
-peg 3350
 peg-3350
-pegcetacoplan
+pegaspargase
 pegfilgrastim
-pegfilgrastim-bmez
-pegfilgrastim-cbqv
+pegfilgrastim-apgf
 pegfilgrastim-jmdb
-pegfilgrastim-unne
 pegflilgrastim-fpgk
+peginterferon
+peginterferon beta-1a
+pegol
 pegulicianine
+pegunigalsidase
+pegunigalsidase alfa
+pegvaliase
+pegvaliase-pqpz
 pegvisomant
-pemazyre
 pembrolizumab
 pemetrexed
-pemetrexed dipotassium
 pemetrexed disodium
 pemetrexed disodium hemipentahydrate
 pemetrexed disodium heptahydrate
 pemetrexed monohydrate
 pemfexy
-pemigatinib
+pemrydi rtu
 penciclovir
 penicillamine
-penicillin g benzathin
-penicillin g benzathine
 penicillin g potassium
-penicillin g procaine
-penicillin g sodium
 penicillin v potassium
-pentamidine diisethionate
+penpulimab
+penpulimab kcqx
+pentam 300
+pentamidine
 pentamidine isethionate
+pentasa
 pentazocine
+pentazocine hydrochloride
+pentetate
+pentetic
+pentetic acid
+pentetreotide
 pentobarbital sodium
-pentosan polysulfate sodium
+pentostatin
 pentoxifylline
-pepcid
-pepo
 perampanel
 percocet
-perfluorohexyloctane
+perfluoropropance
+perfluoropropane
 perflutren
-perikabiven
-perindopril erbumine
+perindopril
 periogard alcohol free
+perjeta
 permethrin
+permethrin 5% w/w
+permethrin cream 5% w/w
 perphenazine
-pertzye
-petroleum
+persica
+pertechnetate
+pertussinum
+pertuzumab
 petroselinum crispum
 petroselinum sativum
-pexidartinib hydrochloride
 pfizerpen
-pheburane
+pharmapurerx lidocaine hcl 4.12%
 phenazopyridine
 phenazopyridine hydrochloride
+phendimetrazine
 phendimetrazine tartrate
+phenelzine
+phenelzine sulfate
 phenergan
 phenobarbital
 phenobarbital oral
 phenobarbital oral solution
 phenobarbital sodium
+phenohytro
+phenoxybenzamine
 phenoxybenzamine hydrochloride
+phenoxymethylpenicillin
 phentermine
-phentermine hcl
 phentermine hcl c-iv
 phentermine hydrochloride
+phentolamine
 phentolamine mesylate
-phenyl salicylate
+phenylacetate
 phenylalanine
+phenylbutyrate
 phenylephrine
 phenylephrine hci
-phenylephrine hcl
 phenylephrine hydrochloride
-phenylephrine hydrochloride phenylephrine hydrochloride
-phenytek
+phenylephrine hydrochloride injection
 phenytoin
 phenytoin infatabs
 phenytoin sodium
-phospha 250 neutral
-phosphate buffer
-phosphatidyl serine
-phospholine iodide
-phosphoric acid
-phosphoricum ac
-phosphoricum ac.
-phosphorus
-photofrin
-phyrago
+phesgo
+phexx
+phexxi
+philith
+phleum pratense
+phleum pratense pollen
+phosphates
+phospholipids
+photrexa cross-linking kit
 physician ez use joint tunnel
+physicians
 physicians ez use b-12 compliance
-phytolacca americana root
-phytolacca decandra
+physicians ez use m-pred
+physiolyte
+physostigmine salicylate
+phytomenadione
 phytonadione
 phytonadione phytonadione
 pibrentasvir
+picolinate
+picosulfate
+pidolate
+piflufolastat
 piflufolastat f-18
+pilocarpine
 pilocarpine hydrochloride
-pilocarpine hydrochloride ophthalmic
 pilocarpine hydrochloride ophthalmic solution
-pimavanserin tartrate
 pimecrolimus
 pimozide
+pimtrea
 pindolol
+pioglitazole
 pioglitazone
-pioglitazone hcl
 pioglitazone hydrochloride
+piper nigrum
 piperacillin
 piperacillin sodium
+piperaquine
+piqray
 pirfenidone
-pirfenidone capsule
+pirnuo
 piroxicam
 pirtobrutinib
 pitavastatin
 pitavastatin calcium
 pitavastatin magnesium
-pitocin
+pitolisant
 pitolisant hydrochloride
-pituitarum posterium gland
-plantago major
+pituitarum posterium
+pivekimab
+pivekimab sunirine
+pivekimab sunirine-pvzy
+pivmecillinam
+pivmecillinam hydrochloride
+pivya
+placenta totalis suis
+plantarum
 plaquenil
+plaquetas
+plasma-lyte 148 (ph 7.4)
 plasma-lyte a
+platelet additive 3
 plavix
 plazomicin
-plecanatide
-plegisol
-plenvu
+plegridy
+plegridy pen
+plenamine
 plerixafor
 plexion
-pliaglis
+plexion ns
+plozasiran
+pluvicto
+pnv-dha
+pnv-omega
+pnv-select
+poa pratensis
+poa pratensis pollen
 podocon 25
-podofilox
+podophyllotoxin
 podophyllum resin
-polidocanol
+pokonza
+pokonza potassium chloride
 polocaine
-polocaine(r) -mpf (mepivacaine hci)
-polocaine-mpf
-polycin
+polocaine (mepivacaine hcl)
 polyethylene glycol 3350
-polyethylene glyocol 3350
+polyethylene glycol-3350
+polygeline
+polymyxin
 polymyxin b
 polymyxin b sulfate
 polymyxin b sulfates
-polysaccharide iron complex
+polysacchride
 polysacchride iron complex
 polysacchride iron vitamin mineral complex supplement
 pomalidomide
-pomalyst
 pombiliti atga
-ponatinib hydrochloride
 ponesimod
 ponvory
-poractant alfa
 porcine
-porfimer sodium
+pork kidney
 posaconazole
-posfrea
-positive skin test control - histamine
+posaconazole delayed-release
+posluma
 potassium acetate
 potassium bicarbonate
+potassium bitartrate
 potassium bromide
 potassium chloride
 potassium chloride er
@@ -3517,192 +3814,245 @@ potassium chloride extended release
 potassium chloride extended-release
 potassium chloride for oral solution
 potassium chloride in dextrose
-potassium chloride in lactated ringers
 potassium chloride in sodium chloride
-potassium chloride oral
+potassium chloride injection
 potassium citrate
 potassium citrate extended release
 potassium iodide
 potassium nitrate
-potassium nitrate 5%
+potassium oxybate
 potassium phosphate
 potassium phosphates
+potassium phosphates in sodium chloride
 potassium sulfate
-poteligeo
+pothos foetidus
+povidine
 povidine iodine
+povidone
 povidone iodine
 povidone-iodine
 pozelimab
+pozelimab-bbfg
+prabotulinum
+prabotulinum toxin type a
 pradaxa
+prademagene
+prademagene zamikeracel
+pralatrexate
+pralidoxime
 pralidoxime chloride
+pralidoxime chloride auto-injector
+pralsetinib
 praluent
 pramipexole
 pramipexole dihydrochloride
+pramipexole dihydrochloride extended-release
+pramlintide
 pramlintide acetate
 pramosone
-pramosone cream
+pramoxine
 pramoxine hcl
 pramoxine hydrochloride
 pramoxine hydrochloride hydrocortisone acetate
 prasugrel
 prasugrel hydrochloride
+pratense
+pratensis
+pravastatin
 pravastatin sodium
-praxbind
 praziquantel
+prazosin
+prazosin hcl
 prazosin hydrochloride
-pre-pen
 precedex
+pred forte
+pred mild
 prednisolone
 prednisolone acetate
-prednisolone acetate 1%
 prednisolone oral
+prednisolone oral solution
 prednisolone sodium phosphate
+prednisolone sodium phosphate odt
+prednisolone sodium phosphate oral solution
 prednisone
 prednisone d/p
+prednisone delayed release
 prednisone intensol
 prednisone tablets
 pregabalin
-pregabalin extended release
-pregablin
+pregabalin capsules
+pregnyl
 premarin
-premasol - sulfite-free (amino acid)
 premphase
 prempro
-prenate chewable
-prenate dha
-prenate elite
-prenate enhance
-prenate essential
-prenate mini
-prenate pixie
-prenate restore
-prenatol-m
-prenatrix
-prenatryl
-prepidil
-pretrate
-prevalite
+prenatal multivitamin tablet
+prenatal plus vitamins
+prenatal supplement with dha
+prenatal vitamins plus low iron
+prenatal with ferrous fumarate
+pretomanid
+prevacid
+prevacid solutab
+prevduo
 prevident 5000 booster plus fruitastic
-prevident 5000 booster plus spearmint
-prevident 5000 plus fruitastic
+prevident 5000 dry mouth
+prevident 5000 enamel protect
 prevident 5000 sensitive
-prevident fresh mint
+prevident alcohol free
 prevymis
 prexxartan
+prezcobix
+prezcobix ped
+prezista
+prialt
+priftin
 prilocaine
-prilosec
+primaquine
+primaquine phosphate
 primaxin iv
 primidone
 pristiq extended-release
-pro-c-dure 6 kit
-pro-den rx
-proair respiclick
+pro gel 5000 citrus
+pro gel 5000 mint
+pro-sys
 probenecid
-procainamide hci
+probentra
+probiotic
+probiotic dietary supplement
+probiotic dietary supplement capsules
+procainamide
 procainamide hydrochloride
-procarbazine hydrochloride
-procardia xl
-procentra
-processed nerve allograft
+procarbazine
 prochlorperazine
 prochlorperazine edisylate
 prochlorperazine maleate
-procto-med hc
-proctocort
+procrit
 proctofoam hc
 proctosol-hc
 proctozone-hc
-procysbi
+professional sensitivity
 progesterone
-proglycem
 prograf
+proguanil
+proguanil hcl
 proguanil hydrochloride
-prolensa
-prolia
+proguanil hydrochloride pediatric
+prohance
+proleukin
 proline
 promacta
-prometa
 promethazine
+promethazine dm
 promethazine hci
 promethazine hcl
 promethazine hydrochloride
 promethegan
 prometrium
+propafenone
 propafenone hydrochloride
+propanediol
+proparacaine
 proparacaine hydrochloride
 propofol
 propofol injectable emulsion
 propranolol
+propranolol hcl
 propranolol hydrochloride
+propranolol hydrochloride er
 propylthiouracil
-prostin vr pediatric
+prosol
+prosys
+protamine sulfate
+proteus inconstans
+proteus mirabilis
+proteus morgani
+proteus morganii
+proteus rettgeri
+proteus vulgaris
+prothionamide
 protonix delayed-release
 protonix i.v.
-protopam chloride
+protriptyline
 protriptyline hydrochloride
 provayblue
 provera
-provigil
-prozac
+provocholine
+provocholine inhalation solution
+proxetil
 prucalopride
 prucalopride succinate
-prunus cerasus (bitter cherry) fruit extract
+prudoxin
 prunus persica flower
 prunus spinosa
 prunus spinosa flower bud
-pruradik
-pseudoephedrine
+prussian blue insoluble capsules
+pryidostigmine bromide
 pseudoephedrine hydrochloride
+psorinum
+psorizide forte
+pteronyssinus
+pubescens
 pulmicort flexhaler
+pulmotech maa
 pulsatilla
 pulsatilla (pratensis)
-pulsatilla pratensis
-pumpkin seed
-punica granatum root bark
-purelife apf
-purevit dualfe plus
+pulsatilla pratensis whole
+purified
+purified cortrophin gel
+purpurea
 pylarify
+pylera
+pyogenes
+pyquvi
+pyrantel
 pyrazinamide
-pyridium
+pyridostigmine
 pyridostigmine bromide
+pyridoxal
 pyridoxal 5-phosphate
+pyridoxal phosphate
 pyridoxal phosphate anhydrous
+pyridoxal-5-phosphate
 pyridoxine
+pyridoxine hcl
 pyridoxine hydrochloride
 pyrimethamine
-pyzchiva
-qbrexza
-qfitlia
-qinlock
+pyrukynd
+qalsody
+qamzova
+qbrelis
+qelbree
 qivigy kthm
-qnasl
-qsymia
-quazepam
+qlosi
+qudexy xr
+quebracho
+quercetin
 questran
 quetiapine
 quetiapine extended release
+quetiapine extended-release
 quetiapine fumarate
 quetiapine fumarate er
-quillichew er
-quillivant xr
+quflora pediatric
 quinapril
+quinapril hcl
 quinapril hydrochloride
-quinapril hydrochloride/hydrochlorothiazide
 quinidine gluconate
-quinidine gluonate
 quinidine sulfate
 quinidine sulfate tablet
 quinidine sulphate
+quinine
 quinine sulfate
-quiofic
-quizartinib
-quizartinib dihydrochloride
 qulipta
-qutenza
-qvar redihaler
-r-gene
+quviviq
+quzyttir
 rabeprazole
 rabeprazole sodium
+rabeprazole sodium dr
+radiogardase
+radium ra 223 dichloride
+radium ra-223 dichloride
+raldesy tm
 raloxifene
 raloxifene hydrochloride
 raltegravir
@@ -3710,1156 +4060,1288 @@ raltegravir potassium
 ramelteon
 ramipril
 ramucirumab
-rancid beef
 ranibizumab
-ranibizumab-eqrn
+ranibizumab-leyk
 ranibizumab-nuna
 ranitidine
 ranitidine hydrochloride
 ranolazine
-rapiblyk
 rasagiline
 rasagiline mesylate
 rasburicase
-ratanhia
-ratanhia.
-raxibacumab
+rasuvo
+ravidasvir
 rayaldee
-rebinyn
-reblozyl
-recarbrio
-reclast
+readi-cat 2
+readi-cat 2 banana smoothie
+readi-cat 2 berry smoothie
+readi-cat 2 creamy vanilla smoothie
+readi-cat 2 mochaccino smoothie
+rebif
+rebyota
+reclipsen 28 day
+reconstituted
 reconstituted air
-recorlev
-recothrom
-rectiv
+redemplo
+refrigerated
 regadenoson
 regadenoson anhydrous
-reglan
-regonol
+regorafenib
 rejuvesol
-relebactam anhydrous
+relacorilant
+relafen ds
+relatlimab
+relatlimab-rmbw
 relenza
-releuko
-relexxii
-relgaabi
-relistor
-relpax
+relivyx plus
 reltone 200 mg
 reltone 400 mg
 relugolix
+remdesivir
 remestemcel-l-rknd
-remibrutinib
-remicade
+remifentanil
 remifentanil hydrochloride
+remimazolam
 remimazolam besylate
-remodulin
-renthyroid
-renvela
+renacidin
 repaglinide
 repository corticotropin
-repotrectinib
-reslizumab
+respiratory plus
 restasis
-restasis multidose
 restoril
 retacrit
 retevmo
-rethymic
-retifanlimab
-retifanlimab-dlwr
-retin-a micro
-retisert
-retrovir
-revatio
-revcovi
-revlimid
-revtorpyk
+retin-a
+retinol
+rettgeri
+reuteri
+revefenacin
+reveos select cpd with as-5 red cell preservative solution for collection of 500ml of blood
+revonto
 revuforj
 revumenib
 revumenib citrate
+rextovy
 rexulti
 reyataz
 reyvow
-rezurock
-rhapsido
-rhododendron aureum leaf
+rezafungin
+rezlidhia
+rezvoglar kwikpen
+rezzayo
+rhamnosus
+rhamnus cathartica bark
 rhofade
-rhubarb
-rhuzdah
-riabni
+rhopressa
+rhus aromatica
+rhus aromatica root bark
+rhus tox
 ribavirin
+ribes nigrum
+ribes nigrum leaf
 ribociclib
-ribociclib succinate
 riboflavin
+riboflavin 5 phosphate sodium
+riboflavin 5'-phosphate
 riboflavin 5'-phosphate sodium
-riboflavin 5-phosphate sodium
+riboflavin 5-phosphate ophthalmic
 riboflavin-5 phosphate sodium
+ridaura
 rifabutin
-rifadin iv
+rifampicin
 rifampin
 rifapentine
-rifaximin
-rilonacept
 rilpivirine
 rilpivirine hydrochloride
 riluzole
-rilzabrutinib
-rimegepant sulfate
+rimabotulinumtoxinb
+rimantadine
+rimantadine hydrochloride
+rimso-50
 ringers
 rinvoq
-ripretinib
+riociguat
+riomet
 risankizumab
 risankizumab-rzaa
+risdiplam
+risedronate
 risedronate sodium
 risedronate sodium hemi-pentahydrate
 risedronate sodium hemipentahydrate
 risedronate sodium monohydrate
-risperdal
-risperdal consta
-risperdal m-tab
 risperidone
 ritalin
 ritalin la
-ritlecitinib
-ritlecitinib tosylate
 ritonavir
+ritonavir 100 mg
+ritonavir film coated
 rituximab
-rituximab-abbs
-rituximab-arrx
-rituximab-pvvr
 rivaroxaban
-rivaroxaban granule
 rivastigmine
 rivastigmine tartrate
 rivastigmine transdermal system
 rivfloza
+rizafilm
 rizatriptan
 rizatriptan benzoate
-rizatriptan benzoate odt
-roasted
 robaxin
+rocklatan
 rocuronium
 rocuronium bromide
 roflumilast
-rolvedon
+rolapitant
+rolapitant hydrochloride
 romidepsin
-romiplostim
-romosozumab
-romosozumab-aqqg
-romvimza
-ropeginterferon alfa-2b
-ropidex
 ropinirole
 ropinirole hydrochloride
+ropivacaine
 ropivacaine hydrochloride
+rose bengal sodium
+rosuvastain
+rosuvastain calcium
 rosuvastatin
 rosuvastatin calcium
-rowasa
+roweepra
 roxicodone
+rozlytrek
+rubia tinctorum
+rubia tinctorum root
+rubidium chloride rb-82
+ruconest
 rufinamide
-rukobia
-ruta graveolens flowering top
 rutin
-ruxience
-ruxolitinib
-ruxolitinib phosphate
-ryanodex dantrolene sodium
-rybelsus
-rybrevant
-rybrevant faspro
+ryaltris
+ryclora
+rylaze
 ryoncil
-rytary
-rytelo
+ryvent
 ryzumvi
-sabadilla
+sabal serrulata
+sabril
+sacrosidase
 sacubitril
+safinamide
+safinamide mesylate
 safyral
-sage
-sajazir
-salagen
-salicate
+salbutamol
 salicylic acid
-salicylic acid 10%
-salicylic acid 6% gel
+salinocaine
 salmeterol
 salmeterol diskus
+salmeterol hfa
 salmeterol xinafoate
-salsalate
-salvia officinalis
-salycim
-sambucus nigra
-sambucus nigra flowering top
-sampling system
-sandimmune
+samidorphan
+samidorphan l-malate
+samsca
+sancuso
 sandostatin
 sandostatin lar depot
-santonin
-santoninum
+sanguinaria canadensis
+sanguinaria canadensis root
 saphnelo
 saphris
+sapropterin
 sapropterin dihydrochloride
 sarclisa
-sarecycline hydrochloride
+sargramostim
 sarilumab
+savella
+saw palmetto
 saxagliptin
-saxagliptin hydrochloride
+saxagliptin hydrochloride dihydrate
+scabies lesion lysate (human)
 scandonest 3% plain
-scarzen
+scemblix
 scenesse
-schoenocaulon officinale seed
+scolopamine
 scolopamine transdermal system
 scopolamine
 scopolamine hydrobromide
 scopolamine trandermal system
-se-natal 19
-se-natal 19 chewable
-se-tan plus
+scopolamine transdermal system
+sebetralstat
 secale cornutum
-secretin human
+secnidazole
+secuado
 secukinumab
-segesterone acetate
 segluromet
+seladelpar
+seladelpar lysine
 selarsdi
+select-ob plus dha prenatal supplement plus dha
+selegiline
 selegiline hydrochloride
 selenious acid
 selenium
 selenium sulfide
+selenocysteine
 selexipag
-selexipag titration pack
 selpercatinib
-selumetinib
-selzentry
 semaglutide
-semecarpus anacardium juice
 semglee
-senna
-senna leaf
-sensipar
 sensorcaine
 sensorcaine mpf
-sensorcaine(r) (bupivacaine hci
-sepia
+sephience
 sepia officinalis juice
-septaforce
-septocaine
-serdexmethylphenidate
-serdexmethylphenidate chloride
-serevent diskus
+sepia.
+sepiapterin
 serine
-sernivo
+seroquel
 seroquel xr
+serrulata
 sertraline
 sertraline hcl
 sertraline hydrochloride
-setmelanotide
+sestamibi
+setlakin
 sevabertinib
+sevelamer
 sevelamer carbonate
-sevelamer carbonate for oral suspension
 sevelamer hydrochloride
 sevoflurane
-seysara
-sf 5000 plus
-sibeprenlimab
-signifor
-signifor lar
-siklos
+sezaby
+sharobel
 sildenafil
 sildenafil citrate
-sildenafil powder
 silicea
 silicon dioxide
 siliq
 silodosin
 siltuximab
+silvadene
 silver nitrate
-silver nitrate applicators
+silver nitrate applicator
 silver sulfadiazine
 simlandi
-simponi
-simponi aria
+simliya
+simpesse
+simulans
 simulect
 simvastatin
 sincalide
-sinecatechins
-sinuva
 siponimod
 sirolimus
+sirturo
 sitagliptin
+sitagliptin hydrochloride oral
 sitagliptin phosphate
-sivextro
+skyclarys
 skyla
 skyrizi
 skytrofa
-soaanz
+sls free - mint (5000 ppm)
+slynd
+sodium 1
 sodium acetate
 sodium acetate anhydrous
 sodium acetate injection
 sodium ascorbate
 sodium benzoate
 sodium bicarbonate
-sodium borate
-sodium carbonate
+sodium bicarbonate injection
+sodium bromide
+sodium cation
 sodium chloride
-sodium chloride for irrigation
+sodium chloride for oral solution
 sodium citrate
+sodium citrate blood-pack units
+sodium diethyl oxalacetate
 sodium ferric gluconate complex
 sodium ferric gluconate complex in sucrose
+sodium flouride
 sodium fluoride
-sodium fluoride 0.25 mg
-sodium fluoride 0.5 mg
-sodium fluoride 1 mg
-sodium fluoride 5000 ppm dry mouth
-sodium fluoride 5000 ppm fruit
-sodium fluoride 5000 ppm sensitive
-sodium fluoride 5000 ppm spearmint
+sodium fluoride 1.1%
+sodium fluoride 1.1% gel
+sodium fluoride 5000 plus
+sodium fluoride 5000 ppm
 sodium fluoride chewable
 sodium fluoride f 18
 sodium fluoride f-18
 sodium fluoride gel
-sodium fluoride toothpaste
-sodium fluoride1.1%
 sodium gluconate
-sodium glycerophosphate anhydrous
+sodium iodide i 123
+sodium iodide i 131
+sodium iodide i 131 diagnostic
+sodium iodide i-123
 sodium iodide i-131
 sodium lactate
-sodium lauryl sulfate
-sodium nitrite
 sodium nitroprusside
+sodium nitroprusside in 0.9% sodium chloride
 sodium oxybate
+sodium oxybates
 sodium phenylacetate
 sodium phenylbutyrate
+sodium phenylbutyrate tablets
 sodium phosphate
 sodium phosphates
+sodium picosulfate
 sodium polystyrene sulfonate
+sodium pyrophosphate
 sodium pyruvate
 sodium sulfacetamide
-sodium sulfacetamide 10% wash
-sodium sulfacetamide 8% sulfur 4% cleanser
+sodium sulfacetamide - sulfur wash
+sodium sulfacetamide 10 %
+sodium sulfacetamide 10 sulfur 2 cleanser
+sodium sulfacetamide 10 sulfur 2 cream
+sodium sulfacetamide 10 sulfur 5 cleanser
+sodium sulfacetamide 10%
+sodium sulfacetamide 8%
+sodium sulfacetamide 8% sulfur 4%
+sodium sulfacetamide 9 sulfur 4.5 wash
+sodium sulfacetamide 9%
+sodium sulfacetamide 9% - sulfur 4%
+sodium sulfacetamide 9% - sulfur 4.5% wash
+sodium sulfacetamide 9.8 %
 sodium sulfacetamide 9.8%
+sodium sulfacetamide 9.8% sulfur 4.8%
 sodium sulfate
 sodium sulfate anhydrous
 sodium tetradecyl sulfate
 sodium thiosulfate
 sofosbuvir
 sogroya
-solidago
+sohonos
+solanum dulcamara top
+soldium
+soldium lactate
+solidago virgaurea
 solidago virgaurea flowering top
+solifenacin
+solifenacin succiate
 solifenacin succinate
-soltamox
+solifenacin succinate tablets
+soliqua 100/33
+soliris
+soln
+solosec
+solriamfetol
 solu-cortef
 solu-medrol
+solu-medrol(r) methylprednisolone sodium succinat
+solucion
+solucion aditiva para plaquetas 3
+solucion intersol
 somapacitan
 somapacitan-beco
 somatrogon
 somatrogon-ghla
 somatropin
+somatuline depot
 somavert
+sonidegib
+sonidegib phosphate
 sorafenib
 sorafenib tosylate
 sorbitol
-sorilux
-sotagliflozin
+sorbitol-mannitol
+sotalol
 sotalol hydrochloride
 sotatercept-csrk
-sotorasib
-sotyktu
-sovuna
+sotradecol
+sotylize
+sovaldi
 soybean oil
-spigelia
-spigelia anth
-spigelia anthelmia
-spigelia marilandica root
+spectinomycin
+spesolimab
+spesolimab-sbzo
+spevigo
+spinkle
+spinosa
 spinosad
+spinraza
 spiriva handihaler
-spiriva respimat
 spironolactone
-spongia
-spongia officinalis skeleton
-sporanox
-spravato
 sprintec
-sprix
+spritam
 sprycel
-sronyx
 ssd cream
-standardized cat hair
+sski
+standardized bermuda grass
+standardized kentucky blue (june) grass
+standardized meadow fescue grass
+standardized mite dermatophagoides farinae
+standardized mite dermatophagoides pteronyssinus
+standardized mite mix dermatophagoides farinae
+standardized orchard grass
+standardized timothy grass
+stannous chloride
 stannous fluoride
-stannum metallicum
-starjemza
+stanous
+stanous fluoride
+staphylococcinum
+staphylococcus epidermidis
+staphylococcus haemolyticus
+staphylococcus simulans
+staphysagria
 steglatro
 steglujan
-stelara
-stem bromelain
-steqeyma
-sterile diluent
-sterile diluent for remodulin
 sterile water
-stiff joints hp
+sterile water for injection
+stimate
 stimufend
-stiolto respimat
-stoboclo
+stiripentol
+stivarga
 strattera
-strenza plus
+strensiq
 streptococcinum
 streptococcus pyogenes
-striverdi respimat
-strophanthus hispidus
-strophanthus hispidus seed
+streptokinase
+streptomycin
+streptomycin sulfate
+streptozocin
+stribild
+strong iodine solution
+strovite one caplets
 strychnos ignatii seed
-strychnos nux-vomica seed
-strychnosnux-vomicaseed
-sublocade
-suboxone
+styptstix
+subcitrate
+substrain
+subsulfate
+subvenite
+succiate
 succimer
-succinic acid
+succinat
+succinylcholine
 succinylcholine chloride
-succinylcholine chloride dihydrate
+sucraid
 sucralfate
 sucralfate oral
 sucralfate oral suspension
+sucroferric
+sucroferric oxyhydroxide
+sufentanil
 sufentanil citrate
+suflave
 sugammadex
 sugammadex sodium
-sugar-free
-sular
+suis
 sulbactam
-sulbactam for injection
 sulbactam sodium
-sulconazole nitrate
+sulfacetamide
 sulfacetamide sodium
 sulfadiazine
+sulfadoxine
+sulfameth/trimeth-ds
+sulfamethox-tmp ds
 sulfamethoxazole
+sulfamylon
 sulfasalazine
+sulfates
+sulfide
 sulfur
+sulfur 2 % cleanser
+sulfur 2% cleanser
+sulfur 4%
+sulfur 4% cleanser
+sulfur 4.5% cleanser
+sulfur 4.8 % cleanser
+sulfur 4.8%
 sulfur 4.8% cleanser
+sulfur 5 % cleanser
+sulfur 5%
+sulfur 5% cleanser
+sulfur 5% emollient cream
 sulfur hexafluoride
-sulfur sodium sulfacetamide - sulfur
+sulfur wash
 sulindac
+sulphadiazine
+sulphadoxine
+sulphamethoxazole
 sulphur
 sulphur hexafluoride
+sulphuris
+sumansetron
 sumatriptan
 sumatriptan succinate
-sumaxin cleansing pads
-sumaxin cp
+sunirine
+sunitinib
 sunitinib malate
-supprelin la
-survanta
+sunlenca
+sunosi
+suprane
+suprarenalis
+suprep bowel prep
 sus scrofa adrenal gland
-sus scrofa cerebrum
-sus scrofa hair
+sus scrofa cartilage
+sus scrofa ovary
 sus scrofa pituitary gland
 sus scrofa placenta
-sus scrofa skin
-susscrofahair
-susscrofaskin
+sus scrofa thyroid
+sus scrofa umbilical cord
+susp
+sutab
 sutent
-sutimlimab
-sutimlimab-jome
 suvorexant
+suxamethonium
 suzetrigine
+swabs
 syeda
-syfovre
 sylvant
-symbicort
+sylvatica
+symbravo
 symdeko
+symfi
 symlinpen
-sympazan
-symphytum
-symphytum officinale.
-synalar
-synjardy
+symphytum officinale
+symplocarpus foetidus root
+symtuza
+symvess
+synagis
+syndros
+synjardy xr
 syntherma plus
 synthroid
-syphilinum
-syzygium cumini seed
-syzygium jambolanum
+tabrecta
+tacalcitol
+tachosil
 tacrolimus
+tacrolimus anhydrous
+tacrolimus extended-release capsules
 tadalafil
-tafasitamab
-tafasitamab-cxix
+tafamidis
+tafamidis meglumine
 tafinlar
-tagraxofusp
-takhzyro
+tafluprost
+tafluprost ophthalmic
+tafluprost opthalmic
+tagitol v
+tagrisso
 talazoparib
 talazoparib tosylate
-taletrectinib
-taletrectinib adipate
-taliglucerase alfa
-talimogene laherparepvec
-talquetamab
+talicia
 taltz
-talvey
 talzenna
 tamiflu
+tamoxifen
 tamoxifen citrate
+tamsulosin
 tamsulosin hydrochloride
-tanlor
 tapentadol
 tapentadol hydrochloride
-taperdex 12-day
-taperdex 6-day
-tarentula cubensis
-targadox
 targretin
-tarina 24 fe
-tarina fe 1/20 eq
-tarlatamab-dlle
 tarpeyo
-tascenso odt
 tasigna
+tasimelteon
 tasmar
 taurine
+taurolidine
 tauvid
 tavaborole
+tavaborole topical solution
+tavalisse
 tavneos
-taytulla
 tazarotene
-tazemetostat
-tazemetostat hydrobromide
-tazicef
 tazobactam
 tazobactam sodium
-tazorac
-tazverik
-tbo-filgrastim
 tc 99m medronate
+tecentriq
+tecentriq hybreza
+tecfidera
+technelite
+technescan
+technescan hdp
+technescan mag3
+technescan pyp
+technescan tc 99m mertiatide
+technetium tc 99m medronate
+technetium tc 99m mertiatide
+technetium tc 99m oxidronate
+technetium tc 99m pyrophosphate
 technetium tc 99m sestamibi
 technetium tc 99m sulfur colloid
-technetium tc-99m exametazime
+technetium tc-99m
 technetium tc-99m medronate
 technetium tc-99m pyrophosphate
 technetium tc-99m sestamibi
+technetium tc-99m sodium pertechnetate
+technetium tc99m generator
 technetium tc99m pyrophosphate
-teclistamab
-teclistamab-cqyv
-tecovirimat
-tecovirimat monohydrate
-tecvayli
-tedizolid phosphate
+teduglutide
 teflaro
+teglutik
+tegretol
+tegretol xr
+tekturna
+telavancin
+telavancin hydrochloride
+telisotuzumab
 telisotuzumab vedotin
 telmisartan
+telotristat
 telotristat ethyl
 temazepam
-temazepam civ
+temodar
 temozolomide
 temsirolimus
 temsirolimus injection
-tencon
+tenecteplase
+tenofovir
+tenofovir alafenamide
+tenofovir alafenamide fumarate
 tenofovir disoproxil fumarate
-tenofovir disoproxil fumarate tablets
-tenoretic
-tenormin
 tepadina
-tepezza
 teplizumab
 teplizumab-mzwv
-teprotumumab
+tepmetko
+tepotinib
+tepotinib hydrochloride
 terazosin
 terazosin hydrochloride
 terbinafine
 terbinafine hydrochloride
 terbinafine tablets 250 mg
+terbutaline
 terbutaline sulfate
 terconazole
-terconazole vaginal cream 0.8%
 teriflunomide
 teriparatide
-teriparatide acetate
-terrell
-testim
-testone cik
-testopel
+terizidone
+terlipressin
+terlivaz
+tesamorelin
+tesirine
 testosterone
 testosterone cypionate
-testosterone enanthate
-testosterone gel
-testosterone undecanoate
 tetrabenazine
 tetracaine
-tetracaine hcl
 tetracaine hydrochloride
+tetracycline
 tetracycline hydrochloride
 tetradecyl hydrogen sulfate (ester)
-tetraferric tricitrate decahydrate
-tetrofosmin
-teucrium marum
-teucrium marum.
+tetrafluoroborate
+tetrahydrochloride
+tetrakis(2-methoxyisobutylisocyanide)copper(i) tetrafluoroborate
+tetraxetan
 tevimbra
 tezacaftor
-tezruly
 thalidomide
-thalomid
+thallium
+thallium metallicum
+thallous chloride
+thallous chloride tl 201
+thallous chloride tl-201
 tham
+theo-24
 theophylline
 theophylline (anhydrous)
 theophylline anhydrous
-thiamin
 thiamine
+thiamine hcl
 thiamine hydrochloride
-thiamine hydrochloride injection
 thiamine mononitrate
-thioguanine
-thiola
-thiola ec
+thiopental
+thioridazine
+thioridazine hydrochloride
+thiosulfate
 thiotepa
 thiothixene
 threonine
-thrombin topical recombinant
-thuja occ.
+thrombin human
 thuja occidentalis
 thuja occidentalis leafy twig
-thymoglobulin
-thyquidity
-thyrdoidinum
-thyrogen
-thyroidinum (suis)
-thyroidinum.
-thyrotropin alfa
-tiadylt er
+tiagabine
 tiagabine hydrochloride
+tiazac extended release
 ticagrelor
-tigan
+tice bcg
 tigecycline
-tiger supply inc apf
 tiglutik
 tikosyn
+tildrakizumab
+tildrakizumab-asmn
 tilia fe
-timolol gfs
+timolol
+timolol anhydrous
+timolol hemihydrate
 timolol maleate
-timolol maleate ophthalmic gel forming
+timolol maleate ophthalmic
 timolol maleate ophthalmic gel forming solution
+timolol maleate ophthalmic gel forming solution 0.25%
+timolol maleate ophthalmic gel forming solution 0.5%
 timolol maleate ophthalmic solution
 timolol maleate preservative free
-timoptic
 timoptic in ocudose
-timoptic-xe
+tinctorum
+tindazole
 tinidazole
+tioguanine
 tiopronin
+tiotropium
 tiotropium bromide
-tiotropium bromide anhydrous
-tiotropium bromide inhalation spray
 tiotropium bromide monohydrate
-tirbanibulin
+tipiracil
+tipiracil hydrochloride
+tirofiban
 tirofiban hydrochloride
+tirosint
+tirosint sol
 tirzepatide
 tislelizumab
 tislelizumab-jsgr
-tissue aid
+tissueblue
+titanium dioxide
 tivicay
-tivicay pd
-tivozanib
-tivozanib hydrochloride
+tividenofusp
+tividenofusp alfa
+tividenofusp alfa-eknm
+tizandine
 tizanidine
 tizanidine hcl
 tizanidine hydrochloride
+tizanidne
 tizanidne hydrochloride
-tobradex st
+tl 201
+tnkase
+tobi
+tobi podhaler
 tobramycin
-tobramycin / dexamethasone
-tobramycin inhalation solution
-tobramycin inhalation solution pak
 tobramycin ophthalmic solution
+tobramycin solution
 tobramycin sulfate
 tobrex
 tocilizumab
+tocilizumab-aazg
+tocopheryl
+tocopheryl acid succinate
 tofacitinib
 tofacitinib citrate
-tolak
+tofacitinib xr
+tofersen
+tofidence
 tolcapone
-tolmetin sodium
-tolnaftate
-tolsura
 tolterodine
 tolterodine tartrate
 tolvaptan
-tonmya
-topamax
-topical apf fluoride gel
+toothpaste
 topiramate
-topiramate extended-release
+topiramate spinkle
 topotecan
 topotecan hydrochloride
 toprol xl
+torasemide
+toremifene
 toremifene citrate
-toripalimab
-toripalimab-tpzi
-toronova ii suik
 toronova suik
-torpenz
 torsemide
+torvex
 tosymra
-toujeo
+total fem bal
+total tri-estro
+totalis
 toujeo max
-tovet (emollient formulation)
+toviaz
+tovorafenib
 toxicodendron pubescens leaf
-tpoxx
 trabectedin
+trace elements 4
+trace elements 5
 trace elements injection 4
+tracleer
+tradipitant
+tradjenta
 tralement
+tramadol
 tramadol hcl
 tramadol hcl er
 tramadol hydrochloride
-tramadol hydrochloride extended-release
+tramadol/apap
 trametinib
 trametinib dimethyl sulfoxide
 trandolapril
+trandolapril tablets
+tranexamic
 tranexamic acid
 tranexamic acid in sodium chloride
+transparent dressing
 tranylcypromine
 tranylcypromine sulfate
 trastuzumab
-trastuzumab deruxtecan
-trastuzumab-anns
 trastuzumab-dkst
 trastuzumab-qyyp
-trastuzumab-strf
-travasol
 travatan z
 travoprost
+travoprost (isomer free)
+travoprost intracameral
 travoprost ophthalmic
 travoprost ophthalmic solution
+travoprost ophthalmic soluton
 trazimera
+trazodone
 trazodone hcl
 trazodone hydrochloride
-treanda
-tremelimumab
-tremfya
-treponemic skin canker human
+trazodone hydrochloride oral
+trelegy ellipta
+treosulfan
 treprostinil
-treprostinil sodium
 tresiba
 tretinoin
-tretinoin (microsphere)
-tretinoin 0.025%
-tretinoin cream
-trexall
-trezix
-tri femynor
-tri-lo-marzia
-tri-lo-mili
-tri-lo-sprintec
-tri-luma
-tri-mili
-tri-nymyo
+tretinoin gel 1.2%/0.025%
+tri-estarylla
+tri-linyah
+tri-lo- estarylla
 tri-sprintec
-tri-vite drops with fluoride
-tri-vylibra
-tri-vylibra lo
+triadermex
+triamcinolone
 triamcinolone acetonide
-triamcinolone acetonide cream
+triamcinolone acetonide cream 0.1%
+triamcinolone acetonide extended-release injectable suspension
 triamcinolone acetonide ointment usp
+triamcinolone hexacetonide
 triamterene
 triamterene capsules
+triasil
 triazolam
-tribasic calcium phosphate
-tribenzor
 tricitrasol
-tridacaine xl
-tridesilon cream
+tricitrates
+triclabendazole
+tricor
+trientine
 trientine hydrochloride
 trientine tetrahydrochloride
-triesence
-trifarotene
+trifenatate
+trifluoperazine
 trifluoperazine hydrochloride
 trifluridine
 trigger kit
-trigger kit ii
-triheptanoin
+trihexyphenidyl
 trihexyphenidyl hydrochloride
+triiodide
 trijardy xr
 trikafta
 trileptal
-triloan ii suik
 triloan suik
-trilocaine
 trilona
-trilyte
 trimbow
+trimethobenzamide
 trimethobenzamide hydrochloride
 trimethoprim
 trimethoprim sulfate
+trimipramine
 trimipramine maleate
-trimo san
-trisenox
+trintellix
+trionex
+triptodur
+triptorelin
 trisodium citrate dihydrate
-triumeq
-triumeq pd
-trofinetide
+tristart dha
+trokendi xr
 tromethamine
-trophamine
 tropicamide
+tropisetron
+trospium
 trospium chloride
 trospium chloride er
 trubrexa
-truguard 5000
-trulance immediate release
+trudhesa
 trulicity
-trutakna
-truxima
+truvada
+trypan blue
 tryptophan
 tryptyr
 tryvio
 tuberculin purified protein derivative
-tuberculinum
-turalio
-turmeric
+tubersol
+tucatinib
+tukysa
 turqoz
+tuxarin
 twirla
-twyneo
+tybost
+tyenne
 tygacil
+tykerb
+tymlos
 tyrosine
-tyruko
-tyrvaya
-tyvaso
-tyvaso dpi
+tysabri
+tyzavan
 tzield
+ubiquinone
+ublituximab
 ubrelvy
 ubrogepant
 uceris
-udenyca
+udsx medicated system
+udsxmp medicated system
+ulex europaeus
+ulex europaeus flower
+ulipristal
+ulipristal acetate
+uloric
 ultane
-ultiva
+ultra-technekow v4
+ultramicrosize
 ultramicrosize griseofulvin
+ultramicrosize griseofulvin tablets
+ultratag rbc
 ultravist
+umbellata
+umbilicalis
 umeclidinium
 umeclidinium bromide
 unasyn
-unituxin
-unloxcyt
+unithroid
 unspecified form
 upadacitinib
-uplizna
+upneeq
 uptravi
-uracin 20%
+uptravi titration pack
 urea
-urea 20%
-urea 39.5% with 2% salicylic acid
+urea 39% cream
+urea 39.5%
 urea 40 percent
+urea 40.5 cream
+urea 41
+urea 41%
 urea cream 40 percent
 urea cream 40%
-urea cream 41%
-uribel tabs
-urimar-t caps
+uredex
+urevex
 urocit-k
 urogesic blue
-uroxatral
-ursadiol
-urso 250
-urso forte
 ursodiol
-ursosiol
+ursodiol 200 mg
+ursodiol 400 mg
+urtica dioica
+usodiol
 ustekinumab
+ustekinumab-aauz
 ustekinumab-aekn
-ustekinumab-auub
-ustekinumab-hmny
-ustekinumab-srlf
-ustekinumab-stba
-ustekinumab-ttwe
-vabrinty
-vadadustat
-vafseo
+uva-ursi
+uzedy
+vabomere
+vaborbactam
+vaccinia immune globulin intravenous (human)
 vagifem
+vagizole
+valaciclovir
 valacyclovir
 valacyclovir hydrochloride
-valeriana officinalis whole
+valbenazine
+valbenazine tosylate
+valchlor
+valcyte
 valganciclovir
 valganciclovir hydrochloride
-valganciclovir hydrochloride for oral
+valganciclovir hydrochloride powder
 valine
+valium
+valproate
 valproate sodium
 valproic
 valproic acid
 valrubicin
 valrubicin intravesical solution
 valsartan
-valsartan sacubitril
-valstar
-valtoco
+valsartan oral
 valtrex
-vamorolone
-vanadyl sulfate
-vancocin
+vancomycin
 vancomycin hydrochloride
-vandetanib
-vanflyta
 vanos
-vanrafia
 vanzacaftor
 vardenafil
 vardenafil hydrochloride
 vardenafil hydrochloride trihydrate
 varenicline
 varenicline tartrate
+varibar nectar
+varibar thin liquid
 varophen
-vaseretic
+varubi
+vascepa
 vasopressin
 vasopressin in 0.9% sodium chloride
 vasostrict
-vasotec
-vectibix
+vecamyl
+vecuronium
 vecuronium bromide
-vegzelma
-velcade
-veligrotug
-velsipity
+vedolizumab
+vedotin
+veklury
+velaglucerase
+velaglucerase alfa
+veletri
+velivet triphasic regimen
+velmanase
+velmanase alfa-tycv
+velpatasvir
+velphoro
+veltassa
+vemlidy
 venclexta
 venetoclax
-venexa
-venexa fe
 venlafaxine
-venlafaxine besylate monohydrate
 venlafaxine hcl
 venlafaxine hcl er
 venlafaxine hydrochloride
-venngel ii
+venngel one
 venofer
 venofer (iron sucrose)
+venoforce ii
 ventolin hfa
-ventrixyl
-ventrixyl fe
-veopoz
 veozah
+vepdegestrant
+vepesid
+veppanu
+verapamil
 verapamil hci
 verapamil hydrochloride
-veratrum vir
-veratrum viride root
-veregen
 vericiguat
-verkazia
-vermox
 verquvo
-versacloz
-verteporfin
-verteporfin for injection
 verzenio
-vesicare
-vestronidase alfa
-vevye
+vesicatoria
 vfend
 viagra
-vibegron
-viberzi
+vibativ
+viburnum opulus
+viburnum opulus bark
 victoza
-vidaza
+vienva
 vigabatrin
+vigabatrin for oral solution
 vigadrone
-vigafyde
-vigamox
-vijoice
+viibryd
+vilanterol
+vilanterol ellipta
 vilanterol trifenatate
+vilazodone
 vilazodone hydrochloride
-vimseltinib
-vinblastine sulfate
-vinca minor
+vilobelimab
+viloxazine
+viloxazine hydrochloride
+viltepso
+viltolarsen
+vimizim
+vimpat
+vinblastine
+vincristine
 vinorelbine
 vinorelbine tartrate
 viokace
-viorele
-viracept
-visudyne
-vitalipid n
-vitalux
+vipera berus
+vipera berus venom
+vipivotide
+viread
+virexa
+virgaurea
+virginiana
+visionblue
+visipaque
+vismodegib
+vitafol one
+vitafol ultra
+vitafol-ob plus dha prenatal supplement plus dha
+vitamin
 vitamin a
 vitamin a acetate
 vitamin a palmitate
+vitamin b complex
+vitamin b1
 vitamin b12
 vitamin b6
 vitamin c
-vitamin c 10 %
-vitamin c 15 %
 vitamin d
 vitamin d3
-vitamin e
 vitamin k1
+vitamin k1 - phytonadione
+vitamin k1 phytonadione
 vitamin mineral supplement
 vitamin- mineral omega-3 supplement
 vitamins
+vitavera
 vitrakvi
-vitramyn
-vitranol
-vitranol fe
-vitrexate
-vitrexate fe
-vitrexyl
-vitrexyl plus iron
-vivelle-dot
 vivimusta
-vizamyl
-vizz
-vocabria
-vonoprazan fumarate
-voquezna
-voquezna dual pak
-voquezna triple pak
+vivitrol
+vizimpro
+volnea
+vonjo
 voriconazole
-vorinostat
-vowst
-voxelotor
-voyxact
-vraylar
+voriconazole injection
+vortioxetine
+vortioxetine hydrobromide
+vosevi
+vosoritide
+voxilaprevir
+voxzogo 0.4mg
+voxzogo 0.56mg
+voxzogo 1.2mg
+voydeya
+vpriv
 vueway
-vutrisiran
-vutrisiran sodium
-vyalev
-vyfemla
-vykoura
-vyleesi
-vylibra
-vyloy
-vyzulta
-wainua
+vulgaris
+vumerity
+vusion
+vyepti
+vyndamax
+vyndaqel
+vyondys 53
+vyscoxa
+vytone
+vyvanse
+vyxeos
 wakix
 warfarin
 warfarin sodium
-waskyra
-water-miscible retinyl palmitate
-wayrilz
-welireg
-wellbutrin sr
-wentworth alcohol free
-wezlana
+water injection
+wegovy
+wera
+white petrolatum
+widaplik
 winrevair
-withania somnifera root
-wixela inhub
-wood creosote
-wymzya fe
-wynzora
-wyost
-xalatan
-xalix
+xadago
 xalkori
 xanax
-xanax xr
 xanomeline
 xarelto
+xatmep
+xcopri
+xcopri maintenance pack
+xcopri titration pack
+xe-133
 xeljanz
 xeljanz xr
-xenon xe 129 hyperpolarized
-xenon xe-129
-xenoview
-xenpozyme
+xeloda
+xelpros
+xenazine
+xenical
+xenleta
+xenon
+xenon xe-133
 xeomin
-xerese
 xermelo
-xgeva
 xhance
-xiaflex
-xifaxan
-xipere
+xiclofen
+xifyrm
+xigduo xr
+xocova
+xofigo
+xofluza
+xolair
+xolair pfs
+xopenex hfa
 xospata
-xtampza er
 xtandi
-xtoro
-xtrenbo
-xylocain (lidocaine hcl )
+xulane
+xyliderm
 xylocaine
-xylocaine (lidocaine hcl )
 xylocaine mpf
-xylocaine- mpf (lidocaine hcl )
-xyosted
+xylocaine-mpf with epi
+xylometazoline
+xyrem
+xywav
+xyzal
+yartemlea
 yasmin
 ycanth
+yervoy
+yesafili
 yesintek
-yin-yang balance
+yeztugo
+yondelis
 yonsa
 yorvipath
-yuflyma
+yulithira
+yupelri
 yusimry
-yutrepia
+yutiq
 yuvafem
+yuvezzi
 yuviwel
+zafemy
 zafirlukast
 zaleplon
 zaltrap
+zamikeracel
 zanaflex
 zanamivir
+zanidatamab
+zanidatamab-hrii
+zanosar
 zanubrutinib
+zap apf
+zap neutral
 zarontin
-zarxio
 zavegepant
 zavegepant hydrochloride
+zavesca
 zavzpret
+zaynich
+zegalogue
+zegerid
 zejula
+zelsuvmi
 zelvysia
 zembrace symtouch
-zemdri (plazomicin)
 zemplar
 zenatane
-zenchent fe
+zenocutuzumab
 zenpep
+zenzedi
+zepatier
 zepbound
 zepbound kwikpen
-zeposia 7-day starter pack
-zerbaxa
-zerviate
-zestoretic
-zestril
-ziagen
+zepzelca
+zevaskyn
 ziana
-zidesamtinib
+ziconotide
+ziconotide acetate
+zidebactam
+zidebactam dihydrate
 zidovudine
-ziextenzo
+ziftomenib
+ziihera
 zileuton
-zilxi
-zimhi
+zilretta
 zinc
 zinc acetate
-zinc ascorbate
+zinc chloride
 zinc citrate
 zinc gluconate
-zinc glycinate
 zinc oxide
 zinc picolinate
 zinc sulfate
+zinc sulfate anhydrous
+zinc sulfate heptahydrate
 zinc sulfate injection
-zincum gluconicum
-zinum metallicum
+zinplava
 ziprasidone
 ziprasidone hcl
 ziprasidone hydrochloride
 ziprasidone mesylate
-zipsor
-zirabev
-zirgan
 zithromax
-zituvimet
-zituvimet xr
+zituvio
 ziv-aflibercept
-zokinvy
-zolbetuximab
+zoladex
+zoledronic
 zoledronic acid
 zolgensma
-zolinza
+zolmiptriptan
 zolmitriptan
 zolmitriptan od
 zolpidem
 zolpidem tartrate
 zolpidem tartrate sublingual
-zomig
-zonegran
+zongertinib
+zonisade
 zonisamide
-zooby gator gum
-zooby growlin grrrape
-zooby happy hippo cake
-zooby turtle melon
-zopapogene imadenovec
+zorcaine
 zortress
-zoryve
 zosyn
-zosyn in galaxy containers
 zovia 1/35
 zovirax
+ztlido
 zubsolv
+zumandimine
+zuranolone
+zurnai
+zurzuvae
 zyclara
-zycubo
-zyflo
-zykadia
-zylet
-zymfentra
+zydelig
 zynlonta
-zynyz
+zyogreen
 zypitamag
-zytiga
+zyprexa
+zyprexa intramuscular
+zyprexa relprevv
+zyprexa zydis
 zyvox

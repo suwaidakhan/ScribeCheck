@@ -309,3 +309,93 @@ ask the labeller questions the screen does not contain the answer to.
 - [x] A3 W3 stratified sampling with weights, not just a disclosure
 - [x] A4 W6 NO-ERROR added, and DOSE-MISS which was missing entirely
 - [x] A5 regenerated, browser-verified, both counts re-measured
+
+---
+
+## Phase A2, opened 2026-08-14 by Suwaid labelling rows 1 to 4
+
+Phase A was declared done and he opened the sheet. Rows 1, 3 and 4 each exposed
+a defect that 267 green tests did not, which is the third time this session that
+the artifact was broken while the code that builds it was correct.
+
+Ordering changed on his challenge: he asked why W4 was not being done first.
+He was right. W11 counts drug mentions with the same lexicon, and the M2
+denominator rests on it, so running Phase B first computes drug precision and
+drug accuracy against a lexicon that is about to change. His ordering computes
+each number once. Phase C therefore splits: W4 is pre-labelling, W7 and W8 stay
+post-labelling because they need his labels to exist.
+
+### What rows 1 to 4 exposed
+
+- **W16, new. Collapsed transcripts are labelled per entity.** Row 1: the whole
+  hypothesis was `so radiation of other force damaged tubular fracture of lotr
+  is formula`. 118 of 2,000 transcripts score WER at or above 0.8; they produce
+  57 percent of DOSE-MISS and 25 percent of DRUG-DEL, and 42 of the 150 sheet
+  rows. Clip `8132758125fa0e31` collapsed for all five providers and contributed
+  10 rows on its own, 6.7 percent of the labelling budget.
+- **W5 was resolved wrongly.** It was closed as "MQM assigns one category per
+  span, leave it". That answered a question he had not asked. He asked how to
+  record several errors in one clip, and the sheet caps what he can record at
+  what the detector proposed. Row 3: `glargine` became `nicaragine`, an insulin
+  mangled into a non-word, and it produced no row at all, while the only row
+  offered was a false DOSE-MISS on `22 units` that the hypothesis contains
+  twice. On that clip the eval scored one error that is not real and missed the
+  one that is.
+- **W4 is larger than the 3 percent measured.** 2,363 of 4,865 lexicon entries
+  are multi-word. `insulin glargine` is present; `glargine` and `insulin` are
+  not. 131 clips contain a component word whose only entry is a longer phrase.
+- **New, unnamed in the PRD: non-English hallucination.** Row 4 is Gemini
+  emitting `Me le gusta oír sin titubear. Juan, ¿me hablas?` against a
+  levothyroxine script. Gemini has 9 non-ASCII outputs, Whisper 2, the other
+  three zero.
+
+### Decision taken, collapsed transcripts
+
+Keep them in the eval, take them out of the labelling. Collapse rate is a
+provider finding in its own right: AAI 0.5 percent, dg-medical 5.5, Gemini 6.8,
+dg-general 7.2, Whisper 9.5, a 19-fold spread. It is flat across accent tiers
+(6.4 / 5.2 / 6.2), so it is a robustness result and not an equity one. Entity
+metrics report with and without. What he does not do is click a dropdown 42
+times to record something the WER column already holds.
+
+### Tracks, run in parallel on his instruction
+
+1. **findings.py, me.** `COLLAPSE_WER`, `collapse_finding`, `FINDING_KINDS`,
+   and `findings_for` short-circuiting a collapsed transcript to one finding.
+2. **lexicon.py, agent.** Single-token generic components under the existing
+   dictionary and blocklist filters, plus a committed INN supplement. Must
+   re-measure the top newly-matched terms against real transcripts, the D008
+   method that caught `pain` in 91 clips.
+3. **failures.py, agent.** Group the sheet by clip and provider, add an
+   "add an error I found" control that is not gated on the detector, add the
+   `ASR-COLLAPSE` code, carry a `source` column of `detector` or `human`.
+
+### Definition of done, phase A2
+
+- A collapsed transcript produces exactly one sheet row. Measured: rows drawn
+  from transcripts at WER >= 0.8 falls from 42 of 150 to at most one per
+  transcript.
+- `glargine`, `insulin`, `paracetamol`, `chloroquine` and `rifampicin` are all
+  in the lexicon, and the top 30 newly-matched terms against real transcripts
+  contain no ordinary English word.
+- He can add an error the detector never proposed, it survives a reload, and it
+  exports with `source=human`.
+- Every kind in `FINDING_KINDS` has a selectable code.
+- Full suite green AND the page driven in a browser: label a detector row, add
+  a human row, reload, export, read the CSV.
+
+### Progress
+
+- [x] A2-1 W16 measured: 118 collapsed transcripts, 42 of 150 rows, clip
+      `8132758125fa0e31` alone contributing 10
+- [x] A2-2 collapse rate by provider and tier computed, 19-fold spread, flat
+      across tiers
+- [x] A2-3 non-English hallucination counted per provider
+- [x] A2-4 W16 written into the PRD with options and a recommendation
+- [x] A2-5 `findings.py`: collapse short-circuit, RED confirmed then green
+- [x] A2-6 lexicon rebuilt and re-measured: 4,865 to 5,347 terms, 145 to
+      175 mentions, all five probes present, six false terms blocklisted
+- [x] A2-6b W9 promoted out of phase B: 38 of 118 collapses were false,
+      caused by transcribed punctuation. `strip_spoken_punctuation` added.
+- [ ] A2-7 labelling page grouped, add-an-error control, ASR-COLLAPSE
+- [ ] A2-8 regenerate, re-measure, browser-verify, commit

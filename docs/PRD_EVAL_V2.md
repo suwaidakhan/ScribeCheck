@@ -1,11 +1,15 @@
 # PRD: evaluation harness v2
 
-Status: proposed, nothing implemented. No code has been changed.
+Status, 2026-08-14: W1, W2, W3, W6, W9, W16 implemented. W4 implemented as
+components plus a committed INN list. W5 reopened after being closed wrongly,
+and implemented. W7, W8, W10 to W15 and W17 open. Each section below carries its
+own outcome where one exists.
 
 Written after Suwaid sat down to label 100 failures and found four defects in
-the first twelve rows. Every weakness below is evidenced against the real data
-in this repo, with the blast radius measured rather than estimated, and options
-ranked by cost.
+the first twelve rows, then reopened it a day later and found four more in rows
+1 to 4. Every weakness below is evidenced against the real data in this repo,
+with the blast radius measured rather than estimated, and options ranked by
+cost.
 
 **The one-line summary.** The measurement pipeline is sound and the transcripts
 are real. The layer between the measurement and the human, meaning what gets
@@ -438,6 +442,120 @@ reader who knows NCC MERP to call it a category error.
 
 ---
 
+## W16. A collapsed transcript is labelled as several entity errors
+
+**Severity: high. It is the largest single distortion left in the sheet, and it
+was found by Suwaid opening row 1.**
+
+**Observed.** Row 1 shows the reference `cyclafem 7 7 7 ethinyl estradiol
+norethindrone 0.035 mg 0.035 mg 0.035 mg 0.5 mg` against the hypothesis `so
+radiation of other force damaged tubular fracture of lotr is formula`. Nothing
+survived. The row asks which of the ten codes describes a missing `0.035 mg`,
+and the honest answer is that none of them do, because the dose did not fail.
+The transcription did.
+
+**Blast radius, measured.** 118 of 2,000 transcripts score WER at or above 0.8.
+That is 5.9 percent of the corpus, and they generate a wildly disproportionate
+share of the findings:
+
+| Class | From collapsed transcripts | Total | Share |
+|---|---|---|---|
+| DOSE-MISS | 52 | 92 | 57% |
+| DRUG-DEL | 41 | 163 | 25% |
+| NEG-FLIP | 10 | 38 | 26% |
+| DOSE-UNIT | 1 | 8 | 13% |
+| DRUG-SUB | 1 | 5 | 20% |
+| DOSE-VAL | 0 | 22 | 0% |
+
+42 of the 150 sheet rows come from a collapsed transcript, drawn from 34
+distinct clip and provider pairs.
+
+**The worst case is row 1 itself.** Clip `8132758125fa0e31` collapsed for all
+five providers, WER 0.850 to 0.925, with all five doses lost every time. It
+produces 10 of the 150 sheet rows on its own, 6.7 percent of the labelling
+budget, and every one of those rows asks the same question about the same
+recording.
+
+**What this does to the open DOSE-MISS question.** The PRD already records a
+suspicion that DOSE-MISS is substantially false because of tokenisation
+artefacts like `2 l` against `2 lnc`. That is real but secondary. The larger
+effect is that the majority of DOSE-MISS is a proxy for total transcription
+failure, so the second largest class in the taxonomy is mostly not measuring
+doses.
+
+**Precedent.** MQM handles this at the segment level rather than the span
+level: output that is unusable as a whole is annotated once and does not
+accumulate per-span penalties, which would otherwise let one broken segment
+dominate a system score. Confidence: moderate on the exact category naming,
+high on the principle.
+
+**Options.**
+
+1. Add an `ASR-COLLAPSE` code, and collapse the rows so one failed transcript
+   contributes one sheet row instead of ten. The entity metrics keep counting
+   the losses, since a drug lost to a collapse is still a drug lost, but the
+   human labels the event once. **Recommended.**
+2. Add the code and leave the rows as they are. Cheapest, and it leaves 42 of
+   150 rows asking unanswerable questions.
+3. Exclude collapsed transcripts from the entity metrics entirely, and report
+   the collapse rate as its own headline number. Cleanest statistically,
+   changes what drug and dose accuracy mean, and needs Suwaid's call.
+
+**Decided, 2026-08-14, Suwaid.** Option 1. Collapsed transcripts stay inside the
+eval and leave the labelling. The collapse rate is a provider result on its own:
+AAI 0.5 percent, dg-medical 5.5, Gemini 6.8, dg-general 7.2, Whisper 9.5. A
+19-fold spread, and flat across accent tiers at 6.4 / 5.2 / 6.2, so it is a
+robustness finding rather than an equity one. Entity accuracy is reported with
+and without them, because a drug lost to a collapse is still lost and dropping
+the worst 5.9 percent would flatter every provider.
+
+**Implemented, measured.** `findings_for` short-circuits a transcript at
+WER >= 0.8 to a single `ASR-COLLAPSE` finding:
+
+| Class | Before | After | Removed as collapse artefact |
+|---|---|---|---|
+| DRUG-DEL | 163 | 122 | 41 |
+| DOSE-MISS | 92 | 40 | 52 |
+| NEG-FLIP | 38 | 28 | 10 |
+| DOSE-VAL | 22 | 22 | 0 |
+| DOSE-UNIT | 8 | 7 | 1 |
+| DRUG-SUB | 5 | 4 | 1 |
+| ASR-COLLAPSE | 0 | 118 | new |
+
+DOSE-MISS loses 57 percent of its population, which settles the open question
+about that class: the tokenisation artefacts are real but secondary, and the
+larger effect was that the second largest class in the taxonomy was mostly
+measuring total transcription failure. The worst clip drops from 10 sheet rows
+to 5, one per provider, which is correct because each provider failing the same
+recording is its own observation. Sampling weights still recover the population
+totals exactly.
+
+---
+
+## W17. Gemini transcribes into the wrong language
+
+**Severity: moderate, and it is a distinct failure mode rather than a collapse.**
+
+**Observed.** Row 4 of the sheet. Reference `9 levothyroxine 50 mcg tablet sig
+one one tablet po`, and Gemini returned `Me le gusta oír sin titubear. Juan,
+¿me hablas?`. Fluent Spanish, correctly accented, with no relation to the audio.
+
+**Counts.** Outputs containing non-ASCII characters: Gemini 9, Whisper 2, and
+zero for AssemblyAI, dg-general and dg-medical. The Spanish case is the clearest
+but the class is language identification failing on accented English.
+
+**Why it matters separately from W16.** These score as collapses on WER and are
+already caught by that threshold, so nothing is missed. What is lost is the
+explanation. "Whisper and Gemini collapse on 7 to 10 percent of clips" and
+"Gemini sometimes decides the speaker is Spanish" are different findings for a
+buyer, and the second is the more alarming one in a clinical setting because the
+output is fluent and confident.
+
+**Option.** Report the count in RESULTS as a named sub-class of collapse. No
+code change; the detector already routes these to `ASR-COLLAPSE`.
+
+---
+
 ## What the research says the project already gets right
 
 Recorded so the PRD is not only a list of faults.
@@ -525,3 +643,46 @@ number exists.
 3. Re-label from scratch after the fixes, or keep any labels already recorded?
    Given W2 affects 42 rows, anything labelled before the fix should probably be
    redone.
+
+---
+
+## W9 was promoted out of Phase B, 2026-08-14
+
+W9 was filed as a reporting question: show one WER or two. It stopped being a
+reporting question the moment W16 made WER a classifier.
+
+**Measured.** Of the 118 transcripts at WER 0.8 or above, **38 are not
+collapses**. Their WER is inflated by punctuation the speaker voiced and the
+provider transcribed. A Rituxan line scored 1.62 and scores 0.38 once the
+punctuation words are removed. The clip that started this thread, `14 glargine
+sig 22 units at bedtime` against `nicaragine sig twenty two open bracket twenty
+two close bracket units at bedtime`, scored 1.14.
+
+**Why that was serious.** A false collapse hides its own contents. That clip
+holds a genuine drug deletion, `glargine` heard as `nicaragine`, and it was
+about to be buried inside a single ASR-COLLAPSE row rather than labelled as the
+drug failure it is. The fix that was meant to stop the sheet wasting attention
+would have started hiding evidence instead.
+
+**Implemented.** `strip_spoken_punctuation` in `src/entities.py`, applied inside
+both `findings_for` and `excerpt_around` so a finding's position and the text
+the labeller reads cannot drift apart. Effect:
+
+| Class | Collapse fix alone | With punctuation removed |
+|---|---|---|
+| ASR-COLLAPSE | 118 | **80** |
+| DRUG-DEL | 146 | 157 |
+| DRUG-SUB | 10 | 12 |
+| DOSE-MISS | 40 | 44 |
+
+The glargine clip now yields four DRUG-DEL rows, one per provider, and its false
+DOSE-MISS is gone: `twenty two open bracket twenty two close bracket units`
+reduces to a dose of 22 units, which is what the speaker said.
+
+**Known cost, accepted.** The word `colon` is removed whether it was punctuation
+or an organ. Telling the two apart needs context the function does not have, and
+leaving every punctuation word in misclassified 32 percent of the collapse set.
+
+**Still owed in Phase B.** The dual WER in `RESULTS`, which is the original W9
+ask. `score.py` is untouched so far; it will use the same helper, so the sheet
+and the headline will describe the same set of transcripts.
