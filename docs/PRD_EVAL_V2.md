@@ -82,8 +82,27 @@ The claim does not survive.
 `emotivitamin`, is at the end of the clip and off screen. `excerpt()` centres
 on the first marked token, and the first difference was `The` against `the`.
 
-**Blast radius.** 42 of 100 rows hide at least one changed word from the
-labeller.
+**Blast radius.** 42 of 100 rows hide at least one changed word. Worse, **15 of
+100 hide a drug, a dose or a negation outright**, which is the entity class the
+whole benchmark is about.
+
+| Row | Provider | Hidden from the display |
+|---|---|---|
+| 15 | gemini | `200mg`, `400mg`, `10mg` |
+| 12, 19 | dg-general, whisper | `folate`, `thiamine`, `multivitamin`, `3 days` |
+| 2, 5 | dg-general, dg-medical | `haloperidol`, `chlorpromazine` |
+| 7 | gemini | `artesunate` |
+
+Row 15 is the clearest case. The reference reads `200MG;10MG` and the system
+heard `400 mg 10 mg`. A doubled dose, off screen, on a row presented to the
+labeller as a drug-substitution candidate. Rows 2 and 5 hide the very pair,
+haloperidol and chlorpromazine, that produced a false substitution under W1.
+
+A note on a diagnosis that turned out to be wrong: the transcripts themselves
+are complete. Audio duration matches the manifest across all 400 clips, ratio
+1.00, and row 15's reference covers its 21.2 seconds at 1.13 words per second,
+normal for this corpus. Nothing is truncated upstream. The truncation is
+entirely in `excerpt()`, which is a display function.
 
 **Options.**
 
