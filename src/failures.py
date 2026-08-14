@@ -18,6 +18,7 @@ import sys
 import pandas as pd
 
 from src import config
+from src.lexicon import load as load_lexicon
 
 FAILURE_SHEET_ROWS = 100
 EXCERPT_WIDTH = 15
@@ -170,6 +171,30 @@ def mark_diff(reference: str, hypothesis: str) -> tuple[str, str]:
     return " ".join(marked_ref), " ".join(marked_hyp)
 
 
+def drug_evidence(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
+    """Which words in this row are known drugs, on both sides.
+
+    DRUG-SUB against DRUG-DEL turns on one question: is the word that replaced
+    the drug itself a drug? That has a right answer, it sits in the openFDA
+    directory, and the scorer already consults it. Leaving the labeller to
+    recall whether "glatropin" is a real medicine made a factual lookup feel
+    like a judgment call and would have put noise into one of the two headline
+    metrics.
+
+    So the fact is surfaced and the judgment is not. Nothing here suggests a
+    code or a severity. Both remain empty for a human to fill.
+    """
+    from src.entities import find_drug_mentions
+    from src.score import normalize
+
+    ref = normalize(str(reference))
+    hyp = normalize(str(hypothesis))
+    return {
+        "expected": find_drug_mentions(ref, lexicon),
+        "heard_known": find_drug_mentions(hyp, lexicon),
+    }
+
+
 def excerpt(marked: str, width: int = EXCERPT_WIDTH) -> str:
     """About `width` words centred on the first marked token."""
     tokens = marked.split()
@@ -271,8 +296,21 @@ def print_instructions() -> None:
 
 def _write_labeling_page(sheet: pd.DataFrame, manifest: pd.DataFrame) -> None:
     """A single self-contained page: audio, diff, dropdowns, CSV export."""
+    try:
+        lexicon = load_lexicon()
+    except Exception:
+        # The page is still usable without the directory lookup, just harder to
+        # label. Losing the whole page over it would be worse.
+        lexicon = set()
+
     payload = []
     for _, row in sheet.iterrows():
+        # Read the evidence off the excerpts, which are what the labeller sees
+        # and which centre on the changed words by construction.
+        plain = lambda text: str(text).replace("*", "")
+        evidence = drug_evidence(
+            plain(row["ref_excerpt"]), plain(row["hyp_excerpt"]), lexicon
+        )
         payload.append(
             {
                 "row_id": int(row["row_id"]),
@@ -285,6 +323,8 @@ def _write_labeling_page(sheet: pd.DataFrame, manifest: pd.DataFrame) -> None:
                 "hyp": row["hyp_excerpt"],
                 "entity": row["entity_expected"],
                 "flag": row["auto_flag"],
+                "expected_drugs": evidence["expected"],
+                "heard_drugs": evidence["heard_known"],
             }
         )
 
@@ -342,6 +382,11 @@ _LABELING_TEMPLATE = r"""<!doctype html>
   .done-tag { color:var(--ok); font-weight:600; font-size:13px; margin-left:6px; }
   .help { font-size:12px; opacity:.7; margin-top:4px; }
   .listen { font-size:13px; margin-left:4px; user-select:none; }
+  .drugs { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+           background:var(--panel); border-radius:6px; padding:8px 10px; margin:8px 0; }
+  .drugs b { color:var(--mark); }
+  .caveat { display:block; font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+            font-size:11px; color:var(--muted); margin-top:4px; }
   .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:4px; }
 </style>
 </head>
@@ -447,6 +492,33 @@ const escapeHtml = (s) =>
   String(s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+// Whether a word is a real drug is a lookup, not a judgment, so the answer is
+// shown rather than left to the labeller's pharmacology. It is what separates
+// DRUG-SUB from DRUG-DEL: a drug replaced by another real drug reads as a
+// valid sentence, a drug replaced by a non-word does not. Deliberately states
+// the fact and suggests neither a code nor a severity.
+function drugLine(r) {
+  const expected = r.expected_drugs || [];
+  const heard = r.heard_drugs || [];
+  if (!expected.length && !heard.length) return "";
+  const survived = expected.filter((d) => heard.includes(d));
+  const arrived = heard.filter((d) => !expected.includes(d));
+  const bits = [];
+  if (expected.length)
+    bits.push("expected <b>" + expected.map(escapeHtml).join(", ") + "</b>");
+  if (survived.length)
+    bits.push("survived <b>" + survived.map(escapeHtml).join(", ") + "</b>");
+  if (arrived.length)
+    bits.push("a different real drug appears: <b>" +
+              arrived.map(escapeHtml).join(", ") + "</b>");
+  if (expected.length && !heard.length)
+    bits.push("no known drug in what was heard");
+  return `<div class="drugs"><span class="label">drugs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>` +
+         bits.join(" &middot; ") +
+         `<span class="caveat">checked against the openFDA prescription directory, ` +
+         `which is partial: a word missing from it is probably not a drug, not certainly</span></div>`;
+}
+
 document.getElementById("rows").innerHTML = ROWS.map((r) => `
   <div class="card" id="card-${r.row_id}">
     <div class="tags">#${r.row_id} &middot; ${escapeHtml(r.provider)} &middot; ${escapeHtml(r.accent)}
@@ -454,6 +526,7 @@ document.getElementById("rows").innerHTML = ROWS.map((r) => `
     <audio controls preload="none" src="../data/audio/${encodeURIComponent(r.clip_id)}.wav"></audio>
     <div class="text"><span class="label">reference&nbsp;</span>${markup(escapeHtml(r.ref))}</div>
     <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(escapeHtml(r.hyp))}</div>
+    ${drugLine(r)}
     <div class="controls">
       <select data-row="${r.row_id}" data-field="failure_code">
         <option value="">code...</option>

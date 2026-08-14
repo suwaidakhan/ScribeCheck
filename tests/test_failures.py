@@ -204,3 +204,92 @@ class TestLabelingPageIsValid:
         page = self._page(tmp_path)
         assert "markup(escapeHtml(r.ref))" in page
         assert "markup(escapeHtml(r.hyp))" in page
+
+
+class TestDrugEvidence:
+    """Tell the labeller which words are real drugs.
+
+    DRUG-SUB against DRUG-DEL turns on whether the word that replaced the drug
+    is itself a drug. That is a lookup with a right answer, not a judgment, and
+    the lexicon already holds it. Asking a product manager to recall whether
+    "glatropin" is a real medicine was a tooling gap: the code knew and did not
+    say. Severity stays entirely theirs.
+    """
+
+    LEX = {"quetiapine", "humira", "ropinirole", "propranolol", "captopril"}
+
+    def test_names_the_reference_drug(self):
+        from src.failures import drug_evidence
+
+        e = drug_evidence("quetiapine fumarate 25 mg", "glatropin humira 25 mg", self.LEX)
+        assert e["expected"] == ["quetiapine"]
+
+    def test_flags_a_real_drug_in_the_hypothesis(self):
+        # humira is a real biologic, so this is a substitution, not a deletion.
+        from src.failures import drug_evidence
+
+        e = drug_evidence("quetiapine fumarate", "glatropin humira", self.LEX)
+        assert "humira" in e["heard_known"]
+
+    def test_does_not_claim_an_unknown_word_is_a_drug(self):
+        from src.failures import drug_evidence
+
+        e = drug_evidence("quetiapine fumarate", "glatropin humira", self.LEX)
+        assert "glatropin" not in e["heard_known"]
+
+    def test_reports_nothing_heard_when_the_drug_was_mangled_into_nonwords(self):
+        # captopril became "cap to praline": no real drug survived.
+        from src.failures import drug_evidence
+
+        e = drug_evidence("held captopril and clonidine", "head cap to praline", self.LEX)
+        assert e["expected"] == ["captopril"]
+        assert e["heard_known"] == []
+
+    def test_a_surviving_drug_is_reported_as_heard(self):
+        from src.failures import drug_evidence
+
+        e = drug_evidence("takes propranolol", "takes propranolol", self.LEX)
+        assert e["heard_known"] == ["propranolol"]
+
+    def test_a_row_with_no_drugs_reports_nothing(self):
+        from src.failures import drug_evidence
+
+        e = drug_evidence("the patient is stable", "the patient is stable", self.LEX)
+        assert e["expected"] == [] and e["heard_known"] == []
+
+    def test_the_evidence_reaches_the_page(self, tmp_path):
+        # The lookup is worthless if the labeller never sees it, so check the
+        # rendered page rather than the function.
+        import pandas as pd
+        from src import config, failures
+
+        sheet = pd.DataFrame(
+            [{
+                "row_id": 1, "clip_id": "c1", "provider": "dg-medical",
+                "accent": "igbo", "tier": "A", "domain": "clinical",
+                "ref_excerpt": "*quetiapine* fumarate 25 mg",
+                "hyp_excerpt": "*glatropin* *humira* 25 mg",
+                "entity_expected": "quetiapine", "entity_transcribed": "",
+                "auto_flag": "DRUG-SUB candidate", "needs_listen": "",
+                "failure_code": "", "severity": "", "note": "",
+            }],
+            columns=failures.SHEET_COLUMNS,
+        )
+        original = config.TAXONOMY
+        config.TAXONOMY = tmp_path
+        try:
+            failures._write_labeling_page(sheet, pd.DataFrame())
+        finally:
+            config.TAXONOMY = original
+        page = (tmp_path / "labeling.html").read_text()
+
+        assert "drugLine" in page, "the page never renders the lookup"
+        assert "expected_drugs" in page and "heard_drugs" in page
+        assert "openFDA" in page, "the caveat about partial coverage is missing"
+
+    def test_the_page_states_the_lookup_is_partial(self, tmp_path):
+        # Absence from a partial directory is evidence, not proof, and the page
+        # has to say so or it will be read as a verdict.
+        from src.failures import _LABELING_TEMPLATE
+
+        assert "probably not a drug, not certainly" in _LABELING_TEMPLATE

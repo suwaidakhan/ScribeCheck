@@ -35,6 +35,11 @@
   .done-tag { color:var(--ok); font-weight:600; font-size:13px; margin-left:6px; }
   .help { font-size:12px; opacity:.7; margin-top:4px; }
   .listen { font-size:13px; margin-left:4px; user-select:none; }
+  .drugs { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+           background:var(--panel); border-radius:6px; padding:8px 10px; margin:8px 0; }
+  .drugs b { color:var(--mark); }
+  .caveat { display:block; font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+            font-size:11px; color:var(--muted); margin-top:4px; }
   .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:4px; }
 </style>
 </head>
@@ -73,7 +78,13 @@ const ROWS = [
   "ref": "ulna styloid process, subsequent. TABLET, EXTENDED RELEASE, *ORAL* *REQUIP* XL, *ROPINIROLE* HYDROCHLORIDE, EQ 12MG BASE. Exposure",
   "hyp": "ulna styloid process, subsequent. TABLET, EXTENDED RELEASE, *ORALLY* *REQUIPED* XL, *PROPRANOLOL* HYDROCHLORIDE, EQ 12MG BASE. Exposure",
   "entity": "ropinirole",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "ropinirole"
+  ],
+  "heard_drugs": [
+   "propranolol"
+  ]
  },
  {
   "row_id": 2,
@@ -85,7 +96,9 @@ const ROWS = [
   "ref": "*Long-term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated with neuroleptic",
   "hyp": "*long* *hyphen* *term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated",
   "entity": "haloperidol|chlorpromazine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 3,
@@ -97,7 +110,13 @@ const ROWS = [
   "ref": "*Quetiapine* *Fumarate* *25* *mg* *Tablet* *Sig:* *One* *1* *Tablet* *PO* *QHSonce* a day at bedtime *as*",
   "hyp": "*glatropin* *humira* *twenty* *five* *milligram* *tablet* *civitrol* *one* *tablet* *is* *once* a day at bedtime",
   "entity": "quetiapine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "quetiapine"
+  ],
+  "heard_drugs": [
+   "humira"
+  ]
  },
  {
   "row_id": 4,
@@ -109,7 +128,14 @@ const ROWS = [
   "ref": "*Held* *captopril* *and* clonidine as *Farwar* md *parameters.*",
   "hyp": "*head* *cap* *to* *praline* clonidine as *far* *wall* md *parameters*",
   "entity": "captopril|clonidine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "captopril",
+   "clonidine"
+  ],
+  "heard_drugs": [
+   "clonidine"
+  ]
  },
  {
   "row_id": 5,
@@ -121,7 +147,9 @@ const ROWS = [
   "ref": "*Long-term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated with neuroleptic",
   "hyp": "*long* *hyphen* *term* abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated",
   "entity": "haloperidol|chlorpromazine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 6,
@@ -133,7 +161,14 @@ const ROWS = [
   "ref": "*Her* *metoprolol* and *lisinopril* were stopped due to *hypotension.*",
   "hyp": "*Our* *metropolo* and *Lisinopril* were stopped due to *hypertension.*",
   "entity": "metoprolol|lisinopril",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "metoprolol",
+   "lisinopril"
+  ],
+  "heard_drugs": [
+   "lisinopril"
+  ]
  },
  {
   "row_id": 7,
@@ -145,7 +180,11 @@ const ROWS = [
   "ref": "*Adverse* effects and drug *interactions* with *codeineare* similar to those reported for *morphine,* *althoughthey* *are* *less*",
   "hyp": "*adverse* effects and drug *interaction* with *quinine* similar to those reported for *monotherapy* *chloroquine* *and* *all*",
   "entity": "morphine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "morphine"
+  ],
+  "heard_drugs": []
  },
  {
   "row_id": 8,
@@ -157,7 +196,14 @@ const ROWS = [
   "ref": "*SOLUTION,* *SUBCUTANEOUS* *RITUXAN* *HYCELA,* *RITUXIMAB;* *HYALURONIDASE* *(HUMAN* *RECOMBINANT),* *1600MG* and *26800UNITS/13.4ML*",
   "hyp": "*Solution{comma}* *subcutaneous{comma}* *wituzan{comma}* *icella{comma}* *wituzima{comma}* *semicolon{comma}* *hyaluronidase{comma}* *open* *bracket{comma}* *human* *recombinant{comma}* *close* *bracket{comma}* *{comma}* *1,600* *mg*",
   "entity": "rituximab|hyaluronidase",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "rituximab",
+   "hyaluronidase"
+  ],
+  "heard_drugs": [
+   "hyaluronidase"
+  ]
  },
  {
   "row_id": 9,
@@ -169,7 +215,14 @@ const ROWS = [
   "ref": "*Her* *metoprolol* and lisinopril were stopped due to *hypotension.*",
   "hyp": "*Parmetropole* and lisinopril were stopped due to *hypertension.*",
   "entity": "metoprolol|lisinopril",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "metoprolol",
+   "lisinopril"
+  ],
+  "heard_drugs": [
+   "lisinopril"
+  ]
  },
  {
   "row_id": 10,
@@ -181,7 +234,14 @@ const ROWS = [
   "ref": "Rotimi *Yetunde* *Other* *Antimalarial* drugs include pyrimethamine, proguanil, *chlorproguanil,* and *trimethoprim*",
   "hyp": "Rotimi *yetunde,* *other* *antimalarial* drugs include pyrimethamine, proguanil, *chlorpropuanil,* and *trimethropium.*",
   "entity": "pyrimethamine|trimethoprim",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "pyrimethamine",
+   "trimethoprim"
+  ],
+  "heard_drugs": [
+   "pyrimethamine"
+  ]
  },
  {
   "row_id": 11,
@@ -193,7 +253,14 @@ const ROWS = [
   "ref": "*SOLUTION,* *SUBCUTANEOUS* *RITUXAN* *HYCELA,* *RITUXIMAB;* *HYALURONIDASE* *(HUMAN* *RECOMBINANT),* *1600MG* and *26800UNITS/13.4ML*",
   "hyp": "*Solution,* *subcontainers,* *vitruzan,* *isella,* *vitruzima,* *semicolon,* *hyaluronidase,* *human,* *recombinant,* *1600* *mg* and *26,800* *units,* *13.4* *ml.*",
   "entity": "rituximab|hyaluronidase",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "rituximab",
+   "hyaluronidase"
+  ],
+  "heard_drugs": [
+   "hyaluronidase"
+  ]
  },
  {
   "row_id": 12,
@@ -205,7 +272,13 @@ const ROWS = [
   "ref": "*The* following medication change was *made:* *-* *ADDED:* *Amoxicillin/Clavulanic* *acid:* take *1* tablet twice a day",
   "hyp": "*the* following medication change was *made* *added* *amoxicillin* *clavulanic* *acid* take *one* tablet twice a day",
   "entity": "amoxicillin|folate|thiamine|multivitamin",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "amoxicillin"
+  ],
+  "heard_drugs": [
+   "amoxicillin"
+  ]
  },
  {
   "row_id": 13,
@@ -217,7 +290,13 @@ const ROWS = [
   "ref": "*Metoprolol* *100mg* *Hospital* *Dekunle2.*",
   "hyp": "*Methotrexate* *100* *mg,* *h\u00f4pital* *de* *Creil-sur-Oise.*",
   "entity": "metoprolol",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "metoprolol"
+  ],
+  "heard_drugs": [
+   "methotrexate"
+  ]
  },
  {
   "row_id": 14,
@@ -229,7 +308,13 @@ const ROWS = [
   "ref": "*TABLET,* *CHEWABLE,* *ORAL* *VYVANSE,* *LISDEXAMFETAMINE* *DIMESYLATE,* *10MG*",
   "hyp": "*Tablets,* *chewable,* *oral* *vitamins,* *desamphetamine,* *dimethylate,* *10* *mg.*",
   "entity": "lisdexamfetamine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "lisdexamfetamine"
+  ],
+  "heard_drugs": [
+   "vitamins"
+  ]
  },
  {
   "row_id": 15,
@@ -241,7 +326,14 @@ const ROWS = [
   "ref": "foreign body of other specified part of *neck,* *sequela.* *TABLET,* *ORAL* *ADVIL* *CONGESTION* *RELIEF,* *IBUPROFEN;* *PHENYLEPHRINE*",
   "hyp": "foreign body of other specified part of *neck* *Sequela.* *Tablets:* *oral* *at* *view* *congestion* *relief* *ibuprofen,*",
   "entity": "ibuprofen|phenylephrine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "ibuprofen",
+   "phenylephrine"
+  ],
+  "heard_drugs": [
+   "ibuprofen"
+  ]
  },
  {
   "row_id": 16,
@@ -253,7 +345,14 @@ const ROWS = [
   "ref": "schizophrenia and must be treated with neuroleptic *drugs* *haloperidol,* *chlorpromazine.*",
   "hyp": "schizophrenia and must be treated with neuroleptic *drug* *shallow* *periodo,* *chlorpromazine,* *full* *stop.*",
   "entity": "haloperidol|chlorpromazine",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "haloperidol",
+   "chlorpromazine"
+  ],
+  "heard_drugs": [
+   "chlorpromazine"
+  ]
  },
  {
   "row_id": 17,
@@ -265,7 +364,14 @@ const ROWS = [
   "ref": "For example, ketoconazole and *triazolam* compete for binding to the CYP3A4 active site and thus exhibit",
   "hyp": "For example, ketoconazole and *trizalam* compete for binding to the CYP3A4 active site and thus exhibit",
   "entity": "ketoconazole|triazolam",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "ketoconazole",
+   "triazolam"
+  ],
+  "heard_drugs": [
+   "ketoconazole"
+  ]
  },
  {
   "row_id": 18,
@@ -277,7 +383,14 @@ const ROWS = [
   "ref": "For example, *ketoconazole* and triazolam compete for binding to the CYP3A4 active site and thus exhibit",
   "hyp": "For example, *coma,* *catechonozole,* and triazolam compete for binding to the CYP3A4 active site and thus",
   "entity": "ketoconazole|triazolam",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "ketoconazole",
+   "triazolam"
+  ],
+  "heard_drugs": [
+   "triazolam"
+  ]
  },
  {
   "row_id": 19,
@@ -289,7 +402,11 @@ const ROWS = [
   "ref": "The following medication change was *made:* *-* *ADDED:* *Amoxicillin/Clavulanic* *acid:* *take* *1* tablet twice a day",
   "hyp": "The following medication change was *made.* *Added* *amozicillin,* *clavulanic* *acid.* *Take* *one* tablet twice a day",
   "entity": "amoxicillin|folate|thiamine|multivitamin",
-  "flag": "DRUG-SUB candidate"
+  "flag": "DRUG-SUB candidate",
+  "expected_drugs": [
+   "amoxicillin"
+  ],
+  "heard_drugs": []
  },
  {
   "row_id": 20,
@@ -301,7 +418,9 @@ const ROWS = [
   "ref": "Empty *weight* *:* approximately *9* *,* *800* lb *4* *,* *445* kg",
   "hyp": "Empty *weight:* approximately *9,800* lb *4,445* kg",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 21,
@@ -313,7 +432,9 @@ const ROWS = [
   "ref": "*Amt:* *57ML* *OPTI240;* *60ML* *OPTI320* *CPT*",
   "hyp": "*Amount:* *27* *mL* *Opti* *240* *60* *mL* *Opti* *320* *CPT.*",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 22,
@@ -325,7 +446,9 @@ const ROWS = [
   "ref": "*ELEVATED* *INR:* *The* patient was *given* *8* units of fresh frozen plasma with correction of *INR.*",
   "hyp": "*elevated* *i* *and* *half* *the* patient was *immune* *eighty* units of fresh frozen plasma with correction",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 23,
@@ -337,7 +460,13 @@ const ROWS = [
   "ref": "*NEURO:* *PT* *SEDATED* *FOR* *COMFORT* *ON* *FENTANYL* *500MCQ/HR* *VERSED* *15MG/HR* *AND* *MS* *GTT* *AT* *5MG/HR.*",
   "hyp": "*neuro* *patient* *submitted* *for* *comfort* *on* *fentanyl* *five* *hundred* *mcq* *per* *hour* *vas* *fifty* *milligram* *per*",
   "entity": "fentanyl",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "fentanyl"
+  ],
+  "heard_drugs": [
+   "fentanyl"
+  ]
  },
  {
   "row_id": 24,
@@ -349,7 +478,9 @@ const ROWS = [
   "ref": "*ELEVATED* *INR:* *The* patient was *given* *8* units of fresh frozen plasma with correction of *INR.*",
   "hyp": "*elevated* *i* *and* *r* *the* patient was *immune* *eighty* units of fresh frozen plasma with correction",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 25,
@@ -361,7 +492,13 @@ const ROWS = [
   "ref": "*NEURO:* *PT* *SEDATED* *FOR* *COMFORT* *ON* *FENTANYL* *500MCQ/HR* *VERSED* *15MG/HR* *AND* *MS* *GTT* *AT* *5MG/HR.*",
   "hyp": "*neuro* *patient* *sedated* *for* *comfort* *on* *fentanyl* *five* *hundred* *mcq* *per* *hour* *vas* *fifty* *milligram* *per*",
   "entity": "fentanyl",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "fentanyl"
+  ],
+  "heard_drugs": [
+   "fentanyl"
+  ]
  },
  {
   "row_id": 26,
@@ -373,7 +510,19 @@ const ROWS = [
   "ref": "*Allergic* dermatitis of right lower *eyelid.* *TABLET,* *ORAL* *CARBIDOPA* *AND* *LEVODOPA,* *CARBIDOPA;* *LEVODOPA,* *25MG;250MG.* *Glaucoma* secondary",
   "hyp": "*allergic* dermatitis of right lower *eyelid* *tablets* *oral* *carbidopa* *and* *levodopa* *carbidopa* *levodopa* *twenty* *five* *milligrams*",
   "entity": "carbidopa|levodopa|carbidopa|levodopa",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "carbidopa",
+   "levodopa",
+   "carbidopa",
+   "levodopa"
+  ],
+  "heard_drugs": [
+   "carbidopa",
+   "levodopa",
+   "carbidopa",
+   "levodopa"
+  ]
  },
  {
   "row_id": 27,
@@ -385,7 +534,9 @@ const ROWS = [
   "ref": "*Empty* *weight* *:* approximately *9* *,* *800* *lb* *4* *,* *445* kg",
   "hyp": "*MTW* *column* approximately *9,800* *IP* *4,445* kg",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 28,
@@ -397,7 +548,9 @@ const ROWS = [
   "ref": "*Took* *62* and *35cc* well with yellow nipple.",
   "hyp": "*262* and *335* *cc* well with yellow nipple.",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 29,
@@ -409,7 +562,13 @@ const ROWS = [
   "ref": "*30* units of *lantus* given *riss* *scale* per *cvicu* protocol.",
   "hyp": "*10* units of *Lantus* given *rescale* per *CVICU* protocol.",
   "entity": "lantus",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "lantus"
+  ],
+  "heard_drugs": [
+   "lantus"
+  ]
  },
  {
   "row_id": 30,
@@ -421,7 +580,9 @@ const ROWS = [
   "ref": "Empty weight *:* *approximately* *9* *,* *800* *lb* *4* *,* *445* *kg*",
   "hyp": "Empty weight *kulu,* *opposed* *medley* *9,800* *IB,* *4,445* *kg.*",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 31,
@@ -433,7 +594,19 @@ const ROWS = [
   "ref": "Allergic dermatitis of right lower eyelid. *TABLET,* *ORAL* *CARBIDOPA* *AND* *LEVODOPA,* *CARBIDOPA;* *LEVODOPA,* *25MG;250MG.* *Glaucoma* secondary",
   "hyp": "Allergic dermatitis of right lower eyelid. *Tablet.* *Oral* *carbidopa* *and* *levodopa.* *Carbidopa,* *levodopa,* *25* *mg,* *150*",
   "entity": "carbidopa|levodopa|carbidopa|levodopa",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "carbidopa",
+   "levodopa",
+   "carbidopa",
+   "levodopa"
+  ],
+  "heard_drugs": [
+   "carbidopa",
+   "levodopa",
+   "carbidopa",
+   "levodopa"
+  ]
  },
  {
   "row_id": 32,
@@ -445,7 +618,9 @@ const ROWS = [
   "ref": "ELEVATED INR: The patient was given *8* units of fresh frozen plasma with correction of INR.",
   "hyp": "ELEVATED INR: The patient was given *80* units of fresh frozen plasma with correction of INR.",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 33,
@@ -457,7 +632,9 @@ const ROWS = [
   "ref": "*Took* *62* and *35cc* well with yellow *nipple.*",
   "hyp": "*two* *sixty* *two* and *three* *thirty* *five* *cc* well with yellow *nipple*",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 34,
@@ -469,7 +646,9 @@ const ROWS = [
   "ref": "*Ebe* *Iebonaem* *113* days *old-* *CGA43wks.*",
   "hyp": "*lebonium* *thirteen* days *old* *cga* *forty* *three* *weeks*",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 35,
@@ -481,7 +660,9 @@ const ROWS = [
   "ref": "*Flagyl* *500* *mg* *Tablet* *Hospital* *Oyatu:* *One* *1* *Tablet* *PO* three times a day for *4*",
   "hyp": "*hundred* *milligram* *tablet* *hospital* *oya-2* *one* *tablet* *per* *oral* three times a day for *four* *days*",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 36,
@@ -493,7 +674,11 @@ const ROWS = [
   "ref": "*Quetiapine* *Fumarate* *25* mg *Tablet* *Sig:* *One* *1* *Tablet* *PO* *QHSonce* a day at bedtime as",
   "hyp": "*Which* *has* *been* *twice* *in* *5* mg *tablets* *cell* *me* *show* *one* *tablet* *go* *this* *once*",
   "entity": "quetiapine",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "quetiapine"
+  ],
+  "heard_drugs": []
  },
  {
   "row_id": 37,
@@ -505,7 +690,9 @@ const ROWS = [
   "ref": "*POx1* *40cc* and *BFx1* so far *this* *shift.*",
   "hyp": "*POX140CC* and *BFX1* so far *the* *shift*",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 38,
@@ -517,7 +704,9 @@ const ROWS = [
   "ref": "*Took* *62* and *35cc* well with yellow *nipple.*",
   "hyp": "*two* *sixty* *two* and *three* *thirty* *five* *cc* well with yellow *nipple*",
   "entity": NaN,
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 39,
@@ -529,7 +718,15 @@ const ROWS = [
   "ref": "Unspecified superficial injury of unspecified *elbow,* initial encounter. *TABLET,* *ORAL* *CIPROFLOXACIN* *HYDROCHLORIDE,* *CIPROFLOXACIN* *HYDROCHLORIDE,* *EQ* *750MG*",
   "hyp": "Unspecified superficial injury of unspecified *elbow* initial encounter. *Tablet* *oral* *ciprofloxacin* *hydrochloride* *ciprofloxacin* *hydrochloride* *2750* *mg*",
   "entity": "ciprofloxacin|ciprofloxacin",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "ciprofloxacin",
+   "ciprofloxacin"
+  ],
+  "heard_drugs": [
+   "ciprofloxacin",
+   "ciprofloxacin"
+  ]
  },
  {
   "row_id": 40,
@@ -541,7 +738,13 @@ const ROWS = [
   "ref": "*NEURO:* *PT* *SEDATED* *FOR* *COMFORT* *ON* *FENTANYL* *500MCQ/HR* *VERSED* *15MG/HR* *AND* MS GTT *AT* *5MG/HR.*",
   "hyp": "*Neurological* *patient* *sedated* *for* *comfort* *on* *Fentanyl* *500* *mcg/hr,* *Versed* *50* *mg/hr,* *and* MS GTT *at*",
   "entity": "fentanyl",
-  "flag": "DOSE-VAL candidate"
+  "flag": "DOSE-VAL candidate",
+  "expected_drugs": [
+   "fentanyl"
+  ],
+  "heard_drugs": [
+   "fentanyl"
+  ]
  },
  {
   "row_id": 41,
@@ -553,7 +756,9 @@ const ROWS = [
   "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
   "hyp": "*Continue* *to* *suction* *thick* *tan* *secretions.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 42,
@@ -565,7 +770,9 @@ const ROWS = [
   "ref": "If we *don't* find the gas leak quickly, it becomes difficult to find it at all.",
   "hyp": "If we *dont* find the gas leak quickly, it becomes difficult to find it at all.",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 43,
@@ -577,7 +784,9 @@ const ROWS = [
   "ref": "*Discharge* *Diagnosis:* *PrimaryMRSA* *sepsis* *with* *cervical* *abcsess* *and* *cervica* *osteomyelitis* *as* *well* *drained* *paraspinal* *abscess* *in*",
   "hyp": "",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 44,
@@ -589,7 +798,9 @@ const ROWS = [
   "ref": "*Im* *not* the first person to think he should *run* for higher *office,* by the *way.*",
   "hyp": "*i'm* *one* *of* the first person to think he should *land* for higher *office* by the",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 45,
@@ -601,7 +812,9 @@ const ROWS = [
   "ref": "*Discharge* *Diagnosis:* *PrimaryMRSA* *sepsis* *with* *cervical* *abcsess* *and* *cervica* *osteomyelitis* *as* *well* *drained* *paraspinal* *abscess* *in*",
   "hyp": "",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 46,
@@ -613,7 +826,9 @@ const ROWS = [
   "ref": "*Dr* Ewatomi *Safiyah* made *aware* *of* rising *Calcium* *with* *no* *new* *orders* received *at* *23* *May,*",
   "hyp": "*Doctor* Ewatomi *Saphaya* made *our* *wedding* *the* rising *calcium.* *We* *don't* *know* *others* received *a* *23rd*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 47,
@@ -625,7 +840,9 @@ const ROWS = [
   "ref": "*Im* *not* the first person to think he should *run* for higher office, by the way.",
   "hyp": "*I'm* *one* *of* the first person to think he should *learn* for higher office, by the",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 48,
@@ -637,7 +854,9 @@ const ROWS = [
   "ref": "*Denies* chest *pain* dizziness or *lightheadedness;* *no* *palpitations.*",
   "hyp": "*Deny* chest *pain,* dizziness or *light-sidedness.* *No* *power* *petitions.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 49,
@@ -649,7 +868,9 @@ const ROWS = [
   "ref": "*Vasodilation,* *however,* *is* *brought* *about* *not* *by* *any* *muscular* *effort* *to* *widen* *a* *vessel* *but* *rather*",
   "hyp": "*Kwenye* *kwele* *nyeshouweza* *kapa* *moja,* *hiko* *ya* *kisaribu* *zibundi* *kwa* *katika* *haifa* *kwa* *ya* *ushangi* *wa*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 50,
@@ -661,7 +882,9 @@ const ROWS = [
   "ref": "*Instruct* *patient* *to* *inhale* *slowly* *and* *as* *deeply* *as* *possible* *through* *the* *mouthpiece* *without* *using* *nose*",
   "hyp": "*Ndiyoza* *wakati* *kuaweza* *kuhulio* *kwa* *hivyo.* *Na* *kwa* *hivyo* *ni* *kwa* *mawazo.* *Wakati* *kwa* *wakati* *kwa*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 51,
@@ -673,7 +896,9 @@ const ROWS = [
   "ref": "She *never* lets me pick out her stuff, so she would see what she wants and",
   "hyp": "she wants and just pick that out, *Langhorne* said.",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 52,
@@ -685,7 +910,9 @@ const ROWS = [
   "ref": "*Dr* *Ewatomi* *Safiyah* made *aware* *of* rising *Calcium* with *no* new orders received at *23* *May,*",
   "hyp": "*doctor* *ewatomi* *saphaya* made *away* *the* rising *calcium* with *two* new orders received at *twenty* *third*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 53,
@@ -697,7 +924,9 @@ const ROWS = [
   "ref": "*UO* *3cc/kg/hr* this shift *no* *stool.*",
   "hyp": "*you* *owe* *three* *cc* *per* *kg* *per* *hour* this shift *nostril*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 54,
@@ -709,7 +938,9 @@ const ROWS = [
   "ref": "*HR* *100-160's* *no* *murmur* noted.",
   "hyp": "*HR10216* *is* *Nomama* noted.",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 55,
@@ -721,7 +952,9 @@ const ROWS = [
   "ref": "*Dr* *Ewatomi* *Safiyah* made aware *of* rising *Calcium* *with* *no* *new* *orders* *received* at *23* May,",
   "hyp": "*Dr.* *Ewatumi* *Safaya* made aware *the* rising *calcium* *we* *don't* *know* *others* *receive* at *22* May,",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 56,
@@ -733,7 +966,11 @@ const ROWS = [
   "ref": "*Unlike* *quinidine,* *disopyramide* *does* *not* *increase* *the* plasma *concentration* *of* *digoxin* *in* *patients* *receiving* *a* *maintenance*",
   "hyp": "*Kama* *pia* *kwenye* *kuma,* *pia* *kwenye* *pira* *ni* *kukua* *kusimu* *ya* plasma *kwa* *hivyo* *kwa* *mtu*",
   "entity": "digoxin",
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [
+   "digoxin"
+  ],
+  "heard_drugs": []
  },
  {
   "row_id": 57,
@@ -745,7 +982,9 @@ const ROWS = [
   "ref": "*She* *never* *lets* me pick out her *stuff,* so she would see what she wants and",
   "hyp": "*let* me pick out her *stuff* *comma* so she would see what she wants and just",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 58,
@@ -757,7 +996,9 @@ const ROWS = [
   "ref": "*She* *never* *lets* me pick out her *stuff,* so she would see what she wants and",
   "hyp": "*let* me pick out her *stuff* *comma* so she would see what she wants and just",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 59,
@@ -769,7 +1010,9 @@ const ROWS = [
   "ref": "*She* *never* *lets* me pick out *her* *stuff,* so *she* would see what she *wants* and",
   "hyp": "*Let's* me pick out *our* *staff,* *comma,* so *you* would see what she *owns* and just",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 60,
@@ -781,7 +1024,9 @@ const ROWS = [
   "ref": "*UO* *3cc/kg/hr* this shift *no* *stool.*",
   "hyp": "*UO3CC* *per* *kg* *per* *hour* this shift *nose* *tool.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 61,
@@ -793,7 +1038,9 @@ const ROWS = [
   "ref": "*However,* *a* *lab* *may* *want* *to* *prepare* *their* *own* *inhouse* *probe* *if* *a* *probe* *is* *not*",
   "hyp": "*Kwa* *hivyo,* *maaweza* *kuhudhukua* *kutafutia* *kutafutia* *kutafutia* *kutafutia* *kutafutia* *kutafutia.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 62,
@@ -805,7 +1052,9 @@ const ROWS = [
   "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
   "hyp": "*continue* *to* *suction* *thick* *tan* *secretions*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 63,
@@ -817,7 +1066,9 @@ const ROWS = [
   "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
   "hyp": "*continue* *to* *suction* *thick* *tan* *secretions*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 64,
@@ -829,7 +1080,9 @@ const ROWS = [
   "ref": "*UO* *3cc/kg/hr* *this* shift *no* *stool.*",
   "hyp": "*UO3CC* *package* *para* *sa* shift *nos* *stool*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 65,
@@ -841,7 +1094,9 @@ const ROWS = [
   "ref": "*CT* *02/08/2029:* *impression:* no femoral fracture or *dislocation* diffuse subcutaneous edema and possible edema of the",
   "hyp": "*I'm* *sorry,* *I'm* *sorry.* *Computed* *tomography,* *2nd* *of* *August,* *2029.* *Impression,* no femoral fracture or *dislocation,*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 66,
@@ -853,7 +1108,9 @@ const ROWS = [
   "ref": "*You* *can* *make* *it* *big* *without* *a* *record* *label* *but* *you* *just* *have* *to* *know* *how*",
   "hyp": "*Kwa* *hivyo,* *kuhitajiweza* *kwa* *kwa* *hivyo,* *lakini* *kutoka* *kufanya* *kufanya.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 67,
@@ -865,7 +1122,9 @@ const ROWS = [
   "ref": "*not* candidate for bedside *PICC.*",
   "hyp": "*north* candidate for bedside *picc*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 68,
@@ -877,7 +1136,9 @@ const ROWS = [
   "ref": "*No* one passenger moves from the door to the *rear,* but the crowding and transfer of",
   "hyp": "passenger moves from the door to the *rear* *comma* but the crowding and transfer of energy",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 69,
@@ -889,7 +1150,9 @@ const ROWS = [
   "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
   "hyp": "*continue* *to* *sanction* *thick* *tan* *secretions*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 70,
@@ -901,7 +1164,9 @@ const ROWS = [
   "ref": "*CON'T* *TO* *SUCTION* *THICK* *TAN* *SECRETIONS.*",
   "hyp": "*continue* *to* *sanction* *thick* *tan* *secretions.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 71,
@@ -913,7 +1178,9 @@ const ROWS = [
   "ref": "*It* *should* *not* *be* *used* *initially40* *Drugs* *Used* *in* *Gastrointestinal* *Disorders4835.*",
   "hyp": "*Itiweza* *kwenye* *kutoka* *kwa* *kwa* *kwa* *kwa* *kwa.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 72,
@@ -925,7 +1192,9 @@ const ROWS = [
   "ref": "*CT* *02/08/2029:* *impression:* no femoral fracture or *dislocation* diffuse subcutaneous edema and possible edema of the",
   "hyp": "*Is* *this* *examination* *good* *even?* *Um* *computed* *tomography* *2nd* *of* *um* *August* *2029* *impression,* no femoral",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 73,
@@ -937,7 +1206,9 @@ const ROWS = [
   "ref": "*She* *never* *lets* me pick out her stuff, so she would see what she wants and",
   "hyp": "*Let* me pick out her stuff, so she would see what she wants and just pick",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 74,
@@ -949,7 +1220,9 @@ const ROWS = [
   "ref": "*not* candidate for bedside *PICC.*",
   "hyp": "*nurse* candidate for bedside *PICC*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 75,
@@ -961,7 +1234,9 @@ const ROWS = [
   "ref": "*GI:* *ABDOMEN* *SOFT* *NON-TENDER* *APPETITE* *FAIR* *BUT* *IMPROVING* *NO* *STOOL*",
   "hyp": "*GI,* *abdomen* *soft,* *non-tender.* *Appetite* *fair,* *but* *improving.* *Nose* *too.*",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 76,
@@ -973,7 +1248,9 @@ const ROWS = [
   "ref": "*Denies* chest *pain* dizziness or *lightheadedness;* no palpitations.",
   "hyp": "*dinice* chest *pain.* dizziness or *lightheadedness.* no palpitations.",
   "entity": NaN,
-  "flag": "NEG-FLIP candidate"
+  "flag": "NEG-FLIP candidate",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 77,
@@ -985,7 +1262,9 @@ const ROWS = [
   "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
   "hyp": "*No* *spits* *mass* *aspirate.ccc.*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 78,
@@ -997,7 +1276,9 @@ const ROWS = [
   "ref": "No *such* *diuretic* *exists.*",
   "hyp": "No *directly* *exist.*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 79,
@@ -1009,7 +1290,9 @@ const ROWS = [
   "ref": "She was on heparin at 250 *units/hr* *dopa* at 5 *mcg/kg* and *TPN* at *42cc/hr.*",
   "hyp": "She was on heparin at 250 *units* *per* *hour* *dopamine* at 5 *microgram* *per* *kilogram* and",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 80,
@@ -1021,7 +1304,9 @@ const ROWS = [
   "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
   "hyp": "*no* *spits* *mass* *aspirate* *dot* *c* *c* *c*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 81,
@@ -1033,7 +1318,9 @@ const ROWS = [
   "ref": "*POx1* *40cc* and *BFx1* *so* *far* *this* *shift.*",
   "hyp": "*p* *o* *x* *one* *forty* *c* *c* and *b* *f* *x* *one* *sofa* *deshift*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 82,
@@ -1045,7 +1332,9 @@ const ROWS = [
   "ref": "*IzuOjukwu* *OkeyOgunjioforAMVCA* *AMVCA8* *pic.twitter.com3qOcOcftj6*",
   "hyp": "*izu* *ojuku* *oke* *ogunjiofo* *amvca* *a* *m* *v* *c* *a* *eight* *pic* *dot* *twitter* *dot* *com*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 83,
@@ -1057,7 +1346,9 @@ const ROWS = [
   "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
   "hyp": "*nose* *pits* *mass* *aspirate* *dot* *c* *c* *c*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 84,
@@ -1069,7 +1360,9 @@ const ROWS = [
   "ref": "*I* *dont* care if *youre* *dip* fishing *in* *Ninilchik,* if *youre* not eating this right *nowyoure*",
   "hyp": "*i* *don't* care if *you* *are* *deep* fishing *a* *menial* *chick* *comma* if *you* *are* not",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 85,
@@ -1081,7 +1374,9 @@ const ROWS = [
   "ref": "*IzuOjukwu* *OkeyOgunjioforAMVCA* *AMVCA8* *pic.twitter.com3qOcOcftj6*",
   "hyp": "*izu* *ojuku* *oke* *ogunjio* *four* *amvca* *amvca* *eight* *pic* *dot* *twitter* *dot* *com* *three* *q* *o*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 86,
@@ -1093,7 +1388,9 @@ const ROWS = [
   "ref": "*No* acute distress *Eyes* */* *Conjunctiva:* *PERRL*",
   "hyp": "*no* acute distress *eyes/* *conjunctiva* *;* *semicolon* *p* *e* *r* *r* *l*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 87,
@@ -1105,7 +1402,9 @@ const ROWS = [
   "ref": "*They* *are* *fungicidal* *at* *high* *concentrations.*",
   "hyp": "*DAFungicide* *Water* *High* *Concentration* *{full* *stop}*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 88,
@@ -1117,7 +1416,11 @@ const ROWS = [
   "ref": "*6.* *Calcitriol* 0.5 *mcg* *Capsule* *Sig* *:* One *(* *1* *)* *Capsule* *PO* *EVERY* *OTHER* *DAY*",
   "hyp": "*Kwame.* *Na,* *na,* *na,* *na,* *na.* *Go* *ahead.* *Cause* *it* *try* *all* 0.5 *mg* *capsule.* One",
   "entity": "calcitriol",
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [
+   "calcitriol"
+  ],
+  "heard_drugs": []
  },
  {
   "row_id": 89,
@@ -1129,7 +1432,9 @@ const ROWS = [
   "ref": "*NOSPITS* *MAX* *ASPIRATE3.6CC.*",
   "hyp": "*no* *speech* *mass* *a* *spirit* *dot* *CCC*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 90,
@@ -1141,7 +1446,9 @@ const ROWS = [
   "ref": "*Protection* *of* *the* *host* *immune* *mechanism* *mightincrease* *the* *efcacy* *of* *other* *drugs* *that* *inhibit* *viralreplication.*",
   "hyp": "*Mwisho* *ya* *kwaalisha* *ya* *kweka* *lakini* *ya* *msingi,* *kumekuwa* *kwenye* *uweza* *ya* *kubwa* *ya* *kubwa* *ya*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 91,
@@ -1153,7 +1460,9 @@ const ROWS = [
   "ref": "*Sequential* *dosing* *is* *usually* *for* *10* *or* *12* *days* *each* *calendarmonth.*",
   "hyp": "*\u09b8\u09c7\u0996\u09c7\u0999\u09cd\u09b7\u09be* *\u09a6\u09cb\u099c\u09bf\u09a8* *\u0987\u09b8* *\u09ef\u09cb* *\u099f\u09c7\u09a8* *\u0993* *\u099f\u09cd\u09b0\u09c7\u0995* *\u09a6\u09c7\u0987\u099c* *\u0987\u0995\u09cd\u09b7* *\u0995\u09be\u09b2\u09c7\u0982\u09a1\u09be* *\u09ae\u09be\u0982\u099f\u0964*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 92,
@@ -1165,7 +1474,12 @@ const ROWS = [
   "ref": "*Encounter* *for* *supervision* of other *normal* *pregnancy,* first *trimester.* *TABLET,* *ORAL-28* *CYCLAFEM* *7/7/7,* *ETHINYL* *ESTRADIOL;* *NORETHINDRONE,*",
   "hyp": "*Subluxation* of other first *phalangeal* *tubercle,* fracture of lateral *formula*",
   "entity": "estradiol|norethindrone",
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [
+   "estradiol",
+   "norethindrone"
+  ],
+  "heard_drugs": []
  },
  {
   "row_id": 93,
@@ -1177,7 +1491,9 @@ const ROWS = [
   "ref": "A post shared by *BellaNaijaStyle* *bellanaijastyleBut* *OwoseniMakanjuola* does not believe anyone should jettison modesty in the",
   "hyp": "A post shared by *belle_naija_style* *belle_naija_style* *But* *OSN* *Makajula* does not believe anyone should jettison modesty",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 94,
@@ -1189,7 +1505,13 @@ const ROWS = [
   "ref": "Neuro checks *Q:* *4* *Pain:* *Fentanyl* gtt *Cardiovascular:* *Loongy* *Ahnoowah* *-* *pt* *appears* *to* *be* *volume*",
   "hyp": "Neuro checks *cure* *for* *pain* *fentanyl* gtt *cardiovascular* *lungi* *Anuwa* *Olooloolooloo*",
   "entity": "fentanyl",
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [
+   "fentanyl"
+  ],
+  "heard_drugs": [
+   "fentanyl"
+  ]
  },
  {
   "row_id": 95,
@@ -1201,7 +1523,9 @@ const ROWS = [
   "ref": "*SOLUTION,* *INTRAMUSCULAR* *HYDROXYPROGESTERONE* *CAPROATE,* *HYDROXYPROGESTERONE* *CAPROATE,* *1250MG/5ML* *(250MG/ML)*",
   "hyp": "*solution* *intramuscular* *hydroxyprogesterone* *caproate* *hydroxyprogesterone* *caproate* *one* *thousand* *two* *hundred* *and* *fifty* *milligram* *per* *five* *mil*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 96,
@@ -1213,7 +1537,9 @@ const ROWS = [
   "ref": "*No* *such* *diuretic* *exists.*",
   "hyp": "*no* *directly* *exist* *full* *stop*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 97,
@@ -1225,7 +1551,13 @@ const ROWS = [
   "ref": "*Cont* monitor *MS* *Lactulose* *enems2.*",
   "hyp": "*continue* monitor *m* *s* *lactulose* *e* *n* *e* *m* *s* *two*",
   "entity": "lactulose",
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [
+   "lactulose"
+  ],
+  "heard_drugs": [
+   "lactulose"
+  ]
  },
  {
   "row_id": 98,
@@ -1237,7 +1569,9 @@ const ROWS = [
   "ref": "*SOLUTION,* *INTRAMUSCULAR* *HYDROXYPROGESTERONE* *CAPROATE,* *HYDROXYPROGESTERONE* *CAPROATE,* *1250MG/5ML* *(250MG/ML)*",
   "hyp": "*solution* *intramuscular* *hydroxyprogesterone* *caproate* *hydroxyprogesterone* *caproate* *one* *thousand* *two* *hundred* *and* *fifty* *milligram* *per* *five* *mil*",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 99,
@@ -1249,7 +1583,9 @@ const ROWS = [
   "ref": "*The* *Womens* *WorldTour* calendar is *also* *scheduled* *to* *return* with *Strade* *Bianche* on *August* *1,* followed",
   "hyp": "*q* *and* *so* *what* *the* calendar is *associated* with *the* on *august* *first* *comma* followed by",
   "entity": NaN,
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [],
+  "heard_drugs": []
  },
  {
   "row_id": 100,
@@ -1261,7 +1597,12 @@ const ROWS = [
   "ref": "*SOLUTION,* *SUBCUTANEOUS* *RITUXAN* *HYCELA,* *RITUXIMAB;* *HYALURONIDASE* *(HUMAN* *RECOMBINANT),* *1600MG* and *26800UNITS/13.4ML*",
   "hyp": "*comma* *subcutaneous* *rituxan* *hicellar* *comma* *rituxan* *semicolon* *high* *alluron* *needles* *open* *bracket* *human* *recombinant* *close* *bracket*",
   "entity": "rituximab|hyaluronidase",
-  "flag": "high WER"
+  "flag": "high WER",
+  "expected_drugs": [
+   "rituximab",
+   "hyaluronidase"
+  ],
+  "heard_drugs": []
  }
 ];
 const CODES = ["DRUG-SUB", "DRUG-DEL", "DOSE-VAL", "DOSE-UNIT", "NEG-FLIP", "TERM-CORRUPT", "PHON-ACCENT", "BENIGN"];
@@ -1341,6 +1682,33 @@ const escapeHtml = (s) =>
   String(s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+// Whether a word is a real drug is a lookup, not a judgment, so the answer is
+// shown rather than left to the labeller's pharmacology. It is what separates
+// DRUG-SUB from DRUG-DEL: a drug replaced by another real drug reads as a
+// valid sentence, a drug replaced by a non-word does not. Deliberately states
+// the fact and suggests neither a code nor a severity.
+function drugLine(r) {
+  const expected = r.expected_drugs || [];
+  const heard = r.heard_drugs || [];
+  if (!expected.length && !heard.length) return "";
+  const survived = expected.filter((d) => heard.includes(d));
+  const arrived = heard.filter((d) => !expected.includes(d));
+  const bits = [];
+  if (expected.length)
+    bits.push("expected <b>" + expected.map(escapeHtml).join(", ") + "</b>");
+  if (survived.length)
+    bits.push("survived <b>" + survived.map(escapeHtml).join(", ") + "</b>");
+  if (arrived.length)
+    bits.push("a different real drug appears: <b>" +
+              arrived.map(escapeHtml).join(", ") + "</b>");
+  if (expected.length && !heard.length)
+    bits.push("no known drug in what was heard");
+  return `<div class="drugs"><span class="label">drugs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>` +
+         bits.join(" &middot; ") +
+         `<span class="caveat">checked against the openFDA prescription directory, ` +
+         `which is partial: a word missing from it is probably not a drug, not certainly</span></div>`;
+}
+
 document.getElementById("rows").innerHTML = ROWS.map((r) => `
   <div class="card" id="card-${r.row_id}">
     <div class="tags">#${r.row_id} &middot; ${escapeHtml(r.provider)} &middot; ${escapeHtml(r.accent)}
@@ -1348,6 +1716,7 @@ document.getElementById("rows").innerHTML = ROWS.map((r) => `
     <audio controls preload="none" src="../data/audio/${encodeURIComponent(r.clip_id)}.wav"></audio>
     <div class="text"><span class="label">reference&nbsp;</span>${markup(escapeHtml(r.ref))}</div>
     <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(escapeHtml(r.hyp))}</div>
+    ${drugLine(r)}
     <div class="controls">
       <select data-row="${r.row_id}" data-field="failure_code">
         <option value="">code...</option>
