@@ -480,6 +480,41 @@ patterns already implemented.
 
 ---
 
+## Decisions taken
+
+Recorded here because they were made in conversation and would otherwise exist
+nowhere. All three were Suwaid's calls, 2026-08-14.
+
+**One row per error, not per clip.** The span-level model, which is what MQM
+does. Chosen over one row per clip with the sampling merely disclosed, on the
+grounds that it is the only version supporting a published rate. Implemented in
+Phase A.
+
+**Report both WERs, as-scored and formatting-normalised.** W9 option 1. The gap
+between them, up to 9.5 percent for Deepgram, becomes a finding about the
+metric's fragility rather than a footnote. Not yet implemented; it is the first
+item of Phase B.
+
+**Discard the labels recorded before Phase A.** With 15 rows having hidden the
+entity they asked about, anything judged against the old sheet is unreliable.
+Executed: browser storage cleared, and row identity now includes the finding so
+old keys cannot silently match new rows.
+
+## Still open, raised but not settled
+
+**Several codes on one finding.** A row can carry one code today. If a single
+error is genuinely both TERM-CORRUPT and PHON-ACCENT there is no way to say so.
+MQM assigns one category per span, so the default is to leave it. Revisit only
+if labelling actually hits the case.
+
+**DOSE-MISS may be substantially false.** Spotted in the first rows of the new
+sheet: `2 l` against `2 lnc` and `22 units` against `22 unit` are tokenisation
+and pluralisation artefacts, not missing doses. DOSE-MISS is the second largest
+class at 92 findings, so if a large share are false the sheet is spending human
+attention on nothing. The NO-ERROR code exists to measure exactly this, so the
+labelling pass will produce the number. Do not tune the detector before that
+number exists.
+
 ## Open questions for Suwaid
 
 1. W3 is the fork in the road. One row per clip with the sampling scheme
