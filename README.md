@@ -11,9 +11,11 @@ The claim under test is that headline WER is the wrong acceptance metric for
 clinical dictation. The benchmark either supports that with numbers or it does
 not, and both outcomes are reportable.
 
-**Status: all 2,000 transcriptions complete, scored, failure sheet built.
-Human labelling of the 100 failures is outstanding.** See
-[RESULTS.md](RESULTS.md).
+**Status: all 2,000 transcriptions complete and scored. The labelling sheet has
+been rebuilt as 150 individual errors after four defects were found by using it
+on real rows, and human labelling is outstanding.** See [RESULTS.md](RESULTS.md)
+for the numbers and [docs/PRD_EVAL_V2.md](docs/PRD_EVAL_V2.md) for what the
+rebuild fixed and why.
 
 ## What is measured
 
@@ -23,8 +25,8 @@ Gemini 3.5 Flash Lite. Deepgram appears twice because the general-against-medica
 delta is a pricing and product finding in itself.
 
 The result, in one line: Whisper large-v3 and Deepgram nova-3 differ by 0.0009
-on WER and 11.7 points on drug-name accuracy. Full table in
-[RESULTS.md](RESULTS.md).
+on WER and 11.4 points on drug-name recall, p = 0.0004 paired across the 109
+clips that contain a drug. Full table in [RESULTS.md](RESULTS.md).
 
 Whisper runs through Groq rather than OpenAI because every configuration here
 sits on a free tier, which keeps the benchmark reproducible by anyone without a

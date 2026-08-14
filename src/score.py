@@ -1,9 +1,17 @@
 """Metrics M1 through M5, SPEC section 5.
 
-Every metric is measured over reference mentions, never hypothesis mentions.
-A provider that invents a drug it was never asked to transcribe is doing
+M1 through M4 are measured over the reference, never over the hypothesis. A
+provider that invents a drug it was never asked to transcribe is doing
 something bad, but it is not failing to transcribe a drug, and mixing the two
 would let a provider improve its drug accuracy by hallucinating more drugs.
+
+That reasoning is why the hypothesis side is reported beside M2 rather than
+folded into it. `drug_accuracy` is recall over reference mentions and still
+means exactly what it meant when it was published. `drug_precision` and
+`drug_f1` answer the separate question of how much of what a provider wrote was
+ever said, and they are the only numbers here computed over the hypothesis.
+Both directions are needed: recall alone scores a silent system and a
+confabulating one the same way, and silence is the safer failure.
 
 Where SPEC leaves a judgment call, it is made once here, applied identically to
 all five configurations, and recorded in docs/DECISIONS.md.
@@ -13,7 +21,9 @@ Run:  python -m src.score
 
 from __future__ import annotations
 
+import math
 import sys
+from itertools import combinations
 
 import jiwer
 import pandas as pd
@@ -21,7 +31,12 @@ from rapidfuzz.distance import Levenshtein
 from whisper_normalizer.english import EnglishTextNormalizer
 
 from src import config
-from src.entities import find_dose_pairs, find_drug_mentions, find_negations
+from src.entities import (
+    find_dose_pairs,
+    find_drug_mentions,
+    find_negations,
+    strip_spoken_punctuation,
+)
 from src.lexicon import load as load_lexicon
 
 # SPEC section 5: one normalizer, applied to reference and hypothesis alike.
@@ -75,12 +90,25 @@ def score_drugs(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
     Substitution is the class that matters. A drug dropped leaves a hole a
     reader may notice; a drug replaced by a different real drug reads as a
     complete, plausible sentence and is the failure that reaches a patient.
+
+    `mentions`, `correct`, `substitution` and `deletion` are the recall side and
+    are counted over the reference, unchanged. `hyp_mentions` and
+    `false_positive` are the other direction: drug names the provider wrote
+    that were never said. They are separate counts rather than adjustments to
+    the first four, because a hallucinated drug is a different failure from a
+    missed one and the taxonomy codes them apart.
     """
     ref_tokens = _tokens(reference)
     hyp_tokens = _tokens(hypothesis)
     mentions = find_drug_mentions(reference, lexicon)
 
-    result = {"mentions": len(mentions), "correct": 0, "substitution": 0, "deletion": 0}
+    result = {
+        "mentions": len(mentions),
+        "correct": 0,
+        "substitution": 0,
+        "deletion": 0,
+        **_count_false_positives(mentions, find_drug_mentions(hypothesis, lexicon)),
+    }
     if not mentions:
         return result
 
@@ -120,6 +148,42 @@ def score_drugs(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
             result["deletion"] += 1
 
     return result
+
+
+def _count_false_positives(
+    ref_mentions: list[str], hyp_mentions: list[str]
+) -> dict[str, int]:
+    """Hypothesis drug mentions with no reference mention to account for them.
+
+    Matched greedily and one for one, on the same edit distance the recall side
+    allows, so "metformim" for "metformin" is not counted as an invention in
+    one direction while being counted correct in the other. Saying a drug once
+    and writing it twice leaves the second copy unaccounted for, which is what
+    the greedy pass is for.
+
+    A substituted drug is a false positive as well as a recall miss. Both
+    statements are true of it: the drug that was said is gone, and a drug that
+    was never said is on the page.
+    """
+    unclaimed = list(ref_mentions)
+    false_positives = 0
+    for written in hyp_mentions:
+        # Closest first, so a fuzzy match cannot consume the reference mention
+        # that some later hypothesis token matches exactly and strand it.
+        nearest = min(
+            unclaimed,
+            key=lambda mention: Levenshtein.distance(mention, written),
+            default=None,
+        )
+        matched = (
+            nearest is not None
+            and Levenshtein.distance(nearest, written) <= DRUG_EDIT_TOLERANCE
+        )
+        if matched:
+            unclaimed.remove(nearest)
+        else:
+            false_positives += 1
+    return {"hyp_mentions": len(hyp_mentions), "false_positive": false_positives}
 
 
 def score_doses(reference: str, hypothesis: str) -> dict:
@@ -188,7 +252,26 @@ def score_negations(reference: str, hypothesis: str) -> dict:
 
 
 def score_clip(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
-    """Every metric for one clip and one provider, on normalized text."""
+    """Every metric for one clip and one provider, on normalized text.
+
+    Two word error rates, W9. `wer` is what the providers were charged for,
+    every word they wrote against every word in the reference. Speakers in this
+    dataset read the punctuation aloud, and vendors disagree about what to do
+    with it: AssemblyAI writes a comma character, which the normalizer strips,
+    while Deepgram writes the word "comma" and takes an insertion error for it.
+    `wer_spoken_punct_removed` takes those words off both sides, so it compares
+    recognition without the formatting convention.
+
+    Neither one is the true number. Measured on this sample, the gap is 18 to
+    30 percent of the error of every provider except AssemblyAI, whose gap is
+    zero because it emits characters instead of words. That is the finding: WER
+    is sensitive to a vendor formatting choice that has nothing to do with what
+    the model heard.
+
+    Entity metrics are computed on the as-scored text, because no punctuation
+    word is a drug, a unit, a number or a negation cue, so stripping cannot
+    move them.
+    """
     ref = normalize(str(reference))
     hyp = normalize(str(hypothesis))
     drugs = score_drugs(ref, hyp, lexicon)
@@ -196,10 +279,15 @@ def score_clip(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
     negations = score_negations(ref, hyp)
     return {
         "wer": score_wer(ref, hyp),
+        "wer_spoken_punct_removed": score_wer(
+            strip_spoken_punctuation(ref), strip_spoken_punctuation(hyp)
+        ),
         "drug_mentions": drugs["mentions"],
         "drug_correct": drugs["correct"],
         "drug_substitution": drugs["substitution"],
         "drug_deletion": drugs["deletion"],
+        "drug_hyp_mentions": drugs["hyp_mentions"],
+        "drug_false_positive": drugs["false_positive"],
         "doses": doses["doses"],
         "dose_correct": doses["correct"],
         "dose_value_error": doses["value_error"],
@@ -209,6 +297,122 @@ def score_clip(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
         "negation_preserved": negations["preserved"],
         "negation_lost": negations["lost"],
     }
+
+
+# Below this many disagreements the chi-square approximation is unreliable and
+# the exact binomial is used instead. The conventional threshold.
+MCNEMAR_EXACT_BELOW = 25
+
+# A clip counts as a success for a metric when every reference entity of that
+# kind survived it. The denominator is the first column: a clip with no drug
+# mention cannot succeed or fail at drugs, so it is not a pair.
+#
+# The dose rule matches the published `dose_value_accuracy`, where a surviving
+# value with the wrong unit still counts. Two definitions of a correct dose in
+# one repo is how a headline and its significance test start disagreeing.
+PAIRED_METRICS: dict[str, tuple[str, tuple[str, ...]]] = {
+    "drug": ("drug_mentions", ("drug_correct",)),
+    "dose": ("doses", ("dose_correct", "dose_unit_error")),
+    "negation": ("negation_cues", ("negation_preserved",)),
+}
+
+
+def mcnemar(a_only: int, b_only: int) -> dict:
+    """McNemar's paired test on two counts of disagreement.
+
+    `a_only` is the number of clips the first provider got right and the second
+    got wrong, `b_only` the reverse. Clips both got right and clips both got
+    wrong carry no information about which is better and are not used, which is
+    the whole point of a paired test.
+
+    Exact binomial below `MCNEMAR_EXACT_BELOW` disagreements, chi-square with
+    Edwards' continuity correction above it. No scipy: the chi-square survival
+    function with one degree of freedom is erfc(sqrt(x / 2)), and the binomial
+    tail is a sum of math.comb terms, so both are stdlib.
+
+    What this does NOT account for: the 400 clips come from 247 speakers and 99
+    of those contribute more than one clip, so the pairs are not independent
+    draws. The test assumes they are. The p-value is therefore optimistic, and
+    a speaker-blocked bootstrap is the correct fix. That is W12, and it is not
+    done here. Read any p-value below as an upper bound on the evidence, not a
+    measurement of it.
+    """
+    discordant = a_only + b_only
+    # Edwards' correction, floored at zero so a perfectly symmetric split gives
+    # a statistic of 0 rather than a small positive number.
+    statistic = (
+        max(abs(a_only - b_only) - 1, 0) ** 2 / discordant if discordant else 0.0
+    )
+
+    if discordant < MCNEMAR_EXACT_BELOW:
+        smaller = min(a_only, b_only)
+        tail = sum(math.comb(discordant, k) for k in range(smaller + 1))
+        p_value = min(1.0, 2 * tail / 2**discordant)
+        test = "exact"
+    else:
+        p_value = math.erfc(math.sqrt(statistic / 2))
+        test = "chi2"
+
+    return {
+        "a_only": a_only,
+        "b_only": b_only,
+        "discordant": discordant,
+        "statistic": statistic,
+        "p_value": p_value,
+        "test": test,
+    }
+
+
+def paired_significance(per_clip: pd.DataFrame, metric: str = "drug") -> pd.DataFrame:
+    """McNemar's test for every provider pair, on per-clip outcomes.
+
+    The same 400 clips went to all five providers, so a difference between two
+    of them is matched-pairs data and the unpaired comparison the writeup
+    currently makes throws that away.
+
+    The unit of pairing is the clip, not the entity mention, because the clip
+    is what `per_clip_scores.csv` records. A clip with four drug mentions counts
+    once, and it counts as a success only if all four survived. That is a
+    stricter outcome than per-mention accuracy and it is not the same quantity
+    as `drug_accuracy`; the p-value says whether one provider beats another on
+    clips, and the headline percentage stays the mention-level number.
+
+    Independence is assumed and is not true. See `mcnemar`.
+    """
+    if metric not in PAIRED_METRICS:
+        raise ValueError(
+            f"{metric!r} has no binary per-clip outcome. McNemar's test needs "
+            f"paired binary data; choose one of {sorted(PAIRED_METRICS)}. WER is "
+            "continuous and dichotomising it would invent a threshold nobody "
+            "chose."
+        )
+
+    denominator, survived = PAIRED_METRICS[metric]
+    frame = per_clip[per_clip[denominator] > 0]
+    outcomes = {
+        provider: (
+            group.set_index("clip_id")[list(survived)].sum(axis=1)
+            == group.set_index("clip_id")[denominator]
+        )
+        for provider, group in frame.groupby("provider")
+    }
+
+    rows = []
+    for first, second in combinations(sorted(outcomes), 2):
+        a, b = outcomes[first].align(outcomes[second], join="inner")
+        result = mcnemar(int((a & ~b).sum()), int((b & ~a).sum()))
+        rows.append(
+            {
+                "metric": metric,
+                "provider_a": first,
+                "provider_b": second,
+                "n_pairs": int(len(a)),
+                "a_clips_correct": int(a.sum()),
+                "b_clips_correct": int(b.sum()),
+                **result,
+            }
+        )
+    return pd.DataFrame(rows)
 
 
 def load_cached_transcripts() -> pd.DataFrame:
@@ -273,6 +477,9 @@ def build() -> pd.DataFrame:
     summarise(per_clip, merged, by="accent").to_csv(
         config.RESULTS / "by_accent.csv", index=False
     )
+    pd.concat(
+        [paired_significance(per_clip, metric=metric) for metric in PAIRED_METRICS]
+    ).to_csv(config.RESULTS / "significance.csv", index=False)
 
     print(headline.to_string(index=False))
     print(f"\nWrote {config.RESULTS}/headline.csv and the breakdowns.")
@@ -295,10 +502,27 @@ def summarise(
         row = dict(zip(keys, values))
         row["clips"] = len(group)
         row["wer"] = group["wer"].mean()
+        row["wer_spoken_punct_removed"] = group["wer_spoken_punct_removed"].mean()
+        # What share of this provider's measured error was punctuation it was
+        # told to write. Deepgram runs with smart_format off, deliberately, to
+        # protect dosage scoring, and pays for it here.
+        row["wer_spoken_punct_share"] = _ratio(
+            row["wer"] - row["wer_spoken_punct_removed"], row["wer"]
+        )
         row["drug_mentions"] = int(group["drug_mentions"].sum())
         row["drug_accuracy"] = _ratio(
             group["drug_correct"].sum(), group["drug_mentions"].sum()
         )
+        # W11. Recall over reference mentions is `drug_accuracy` and is
+        # unchanged. Precision is over what the provider wrote, so a provider
+        # that invents drug names is finally charged for it somewhere.
+        row["drug_hyp_mentions"] = int(group["drug_hyp_mentions"].sum())
+        row["drug_false_positives"] = int(group["drug_false_positive"].sum())
+        row["drug_precision"] = _ratio(
+            group["drug_hyp_mentions"].sum() - group["drug_false_positive"].sum(),
+            group["drug_hyp_mentions"].sum(),
+        )
+        row["drug_f1"] = _harmonic_mean(row["drug_precision"], row["drug_accuracy"])
         row["drug_substitutions"] = int(group["drug_substitution"].sum())
         row["doses"] = int(group["doses"].sum())
         row["dose_value_accuracy"] = _ratio(
@@ -326,6 +550,17 @@ def _ratio(numerator, denominator) -> float | None:
     not a perfect one and not a zero.
     """
     return float(numerator) / float(denominator) if denominator else None
+
+
+def _harmonic_mean(precision: float | None, recall: float | None) -> float | None:
+    """F1, or None when either side has no denominator to be measured on.
+
+    A provider with nothing to be precise about does not have an F1 of zero, it
+    has no F1, same rule as `_ratio`.
+    """
+    if precision is None or recall is None or precision + recall == 0:
+        return None
+    return 2 * precision * recall / (precision + recall)
 
 
 def _cost_per_hour(merged: pd.DataFrame) -> pd.DataFrame:

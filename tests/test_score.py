@@ -9,8 +9,19 @@ Every function takes text that has already been through the one normalizer, per
 SPEC section 5.
 """
 
+import pandas as pd
 import pytest
-from src.score import score_doses, score_drugs, score_negations, score_wer
+
+from src.score import (
+    mcnemar,
+    paired_significance,
+    score_clip,
+    score_doses,
+    score_drugs,
+    score_negations,
+    score_wer,
+    summarise,
+)
 
 LEXICON = {
     "metformin",
@@ -200,8 +211,16 @@ class TestSubstitutionIsNotCreditedToAnotherSurvivingDrug:
     leaves a hole a reader can notice. Conflating them overstates the danger.
     """
 
-    LEX = {"aspirin", "warfarin", "pyrimethamine", "trimethoprim", "metformin",
-           "metronidazole", "haloperidol", "chlorpromazine"}
+    LEX = {
+        "aspirin",
+        "warfarin",
+        "pyrimethamine",
+        "trimethoprim",
+        "metformin",
+        "metronidazole",
+        "haloperidol",
+        "chlorpromazine",
+    }
 
     def test_a_mangled_drug_beside_a_surviving_drug_is_a_deletion(self):
         result = score_drugs(
@@ -220,7 +239,9 @@ class TestSubstitutionIsNotCreditedToAnotherSurvivingDrug:
             "drugs include pyrimethamine proguanil chlorpropuanil and trimethropium",
             self.LEX,
         )
-        assert result["substitution"] == 0, "pyrimethamine survived, it is not a substitute"
+        assert result["substitution"] == 0, (
+            "pyrimethamine survived, it is not a substitute"
+        )
         assert result["deletion"] == 1
         assert result["correct"] == 1
 
@@ -253,3 +274,317 @@ class TestSubstitutionIsNotCreditedToAnotherSurvivingDrug:
         )
         assert result["substitution"] == 1
         assert result["correct"] == 1
+
+
+def _scored_row(**overrides) -> dict:
+    """One per-clip scoring row, in the shape `summarise` consumes."""
+    row = {
+        "provider": "aai",
+        "clip_id": "c1",
+        "tier": "A",
+        "wer": 0.2,
+        "wer_spoken_punct_removed": 0.2,
+        "drug_mentions": 0,
+        "drug_correct": 0,
+        "drug_substitution": 0,
+        "drug_deletion": 0,
+        "drug_hyp_mentions": 0,
+        "drug_false_positive": 0,
+        "doses": 0,
+        "dose_correct": 0,
+        "dose_value_error": 0,
+        "dose_unit_error": 0,
+        "dose_missing": 0,
+        "negation_cues": 0,
+        "negation_preserved": 0,
+        "negation_lost": 0,
+    }
+    row.update(overrides)
+    return row
+
+
+def _merged_row(**overrides) -> dict:
+    """The transcription-side row `summarise` needs for the M5 cost columns."""
+    row = {
+        "provider": "aai",
+        "audio_seconds": 3600.0,
+        "cost_usd": 1.0,
+        "latency_ms": 500,
+    }
+    row.update(overrides)
+    return row
+
+
+class TestDualWer:
+    """W9. Spoken punctuation is a formatting convention, not a recognition error.
+
+    112 of the 400 clips have a speaker voicing "comma" or "open bracket" and
+    the providers write the word. AssemblyAI turns it into a character the
+    normalizer strips; Deepgram writes it out and takes an insertion error on
+    the same audio. One number cannot describe both, so both are reported and
+    the gap between them is the finding.
+    """
+
+    def test_score_clip_reports_both_wers(self):
+        result = score_clip("the patient is stable", "the patient is stable", LEXICON)
+        assert result["wer"] == 0.0
+        assert result["wer_spoken_punct_removed"] == 0.0
+
+    def test_a_voiced_comma_costs_the_as_scored_wer_and_not_the_other(self):
+        # The provider heard exactly what was said. Only the convention differs.
+        result = score_clip("no fever no cough", "no fever comma no cough", LEXICON)
+        assert result["wer"] == 0.25
+        assert result["wer_spoken_punct_removed"] == 0.0
+
+    def test_a_multi_word_punctuation_phrase_is_removed_whole(self):
+        result = score_clip(
+            "22 units at bedtime",
+            "open bracket 22 close bracket units at bedtime",
+            LEXICON,
+        )
+        assert result["wer"] > 0
+        assert result["wer_spoken_punct_removed"] == 0.0
+
+    def test_a_real_error_survives_both(self):
+        # Removing punctuation must not launder a genuine substitution.
+        result = score_clip(
+            "takes metformin daily", "takes metronidazole daily", LEXICON
+        )
+        assert result["wer"] == result["wer_spoken_punct_removed"] == 1 / 3
+
+    def test_a_reference_that_is_only_punctuation_has_no_stripped_denominator(self):
+        # An empty stripped reference has no denominator, same rule as M1.
+        result = score_clip("comma", "comma", LEXICON)
+        assert result["wer"] == 0.0
+        assert result["wer_spoken_punct_removed"] is None
+
+    def test_summarise_carries_both_and_the_share_between_them(self):
+        per_clip = pd.DataFrame(
+            [
+                _scored_row(
+                    provider="dg-general", wer=0.4, wer_spoken_punct_removed=0.3
+                ),
+                _scored_row(
+                    provider="dg-general", wer=0.2, wer_spoken_punct_removed=0.1
+                ),
+            ]
+        )
+        merged = pd.DataFrame([_merged_row(provider="dg-general")])
+        row = summarise(per_clip, merged).iloc[0]
+        assert row["wer"] == pytest.approx(0.3)
+        assert row["wer_spoken_punct_removed"] == pytest.approx(0.2)
+        # A third of this provider's measured error is transcribed punctuation.
+        assert row["wer_spoken_punct_share"] == pytest.approx(1 / 3)
+
+
+class TestDrugPrecision:
+    """W11. Recall alone rewards a provider for inventing drugs.
+
+    M2 stays measured over reference mentions, for the reason in the module
+    docstring: a hallucinated drug is not a failure to transcribe a drug.
+    Precision is the second direction, reported beside it rather than folded
+    into it, so neither number can hide the other.
+    """
+
+    def test_the_recall_counts_are_untouched(self):
+        # M2 is published. Adding a direction must not move the existing one.
+        result = score_drugs("takes metformin daily", "takes metformin daily", LEXICON)
+        assert result["mentions"] == 1
+        assert result["correct"] == 1
+        assert result["substitution"] == 0
+        assert result["deletion"] == 0
+
+    def test_an_invented_drug_is_a_false_positive(self):
+        # The case the metric was blind to: nothing in the reference to score
+        # against, so recall never notices.
+        result = score_drugs("the patient is stable", "takes warfarin", LEXICON)
+        assert result["mentions"] == 0
+        assert result["hyp_mentions"] == 1
+        assert result["false_positive"] == 1
+
+    def test_a_surviving_drug_is_not_a_false_positive(self):
+        result = score_drugs("takes metformin daily", "takes metformin daily", LEXICON)
+        assert result["hyp_mentions"] == 1
+        assert result["false_positive"] == 0
+
+    def test_a_minor_spelling_slip_is_not_a_false_positive(self):
+        # Same edit-distance tolerance as the recall side, or the two
+        # directions would disagree about the same word.
+        result = score_drugs("takes metformin", "takes metformim", LEXICON)
+        assert result["correct"] == 1
+        assert result["false_positive"] == 0
+
+    def test_a_substitution_is_a_false_positive_as_well_as_a_recall_miss(self):
+        # metronidazole was never said. It is a miss in one direction and an
+        # invention in the other, and it is both at once.
+        result = score_drugs(
+            "takes metformin daily", "takes metronidazole daily", LEXICON
+        )
+        assert result["substitution"] == 1
+        assert result["false_positive"] == 1
+
+    def test_an_extra_copy_of_a_real_drug_is_a_false_positive(self):
+        # Said once, written twice. The second mention has nothing to match.
+        result = score_drugs("takes warfarin", "takes warfarin and warfarin", LEXICON)
+        assert result["hyp_mentions"] == 2
+        assert result["false_positive"] == 1
+
+    def test_a_hypothesis_with_no_drug_has_no_precision_denominator(self):
+        result = score_drugs("takes metformin", "takes it", LEXICON)
+        assert result["hyp_mentions"] == 0
+        assert result["false_positive"] == 0
+
+    def test_summarise_reports_precision_and_f1_beside_recall(self):
+        per_clip = pd.DataFrame(
+            [
+                _scored_row(
+                    provider="gemini",
+                    drug_mentions=4,
+                    drug_correct=2,
+                    drug_hyp_mentions=4,
+                    drug_false_positive=2,
+                )
+            ]
+        )
+        merged = pd.DataFrame([_merged_row(provider="gemini")])
+        row = summarise(per_clip, merged).iloc[0]
+        assert row["drug_accuracy"] == pytest.approx(0.5), "recall, unrenamed"
+        assert row["drug_precision"] == pytest.approx(0.5)
+        assert row["drug_f1"] == pytest.approx(0.5)
+        assert row["drug_false_positives"] == 2
+
+    def test_precision_is_undefined_rather_than_zero_when_no_drug_was_output(self):
+        per_clip = pd.DataFrame([_scored_row(provider="whisper")])
+        merged = pd.DataFrame([_merged_row(provider="whisper")])
+        row = summarise(per_clip, merged).iloc[0]
+        assert row["drug_precision"] is None
+        assert row["drug_f1"] is None
+
+
+class TestMcnemar:
+    """W13. The headline gap is reported as a raw difference and nothing else."""
+
+    def test_symmetric_disagreement_is_not_significant(self):
+        result = mcnemar(10, 10)
+        assert result["statistic"] == pytest.approx(0.0)
+        assert result["p_value"] == pytest.approx(1.0)
+
+    def test_no_disagreement_at_all_gives_p_one(self):
+        result = mcnemar(0, 0)
+        assert result["discordant"] == 0
+        assert result["p_value"] == pytest.approx(1.0)
+
+    def test_a_one_sided_disagreement_is_significant(self):
+        result = mcnemar(20, 5)
+        assert result["p_value"] < 0.01
+
+    def test_small_samples_use_the_exact_binomial(self):
+        # 2 against 8 is 2 * P(X <= 2 | n=10, p=0.5) = 112/1024.
+        result = mcnemar(2, 8)
+        assert result["test"] == "exact"
+        assert result["p_value"] == pytest.approx(0.109375)
+
+    def test_large_samples_use_chi_square_with_continuity_correction(self):
+        # (|20 - 5| - 1)^2 / 25 = 7.84, one degree of freedom.
+        result = mcnemar(20, 5)
+        assert result["test"] == "chi2"
+        assert result["statistic"] == pytest.approx(7.84)
+        assert result["p_value"] == pytest.approx(0.005110, rel=1e-3)
+
+    def test_the_test_is_symmetric_in_its_arguments(self):
+        assert mcnemar(20, 5)["p_value"] == pytest.approx(mcnemar(5, 20)["p_value"])
+
+
+class TestPairedSignificance:
+    """The same 400 clips go to every provider, which is matched-pairs data.
+
+    What the test does not carry is stated in the docstring of the function
+    itself: 99 speakers contribute more than one clip, so the clips are not
+    independent draws and the p-value is optimistic. That is W12.
+    """
+
+    def _frame(self) -> pd.DataFrame:
+        # Four clips with one drug mention each. `a` gets all four, `b` gets one.
+        rows = []
+        for i in range(4):
+            rows.append(
+                _scored_row(
+                    provider="a", clip_id=f"c{i}", drug_mentions=1, drug_correct=1
+                )
+            )
+            rows.append(
+                _scored_row(
+                    provider="b",
+                    clip_id=f"c{i}",
+                    drug_mentions=1,
+                    drug_correct=1 if i == 0 else 0,
+                    drug_deletion=0 if i == 0 else 1,
+                )
+            )
+        return pd.DataFrame(rows)
+
+    def test_it_counts_the_discordant_clips(self):
+        result = paired_significance(self._frame(), metric="drug")
+        row = result.iloc[0]
+        assert row["provider_a"] == "a" and row["provider_b"] == "b"
+        assert row["n_pairs"] == 4
+        assert row["a_only"] == 3
+        assert row["b_only"] == 0
+
+    def test_a_clip_with_no_denominator_is_not_a_pair(self):
+        frame = pd.concat(
+            [
+                self._frame(),
+                pd.DataFrame(
+                    [
+                        _scored_row(provider="a", clip_id="empty"),
+                        _scored_row(provider="b", clip_id="empty"),
+                    ]
+                ),
+            ]
+        )
+        assert paired_significance(frame, metric="drug").iloc[0]["n_pairs"] == 4
+
+    def test_every_provider_pair_appears_once(self):
+        frame = pd.concat(
+            [
+                self._frame(),
+                pd.DataFrame(
+                    [
+                        _scored_row(
+                            provider="c",
+                            clip_id=f"c{i}",
+                            drug_mentions=1,
+                            drug_correct=1,
+                        )
+                        for i in range(4)
+                    ]
+                ),
+            ]
+        )
+        result = paired_significance(frame, metric="drug")
+        assert len(result) == 3
+        assert set(zip(result["provider_a"], result["provider_b"])) == {
+            ("a", "b"),
+            ("a", "c"),
+            ("b", "c"),
+        }
+
+    def test_negation_and_dose_are_pairable_too(self):
+        frame = pd.DataFrame(
+            [
+                _scored_row(
+                    provider="a", clip_id="c1", negation_cues=1, negation_preserved=1
+                ),
+                _scored_row(
+                    provider="b", clip_id="c1", negation_cues=1, negation_preserved=0
+                ),
+            ]
+        )
+        assert paired_significance(frame, metric="negation").iloc[0]["a_only"] == 1
+
+    def test_wer_is_refused_because_it_is_not_a_binary_outcome(self):
+        # McNemar needs a paired binary outcome. Dichotomising a continuous WER
+        # to force it through the test would invent a threshold nobody chose.
+        with pytest.raises(ValueError, match="binary"):
+            paired_significance(self._frame(), metric="wer")

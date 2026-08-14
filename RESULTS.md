@@ -1,17 +1,26 @@
 # Results
 
-**Two speech-to-text systems can post the same word error rate and differ by 11.7
+**Two speech-to-text systems can post the same word error rate and differ by 11.4
 points on whether they get the drug name right.**
 
 Whisper large-v3 and Deepgram nova-3 landed 0.0009 apart on WER, the metric
-vendors publish and buyers compare. On drug-name accuracy they landed 62.8
-percent against 74.5 percent, and Whisper substituted one real drug for a
-different real drug 7 times against Deepgram's 2. A procurement decision made on
-published WER would treat those two systems as interchangeable.
+vendors publish and buyers compare. On drug-name accuracy they landed 62.3
+percent against 73.7 percent. Paired across the 109 clips that contain a drug,
+Deepgram gets 18 right that Whisper misses and Whisper gets 2 that Deepgram
+misses, p = 0.0004 by McNemar. A procurement decision made on published WER
+would treat those two systems as interchangeable.
+
+One honest qualification travels with that. 112 of the 400 clips have a speaker
+voicing punctuation aloud, and the providers write "comma" and "open bracket"
+as words. Charged for those, Whisper and Deepgram are 0.0009 apart. Not charged
+for them, they are 0.0305 apart, because Deepgram writes far more of them. The
+drug gap is 11.4 points either way. Both WERs are reported below rather than
+one, since which of them a buyer sees decides whether these two systems look
+identical.
 
 Measured over 2,000 transcriptions: 400 clips through five commercial
 configurations, zero failures, USD 1.35 spent entirely against provider signup
-credit. Generated 2026-08-06 from `data/manifest.csv` under seed 42, and
+credit. Generated 2026-08-13 from `data/manifest.csv` under seed 42, and
 reproducible from `results/headline.csv`.
 
 ## What is settled and what comes next
@@ -20,8 +29,9 @@ The measurement is complete. All five metrics are computed over every clip and
 every configuration, and the comparison above is the finding.
 
 One layer is outstanding. Ranking systems by *how badly* they fail needs a human
-to classify each error, and 100 failures have been selected and prepared for
-that. `failure_code` and `severity` are empty until a person fills them, and the
+to classify each error, and 150 individual errors have been selected and prepared
+for that, one per row, stratified by error class with sampling weights so a
+population rate can be recovered from the labelled sheet. `failure_code` and `severity` are empty until a person fills them, and the
 code refuses to guess: a model rating the danger of its own domain's mistakes is
 the one number nobody should accept. So this page reports accuracy, not harm.
 The per-provider count of errors that could change a clinical action is the next
@@ -29,38 +39,66 @@ deliverable and does not exist yet.
 
 ## Headline
 
-| Configuration | WER | Drug accuracy | Drug subs | Dose value | Negation | Cost/hr | Median latency |
-|---|---|---|---|---|---|---|---|
-| AssemblyAI universal-3-5-pro | **0.100** | **91.0%** | 1 | 92.5% | 98.3% | $0.21 | 518 ms |
-| Deepgram nova-3-medical | 0.324 | 83.4% | 3 | 82.3% | 96.5% | $0.46 | 876 ms |
-| Gemini 3.5 Flash Lite | 0.333 | 72.4% | 6 | 82.3% | 94.8% | $0.00 | 4112 ms |
-| Deepgram nova-3 | 0.337 | 74.5% | 2 | 85.0% | 95.9% | $0.46 | 752 ms |
-| Whisper large-v3 (Groq) | 0.338 | 62.8% | **7** | 80.3% | 92.4% | $0.00 | 952 ms |
+| Configuration | WER | WER, punctuation words removed | Drug recall | Drug precision | Dose value | Negation | Cost/hr | Median latency |
+|---|---|---|---|---|---|---|---|---|
+| AssemblyAI universal-3-5-pro | **0.100** | **0.100** | **93.1%** | 95.8% | 92.5% | 98.3% | $0.21 | 518 ms |
+| Deepgram nova-3-medical | 0.324 | 0.228 | 82.3% | 95.2% | 82.3% | 96.5% | $0.46 | 876 ms |
+| Gemini 3.5 Flash Lite | 0.333 | 0.262 | 72.6% | **89.2%** | 82.3% | 94.8% | $0.00 | 4112 ms |
+| Deepgram nova-3 | 0.337 | 0.247 | 73.7% | 96.8% | 85.0% | 95.9% | $0.46 | 752 ms |
+| Whisper large-v3 (Groq) | 0.338 | 0.278 | **62.3%** | 96.6% | 80.3% | 92.4% | $0.00 | 952 ms |
 
-Drug accuracy is measured over 145 reference drug mentions, dosage over 147
+Drug metrics are measured over 175 reference drug mentions, dosage over 147
 pairs, negation over 172 cues.
+
+**Recall and precision answer different questions and both are reported.**
+Recall asks whether a drug the clinician said survived. Precision asks whether a
+drug the system wrote was ever said. A system can raise recall by guessing more
+drug names, so recall alone points a vendor in the wrong direction. Gemini
+invented 14 drug names that appear in no reference, against 3 for Whisper and 4
+for Deepgram nova-3, which is why it sits last on precision while sitting fourth
+on recall.
+
+Drug substitution, one real drug written as a different real drug, no longer
+separates these systems: 3, 4, 2, 2, 2 across the five. An earlier version of
+this page led with a 7-against-2 split on that column. It was wrong. The scorer
+credited a surviving reference drug as the replacement for a mangled one, and 14
+of the 19 recorded substitutions were false. The fix and its measurement are in
+`docs/PRD_EVAL_V2.md` under W1.
 
 ## What the numbers say
 
-A substituted drug is the dangerous class. A dropped drug leaves a hole a reader
-notices; a drug swapped for a different real drug reads as a complete, plausible
-sentence, and nothing downstream looks wrong.
-
-Gemini and Deepgram nova-3 also swap places between the two columns: Gemini
-ranks 3rd on WER and 4th on drugs.
+Drug recall spans 30.8 points across the five systems, from 62.3 to 93.1. WER
+spans 0.238. The two orderings do not match: Gemini ranks 3rd on WER and 4th on
+drugs, and the three systems clustered within 0.005 of each other on WER sit
+11.1 points apart on drugs.
 
 WER is not useless. AssemblyAI leads on both, by a wide margin on each. The
-claim is narrower and survives the counterexample: WER alone does not tell you
-which systems are safe to put in front of a prescription, and two systems with
-the same WER can differ sharply on the words that matter.
+claim is narrower and survives that: WER alone does not tell you which systems
+are safe to put in front of a prescription, and systems with the same WER can
+differ sharply on the words that matter.
 
 **The medical model earns its price on the axis it should.** nova-3-medical
-against nova-3 is +9.0 points of drug accuracy for a 0.013 WER improvement. The
-gain is concentrated exactly where a clinical buyer would want it.
+against nova-3 is +8.6 points of drug recall for a 0.013 WER improvement, and
+the pairing holds up: 12 clips where the medical model gets the drug and the
+general one does not, against 1 the other way, p = 0.003. The gain is
+concentrated exactly where a clinical buyer would want it, and it costs the same.
+
+**Two of the gaps do not survive a test, and saying so is part of the result.**
+Every pair was compared with McNemar over the clips that contain the entity,
+which is matched-pairs data because all five systems saw the same 400 clips.
+Deepgram nova-3 and Gemini are indistinguishable on drugs, p = 1.00, despite
+looking 1.1 points apart in the table. On dosage only AssemblyAI separates from
+anything, and the other four are mutually indistinguishable, p = 0.21 to 1.00.
+On negation only two of the ten pairs separate. Full table in
+`results/significance.csv`.
+
+That test assumes clips are independent. They are not: the 400 clips come from
+247 speakers and 99 speakers contribute more than one, so every p-value above is
+optimistic and should be read as an upper bound on the evidence.
 
 ## What this sample cannot answer
 
-The accent-equity question. Drug accuracy per tier rests on 44, 40 and 61
+The accent-equity question. Drug recall per tier rests on 52, 50 and 73
 mentions, so one error moves a tier by roughly two points, every provider's
 three Wilson intervals overlap, and two of five providers are non-monotonic
 across tiers. Domain mix is identical at 80/20 in every tier, so composition is
@@ -108,5 +146,6 @@ free tiers; `env.example` has the signup links.
 | `results/by_tier.csv`, `by_domain.csv`, `by_accent.csv` | breakdowns |
 | `results/per_clip_scores.csv` | every clip, every provider, every metric |
 | `results/transcription_run_summary.csv` | clips, cost and latency per configuration |
-| `taxonomy/failure_taxonomy.csv` | the 100 selected failures, unlabelled |
+| `results/significance.csv` | McNemar paired tests, every provider pair, every entity |
+| `taxonomy/failure_taxonomy.csv` | the 150 selected findings, unlabelled |
 | `taxonomy/labeling.html` | the labelling interface |

@@ -340,3 +340,41 @@ number; what does not hold is that a future `--force` reproduces it. Recorded
 here rather than fixed, because the fix is to commit the raw openFDA snapshot
 and build from that, which is a change to the fetch path and not to any number
 in the current results.
+
+**D026 | drug precision beside recall | Report precision and F1 alongside the
+existing recall metric, keeping `drug_accuracy` named and defined as it was. |
+Replace M2 with an F1, or leave recall alone. | Measured over reference
+mentions, M2 asks whether a drug the clinician said survived, and a system can
+raise that number by writing more drug names. Gemini invented 14 drug names that
+appear in no reference, against 3 for Whisper, and paid nothing for it. Folding
+the two into a single F1 was rejected because a missed drug and an invented drug
+are different clinical failures and a buyer needs to see which one a system
+commits. `drug_accuracy` keeps its name because it is already published.
+
+**D027 | significance at clip level | McNemar over clips, where a clip counts as
+correct only if every entity mention in it survived, for each provider pair. |
+Mention-level pairing, or no test. | The same 400 clips went to all five
+providers, so this is matched-pairs data and an unpaired test would throw away
+the pairing. Clip level rather than mention level because per-mention identity is
+not carried in `per_clip_scores.csv`. The test is stated in the code and in
+RESULTS as an upper bound on evidence rather than a p-value to be taken at face
+value: 99 of the 247 speakers contribute more than one clip, so the independence
+assumption is violated and the true intervals are wider. Implemented with the
+standard library, `math.comb` for the exact tail below 25 discordant pairs and an
+Edwards-corrected chi-square above it, so no dependency was added for it.
+
+**D028 | export filenames are timestamped | The labelling page writes
+`failure_taxonomy-YYYYMMDD-HHMM.csv`. | Keep the fixed filename. | A fixed name
+means the browser either silently overwrites the previous export or appends
+"(1)", and in both cases the labeller cannot tell which file holds which
+session. One export was lost to this before it was noticed.
+
+**D029 | labels from the previous sheet are surfaced, not migrated | If the old
+storage key holds labels, the page shows a banner and offers them as a download.
+It does not apply them. | Auto-map them onto the new rows, or ignore them. | Row
+identity changed when the sheet moved to one card per transcript, so a stored
+`finding_id` no longer names the same finding. Applying those labels blind would
+attach a human judgment to whichever error now holds that number, which is worse
+than losing it, because a wrong label is indistinguishable from a right one once
+it is in the file. Remapping is done offline against the old sheet in git, where
+the mapping can be checked.
