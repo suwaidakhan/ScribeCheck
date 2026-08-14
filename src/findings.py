@@ -158,6 +158,39 @@ def negation_findings(reference: str, hypothesis: str) -> list[dict]:
     return found
 
 
+EXCERPT_WIDTH = 15
+
+
+def excerpt_around(
+    reference: str, hypothesis: str, ref_index: int, width: int = EXCERPT_WIDTH
+) -> tuple[str, str]:
+    """Show both sides centred on the finding, with the judged entity marked.
+
+    The old excerpt centred on the first textual difference. That is almost
+    always capitalisation, so the entity being judged was frequently off screen:
+    15 of 100 rows hid a drug, a dose or a negation outright, and one of them
+    hid a dose doubling from 200mg to 400mg.
+
+    Centring on the finding's own position is the fix. The judged entity is
+    wrapped in double brackets so it reads differently from the ordinary diff
+    marks around it, because a row that shows six changed words needs to say
+    which one it is asking about.
+    """
+    ref_tokens, hyp_tokens = _tokens(reference), _tokens(hypothesis)
+    marked_ref = list(ref_tokens)
+    if 0 <= ref_index < len(marked_ref):
+        marked_ref[ref_index] = f"[[{marked_ref[ref_index]}]]"
+
+    # `half` words either side of the centre word, so the window is exactly
+    # `width` tokens for an odd width and the judged entity sits in the middle.
+    centre_hyp = _aligned_centre(ref_index, len(ref_tokens), len(hyp_tokens))
+    half = width // 2
+    return (
+        " ".join(marked_ref[max(0, ref_index - half) : ref_index + half + 1]),
+        " ".join(hyp_tokens[max(0, centre_hyp - half) : centre_hyp + half + 1]),
+    )
+
+
 def select_findings(
     all_findings: pd.DataFrame, target: int = 150, seed: int = 42
 ) -> pd.DataFrame:

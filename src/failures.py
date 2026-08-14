@@ -18,7 +18,9 @@ import sys
 import pandas as pd
 
 from src import config
+from src.findings import excerpt_around, findings_for, select_findings
 from src.lexicon import load as load_lexicon
+from src.score import normalize
 
 FAILURE_SHEET_ROWS = 100
 EXCERPT_WIDTH = 15
@@ -32,31 +34,40 @@ PRIORITY = [
 ]
 
 SHEET_COLUMNS = [
-    "row_id",
+    "finding_id",
     "clip_id",
     "provider",
     "accent",
     "tier",
     "domain",
+    "kind",
+    "expected",
+    "heard",
+    "weight",
     "ref_excerpt",
     "hyp_excerpt",
-    "entity_expected",
-    "entity_transcribed",
     "auto_flag",
+    "needs_listen",
     "failure_code",
     "severity",
     "note",
 ]
+
+# How many findings a human is asked to judge. Every row is one error, so this
+# is a count of judgments rather than of clips.
+SHEET_SIZE = 150
 
 CODE_DEFINITIONS = [
     ("DRUG-SUB", "one real drug transcribed as a different real drug"),
     ("DRUG-DEL", "drug name dropped or corrupted into a non-word"),
     ("DOSE-VAL", "numeric value changed"),
     ("DOSE-UNIT", "unit changed, value intact"),
+    ("DOSE-MISS", "the dose is gone: no number and unit survived in its place"),
     ("NEG-FLIP", "negation lost or inverted"),
     ("TERM-CORRUPT", "clinical term corrupted into a plausible-reading wrong term"),
     ("PHON-ACCENT", "error traceable to accent phonology (verify by listening)"),
-    ("BENIGN", "error with no clinical meaning change"),
+    ("BENIGN", "a real error, but no clinical meaning changes"),
+    ("NO-ERROR", "the detector was wrong, nothing is wrong with this transcription"),
 ]
 
 SEVERITY_DEFINITIONS = [
@@ -209,54 +220,92 @@ def excerpt(marked: str, width: int = EXCERPT_WIDTH) -> str:
 
 
 def build() -> pd.DataFrame:
-    """Write taxonomy/failure_taxonomy.csv and taxonomy/labeling.html."""
-    scores_path = config.RESULTS / "per_clip_scores.csv"
-    if not scores_path.exists():
-        raise SystemExit(
-            f"{scores_path} does not exist. Run `python -m src.score` first, "
-            "which needs cached transcripts, which need the four API keys."
-        )
+    """Write taxonomy/failure_taxonomy.csv and taxonomy/labeling.html.
 
-    scores = pd.read_csv(scores_path)
+    One row per finding rather than per clip. A clip with three errors produces
+    three rows, each centred on its own entity and each carrying its own code
+    and severity, because a single dropdown cannot describe three errors and a
+    single excerpt cannot show them.
+
+    The sheet is a stratified sample with inclusion weights, so a rate computed
+    from the labelled rows describes the whole population of findings rather
+    than the sheet. See docs/PRD_EVAL_V2.md W2, W3, W5 and W6.
+    """
     manifest = pd.read_csv(config.MANIFEST).set_index("clip_id")
     transcripts = _cached_text()
+    if not transcripts:
+        raise SystemExit(
+            "No cached transcripts in data/cache/. Run `python -m src.transcribe` "
+            "first, which needs the four API keys in .env."
+        )
 
-    selected = select_failures(scores)
+    lexicon = load_lexicon()
     rows = []
-    for row_id, (_, row) in enumerate(selected.iterrows(), start=1):
-        clip_id = row["clip_id"]
-        reference = str(manifest.loc[clip_id, "transcript"])
-        hypothesis = transcripts.get((row["provider"], clip_id), "")
-        marked_ref, marked_hyp = mark_diff(reference, hypothesis)
-        rows.append(
+    for (provider, clip_id), heard in transcripts.items():
+        if clip_id not in manifest.index:
+            continue
+        reference = normalize(str(manifest.loc[clip_id, "transcript"]))
+        hypothesis = normalize(str(heard))
+        for finding in findings_for(reference, hypothesis, lexicon):
+            rows.append(
+                {
+                    **finding,
+                    "clip_id": clip_id,
+                    "provider": provider,
+                    "accent": manifest.loc[clip_id, "accent"],
+                    "tier": manifest.loc[clip_id, "tier"],
+                    "domain": manifest.loc[clip_id, "domain"],
+                }
+            )
+
+    population = pd.DataFrame(rows)
+    print(f"{len(population)} findings across {len(transcripts)} transcripts.")
+    selected = select_findings(population, target=SHEET_SIZE, seed=config.SEED)
+
+    sheet_rows = []
+    for finding_id, (_, row) in enumerate(selected.iterrows(), start=1):
+        reference = normalize(str(manifest.loc[row["clip_id"], "transcript"]))
+        hypothesis = normalize(str(transcripts[(row["provider"], row["clip_id"])]))
+        shown_ref, shown_hyp = excerpt_around(
+            reference, hypothesis, int(row["ref_index"])
+        )
+        sheet_rows.append(
             {
-                "row_id": row_id,
-                "clip_id": clip_id,
+                "finding_id": finding_id,
+                "clip_id": row["clip_id"],
                 "provider": row["provider"],
                 "accent": row["accent"],
                 "tier": row["tier"],
                 "domain": row["domain"],
-                "ref_excerpt": excerpt(marked_ref),
-                "hyp_excerpt": excerpt(marked_hyp),
-                "entity_expected": manifest.loc[clip_id, "drug_terms"]
-                or manifest.loc[clip_id, "dose_strings"]
-                or "",
-                "entity_transcribed": "",
-                "auto_flag": row["auto_flag"],
-                "needs_listen": "",  # Set in the page when a row needs audio.
+                "kind": row["kind"],
+                "weight": float(row["weight"]),
+                "expected": row["expected"],
+                "heard": row["heard"],
+                "weight": round(float(row["weight"]), 4),
+                "ref_excerpt": shown_ref,
+                "hyp_excerpt": shown_hyp,
+                "auto_flag": f"{row['kind']} candidate",
+                "needs_listen": "",
                 "failure_code": "",  # Suwaid's.
                 "severity": "",  # Suwaid's.
                 "note": "",  # Suwaid's.
             }
         )
 
-    sheet = pd.DataFrame(rows, columns=SHEET_COLUMNS)
+    sheet = pd.DataFrame(sheet_rows, columns=SHEET_COLUMNS)
     config.TAXONOMY.mkdir(parents=True, exist_ok=True)
     sheet.to_csv(config.TAXONOMY / "failure_taxonomy.csv", index=False)
+    config.RESULTS.mkdir(parents=True, exist_ok=True)
+    population.to_csv(config.RESULTS / "all_findings.csv", index=False)
     _write_labeling_page(sheet, manifest)
 
     print(f"Wrote {len(sheet)} rows to {config.TAXONOMY / 'failure_taxonomy.csv'}")
+    print(f"Wrote {config.RESULTS / 'all_findings.csv'} ({len(population)} findings)")
     print(f"Wrote {config.TAXONOMY / 'labeling.html'}")
+    print("\nSampling, so a rate can be computed from the labels:")
+    for kind, group in selected.groupby("kind"):
+        n = len(population[population.kind == kind])
+        print(f"  {kind:10s} {len(group):3d} of {n:3d}   weight {group.weight.iloc[0]:.2f}")
     print_instructions()
     return sheet
 
@@ -313,7 +362,7 @@ def _write_labeling_page(sheet: pd.DataFrame, manifest: pd.DataFrame) -> None:
         )
         payload.append(
             {
-                "row_id": int(row["row_id"]),
+                "finding_id": int(row["finding_id"]),
                 "clip_id": row["clip_id"],
                 "provider": row["provider"],
                 "accent": row["accent"],
@@ -321,8 +370,11 @@ def _write_labeling_page(sheet: pd.DataFrame, manifest: pd.DataFrame) -> None:
                 "domain": row["domain"],
                 "ref": row["ref_excerpt"],
                 "hyp": row["hyp_excerpt"],
-                "entity": row["entity_expected"],
                 "flag": row["auto_flag"],
+                "kind": row["kind"],
+                "weight": float(row["weight"]),
+                "expected": row["expected"],
+                "heard_entity": row["heard"],
                 "expected_drugs": evidence["expected"],
                 "heard_drugs": evidence["heard_known"],
             }
@@ -385,6 +437,8 @@ _LABELING_TEMPLATE = r"""<!doctype html>
   .drugs { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
            background:var(--panel); border-radius:6px; padding:8px 10px; margin:8px 0; }
   .drugs b { color:var(--mark); }
+  mark.judged { color:var(--bg); background:var(--mark); padding:1px 5px;
+                border-radius:3px; font-weight:700; }
   .caveat { display:block; font-family:-apple-system,BlinkMacSystemFont,sans-serif;
             font-size:11px; color:var(--muted); margin-top:4px; }
   .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:4px; }
@@ -422,7 +476,7 @@ const STORAGE_KEY = "scribecheck-labels-v1";
 // Keyed on clip and provider rather than row number, so labels survive the
 // sheet being regenerated. Row order is a presentation detail; the pair is the
 // identity of the thing being judged.
-const keyOf = (r) => r.clip_id + "|" + r.provider;
+const keyOf = (r) => r.clip_id + "|" + r.provider + "|" + r.finding_id;
 
 let state = {};
 
@@ -469,8 +523,8 @@ function refresh() {
   let n = 0;
   for (const r of ROWS) {
     const k = keyOf(r);
-    const card = document.getElementById("card-" + r.row_id);
-    const tag = document.getElementById("done-" + r.row_id);
+    const card = document.getElementById("card-" + r.finding_id);
+    const tag = document.getElementById("done-" + r.finding_id);
     if (isDone(k)) {
       n++;
       card.classList.add("done");
@@ -485,7 +539,10 @@ function refresh() {
 }
 
 function markup(text) {
-  return String(text).replace(/\*([^*]+)\*/g, "<mark>$1</mark>");
+  // [[x]] is the entity this row is asking about. *x* is an ordinary diff.
+  return String(text)
+    .replace(/\[\[([^\]]+)\]\]/g, '<mark class="judged">$1</mark>')
+    .replace(/\*([^*]+)\*/g, "<mark>$1</mark>");
 }
 
 const escapeHtml = (s) =>
@@ -520,32 +577,37 @@ function drugLine(r) {
 }
 
 document.getElementById("rows").innerHTML = ROWS.map((r) => `
-  <div class="card" id="card-${r.row_id}">
-    <div class="tags">#${r.row_id} &middot; ${escapeHtml(r.provider)} &middot; ${escapeHtml(r.accent)}
+  <div class="card" id="card-${r.finding_id}">
+    <div class="tags">#${r.finding_id} &middot; ${escapeHtml(r.provider)} &middot; ${escapeHtml(r.accent)}
       &middot; tier ${escapeHtml(r.tier)} &middot; ${escapeHtml(r.domain)} &middot; ${escapeHtml(r.flag)}</div>
     <audio controls preload="none" src="../data/audio/${encodeURIComponent(r.clip_id)}.wav"></audio>
     <div class="text"><span class="label">reference&nbsp;</span>${markup(escapeHtml(r.ref))}</div>
     <div class="text"><span class="label">heard&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${markup(escapeHtml(r.hyp))}</div>
-    ${drugLine(r)}
+    <div class="drugs"><span class="label">this row&nbsp;</span>
+      <b>${escapeHtml(r.kind)}</b> &middot; expected <b>${escapeHtml(r.expected)}</b>${
+        r.heard_entity ? " &middot; heard <b>" + escapeHtml(r.heard_entity) + "</b>"
+                       : " &middot; nothing recognisable in its place"}
+      <span class="caveat">one error per row. Judge only the highlighted entity;
+        other differences on the line belong to their own rows.</span></div>
     <div class="controls">
-      <select data-row="${r.row_id}" data-field="failure_code">
+      <select data-row="${r.finding_id}" data-field="failure_code">
         <option value="">code...</option>
         ${CODES.map((c) => `<option value="${c}">${c}</option>`).join("")}
       </select>
-      <select data-row="${r.row_id}" data-field="severity">
+      <select data-row="${r.finding_id}" data-field="severity">
         <option value="">severity...</option>
         ${SEVERITIES.map((s) => `<option value="${s}">${s}</option>`).join("")}
       </select>
-      <input type="text" data-row="${r.row_id}" data-field="note" placeholder="note (optional)">
+      <input type="text" data-row="${r.finding_id}" data-field="note" placeholder="note (optional)">
       <label class="listen">
-        <input type="checkbox" data-row="${r.row_id}" data-field="needs_listen"> needs a listen
+        <input type="checkbox" data-row="${r.finding_id}" data-field="needs_listen"> needs a listen
       </label>
-      <span class="done-tag" id="done-${r.row_id}"></span>
+      <span class="done-tag" id="done-${r.finding_id}"></span>
     </div>
   </div>`).join("");
 
 const byRowId = {};
-for (const r of ROWS) byRowId[r.row_id] = r;
+for (const r of ROWS) byRowId[r.finding_id] = r;
 
 function restoreInputs() {
   for (const el of document.querySelectorAll("[data-row]")) {
@@ -577,23 +639,26 @@ document.getElementById("next").addEventListener("click", () => {
     alert("All " + ROWS.length + " rows are labeled.");
     return;
   }
-  document.getElementById("card-" + target.row_id)
+  document.getElementById("card-" + target.finding_id)
     .scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
-const HEADER = ["row_id","clip_id","provider","accent","tier","domain",
-                "ref_excerpt","hyp_excerpt","entity_expected","entity_transcribed",
-                "auto_flag","failure_code","severity","needs_listen","note"];
+// Must stay in the same order as the row built below, or the export writes
+// values under the wrong headings.
+const HEADER = ["finding_id","clip_id","provider","accent","tier","domain",
+                "kind","expected","heard","weight","ref_excerpt","hyp_excerpt",
+                "auto_flag","needs_listen","failure_code","severity","note"];
 
 document.getElementById("export").addEventListener("click", () => {
   const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const lines = [HEADER.join(",")];
   for (const r of ROWS) {
     const s = state[keyOf(r)] || {};
-    lines.push([r.row_id, r.clip_id, r.provider, r.accent, r.tier, r.domain,
-                r.ref, r.hyp, r.entity, "", r.flag,
-                s.failure_code || "", s.severity || "",
-                s.needs_listen ? "yes" : "", s.note || ""].map(esc).join(","));
+    lines.push([r.finding_id, r.clip_id, r.provider, r.accent, r.tier, r.domain,
+                r.kind, r.expected, r.heard_entity, r.weight,
+                r.ref, r.hyp, r.flag,
+                s.needs_listen ? "yes" : "",
+                s.failure_code || "", s.severity || "", s.note || ""].map(esc).join(","));
   }
   const url = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/csv" }));
   const link = document.createElement("a");

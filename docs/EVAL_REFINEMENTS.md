@@ -131,3 +131,41 @@ two understated the work.
   each, and the worked examples from rows 1 to 4, written for the project page
   so a reader can see how the classifications were applied rather than only
   the counts. Drafted in conversation, not yet in the repo.
+
+---
+
+## R5. Four defects the test suite could not see
+
+**Observed.** Suwaid labelled twelve rows and found four faults. All 228 tests
+passed throughout, because every test checked the code that builds the sheet and
+none checked the sheet.
+
+**What each was.** A drug destroyed into a non-word was blamed on a different
+drug nearby that had been transcribed perfectly, so 14 of 19 substitutions were
+false and the headline read 7 against 2 when the truth was 1 against 0. The
+excerpt centred on the first textual difference, usually capitalisation, so 15
+of 100 rows hid the clinical entity being judged, one of them a dose doubling
+from 200mg to 400mg. The sheet took one row per clip filled by priority band, so
+the largest error class reached it at 5 percent while three classes reached 100,
+and no rate computed from it would have described anything real. And there was
+no way to record that nothing was wrong, which 12 rows needed.
+
+**Changed.** Findings became the primitive: one record per error, naming what
+was expected, what was heard, and where it sits. The sheet is one row per
+finding, drawn by stratified sampling with inclusion weights so summed weights
+recover the population. Each row centres on its own entity and marks it
+distinctly from ordinary diffs.
+
+**Caught while verifying in the browser rather than in a test.** Labelling a
+DOSE-MISS row silently did nothing: a select rejects a value that is not one of
+its options, and the taxonomy had no DOSE-MISS code although the detector emits
+92 of them. The progress counter sat one behind and that was the only visible
+symptom. There is now a test asserting every kind the detector emits is a
+selectable code.
+
+**Terminology.** *Instrument validation*: the measuring device gets tested
+before the measurements it produces are trusted. The general lesson is narrower
+and more useful than "write more tests": these tests all verified the producer,
+not the artifact, and the artifact is what a human uses. Checking the emitted
+page, the emitted sheet and the emitted numbers is a different activity from
+unit-testing the functions that emit them.

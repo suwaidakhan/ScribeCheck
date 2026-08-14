@@ -304,8 +304,8 @@ ask the labeller questions the screen does not contain the answer to.
 
 ## Progress
 
-- [ ] A1 W1 false substitutions
-- [ ] A2 W2 excerpt centring
-- [ ] A3 W3 sampling disclosure
-- [ ] A4 W6 NO-ERROR code
-- [ ] A5 regenerate, verify in browser, re-measure the two counts
+- [x] A1 W1 false substitutions: 19 to 5, matches the manual audit
+- [x] A2 W2 excerpt centring: rows hiding their entity, 15 to 0
+- [x] A3 W3 stratified sampling with weights, not just a disclosure
+- [x] A4 W6 NO-ERROR added, and DOSE-MISS which was missing entirely
+- [x] A5 regenerated, browser-verified, both counts re-measured

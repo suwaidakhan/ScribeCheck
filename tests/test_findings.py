@@ -221,3 +221,92 @@ class TestStratifiedSelection:
         out = select_findings(self.frame({"DRUG-SUB": 5, "DRUG-DEL": 10}), target=500)
         assert len(out) == 15
         assert (out.weight == 1.0).all()
+
+
+class TestExcerptCentresOnTheFinding:
+    """W2. The row must show the error it is asking about.
+
+    The old excerpt centred on the first textual difference, which is usually
+    capitalisation, so the clinical entity being judged was often off screen.
+    Row 15 hid 200mg becoming 400mg. Row 12 looked clean while multivitamin had
+    become emotivitamin at the end of the clip.
+    """
+
+    def test_centres_on_a_late_error_not_an_early_diff(self):
+        from src.findings import excerpt_around
+
+        ref = "The following medication change was made ADDED folate thiamine and a multivitamin"
+        hyp = "the following medication change was made added folate thiamine and emotivitamin"
+        # The finding sits at the last token, far past the capitalisation diff.
+        shown_ref, shown_hyp = excerpt_around(ref, hyp, ref_index=len(ref.split()) - 1)
+        assert "multivitamin" in shown_ref
+        assert "emotivitamin" in shown_hyp
+
+    def test_the_early_diff_alone_does_not_drag_the_window(self):
+        from src.findings import excerpt_around
+
+        ref = "The " + " ".join(["filler"] * 30) + " metformin"
+        hyp = "the " + " ".join(["filler"] * 30) + " wxyzzy"
+        shown_ref, _ = excerpt_around(ref, hyp, ref_index=len(ref.split()) - 1)
+        assert "metformin" in shown_ref
+
+    def test_marks_the_finding_distinctly_from_ordinary_diffs(self):
+        from src.findings import excerpt_around
+
+        shown_ref, _ = excerpt_around(
+            "takes metformin daily", "takes wxyzzy daily", ref_index=1
+        )
+        assert "[[metformin]]" in shown_ref, "the judged entity needs its own marker"
+
+    def test_short_text_is_shown_whole(self):
+        from src.findings import excerpt_around
+
+        shown_ref, shown_hyp = excerpt_around("takes metformin", "takes wxyzzy", 1)
+        assert "takes" in shown_ref and "takes" in shown_hyp
+
+    def test_a_dose_finding_shows_both_numbers(self):
+        from src.findings import excerpt_around
+
+        ref = " ".join(["w"] * 20) + " ibuprofen 200 mg and 10 mg"
+        hyp = " ".join(["w"] * 20) + " ibuprofen 400 mg and 10 mg"
+        shown_ref, shown_hyp = excerpt_around(ref, hyp, ref_index=21)
+        assert "200" in shown_ref
+        assert "400" in shown_hyp
+
+
+class TestEveryFindingKindHasACode:
+    """The dropdown must be able to express what the detector produces.
+
+    Found in a browser: labelling a DOSE-MISS row silently did nothing. A
+    select rejects a value that is not one of its options, so the row never
+    completed and the progress counter sat one behind. 92 of the 328 findings
+    are DOSE-MISS and the taxonomy had no code for them.
+    """
+
+    KINDS = {"DRUG-SUB", "DRUG-DEL", "DOSE-VAL", "DOSE-UNIT", "DOSE-MISS", "NEG-FLIP"}
+
+    def test_every_kind_the_detector_emits_is_a_selectable_code(self):
+        from src.failures import CODE_DEFINITIONS
+
+        codes = {code for code, _ in CODE_DEFINITIONS}
+        assert self.KINDS <= codes, f"no code for: {self.KINDS - codes}"
+
+    def test_the_judgment_codes_beyond_the_detector_survive(self):
+        # The human can see things the detector cannot, and must keep saying so.
+        from src.failures import CODE_DEFINITIONS
+
+        codes = {code for code, _ in CODE_DEFINITIONS}
+        assert {"TERM-CORRUPT", "PHON-ACCENT", "BENIGN", "NO-ERROR"} <= codes
+
+    def test_the_real_corpus_emits_no_kind_without_a_code(self):
+        import pandas as pd
+        from src.failures import CODE_DEFINITIONS
+
+        path = "results/all_findings.csv"
+        try:
+            emitted = set(pd.read_csv(path)["kind"])
+        except FileNotFoundError:
+            import pytest
+
+            pytest.skip(f"{path} not built yet")
+        assert emitted <= {code for code, _ in CODE_DEFINITIONS}

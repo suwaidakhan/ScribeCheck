@@ -156,11 +156,13 @@ class TestLabelingPageIsValid:
 
         sheet = pd.DataFrame(
             [{
-                "row_id": 1, "clip_id": "c1", "provider": "aai", "accent": "hausa",
-                "tier": "A", "domain": "clinical", "ref_excerpt": "takes *metformin*",
-                "hyp_excerpt": "takes *metronidazole*", "entity_expected": "metformin",
-                "entity_transcribed": "", "auto_flag": "DRUG-SUB candidate",
-                "needs_listen": "", "failure_code": "", "severity": "", "note": "",
+                "finding_id": 1, "clip_id": "c1", "provider": "aai", "accent": "hausa",
+                "tier": "A", "domain": "clinical", "kind": "DRUG-SUB",
+                "expected": "metformin", "heard": "metronidazole", "weight": 1.0,
+                "ref_excerpt": "takes [[metformin]]",
+                "hyp_excerpt": "takes *metronidazole*",
+                "auto_flag": "DRUG-SUB candidate", "needs_listen": "",
+                "failure_code": "", "severity": "", "note": "",
             }],
             columns=failures.SHEET_COLUMNS,
         )
@@ -197,7 +199,8 @@ class TestLabelingPageIsValid:
     def test_the_page_carries_its_persistence(self, tmp_path):
         # Without these the page loses everything the moment it is closed.
         page = self._page(tmp_path)
-        for needed in ["localStorage", "scribecheck-labels-v1", "parseCsv", "needs_listen"]:
+        for needed in ["localStorage", "scribecheck-labels-v1", "parseCsv",
+                       "needs_listen", "finding_id"]:
             assert needed in page, f"{needed} missing from the labeling page"
 
     def test_transcript_text_is_escaped_before_markup(self, tmp_path):
@@ -265,11 +268,12 @@ class TestDrugEvidence:
 
         sheet = pd.DataFrame(
             [{
-                "row_id": 1, "clip_id": "c1", "provider": "dg-medical",
+                "finding_id": 1, "clip_id": "c1", "provider": "dg-medical",
                 "accent": "igbo", "tier": "A", "domain": "clinical",
-                "ref_excerpt": "*quetiapine* fumarate 25 mg",
+                "kind": "DRUG-SUB", "expected": "quetiapine", "heard": "humira",
+                "weight": 1.0,
+                "ref_excerpt": "[[quetiapine]] fumarate 25 mg",
                 "hyp_excerpt": "*glatropin* *humira* 25 mg",
-                "entity_expected": "quetiapine", "entity_transcribed": "",
                 "auto_flag": "DRUG-SUB candidate", "needs_listen": "",
                 "failure_code": "", "severity": "", "note": "",
             }],
@@ -283,13 +287,13 @@ class TestDrugEvidence:
             config.TAXONOMY = original
         page = (tmp_path / "labeling.html").read_text()
 
-        assert "drugLine" in page, "the page never renders the lookup"
-        assert "expected_drugs" in page and "heard_drugs" in page
-        assert "openFDA" in page, "the caveat about partial coverage is missing"
+        assert "this row" in page, "the page never states which error it is asking about"
+        assert "DRUG-SUB" in page and "quetiapine" in page
+        assert "one error per row" in page, "the one-error-per-row rule is not stated"
 
-    def test_the_page_states_the_lookup_is_partial(self, tmp_path):
-        # Absence from a partial directory is evidence, not proof, and the page
-        # has to say so or it will be read as a verdict.
+    def test_the_page_tells_the_labeller_to_judge_only_this_row(self, tmp_path):
+        # A line can carry six changed words belonging to six different rows.
+        # Without this the labeller judges the line rather than the finding.
         from src.failures import _LABELING_TEMPLATE
 
-        assert "probably not a drug, not certainly" in _LABELING_TEMPLATE
+        assert "Judge only the highlighted entity" in _LABELING_TEMPLATE
