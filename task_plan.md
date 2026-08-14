@@ -1,4 +1,4 @@
-# ExecPlan: ScribeCheck overnight build (phases 01-05, API keys blocked)
+# ExecPlan: ScribeCheck
 
 Started 2026-08-05 20:00 local. Owner: Claude Code. Human: Suwaid Khan.
 
@@ -243,3 +243,69 @@ the 8.9 first written.
 
 Verified as a stranger sees it, by cloning the public URL fresh: no `.env`, no
 audio, no cache, 220 tests passing with no keys present.
+
+
+---
+
+# ExecPlan addendum: evaluation harness v2
+
+Opened 2026-08-14. Trigger: Suwaid labelled twelve rows and found four defects
+the 228-test suite did not catch. Full analysis in `docs/PRD_EVAL_V2.md`, 15
+weaknesses with measured blast radius.
+
+## Purpose
+
+Make the labelling instrument trustworthy before any labels are recorded
+against it. Today three defects would put wrong numbers in the writeup and two
+ask the labeller questions the screen does not contain the answer to.
+
+## Phases
+
+- **A. Blocking.** W1 false substitutions, W2 the excerpt, W3 sampling
+  disclosure, W6 a code for no error. Nothing may be labelled until these land.
+  Scoring and display only, no API calls, no cost.
+- **B. Before any number is published.** W9 spoken punctuation, W11 recall-only
+  drug accuracy, W13 paired significance test.
+- **C. Before the taxonomy is called sound.** W4 the lexicon, W5 multiple
+  errors per row, W7 intra-rater reliability, W8 a calibration pass.
+- **D. Writeup framing.** W14 prior art, W15 potential against realised harm,
+  W12 speaker-clustered intervals, W10 an uncertainty flag.
+
+## Method, per `~/.claude/rules/common/coding-style.md`
+
+- TDD without exception. Failing test first, RED confirmed in the transcript,
+  then the implementation, then refactor. Every weakness above has a
+  reproduction already measured against real data, so each starts as a test
+  that encodes that reproduction.
+- Surgical diffs. W1 is a candidate-filter change inside one function. W2 is a
+  centring change inside one function. Neither is licence to restructure
+  scoring.
+- No new abstraction without a second caller. The temptation here is a general
+  "entity span" object; it gets built only if W3 option 3 is chosen and two
+  callers exist.
+- Minimum code for the problem in front of us. W6 is a list entry, not a
+  taxonomy redesign.
+- Catch the four repeat failures. The Kitchen Sink is the live risk: 15
+  weaknesses is an invitation to rewrite the pipeline. Phase A is four fixes
+  and stops there.
+
+## Definition of done, phase A
+
+- `score_drugs` returns deletion, not substitution, when a drug is mangled into
+  a non-word beside a correctly transcribed different drug. Reproduction test
+  green.
+- Every one of the 100 rows displays every clinical entity present in its
+  transcripts. Measured, not asserted: the count of rows hiding a drug, dose or
+  negation is 0, down from 15.
+- RESULTS states the sampling scheme and forbids computing a rate from the
+  sheet.
+- `NO-ERROR` exists and is distinct from `BENIGN`.
+- Full suite green, and the browser check repeated on the regenerated page.
+
+## Progress
+
+- [ ] A1 W1 false substitutions
+- [ ] A2 W2 excerpt centring
+- [ ] A3 W3 sampling disclosure
+- [ ] A4 W6 NO-ERROR code
+- [ ] A5 regenerate, verify in browser, re-measure the two counts
