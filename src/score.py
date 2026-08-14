@@ -100,7 +100,21 @@ def score_drugs(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
 
         centre = _aligned_centre(ref_index, len(ref_tokens), len(hyp_tokens))
         nearby = _window(hyp_tokens, centre)
-        if any(token in lexicon and token != mention for token in nearby):
+        # A substitute has to be a drug the reference never asked for. Another
+        # reference drug sitting nearby is not evidence that this one was
+        # swapped: it is its own mention, scored on its own line, and it is
+        # usually there because it was transcribed correctly.
+        #
+        # Without this, row 10 read as a substitution. trimethoprim was
+        # destroyed into "trimethropium", a non-word, and pyrimethamine two
+        # words away took the blame despite being perfect. 14 of the 19
+        # substitutions in the first full run were produced this way, which put
+        # Whisper's headline count at 7 when the true figure is 1.
+        others = set(mentions) - {mention}
+        if any(
+            token in lexicon and token != mention and token not in others
+            for token in nearby
+        ):
             result["substitution"] += 1
         else:
             result["deletion"] += 1

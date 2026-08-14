@@ -185,3 +185,71 @@ class TestNegations:
     def test_a_negation_the_hypothesis_invents_is_not_counted(self):
         # Measured over reference cues, same as M2.
         assert score_negations("fever present", "no fever present")["cues"] == 0
+
+
+class TestSubstitutionIsNotCreditedToAnotherSurvivingDrug:
+    """W1. A drug mangled into a non-word is a deletion, not a substitution.
+
+    Found by labelling row 10: `trimethoprim` became `trimethropium`, a
+    non-word, and the scorer called it a substitution because `pyrimethamine`
+    sat nearby, was in the lexicon, and had been transcribed perfectly. 14 of
+    the 19 substitutions in the real results were produced this way.
+
+    The distinction is the whole point of M2. A substitution is dangerous
+    because the output still reads as a valid clinical sentence; a deletion
+    leaves a hole a reader can notice. Conflating them overstates the danger.
+    """
+
+    LEX = {"aspirin", "warfarin", "pyrimethamine", "trimethoprim", "metformin",
+           "metronidazole", "haloperidol", "chlorpromazine"}
+
+    def test_a_mangled_drug_beside_a_surviving_drug_is_a_deletion(self):
+        result = score_drugs(
+            "patient takes aspirin and warfarin",
+            "patient takes aspirin and wxyzzy",
+            self.LEX,
+        )
+        assert result["deletion"] == 1
+        assert result["substitution"] == 0
+        assert result["correct"] == 1
+
+    def test_the_row_10_case(self):
+        # Real data. pyrimethamine survived, trimethoprim was destroyed.
+        result = score_drugs(
+            "drugs include pyrimethamine proguanil chlorproguanil and trimethoprim",
+            "drugs include pyrimethamine proguanil chlorpropuanil and trimethropium",
+            self.LEX,
+        )
+        assert result["substitution"] == 0, "pyrimethamine survived, it is not a substitute"
+        assert result["deletion"] == 1
+        assert result["correct"] == 1
+
+    def test_a_genuine_substitution_is_still_caught(self):
+        # The fix must not silence the real thing.
+        result = score_drugs(
+            "takes metformin daily", "takes metronidazole daily", self.LEX
+        )
+        assert result["substitution"] == 1
+        assert result["deletion"] == 0
+
+    def test_two_drugs_swapped_for_each_other_are_both_substitutions(self):
+        # haloperidol and chlorpromazine are both antipsychotics and both in the
+        # reference. Each is missing from where it belongs, and the other one is
+        # not a valid excuse for it.
+        result = score_drugs(
+            "gave haloperidol then chlorpromazine",
+            "gave chlorpromazine then haloperidol",
+            self.LEX,
+        )
+        assert result["correct"] == 2, "both drugs are present, order is not the metric"
+
+    def test_a_real_substitute_wins_over_a_surviving_reference_drug(self):
+        # aspirin survived AND metronidazole appeared where warfarin should be.
+        # The genuine substitute must be preferred over the innocent bystander.
+        result = score_drugs(
+            "takes aspirin and warfarin",
+            "takes aspirin and metronidazole",
+            self.LEX,
+        )
+        assert result["substitution"] == 1
+        assert result["correct"] == 1
