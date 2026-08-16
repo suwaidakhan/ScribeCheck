@@ -5,9 +5,11 @@ DOSE-MISS,3 hours,,3,233b65fe511818e326eff9bffdc2bf6f,aai,hausa,A,clinical
 DOSE-UNIT,40 meq,40 mcg,16,27984ad90703cedf54d2c84bfc6e1a3c,aai,hausa,A,clinical
 DOSE-VAL,8 units,80 units,6,320840b5470cf91679cb154ecddc4d86,aai,hausa,A,clinical
 DRUG-DEL,morphine,,12,5b5cea61187384389906b36683ffa428,aai,zulu,B,clinical
+DRUG-SUB,diamorphine,codeine,21,5f6166b9974aacf66ecec0d39f992fd9,aai,bekwarra,C,general
 ASR-COLLAPSE,encounter for supervision of other normal pregnancy 1st trimester tablet oral 28 cyclafem 7 7,subluxation of other 1st phalangeal tubercle fracture of lateral formula,0,8132758125fa0e3156821052a383f9ef,aai,hausa,A,clinical
 DRUG-DEL,imatinib,,10,927f85be5b655d2292720b02da67a9f2,aai,pidgin,B,clinical
 DRUG-SUB,ropinirole,propranolol,14,950669fd990036359a84fc27a609d98b,aai,hausa,A,clinical
+DRUG-SUB,dopa,dopamine,8,a118dd3124494bfe59ab23ed58e83735,aai,idah,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,aai,idah,C,clinical
 DRUG-DEL,quetiapine,,0,a52cc1bdf941a9b4d76061ddbda05072,aai,igbo,A,clinical
 DOSE-VAL,445 kg,4445 kg,7,aeffc6466b2f3e6a60d1a381c6688d62,aai,igbo,A,general
@@ -33,11 +35,13 @@ DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,dg-general,igbo,A,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,dg-general,swahili,A,general
 DOSE-MISS,4 l,,5,20d0b5e49fb27db230bccda1d2c38946,dg-general,delta,C,clinical
 DRUG-DEL,atovaquone,,0,22347a0c96066c23a0b4037028963e8c,dg-general,kinyarwanda,B,clinical
+DRUG-DEL,dilantin,,2,24e4da52fc2d6869251f9c9de581409c,dg-general,ekpeye,C,clinical
 DOSE-MISS,5 ml,,8,25dead43f9b4f15ff2360caf740a560c,dg-general,yoruba,A,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,dg-general,xhosa,B,clinical
 DOSE-UNIT,40 meq,40 mg,16,27984ad90703cedf54d2c84bfc6e1a3c,dg-general,hausa,A,clinical
 DRUG-DEL,multivitamin,,35,2a2db36f700c4b370d82f111f4e23096,dg-general,etsako,C,clinical
 ASR-COLLAPSE,powder intravenous xerava eravacycline dihydrochloride eq 50 mg base vial,barda intravenous ceraba edavax cyclin dehydrochloride eq 50 milligram base per vi al,0,2eaf4bbff8454dc9f957c29a33be26e5,dg-general,eleme,C,clinical
+DRUG-DEL,dilantin,,4,2f11308426efe80f4c4a23795b245383,dg-general,swahili,A,clinical
 DOSE-VAL,8 units,80 units,6,320840b5470cf91679cb154ecddc4d86,dg-general,hausa,A,clinical
 DRUG-DEL,milrinone,,1,3e15362de5160160b9b6dc4a1b7b5173,dg-general,idah,C,clinical
 DRUG-DEL,labetalol,,7,3fd85b94085df416782fb04d0f9da75a,dg-general,kinyarwanda,B,clinical
@@ -46,6 +50,7 @@ DOSE-VAL,15 mg,50 mg,11,47563df782e059f397a062dc9c49dedc,dg-general,ebira,B,clin
 DOSE-VAL,35 ml,335 ml,3,52ad387abe4206177fecb12004fc81c5,dg-general,pidgin,B,clinical
 ASR-COLLAPSE,uo 45 60 cc hr,u 045 to 60 cc per hour,0,5726844dc6ed872cbd29dced93713dd1,dg-general,igbo,A,clinical
 DRUG-DEL,morphine,,12,5b5cea61187384389906b36683ffa428,dg-general,zulu,B,clinical
+DRUG-DEL,diamorphine,,21,5f6166b9974aacf66ecec0d39f992fd9,dg-general,bekwarra,C,general
 DRUG-DEL,agrylin,,14,5f64f9fc4a594adc778f0a2700d116e6,dg-general,yoruba,A,clinical
 DOSE-MISS,60 ml,,3,68d7b378f686a4ea235df042be92df7c,dg-general,yoruba,A,clinical
 DRUG-DEL,meprobamate,,6,6b6bd6a9b36dbd20ca8ba0b48a0e83c0,dg-general,igbo,A,clinical
@@ -61,6 +66,7 @@ ASR-COLLAPSE,fen tf 130 cc k d of bm 32 with promod pe 32 with promod,f e n t f 
 DRUG-DEL,trimethoprim,,10,8cb3809701786ccfebe73b788fdbf219,dg-general,setswana,B,general
 DRUG-DEL,imatinib,,10,927f85be5b655d2292720b02da67a9f2,dg-general,pidgin,B,clinical
 ASR-COLLAPSE,labetalol 10 20 mg iv q 4 h prn sbp 140 order date 21 at,larvetlo 10 to 20 milligram intravenous q 4 h as a 20 systolic blood pressure,0,95db94bcf9a5dca2090b618996026b61,dg-general,mada,C,clinical
+DRUG-SUB,dopa,dopamine,8,a118dd3124494bfe59ab23ed58e83735,dg-general,idah,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,dg-general,idah,C,clinical
 NEG-FLIP,no,,9,a46605b3fdc92295cbd88bb861487e58,dg-general,ijaw,A,general
 DRUG-DEL,quetiapine,,0,a52cc1bdf941a9b4d76061ddbda05072,dg-general,igbo,A,clinical
@@ -107,6 +113,7 @@ DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,dg-medical,igbo,A,clinical
 DOSE-MISS,100 ml,,18,1dda8dca0b084c03fc5ea2a901de6043,dg-medical,igbo,A,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,dg-medical,swahili,A,general
 DOSE-MISS,4 l,,5,20d0b5e49fb27db230bccda1d2c38946,dg-medical,delta,C,clinical
+DRUG-DEL,dilantin,,2,24e4da52fc2d6869251f9c9de581409c,dg-medical,ekpeye,C,clinical
 DOSE-MISS,5 ml,,8,25dead43f9b4f15ff2360caf740a560c,dg-medical,yoruba,A,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,dg-medical,xhosa,B,clinical
 DOSE-UNIT,40 meq,40 mg,16,27984ad90703cedf54d2c84bfc6e1a3c,dg-medical,hausa,A,clinical
@@ -117,6 +124,7 @@ DRUG-DEL,amnesteem,,15,44fce3c7ec19dff506083c8a906750a3,dg-medical,ijaw,A,clinic
 DOSE-VAL,15 mg,50 mg,11,47563df782e059f397a062dc9c49dedc,dg-medical,ebira,B,clinical
 DOSE-VAL,35 ml,335 ml,3,52ad387abe4206177fecb12004fc81c5,dg-medical,pidgin,B,clinical
 DRUG-DEL,morphine,,12,5b5cea61187384389906b36683ffa428,dg-medical,zulu,B,clinical
+DRUG-DEL,diamorphine,,21,5f6166b9974aacf66ecec0d39f992fd9,dg-medical,bekwarra,C,general
 DRUG-DEL,agrylin,,14,5f64f9fc4a594adc778f0a2700d116e6,dg-medical,yoruba,A,clinical
 ASR-COLLAPSE,u 0 30 60 ml hr all night,,0,68d7b378f686a4ea235df042be92df7c,dg-medical,yoruba,A,clinical
 DRUG-DEL,meprobamate,,6,6b6bd6a9b36dbd20ca8ba0b48a0e83c0,dg-medical,igbo,A,clinical
@@ -133,6 +141,7 @@ DOSE-VAL,113 days,13 days,2,957f35f6f15f3598a944d8e025c18c1e,dg-medical,hausa,A,
 ASR-COLLAPSE,labetalol 10 20 mg iv q 4 h prn sbp 140 order date 21 at,lavatolol 10 to 20 milligram intravenous q 4 h as a 20 minute systolic blood,0,95db94bcf9a5dca2090b618996026b61,dg-medical,mada,C,clinical
 NEG-FLIP,no,,7,96c0239bebf9812f391113c433a60ac3,dg-medical,swahili,A,clinical
 DOSE-VAL,500 mg,100 mg,1,9d77d58566ed0e963ae1123e3ab50cee,dg-medical,idoma,B,clinical
+DRUG-SUB,dopa,dopamine,8,a118dd3124494bfe59ab23ed58e83735,dg-medical,idah,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,dg-medical,idah,C,clinical
 DRUG-SUB,quetiapine,humira,0,a52cc1bdf941a9b4d76061ddbda05072,dg-medical,igbo,A,clinical
 ASR-COLLAPSE,sleeping and abg at 300,sleeping and a b g at 0300,0,a7046fce47c40b1fd7e5e841203d129f,dg-medical,urhobo,B,clinical
@@ -172,6 +181,7 @@ DRUG-DEL,pimozide,,5,1ab41137caf537cf2d196c3914d95b48,gemini,isizulu,B,clinical
 NEG-FLIP,never,,1,1e1f4d7a25294e5853a6c798329b69b9,gemini,swahili,A,general
 DOSE-MISS,4 l,,5,20d0b5e49fb27db230bccda1d2c38946,gemini,delta,C,clinical
 DRUG-DEL,atovaquone,,0,22347a0c96066c23a0b4037028963e8c,gemini,kinyarwanda,B,clinical
+DRUG-SUB,dilantin,dilaudid,2,24e4da52fc2d6869251f9c9de581409c,gemini,ekpeye,C,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,gemini,xhosa,B,clinical
 ASR-COLLAPSE,fen abd benign weight today 1630 down 80 gm on 80 cc kg d pe,f e n a b d b 9 way today 1630 down 80 gm on,0,2724a2c5e5300779ab3ada65f742cd32,gemini,kanuri,C,clinical
 DOSE-MISS,40 meq,,16,27984ad90703cedf54d2c84bfc6e1a3c,gemini,hausa,A,clinical
@@ -184,6 +194,7 @@ DOSE-VAL,15 mg,50 mg,11,47563df782e059f397a062dc9c49dedc,gemini,ebira,B,clinical
 DOSE-VAL,35 ml,335 ml,3,52ad387abe4206177fecb12004fc81c5,gemini,pidgin,B,clinical
 DOSE-MISS,2 l,,4,58fb549d14b07c3aae8b252439917dce,gemini,idoma,B,clinical
 DRUG-SUB,morphine,chloroquine,12,5b5cea61187384389906b36683ffa428,gemini,zulu,B,clinical
+DRUG-DEL,diamorphine,,21,5f6166b9974aacf66ecec0d39f992fd9,gemini,bekwarra,C,general
 DRUG-DEL,agrylin,,14,5f64f9fc4a594adc778f0a2700d116e6,gemini,yoruba,A,clinical
 NEG-FLIP,no,,4,63bd3c234d1d89a65ce8563f55787ac8,gemini,swahili,A,clinical
 DOSE-MISS,60 ml,,3,68d7b378f686a4ea235df042be92df7c,gemini,yoruba,A,clinical
@@ -202,6 +213,7 @@ ASR-COLLAPSE,8 prednisone 10 mg q day,it is prednison 10 mg quantity per day,0,9
 NEG-FLIP,no,,7,96c0239bebf9812f391113c433a60ac3,gemini,swahili,A,clinical
 DRUG-DEL,zosyn,,4,9a375dac7ab12b6d59cffdb932f4d50b,gemini,hausa,A,clinical
 DRUG-DEL,cefotaxime,,8,9b7de9c3315540a63648b9c1212db787,gemini,jaba,C,clinical
+DRUG-SUB,dopa,dopamine,8,a118dd3124494bfe59ab23ed58e83735,gemini,idah,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,gemini,idah,C,clinical
 DRUG-DEL,lopressor,,3,a3b4630a9a8ccf82303417432c662d3f,gemini,berom,C,clinical
 NEG-FLIP,no,,9,a46605b3fdc92295cbd88bb861487e58,gemini,ijaw,A,general
@@ -232,8 +244,8 @@ DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,gemini,swahili,A,clinica
 DRUG-DEL,ritonavir,,11,c361cf1ef4cfa79c13cac6ea5f92ff83,gemini,swahili,A,clinical
 DRUG-DEL,rituximab,,4,c43d8faa6efe9020bdd669a67ba1e988,gemini,efik,C,clinical
 DRUG-DEL,sucralfate,,9,cee69f2a5332655a8e0bf4626e3c67c5,gemini,ibibio,B,clinical
-DRUG-SUB,diltiazem,hydrocloride,8,cf42ee5d7ae6579d20f480a8cf8dc00f,gemini,ibibio,B,clinical
-DRUG-SUB,diltiazem,hydrocloride,8,cf42ee5d7ae6579d20f480a8cf8dc00f,gemini,ibibio,B,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,gemini,ibibio,B,clinical
+DRUG-DEL,diltiazem,,8,cf42ee5d7ae6579d20f480a8cf8dc00f,gemini,ibibio,B,clinical
 ASR-COLLAPSE,tablet chewable oral vyvanse lisdexamfetamine dimesylate 10 mg,comprimes trouble oral vivance dees en fetamine dimethylate comate 10 mg,0,cf605b3aaadbd365452e997fbc78122d,gemini,efik,C,clinical
 DOSE-VAL,40 ml,140 ml,2,eaa66b82d267fa11b54cf412eb32aab3,gemini,idoma,B,clinical
 DRUG-DEL,erythromycin,,0,ee52a0bb537315a9e13798dc8dfbd627,gemini,idoma,B,clinical
@@ -255,11 +267,13 @@ DOSE-MISS,4 l,,5,20d0b5e49fb27db230bccda1d2c38946,whisper,delta,C,clinical
 DRUG-DEL,atovaquone,,0,22347a0c96066c23a0b4037028963e8c,whisper,kinyarwanda,B,clinical
 DOSE-MISS,3 hours,,3,233b65fe511818e326eff9bffdc2bf6f,whisper,hausa,A,clinical
 ASR-COLLAPSE,isolette turned off,i select thundoff,0,23af1c6428d96f4537acf845c51b9085,whisper,ijaw,A,clinical
+DRUG-DEL,dilantin,,2,24e4da52fc2d6869251f9c9de581409c,whisper,ekpeye,C,clinical
 DRUG-DEL,conjugated,,6,2642efa06e8a4c32bc730201ae6b8110,whisper,xhosa,B,clinical
 DOSE-MISS,40 meq,,16,27984ad90703cedf54d2c84bfc6e1a3c,whisper,hausa,A,clinical
 DRUG-DEL,multivitamin,,35,2a2db36f700c4b370d82f111f4e23096,whisper,etsako,C,clinical
 DRUG-DEL,levonorgestrel,,10,2c417f9512707188cc0f0aba9d9a80ef,whisper,mada,C,clinical
 DRUG-DEL,levonorgestrel,,10,2c417f9512707188cc0f0aba9d9a80ef,whisper,mada,C,clinical
+DRUG-DEL,dilantin,,4,2f11308426efe80f4c4a23795b245383,whisper,swahili,A,clinical
 NEG-FLIP,no,,9,36c14ff38c73d6ebc90db41430b058d1,whisper,igbo,A,clinical
 ASR-COLLAPSE,a plan trial off cpap today complate 7 day course for omphalitis cont feeding adv,a plain tray of tpap today completes 7 days course for opalipis continue feeding a,0,395b59676aa6355fae06bacef67fc140,whisper,khana,C,clinical
 ASR-COLLAPSE,no acute distress eyes conjunctiva perrl,no acute distress eyes conjunctiva p e r r l,0,39bf3e3ee7075614072deb7a5280ab60,whisper,igbo,A,clinical
@@ -298,6 +312,7 @@ NEG-FLIP,no,,7,96c0239bebf9812f391113c433a60ac3,whisper,swahili,A,clinical
 ASR-COLLAPSE,the terms for the male of a given animal species,ita am swa di mail of e given an e mawa spay she,0,98aa283c0ebaafc5a1021d01ba1bdb5b,whisper,igala,B,general
 DRUG-DEL,zosyn,,4,9a375dac7ab12b6d59cffdb932f4d50b,whisper,hausa,A,clinical
 DRUG-DEL,cefotaxime,,8,9b7de9c3315540a63648b9c1212db787,whisper,jaba,C,clinical
+DRUG-SUB,dopa,dopamine,8,a118dd3124494bfe59ab23ed58e83735,whisper,idah,C,clinical
 DOSE-MISS,42 ml,,16,a118dd3124494bfe59ab23ed58e83735,whisper,idah,C,clinical
 DRUG-DEL,lopressor,,3,a3b4630a9a8ccf82303417432c662d3f,whisper,berom,C,clinical
 NEG-FLIP,no,,9,a46605b3fdc92295cbd88bb861487e58,whisper,ijaw,A,general

@@ -95,6 +95,11 @@ COLLISION_BLOCKLIST: frozenset[str] = frozenset(
         "sulphate",
         "acetate",
         "hydrochloride",
+        # A single malformed openFDA record, "meclizine hydrocloride",
+        # put this misspelling in while the correct spelling above was
+        # blocked. Writing the salt correctly then counted as inventing
+        # a drug, twice, against one provider.
+        "hydrocloride",
         "hydroxide",
         "oxide",
         "peroxide",

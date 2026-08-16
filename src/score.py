@@ -107,7 +107,9 @@ def score_drugs(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
         "correct": 0,
         "substitution": 0,
         "deletion": 0,
-        **_count_false_positives(mentions, find_drug_mentions(hypothesis, lexicon)),
+        **_count_false_positives(
+            mentions, find_drug_mentions(hypothesis, lexicon), ref_tokens
+        ),
     }
     if not mentions:
         return result
@@ -151,7 +153,9 @@ def score_drugs(reference: str, hypothesis: str, lexicon: set[str]) -> dict:
 
 
 def _count_false_positives(
-    ref_mentions: list[str], hyp_mentions: list[str]
+    ref_mentions: list[str],
+    hyp_mentions: list[str],
+    ref_tokens: list[str] | None = None,
 ) -> dict[str, int]:
     """Hypothesis drug mentions with no reference mention to account for them.
 
@@ -164,8 +168,19 @@ def _count_false_positives(
     A substituted drug is a false positive as well as a recall miss. Both
     statements are true of it: the drug that was said is gone, and a drug that
     was never said is on the page.
+
+    `ref_tokens` is the whole reference, not only its lexicon matches, and it is
+    the guard against charging a provider for the lexicon's gaps. 10 of the 35
+    false positives in the first run were this: the reference reads `propanolol`,
+    which is a misspelling and therefore in no lexicon and therefore not a
+    mention, so three providers that wrote `propranolol` correctly were each
+    recorded as having invented a drug. `hydrocloride` was in the lexicon while
+    `hydrochloride` was not, and `insulins` matched nothing, with the same
+    result. A drug within the edit tolerance of something the clinician actually
+    said was not invented, whatever the lexicon knows about it.
     """
     unclaimed = list(ref_mentions)
+    spoken = list(ref_tokens or [])
     false_positives = 0
     for written in hyp_mentions:
         # Closest first, so a fuzzy match cannot consume the reference mention
@@ -181,8 +196,30 @@ def _count_false_positives(
         )
         if matched:
             unclaimed.remove(nearest)
-        else:
-            false_positives += 1
+            # Spend the spoken word too, so the fallback below cannot forgive a
+            # second copy of a drug that was only said once.
+            if nearest in spoken:
+                spoken.remove(nearest)
+            continue
+        # The clinician said something within a character of this. Whether the
+        # lexicon holds their spelling of it is not the provider's fault.
+        #
+        # Consumed one for one, exactly like the mention list above, because
+        # "warfarin" said once and written twice leaves the second copy
+        # unaccounted for and that is a real invention. Matching against the
+        # reference without consuming would forgive every duplicate.
+        said = next(
+            (
+                token
+                for token in spoken
+                if Levenshtein.distance(token, written) <= DRUG_EDIT_TOLERANCE
+            ),
+            None,
+        )
+        if said is not None:
+            spoken.remove(said)
+            continue
+        false_positives += 1
     return {"hyp_mentions": len(hyp_mentions), "false_positive": false_positives}
 
 

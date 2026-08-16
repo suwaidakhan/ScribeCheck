@@ -1,20 +1,20 @@
 # Results
 
-**Two speech-to-text systems can post the same word error rate and differ by 11.4
+**Two speech-to-text systems can post the same word error rate and differ by 10.6
 points on whether they get the drug name right.**
 
 Whisper large-v3 and Deepgram nova-3 landed 0.0009 apart on WER, the metric
-vendors publish and buyers compare. On drug-name accuracy they landed 62.3
-percent against 73.7 percent. Paired across the 109 clips that contain a drug,
-Deepgram gets 18 right that Whisper misses and Whisper gets 2 that Deepgram
-misses, p = 0.0004 by McNemar. A procurement decision made on published WER
+vendors publish and buyers compare. On drug-name accuracy they landed 61.5
+percent against 72.1 percent. Paired across the 110 clips that contain a drug,
+Deepgram gets 18 right that Whisper misses and Whisper gets 3 that Deepgram
+misses, p = 0.0015 by McNemar. A procurement decision made on published WER
 would treat those two systems as interchangeable.
 
 One honest qualification travels with that. 112 of the 400 clips have a speaker
 voicing punctuation aloud, and the providers write "comma" and "open bracket"
 as words. Charged for those, Whisper and Deepgram are 0.0009 apart. Not charged
 for them, they are 0.0305 apart, because Deepgram writes far more of them. The
-drug gap is 11.4 points either way. Both WERs are reported below rather than
+drug gap is 10.6 points either way. Both WERs are reported below rather than
 one, since which of them a buyer sees decides whether these two systems look
 identical.
 
@@ -41,25 +41,25 @@ deliverable and does not exist yet.
 
 | Configuration | WER | WER, punctuation words removed | Drug recall | Drug precision | Dose value | Negation | Cost/hr | Median latency |
 |---|---|---|---|---|---|---|---|---|
-| AssemblyAI universal-3-5-pro | **0.100** | **0.100** | **93.1%** | 95.8% | 92.5% | 98.3% | $0.21 | 518 ms |
-| Deepgram nova-3-medical | 0.324 | 0.228 | 82.3% | 95.2% | 82.3% | 96.5% | $0.46 | 876 ms |
-| Gemini 3.5 Flash Lite | 0.333 | 0.262 | 72.6% | **89.2%** | 82.3% | 94.8% | $0.00 | 4112 ms |
-| Deepgram nova-3 | 0.337 | 0.247 | 73.7% | 96.8% | 85.0% | 95.9% | $0.46 | 752 ms |
-| Whisper large-v3 (Groq) | 0.338 | 0.278 | **62.3%** | 96.6% | 80.3% | 92.4% | $0.00 | 952 ms |
+| AssemblyAI universal-3-5-pro | **0.100** | **0.100** | **92.2%** | 97.0% | 92.5% | 98.3% | $0.21 | 518 ms |
+| Deepgram nova-3-medical | 0.324 | 0.228 | 81.0% | 95.9% | 82.3% | 96.5% | $0.46 | 876 ms |
+| Gemini 3.5 Flash Lite | 0.333 | 0.262 | 71.5% | **90.6%** | 82.3% | 94.8% | $0.00 | 4112 ms |
+| Deepgram nova-3 | 0.337 | 0.247 | 72.1% | 97.6% | 85.0% | 95.9% | $0.46 | 752 ms |
+| Whisper large-v3 (Groq) | 0.338 | 0.278 | **61.5%** | 97.8% | 80.3% | 92.4% | $0.00 | 952 ms |
 
-Drug metrics are measured over 175 reference drug mentions, dosage over 147
+Drug metrics are measured over 179 reference drug mentions, dosage over 147
 pairs, negation over 172 cues.
 
 **Recall and precision answer different questions and both are reported.**
 Recall asks whether a drug the clinician said survived. Precision asks whether a
 drug the system wrote was ever said. A system can raise recall by guessing more
 drug names, so recall alone points a vendor in the wrong direction. Gemini
-invented 14 drug names that appear in no reference, against 3 for Whisper and 4
-for Deepgram nova-3, which is why it sits last on precision while sitting fourth
+wrote 12 drug names with nothing like them in the reference, against 2 for
+Whisper and 3 for Deepgram nova-3, which is why it sits last on precision while sitting fourth
 on recall.
 
 Drug substitution, one real drug written as a different real drug, no longer
-separates these systems: 3, 4, 2, 2, 2 across the five. An earlier version of
+separates these systems: 5, 4, 3, 3, 3 across the five. An earlier version of
 this page led with a 7-against-2 split on that column. It was wrong. The scorer
 credited a surviving reference drug as the replacement for a mangled one, and 14
 of the 19 recorded substitutions were false. The fix and its measurement are in
@@ -67,10 +67,10 @@ of the 19 recorded substitutions were false. The fix and its measurement are in
 
 ## What the numbers say
 
-Drug recall spans 30.8 points across the five systems, from 62.3 to 93.1. WER
+Drug recall spans 30.7 points across the five systems, from 61.5 to 92.2. WER
 spans 0.238. The two orderings do not match: Gemini ranks 3rd on WER and 4th on
 drugs, and the three systems clustered within 0.005 of each other on WER sit
-11.1 points apart on drugs.
+10.6 points apart on drugs.
 
 WER is not useless. AssemblyAI leads on both, by a wide margin on each. The
 claim is narrower and survives that: WER alone does not tell you which systems
@@ -78,16 +78,16 @@ are safe to put in front of a prescription, and systems with the same WER can
 differ sharply on the words that matter.
 
 **The medical model earns its price on the axis it should.** nova-3-medical
-against nova-3 is +8.6 points of drug recall for a 0.013 WER improvement, and
-the pairing holds up: 12 clips where the medical model gets the drug and the
-general one does not, against 1 the other way, p = 0.003. The gain is
+against nova-3 is +8.9 points of drug recall for a 0.013 WER improvement, and
+the pairing holds up: 13 clips where the medical model gets the drug and the
+general one does not, against 1 the other way, p = 0.002. The gain is
 concentrated exactly where a clinical buyer would want it, and it costs the same.
 
 **Two of the gaps do not survive a test, and saying so is part of the result.**
 Every pair was compared with McNemar over the clips that contain the entity,
 which is matched-pairs data because all five systems saw the same 400 clips.
 Deepgram nova-3 and Gemini are indistinguishable on drugs, p = 1.00, despite
-looking 1.1 points apart in the table. On dosage only AssemblyAI separates from
+looking 0.6 points apart in the table. On dosage only AssemblyAI separates from
 anything, and the other four are mutually indistinguishable, p = 0.21 to 1.00.
 On negation only two of the ten pairs separate. Full table in
 `results/significance.csv`.

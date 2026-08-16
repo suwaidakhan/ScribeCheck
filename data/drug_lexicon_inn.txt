@@ -493,3 +493,14 @@ warfarin
 xylometazoline
 zanubrutinib
 zidovudine
+# Added 2026-08-13 after auditing what the drug-precision denominator held.
+# These are not INN additions for coverage; each one was hiding a real error.
+#   dilantin     brand name for phenytoin. Its absence meant the reference
+#                `dilantin` heard as `dilaudid`, an anticonvulsant read as an
+#                opioid, scored as an invented drug rather than as the drug
+#                substitution it is.
+#   diamorphine  heard as `morphine`, same shape of error.
+#   dopa         reference shorthand; `levodopa` was present and `dopa` was not.
+dilantin
+diamorphine
+dopa

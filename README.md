@@ -25,7 +25,7 @@ Gemini 3.5 Flash Lite. Deepgram appears twice because the general-against-medica
 delta is a pricing and product finding in itself.
 
 The result, in one line: Whisper large-v3 and Deepgram nova-3 differ by 0.0009
-on WER and 11.4 points on drug-name recall, p = 0.0004 paired across the 109
+on WER and 10.6 points on drug-name recall, p = 0.0015 paired across the 109
 clips that contain a drug. Full table in [RESULTS.md](RESULTS.md).
 
 Whisper runs through Groq rather than OpenAI because every configuration here

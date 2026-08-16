@@ -1323,6 +1323,7 @@ diacomit
 dialyvite
 dialyvite 5000
 dialyvite supreme d
+diamorphine
 dianeal low calcium with dextrose
 dianeal pd-2 with dextrose
 diatrizoate
@@ -1375,6 +1376,7 @@ dihydroartemisinin
 dihydroergotamine
 dihydroergotamine mesylate
 dihydroergotamine mesylate nasal
+dilantin
 dilaudid
 diloxanide
 diltiazem
@@ -1439,6 +1441,7 @@ donepezil
 donepezil hydrochloride
 donepezil hydrochlorides extended-release
 donor human stool
+dopa
 dopamine
 dopamine hci
 dopamine hci in 5% dextrose
@@ -2217,7 +2220,6 @@ hydro-q
 hydrochloide
 hydrochlorothiazide
 hydrochlorothiazide tablets
-hydrocloride
 hydrocodone
 hydrocodone bitartrate
 hydrocodone polistirex
@@ -2912,7 +2914,6 @@ mechlorethamine
 mechlorethamine hydrochloride
 meclizine
 meclizine hydrochloride
-meclizine hydrocloride
 medical gasseous oxygen cylinders
 medronate
 medronic

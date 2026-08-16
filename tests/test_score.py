@@ -588,3 +588,57 @@ class TestPairedSignificance:
         # to force it through the test would invent a threshold nobody chose.
         with pytest.raises(ValueError, match="binary"):
             paired_significance(self._frame(), metric="wer")
+
+
+class TestAnInventedDrugMustNotBeTheLexiconsGap:
+    """W11 follow-up. 10 of 35 false positives were the lexicon, not the system.
+
+    Found by checking what the precision denominator was actually made of.
+    Three cases, all of them charging a provider for being right:
+
+    - The reference is misspelled `propanolol`, which is in no lexicon, so it is
+      not a reference mention. Three providers wrote `propranolol` correctly and
+      all three were recorded as having invented a drug.
+    - `hydrocloride` reached the lexicon as a misspelling while `hydrochloride`
+      did not, so writing the correct spelling counted as invention. Twice.
+    - `insulins` is not a lexicon term, so a provider writing `insulin` invented
+      one.
+
+    A hallucination is a drug name with nothing like it in the reference. That is
+    the thing worth reporting, and it is what this now measures.
+    """
+
+    LEX = {"propranolol", "insulin", "morphine", "warfarin"}
+
+    def test_a_drug_the_reference_misspelled_is_not_invented(self):
+        from src.score import score_drugs
+
+        result = score_drugs("propanolol 20 mg tid", "propranolol 20 mg tid", self.LEX)
+        assert result["false_positive"] == 0
+
+    def test_a_plural_in_the_reference_is_not_invented(self):
+        from src.score import score_drugs
+
+        result = score_drugs(
+            "short acting insulins at meals", "short acting insulin at meals", self.LEX
+        )
+        assert result["false_positive"] == 0
+
+    def test_a_genuine_hallucination_is_still_counted(self):
+        from src.score import score_drugs
+
+        # "more follicles" became "morphine calls". Nothing in the reference is
+        # anything like "morphine", so the provider put a drug on the page that
+        # the clinician never said.
+        result = score_drugs(
+            "preventing more follicles from developing",
+            "preventing morphine calls from developing",
+            self.LEX,
+        )
+        assert result["false_positive"] == 1
+
+    def test_an_unrelated_invented_drug_is_still_counted(self):
+        from src.score import score_drugs
+
+        result = score_drugs("the patient is stable", "takes warfarin", self.LEX)
+        assert result["false_positive"] == 1

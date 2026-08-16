@@ -9,6 +9,7 @@ requests==2.34.2
 python-dotenv==1.2.2
 tqdm==4.70.0
 jiwer==4.0.0
+rapidfuzz==3.14.5
 whisper_normalizer==0.1.15
 matplotlib==3.11.1
 pytest==9.1.1

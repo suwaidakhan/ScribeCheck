@@ -677,7 +677,7 @@ const CARDS = [
   "accent": "idah",
   "tier": "C",
   "domain": "clinical",
-  "ref": "she was on heparin at 250 units hr dopa at 5 mcg kg and tpn at [[1|42]] cc hr",
+  "ref": "she was on heparin at 250 units hr [[2|dopa]] at 5 mcg kg and tpn at [[1|42]] cc hr",
   "hyp": "she was on heparin at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition at 42 cubic centimeters per hour",
   "findings": [
    {
@@ -693,6 +693,25 @@ const CARDS = [
     "hyp_excerpt": "kilogram and total parenteral nutrition at 42 cubic centimeters per hour",
     "expected_drugs": [],
     "heard_drugs": []
+   },
+   {
+    "finding_id": 117,
+    "position": 2,
+    "source": "detector",
+    "kind": "DRUG-SUB",
+    "flag": "DRUG-SUB candidate",
+    "weight": 1.0,
+    "expected": "dopa",
+    "heard_entity": "dopamine",
+    "ref_excerpt": "was on heparin at 250 units hr [[dopa]] at 5 mcg kg and tpn at",
+    "hyp_excerpt": "at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition",
+    "expected_drugs": [
+     "heparin",
+     "dopa"
+    ],
+    "heard_drugs": [
+     "dopamine"
+    ]
    }
   ]
  },
@@ -911,7 +930,7 @@ const CARDS = [
   "accent": "idah",
   "tier": "C",
   "domain": "clinical",
-  "ref": "she was on heparin at 250 units hr dopa at 5 mcg kg and tpn at [[1|42]] cc hr",
+  "ref": "she was on heparin at 250 units hr [[2|dopa]] at 5 mcg kg and tpn at [[1|42]] cc hr",
   "hyp": "she was on heparin at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition at 42 cubic centimeters per hour",
   "findings": [
    {
@@ -927,6 +946,25 @@ const CARDS = [
     "hyp_excerpt": "kilogram and total parenteral nutrition at 42 cubic centimeters per hour",
     "expected_drugs": [],
     "heard_drugs": []
+   },
+   {
+    "finding_id": 119,
+    "position": 2,
+    "source": "detector",
+    "kind": "DRUG-SUB",
+    "flag": "DRUG-SUB candidate",
+    "weight": 1.0,
+    "expected": "dopa",
+    "heard_entity": "dopamine",
+    "ref_excerpt": "was on heparin at 250 units hr [[dopa]] at 5 mcg kg and tpn at",
+    "hyp_excerpt": "at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition",
+    "expected_drugs": [
+     "heparin",
+     "dopa"
+    ],
+    "heard_drugs": [
+     "dopamine"
+    ]
    }
   ]
  },
@@ -936,7 +974,7 @@ const CARDS = [
   "accent": "hausa",
   "tier": "A",
   "domain": "clinical",
-  "ref": "syrup oral children is [[2,3|cetirizine]] hydrochloride allergy cetirizine hydrochloride [[1|5]] mg 5 ml",
+  "ref": "syrup oral children is cetirizine hydrochloride allergy cetirizine hydrochloride [[1|5]] mg 5 ml",
   "hyp": "cure all children is strenghin hydrochloride allergy strenghin hydrochloride 5 milligram for 5 mil",
   "findings": [
    {
@@ -950,40 +988,6 @@ const CARDS = [
     "heard_entity": "",
     "ref_excerpt": "children is cetirizine hydrochloride allergy cetirizine hydrochloride [[5]] mg 5 ml",
     "hyp_excerpt": "is strenghin hydrochloride allergy strenghin hydrochloride 5 milligram for 5 mil",
-    "expected_drugs": [
-     "cetirizine",
-     "cetirizine"
-    ],
-    "heard_drugs": []
-   },
-   {
-    "finding_id": 77,
-    "position": 2,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "cetirizine",
-    "heard_entity": "",
-    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
-    "hyp_excerpt": "cure all children is strenghin hydrochloride allergy strenghin hydrochloride 5 milligram for",
-    "expected_drugs": [
-     "cetirizine",
-     "cetirizine"
-    ],
-    "heard_drugs": []
-   },
-   {
-    "finding_id": 79,
-    "position": 3,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "cetirizine",
-    "heard_entity": "",
-    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
-    "hyp_excerpt": "cure all children is strenghin hydrochloride allergy strenghin hydrochloride 5 milligram for",
     "expected_drugs": [
      "cetirizine",
      "cetirizine"
@@ -1884,7 +1888,7 @@ const CARDS = [
   "accent": "igbo",
   "tier": "A",
   "domain": "clinical",
-  "ref": "[[2|quetiapine]] fumarate [[1|25]] mg tablet sig one one tablet po qhsonce a day at bedtime as needed",
+  "ref": "quetiapine fumarate [[1|25]] mg tablet sig one one tablet po qhsonce a day at bedtime as needed",
   "hyp": "which has been twice in 5 mg tablets cell me show one tablet go this once a day at bedtime as needed",
   "findings": [
    {
@@ -1898,22 +1902,6 @@ const CARDS = [
     "heard_entity": "5 mg",
     "ref_excerpt": "quetiapine fumarate [[25]] mg tablet sig one one tablet po",
     "hyp_excerpt": "which has been twice in 5 mg tablets cell me show",
-    "expected_drugs": [
-     "quetiapine"
-    ],
-    "heard_drugs": []
-   },
-   {
-    "finding_id": 102,
-    "position": 2,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "quetiapine",
-    "heard_entity": "",
-    "ref_excerpt": "[[quetiapine]] fumarate 25 mg tablet sig one one",
-    "hyp_excerpt": "which has been twice in 5 mg tablets",
     "expected_drugs": [
      "quetiapine"
     ],
@@ -1951,13 +1939,13 @@ const CARDS = [
   ]
  },
  {
-  "clip_id": "c43d8faa6efe9020bdd669a67ba1e988",
-  "provider": "dg-medical",
-  "accent": "efik",
-  "tier": "C",
+  "clip_id": "b89670db369c7e025fb0d74ca94533af",
+  "provider": "aai",
+  "accent": "hausa",
+  "tier": "A",
   "domain": "clinical",
-  "ref": "solution subcutaneous rituxan hycela [[1|rituximab]] [[2|hyaluronidase]] 1600 mg and 26800 units 13.4 ml",
-  "hyp": "comma subcutaneous rituxan hicellar comma rituxan semicolon high alluron needles open bracket human recombinant close bracket comma 1600 mg and 26800 units slash 13.4 ml",
+  "ref": "syrup oral children is [[1,2|cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5 ml",
+  "hyp": "syrup oral children is sterizine hydrochloride allergy sterizine hydrochloride 5 mg 5 ml",
   "findings": [
    {
     "finding_id": 71,
@@ -1965,44 +1953,44 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "rituximab",
+    "weight": 3.9762,
+    "expected": "cetirizine",
     "heard_entity": "",
-    "ref_excerpt": "solution subcutaneous rituxan hycela [[rituximab]] hyaluronidase 1600 mg and 26800 units 13.4",
-    "hyp_excerpt": "subcutaneous rituxan hicellar rituxan high alluron needles human recombinant 1600 mg and 26800",
+    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
+    "hyp_excerpt": "syrup oral children is sterizine hydrochloride allergy sterizine hydrochloride 5 mg 5",
     "expected_drugs": [
-     "rituximab",
-     "hyaluronidase"
+     "cetirizine",
+     "cetirizine"
     ],
     "heard_drugs": []
    },
    {
-    "finding_id": 110,
+    "finding_id": 107,
     "position": 2,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "hyaluronidase",
+    "weight": 3.9762,
+    "expected": "cetirizine",
     "heard_entity": "",
-    "ref_excerpt": "solution subcutaneous rituxan hycela rituximab [[hyaluronidase]] 1600 mg and 26800 units 13.4 ml",
-    "hyp_excerpt": "subcutaneous rituxan hicellar rituxan high alluron needles human recombinant 1600 mg and 26800 units",
+    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
+    "hyp_excerpt": "syrup oral children is sterizine hydrochloride allergy sterizine hydrochloride 5 mg 5",
     "expected_drugs": [
-     "rituximab",
-     "hyaluronidase"
+     "cetirizine",
+     "cetirizine"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "6afed7fe39a177c3d510b925d8267a94",
+  "clip_id": "b89670db369c7e025fb0d74ca94533af",
   "provider": "whisper",
-  "accent": "swahili",
+  "accent": "hausa",
   "tier": "A",
-  "domain": "general",
-  "ref": "etander ayale other antimalarial drugs include pyrimethamine proguanil chlorproguanil and [[1|trimethoprim]]",
-  "hyp": "etanda ayaleada antimariri drugs include parimedamine proguanil kloroproguanil anthrimedaroprim",
+  "domain": "clinical",
+  "ref": "syrup oral children is [[1,2|cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5 ml",
+  "hyp": "serum for all children styrazine hydrochloride allergy styrazine hydrochloride 5 mg for 5 mil",
   "findings": [
    {
     "finding_id": 72,
@@ -2010,31 +1998,44 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "trimethoprim",
+    "weight": 3.9762,
+    "expected": "cetirizine",
     "heard_entity": "",
-    "ref_excerpt": "antimalarial drugs include pyrimethamine proguanil chlorproguanil and [[trimethoprim]]",
-    "hyp_excerpt": "ayaleada antimariri drugs include parimedamine proguanil kloroproguanil anthrimedaroprim",
+    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
+    "hyp_excerpt": "serum for all children styrazine hydrochloride allergy styrazine hydrochloride 5 mg for",
     "expected_drugs": [
-     "pyrimethamine",
-     "proguanil",
-     "chlorproguanil",
-     "trimethoprim"
+     "cetirizine",
+     "cetirizine"
     ],
-    "heard_drugs": [
-     "proguanil"
-    ]
+    "heard_drugs": []
+   },
+   {
+    "finding_id": 80,
+    "position": 2,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "cetirizine",
+    "heard_entity": "",
+    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
+    "hyp_excerpt": "serum for all children styrazine hydrochloride allergy styrazine hydrochloride 5 mg for",
+    "expected_drugs": [
+     "cetirizine",
+     "cetirizine"
+    ],
+    "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "cf42ee5d7ae6579d20f480a8cf8dc00f",
-  "provider": "dg-general",
-  "accent": "ibibio",
-  "tier": "B",
+  "clip_id": "9b7de9c3315540a63648b9c1212db787",
+  "provider": "whisper",
+  "accent": "jaba",
+  "tier": "C",
   "domain": "clinical",
-  "ref": "fall from scooter sequela capsule extended release oral [[1|diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left elbow",
-  "hyp": "fall from scrotal non motorized sequelae capsule extended release bora dilithiazem hydrochloride dilithiazem hydrochloride 120 milligram contracture left elbow",
+  "ref": "a day 7 7 gent and day 7 [[1|cefotaxime]]",
+  "hyp": "a d 7 slash 7 chained and d 7 cefotazine",
   "findings": [
    {
     "finding_id": 73,
@@ -2042,27 +2043,26 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "diltiazem",
+    "weight": 3.9762,
+    "expected": "cefotaxime",
     "heard_entity": "",
-    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
-    "hyp_excerpt": "scrotal non motorized sequelae capsule extended release bora dilithiazem hydrochloride dilithiazem hydrochloride 120 milligram contracture",
+    "ref_excerpt": "day 7 7 gent and day 7 [[cefotaxime]]",
+    "hyp_excerpt": "d 7 7 chained and d 7 cefotazine",
     "expected_drugs": [
-     "diltiazem",
-     "diltiazem"
+     "cefotaxime"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "cf42ee5d7ae6579d20f480a8cf8dc00f",
+  "clip_id": "6b6bd6a9b36dbd20ca8ba0b48a0e83c0",
   "provider": "whisper",
-  "accent": "ibibio",
-  "tier": "B",
+  "accent": "igbo",
+  "tier": "A",
   "domain": "clinical",
-  "ref": "fall from scooter sequela capsule extended release oral [[1|diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left elbow",
-  "hyp": "foil from scooter non motorized sequela capsule extended release boradilithiazem hydrochloride dilithiazem hydrochloride 120 mg contracture left elbow",
+  "ref": "otorrhea left ear tablet oral miltown [[1|meprobamate]] 600 mg algoneurodystrophy unspecified site",
+  "hyp": "otoria left ear tablet oral male tongue meprobamid 600 mg algo neurodystrophy unspecified site",
   "findings": [
    {
     "finding_id": 74,
@@ -2070,27 +2070,26 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "diltiazem",
+    "weight": 3.9762,
+    "expected": "meprobamate",
     "heard_entity": "",
-    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
-    "hyp_excerpt": "from scooter non motorized sequela capsule extended release boradilithiazem hydrochloride dilithiazem hydrochloride 120 mg contracture",
+    "ref_excerpt": "otorrhea left ear tablet oral miltown [[meprobamate]] 600 mg algoneurodystrophy unspecified site",
+    "hyp_excerpt": "otoria left ear tablet oral male tongue meprobamid 600 mg algo neurodystrophy unspecified site",
     "expected_drugs": [
-     "diltiazem",
-     "diltiazem"
+     "meprobamate"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "bfd411fa6e39fb7fb11f7264221e139a",
-  "provider": "gemini",
-  "accent": "ekene",
+  "clip_id": "aa3d0d5b66d4e3ae1d00cd720b8a0fb7",
+  "provider": "whisper",
+  "accent": "mwaghavul",
   "tier": "C",
   "domain": "clinical",
-  "ref": "congenital deformity of sternocleidomastoid muscle capsule oral [[1|prazosin]] hydrochloride prazosin hydrochloride eq 5 mg base unspecified physeal fracture of upper end of humerus unspecified arm",
-  "hyp": "conjoined twin deformity of 100 clock and mastoid muscle capsule olaparibasin hydrochloride olaparibasin hydrochloride equivalent 5 mg bis unspecified fissure fracture of upper end of humerus unspecified arm",
+  "ref": "unspecified complication of corneal transplant left eye capsule oral [[1|temazepam]] temazepam 7.5 mg poisoning by tramadol intentional self harm initial encounter",
+  "hyp": "unspecified complication of corneal transplant left eye capsule oral timazipab timazipab 7.5 mg poisoning by dramadol intentional self harm initial encounter",
   "findings": [
    {
     "finding_id": 75,
@@ -2098,27 +2097,28 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "prazosin",
+    "weight": 3.9762,
+    "expected": "temazepam",
     "heard_entity": "",
-    "ref_excerpt": "congenital deformity of sternocleidomastoid muscle capsule oral [[prazosin]] hydrochloride prazosin hydrochloride eq 5 mg base",
-    "hyp_excerpt": "twin deformity of 100 clock and mastoid muscle capsule olaparibasin hydrochloride olaparibasin hydrochloride equivalent 5",
+    "ref_excerpt": "of corneal transplant left eye capsule oral [[temazepam]] temazepam 7.5 mg poisoning by tramadol intentional",
+    "hyp_excerpt": "of corneal transplant left eye capsule oral timazipab timazipab 7.5 mg poisoning by dramadol intentional",
     "expected_drugs": [
-     "prazosin",
-     "prazosin"
+     "temazepam",
+     "temazepam",
+     "tramadol"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "3fd85b94085df416782fb04d0f9da75a",
-  "provider": "whisper",
-  "accent": "kinyarwanda",
-  "tier": "B",
+  "clip_id": "2f11308426efe80f4c4a23795b245383",
+  "provider": "dg-general",
+  "accent": "swahili",
+  "tier": "A",
   "domain": "clinical",
-  "ref": "other compoundsseveral other adrenoceptor antagonists similar to [[1|labetalol]] exhibit some degree of receptor antagonism",
-  "hyp": "other compounds several other dash adrenerceptor antagonist similar to the betel exhibit some degree of dash receptor antagonism",
+  "ref": "pt completed course of [[1|dilantin]] after injury no siezure activity noted",
+  "hyp": "pt completed course of dilatine after injury no seizure activity noted full stop",
   "findings": [
    {
     "finding_id": 76,
@@ -2126,13 +2126,13 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "labetalol",
+    "weight": 3.9762,
+    "expected": "dilantin",
     "heard_entity": "",
-    "ref_excerpt": "other compoundsseveral other adrenoceptor antagonists similar to [[labetalol]] exhibit some degree of receptor antagonism",
-    "hyp_excerpt": "compounds several other adrenerceptor antagonist similar to the betel exhibit some degree of receptor antagonism",
+    "ref_excerpt": "pt completed course of [[dilantin]] after injury no siezure activity noted",
+    "hyp_excerpt": "pt completed course of dilatine after injury no seizure activity noted",
     "expected_drugs": [
-     "labetalol"
+     "dilantin"
     ],
     "heard_drugs": []
    }
@@ -2144,16 +2144,33 @@ const CARDS = [
   "accent": "hausa",
   "tier": "A",
   "domain": "clinical",
-  "ref": "syrup oral children is [[1|cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5 ml",
+  "ref": "syrup oral children is [[1,2|cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5 ml",
   "hyp": "sugar oral children is storazine hydrochloride allergy storazine hydrochloride 5 milligram for 5 mil",
   "findings": [
    {
-    "finding_id": 78,
+    "finding_id": 77,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
+    "expected": "cetirizine",
+    "heard_entity": "",
+    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
+    "hyp_excerpt": "sugar oral children is storazine hydrochloride allergy storazine hydrochloride 5 milligram for",
+    "expected_drugs": [
+     "cetirizine",
+     "cetirizine"
+    ],
+    "heard_drugs": []
+   },
+   {
+    "finding_id": 79,
+    "position": 2,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
     "expected": "cetirizine",
     "heard_entity": "",
     "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
@@ -2167,43 +2184,40 @@ const CARDS = [
   ]
  },
  {
-  "clip_id": "cf605b3aaadbd365452e997fbc78122d",
-  "provider": "dg-medical",
-  "accent": "efik",
-  "tier": "C",
+  "clip_id": "a52cc1bdf941a9b4d76061ddbda05072",
+  "provider": "dg-general",
+  "accent": "igbo",
+  "tier": "A",
   "domain": "clinical",
-  "ref": "tablet chewable oral vyvanse [[1|lisdexamfetamine]] dimesylate 10 mg",
-  "hyp": "tablets comma chewable comma oral vyvanse mesylate comma 10 mg",
+  "ref": "[[1|quetiapine]] fumarate 25 mg tablet sig one one tablet po qhsonce a day at bedtime as needed",
+  "hyp": "with 25 milligram tablet signature one tablet is once a day at blood time",
   "findings": [
    {
-    "finding_id": 80,
+    "finding_id": 78,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "lisdexamfetamine",
+    "weight": 3.9762,
+    "expected": "quetiapine",
     "heard_entity": "",
-    "ref_excerpt": "tablet chewable oral vyvanse [[lisdexamfetamine]] dimesylate 10 mg",
-    "hyp_excerpt": "tablets chewable oral vyvanse mesylate 10 mg",
+    "ref_excerpt": "[[quetiapine]] fumarate 25 mg tablet sig one one",
+    "hyp_excerpt": "with 25 milligram tablet signature one tablet is",
     "expected_drugs": [
-     "vyvanse",
-     "lisdexamfetamine"
+     "quetiapine"
     ],
-    "heard_drugs": [
-     "vyvanse"
-    ]
+    "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "2642efa06e8a4c32bc730201ae6b8110",
+  "clip_id": "24e4da52fc2d6869251f9c9de581409c",
   "provider": "dg-medical",
-  "accent": "xhosa",
-  "tier": "B",
+  "accent": "ekpeye",
+  "tier": "C",
   "domain": "clinical",
-  "ref": "the major differences between unconjugated and [[1|conjugated]] bilirubin are summarized in table 21",
-  "hyp": "the major difference between unconjuncted and conjucted biliary in i have summarized in table 21",
+  "ref": "cont on [[1|dilantin]] 100 mg q 6 hr cv af rate 65 87 bp 139 170 60 71 received hydralazine 10 mg at 1400",
+  "hyp": "continue on dylatine 100 mg q 6 hour cvaf rates 65 to 87 blood pressure 139 to 170 slash 60 to 71 received hydralazine 10 mg at 1400",
   "findings": [
    {
     "finding_id": 81,
@@ -2211,26 +2225,26 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "conjugated",
+    "weight": 3.9762,
+    "expected": "dilantin",
     "heard_entity": "",
-    "ref_excerpt": "the major differences between unconjugated and [[conjugated]] bilirubin are summarized in table 21",
-    "hyp_excerpt": "the major difference between unconjuncted and conjucted biliary in i have summarized in table 21",
+    "ref_excerpt": "cont on [[dilantin]] 100 mg q 6 hr cv af",
+    "hyp_excerpt": "continue on dylatine 100 mg q 6 hour cvaf rates",
     "expected_drugs": [
-     "conjugated"
+     "dilantin"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "868ed2786d8b2dedffe5b5358c2c529d",
-  "provider": "dg-medical",
-  "accent": "agatu",
-  "tier": "C",
+  "clip_id": "5b5cea61187384389906b36683ffa428",
+  "provider": "whisper",
+  "accent": "zulu",
+  "tier": "B",
   "domain": "clinical",
-  "ref": "14 [[1|glargine]] sig 22 units at bedtime",
-  "hyp": "nicaragine sig 22 open bracket 22 close bracket unit at bedtime",
+  "ref": "adverse effects and drug interactions with codeineare similar to those reported for [[1|morphine]] althoughthey are less intense",
+  "hyp": "at 1st i felt a drug interaction with convenience similar to those reported for monopill all drugs and less intense",
   "findings": [
    {
     "finding_id": 82,
@@ -2238,13 +2252,13 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "glargine",
+    "weight": 3.9762,
+    "expected": "morphine",
     "heard_entity": "",
-    "ref_excerpt": "14 [[glargine]] sig 22 units at bedtime",
-    "hyp_excerpt": "nicaragine sig 22 22 unit at bedtime",
+    "ref_excerpt": "with codeineare similar to those reported for [[morphine]] althoughthey are less intense",
+    "hyp_excerpt": "with convenience similar to those reported for monopill all drugs and less intense",
     "expected_drugs": [
-     "glargine"
+     "morphine"
     ],
     "heard_drugs": []
    }
@@ -2265,7 +2279,7 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
     "expected": "atovaquone",
     "heard_entity": "",
     "ref_excerpt": "[[atovaquone]] is poorly absorbed from the gastrointestinal tract",
@@ -2278,13 +2292,13 @@ const CARDS = [
   ]
  },
  {
-  "clip_id": "9b7de9c3315540a63648b9c1212db787",
-  "provider": "gemini",
-  "accent": "jaba",
-  "tier": "C",
-  "domain": "clinical",
-  "ref": "a day 7 7 gent and day 7 [[1|cefotaxime]]",
-  "hyp": "a d 7 7 change nd 7 sefatazin",
+  "clip_id": "8cb3809701786ccfebe73b788fdbf219",
+  "provider": "dg-general",
+  "accent": "setswana",
+  "tier": "B",
+  "domain": "general",
+  "ref": "rotimi yetunde other antimalarial drugs include pyrimethamine proguanil chlorproguanil and [[1|trimethoprim]]",
+  "hyp": "rotimi etunde other antimalarial drugs include pyrimethamine comma proguanil comma chlorproguanil comma and trimethropin",
   "findings": [
    {
     "finding_id": 84,
@@ -2292,26 +2306,33 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "cefotaxime",
+    "weight": 3.9762,
+    "expected": "trimethoprim",
     "heard_entity": "",
-    "ref_excerpt": "day 7 7 gent and day 7 [[cefotaxime]]",
-    "hyp_excerpt": "a d 7 7 change nd 7 sefatazin",
+    "ref_excerpt": "antimalarial drugs include pyrimethamine proguanil chlorproguanil and [[trimethoprim]]",
+    "hyp_excerpt": "antimalarial drugs include pyrimethamine proguanil chlorproguanil and trimethropin",
     "expected_drugs": [
-     "cefotaxime"
+     "pyrimethamine",
+     "proguanil",
+     "chlorproguanil",
+     "trimethoprim"
     ],
-    "heard_drugs": []
+    "heard_drugs": [
+     "pyrimethamine",
+     "proguanil",
+     "chlorproguanil"
+    ]
    }
   ]
  },
  {
-  "clip_id": "2c417f9512707188cc0f0aba9d9a80ef",
+  "clip_id": "2642efa06e8a4c32bc730201ae6b8110",
   "provider": "whisper",
-  "accent": "mada",
-  "tier": "C",
+  "accent": "xhosa",
+  "tier": "B",
   "domain": "clinical",
-  "ref": "displaced midcervical fracture of unspecified femur subsequent encoun implant implantation [[1|levonorgestrel]] levonorgestrel 75 mg implant capsular contracture of breast implant subsequent encounter",
-  "hyp": "displaced mid cervical fracture of unspecified femur subsequent encounter implant implantation levenogestrel levenogestrel 75 mg per implant capsular construction of breast implant subsequent encounter implant",
+  "ref": "the major differences between unconjugated and [[1|conjugated]] bilirubin are summarized in table 21",
+  "hyp": "the major difference between unconjured and conjured is that the lary in summarizing table 21",
   "findings": [
    {
     "finding_id": 85,
@@ -2319,27 +2340,26 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "levonorgestrel",
+    "weight": 3.9762,
+    "expected": "conjugated",
     "heard_entity": "",
-    "ref_excerpt": "of unspecified femur subsequent encoun implant implantation [[levonorgestrel]] levonorgestrel 75 mg implant capsular contracture of",
-    "hyp_excerpt": "of unspecified femur subsequent encounter implant implantation levenogestrel levenogestrel 75 mg per implant capsular construction",
+    "ref_excerpt": "the major differences between unconjugated and [[conjugated]] bilirubin are summarized in table 21",
+    "hyp_excerpt": "the major difference between unconjured and conjured is that the lary in summarizing table 21",
     "expected_drugs": [
-     "levonorgestrel",
-     "levonorgestrel"
+     "conjugated"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "44fce3c7ec19dff506083c8a906750a3",
-  "provider": "dg-general",
-  "accent": "ijaw",
-  "tier": "A",
+  "clip_id": "3c5572142e8029ffb07a9bbe17542aed",
+  "provider": "whisper",
+  "accent": "khana",
+  "tier": "C",
   "domain": "clinical",
-  "ref": "corrosions involving 30 39% of body surface with 30 39% 3rd degree c capsule oral [[1|amnesteem]] isotretinoin 10 mg poisoning by cannabis undetermined subsequent encounte",
-  "hyp": "corrosions involving 30 to 39% of body surface with 30 to 39% 3rd degree c capsule oral amnesty isotretinoin 10 milligram poisoning by cannabis bracket open derivatives bracket closed undetermined subsequent encounter",
+  "ref": "nf [[1|cyclosporine]] 0.05 ou hospital ogbalay 7",
+  "hyp": "nf ticlosporin 0.05% ou hospital abale 7",
   "findings": [
    {
     "finding_id": 86,
@@ -2347,18 +2367,15 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "amnesteem",
+    "weight": 3.9762,
+    "expected": "cyclosporine",
     "heard_entity": "",
-    "ref_excerpt": "30 39% 3rd degree c capsule oral [[amnesteem]] isotretinoin 10 mg poisoning by cannabis undetermined",
-    "hyp_excerpt": "39% 3rd degree c capsule oral amnesty isotretinoin 10 milligram poisoning by cannabis open derivatives",
+    "ref_excerpt": "nf [[cyclosporine]] 0.05 ou hospital ogbalay 7",
+    "hyp_excerpt": "nf ticlosporin 0.05% ou hospital abale 7",
     "expected_drugs": [
-     "amnesteem",
-     "isotretinoin"
+     "cyclosporine"
     ],
-    "heard_drugs": [
-     "isotretinoin"
-    ]
+    "heard_drugs": []
    }
   ]
  },
@@ -2368,7 +2385,7 @@ const CARDS = [
   "accent": "efik",
   "tier": "C",
   "domain": "clinical",
-  "ref": "solution subcutaneous rituxan hycela [[2|rituximab]] [[1|hyaluronidase]] 1600 mg and 26800 units 13.4 ml",
+  "ref": "solution subcutaneous rituxan hycela [[1|rituximab]] [[2|hyaluronidase]] 1600 mg and 26800 units 13.4 ml",
   "hyp": "solution comma subcutaneous comma comma comma 1600 mg and 26800 units slash 13.4 ml",
   "findings": [
    {
@@ -2377,24 +2394,7 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "hyaluronidase",
-    "heard_entity": "",
-    "ref_excerpt": "solution subcutaneous rituxan hycela rituximab [[hyaluronidase]] 1600 mg and 26800 units 13.4 ml",
-    "hyp_excerpt": "solution subcutaneous 1600 mg and 26800 units 13.4 ml",
-    "expected_drugs": [
-     "rituximab",
-     "hyaluronidase"
-    ],
-    "heard_drugs": []
-   },
-   {
-    "finding_id": 105,
-    "position": 2,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
     "expected": "rituximab",
     "heard_entity": "",
     "ref_excerpt": "solution subcutaneous rituxan hycela [[rituximab]] hyaluronidase 1600 mg and 26800 units 13.4",
@@ -2404,17 +2404,34 @@ const CARDS = [
      "hyaluronidase"
     ],
     "heard_drugs": []
+   },
+   {
+    "finding_id": 95,
+    "position": 2,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "hyaluronidase",
+    "heard_entity": "",
+    "ref_excerpt": "solution subcutaneous rituxan hycela rituximab [[hyaluronidase]] 1600 mg and 26800 units 13.4 ml",
+    "hyp_excerpt": "solution subcutaneous 1600 mg and 26800 units 13.4 ml",
+    "expected_drugs": [
+     "rituximab",
+     "hyaluronidase"
+    ],
+    "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "bd6c36ca7dfb7303fc8ca6e11274a52f",
+  "clip_id": "6afed7fe39a177c3d510b925d8267a94",
   "provider": "whisper",
-  "accent": "isixhosa",
-  "tier": "C",
-  "domain": "clinical",
-  "ref": "for example [[1|ketoconazole]] and triazolam compete for binding to the cyp 3 a 4 active site and thus exhibit their own unique rate of metabolism",
-  "hyp": "for example coma catechonozole and triazolam compete for binding to the cyp 3 a 4 active site and thus exhibit their own unique rate of metabolism full stop",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "general",
+  "ref": "etander ayale other antimalarial drugs include [[1|pyrimethamine]] proguanil chlorproguanil and trimethoprim",
+  "hyp": "etanda ayaleada antimariri drugs include parimedamine proguanil kloroproguanil anthrimedaroprim",
   "findings": [
    {
     "finding_id": 88,
@@ -2422,29 +2439,31 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "ketoconazole",
+    "weight": 3.9762,
+    "expected": "pyrimethamine",
     "heard_entity": "",
-    "ref_excerpt": "for example [[ketoconazole]] and triazolam compete for binding to the",
-    "hyp_excerpt": "for example coma catechonozole and triazolam compete for binding to",
+    "ref_excerpt": "etander ayale other antimalarial drugs include [[pyrimethamine]] proguanil chlorproguanil and trimethoprim",
+    "hyp_excerpt": "etanda ayaleada antimariri drugs include parimedamine proguanil kloroproguanil anthrimedaroprim",
     "expected_drugs": [
-     "ketoconazole",
-     "triazolam"
+     "pyrimethamine",
+     "proguanil",
+     "chlorproguanil",
+     "trimethoprim"
     ],
     "heard_drugs": [
-     "triazolam"
+     "proguanil"
     ]
    }
   ]
  },
  {
-  "clip_id": "fbb74c6452c0cd8839a84a8e8a6edeab",
-  "provider": "dg-medical",
-  "accent": "akan",
-  "tier": "C",
+  "clip_id": "f1c88ce543440298faaed9f743d579de",
+  "provider": "gemini",
+  "accent": "hausa",
+  "tier": "A",
   "domain": "clinical",
-  "ref": "[[1|dantrolene]] a ryanodine receptor antagonist is generally less useful for symptoms of spasticity than baclofen because muscle power is reduced as spasticity is relieved",
-  "hyp": "dantrolinear ryanodine receptor antagonist is generally less useful for symptoms of spasticity than baclofen because muscle power is reduced as spasticity is relieved full stop",
+  "ref": "continue vanc [[1|zosyn]]",
+  "hyp": "continue bank 205",
   "findings": [
    {
     "finding_id": 89,
@@ -2452,26 +2471,26 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "dantrolene",
+    "weight": 3.9762,
+    "expected": "zosyn",
     "heard_entity": "",
-    "ref_excerpt": "[[dantrolene]] a ryanodine receptor antagonist is generally less",
-    "hyp_excerpt": "dantrolinear ryanodine receptor antagonist is generally less useful",
+    "ref_excerpt": "continue vanc [[zosyn]]",
+    "hyp_excerpt": "continue bank 205",
     "expected_drugs": [
-     "dantrolene"
+     "zosyn"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "927f85be5b655d2292720b02da67a9f2",
-  "provider": "whisper",
-  "accent": "pidgin",
+  "clip_id": "22347a0c96066c23a0b4037028963e8c",
+  "provider": "gemini",
+  "accent": "kinyarwanda",
   "tier": "B",
   "domain": "clinical",
-  "ref": "113 some clinicians have used radiation therapy and biologic agents [[1|imatinib]] with some success in patients with advanced disease",
-  "hyp": "113 some clinicians have used radiation therapy and biological agents in martini with some success in patients with advanced diseases",
+  "ref": "[[1|atovaquone]] is poorly absorbed from the gastrointestinal tract but absorption is increased with a fatty meal",
+  "hyp": "etifoxine is probably absorbed from the gastrointestinal tract comma but absorption is increased with a fatty meal full stop",
   "findings": [
    {
     "finding_id": 90,
@@ -2479,26 +2498,26 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "imatinib",
+    "weight": 3.9762,
+    "expected": "atovaquone",
     "heard_entity": "",
-    "ref_excerpt": "have used radiation therapy and biologic agents [[imatinib]] with some success in patients with advanced",
-    "hyp_excerpt": "used radiation therapy and biological agents in martini with some success in patients with advanced",
+    "ref_excerpt": "[[atovaquone]] is poorly absorbed from the gastrointestinal tract",
+    "hyp_excerpt": "etifoxine is probably absorbed from the gastrointestinal tract",
     "expected_drugs": [
-     "imatinib"
+     "atovaquone"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "c361cf1ef4cfa79c13cac6ea5f92ff83",
-  "provider": "gemini",
-  "accent": "swahili",
+  "clip_id": "9a375dac7ab12b6d59cffdb932f4d50b",
+  "provider": "whisper",
+  "accent": "hausa",
   "tier": "A",
   "domain": "clinical",
-  "ref": "abnormal renal function has been noted when [[1|foscarnet]] is used with ritonavir or ritonavir and saquinavir",
-  "hyp": "abnormal renal function has been noted when foscar net is used with retroneva or retroneva and saquina va",
+  "ref": "started on vancomycin and [[1|zosyn]] for concern of infection but given the lack of systemic symptoms this is unlikely",
+  "hyp": "started on vancomycin and zoosign for concern of infection but given the lack of systemic symptoms this is unlikely",
   "findings": [
    {
     "finding_id": 91,
@@ -2506,28 +2525,29 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "foscarnet",
+    "weight": 3.9762,
+    "expected": "zosyn",
     "heard_entity": "",
-    "ref_excerpt": "abnormal renal function has been noted when [[foscarnet]] is used with ritonavir or ritonavir and",
-    "hyp_excerpt": "renal function has been noted when foscar net is used with retroneva or retroneva and",
+    "ref_excerpt": "started on vancomycin and [[zosyn]] for concern of infection but given the",
+    "hyp_excerpt": "started on vancomycin and zoosign for concern of infection but given the",
     "expected_drugs": [
-     "foscarnet",
-     "ritonavir",
-     "ritonavir"
+     "vancomycin",
+     "zosyn"
     ],
-    "heard_drugs": []
+    "heard_drugs": [
+     "vancomycin"
+    ]
    }
   ]
  },
  {
-  "clip_id": "2642efa06e8a4c32bc730201ae6b8110",
+  "clip_id": "24e4da52fc2d6869251f9c9de581409c",
   "provider": "dg-general",
-  "accent": "xhosa",
-  "tier": "B",
+  "accent": "ekpeye",
+  "tier": "C",
   "domain": "clinical",
-  "ref": "the major differences between unconjugated and [[1|conjugated]] bilirubin are summarized in table 21",
-  "hyp": "the major difference between unconjuncted and conjucted biliary in i have summarized in table 21",
+  "ref": "cont on [[1|dilantin]] 100 mg q 6 hr cv af rate 65 87 bp 139 170 60 71 received hydralazine 10 mg at 1400",
+  "hyp": "continue on dilatine 100 mg q 6 hour cvaf rates 65 to 87 blood pressure 139 to 170 slash 60 to 71 received hydralazine 10 mg at 1400",
   "findings": [
    {
     "finding_id": 92,
@@ -2535,13 +2555,13 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "conjugated",
+    "weight": 3.9762,
+    "expected": "dilantin",
     "heard_entity": "",
-    "ref_excerpt": "the major differences between unconjugated and [[conjugated]] bilirubin are summarized in table 21",
-    "hyp_excerpt": "the major difference between unconjuncted and conjucted biliary in i have summarized in table 21",
+    "ref_excerpt": "cont on [[dilantin]] 100 mg q 6 hr cv af",
+    "hyp_excerpt": "continue on dilatine 100 mg q 6 hour cvaf rates",
     "expected_drugs": [
-     "conjugated"
+     "dilantin"
     ],
     "heard_drugs": []
    }
@@ -2562,7 +2582,7 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
     "expected": "glargine",
     "heard_entity": "",
     "ref_excerpt": "with pimozide for her psychosis and combined [[glargine]] insulin with short acting insulins at meal",
@@ -2593,7 +2613,7 @@ const CARDS = [
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
     "expected": "pimozide",
     "heard_entity": "",
     "ref_excerpt": "she was being treated with [[pimozide]] for her psychosis and combined glargine insulin",
@@ -2610,370 +2630,6 @@ const CARDS = [
   ]
  },
  {
-  "clip_id": "44fce3c7ec19dff506083c8a906750a3",
-  "provider": "dg-medical",
-  "accent": "ijaw",
-  "tier": "A",
-  "domain": "clinical",
-  "ref": "corrosions involving 30 39% of body surface with 30 39% 3rd degree c capsule oral [[1|amnesteem]] isotretinoin 10 mg poisoning by cannabis undetermined subsequent encounte",
-  "hyp": "corrosions involving 30 to 39% of body surface with 30 to 39% 3rd degree c capsule oral amnesty isotretinoin 10 milligram poisoning by cannabis bracket open derivatives bracket closed undetermined subsequent encounter",
-  "findings": [
-   {
-    "finding_id": 95,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "amnesteem",
-    "heard_entity": "",
-    "ref_excerpt": "30 39% 3rd degree c capsule oral [[amnesteem]] isotretinoin 10 mg poisoning by cannabis undetermined",
-    "hyp_excerpt": "39% 3rd degree c capsule oral amnesty isotretinoin 10 milligram poisoning by cannabis open derivatives",
-    "expected_drugs": [
-     "amnesteem",
-     "isotretinoin"
-    ],
-    "heard_drugs": [
-     "isotretinoin"
-    ]
-   }
-  ]
- },
- {
-  "clip_id": "a8b08dfb2d86e274967be71c137de2c2",
-  "provider": "gemini",
-  "accent": "idoma",
-  "tier": "B",
-  "domain": "general",
-  "ref": "all chemists from hahjoing market in roodepoort sell halofantrine lumefantrine [[1|piperaquine]] and tafenoquine to treat malaria",
-  "hyp": "enjoying market in other part sell halofatrin lomafatrin pepacine and tafenocine to treat malaria",
-  "findings": [
-   {
-    "finding_id": 96,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "piperaquine",
-    "heard_entity": "",
-    "ref_excerpt": "hahjoing market in roodepoort sell halofantrine lumefantrine [[piperaquine]] and tafenoquine to treat malaria",
-    "hyp_excerpt": "in other part sell halofatrin lomafatrin pepacine and tafenocine to treat malaria",
-    "expected_drugs": [
-     "lumefantrine",
-     "piperaquine"
-    ],
-    "heard_drugs": []
-   }
-  ]
- },
- {
-  "clip_id": "7ac2b7f21b9550f6de49f8047e0c0e19",
-  "provider": "whisper",
-  "accent": "luo",
-  "tier": "C",
-  "domain": "clinical",
-  "ref": "long term abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated with neuroleptic drugs [[1|haloperidol]] chlorpromazine",
-  "hyp": "long term abuse can produce toxic psychosis that closely resembles schizophrenia and must be treated with neuroleptic drug shallow periodo chlorpromazine full stop",
-  "findings": [
-   {
-    "finding_id": 97,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "haloperidol",
-    "heard_entity": "",
-    "ref_excerpt": "and must be treated with neuroleptic drugs [[haloperidol]] chlorpromazine",
-    "hyp_excerpt": "must be treated with neuroleptic drug shallow periodo chlorpromazine",
-    "expected_drugs": [
-     "haloperidol",
-     "chlorpromazine"
-    ],
-    "heard_drugs": [
-     "chlorpromazine"
-    ]
-   }
-  ]
- },
- {
-  "clip_id": "c43d8faa6efe9020bdd669a67ba1e988",
-  "provider": "gemini",
-  "accent": "efik",
-  "tier": "C",
-  "domain": "clinical",
-  "ref": "solution subcutaneous rituxan hycela [[1|rituximab]] hyaluronidase 1600 mg and 26800 units 13.4 ml",
-  "hyp": "solution comma subcutaneous comma wituzan comma icella comma wituzima comma semicolon comma hyaluronidase comma open bracket comma human recombinant comma close bracket comma comma 1600 mg and 26800 units 13.4 ml",
-  "findings": [
-   {
-    "finding_id": 98,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "rituximab",
-    "heard_entity": "",
-    "ref_excerpt": "solution subcutaneous rituxan hycela [[rituximab]] hyaluronidase 1600 mg and 26800 units 13.4",
-    "hyp_excerpt": "solution subcutaneous wituzan icella wituzima hyaluronidase human recombinant 1600 mg and 26800 units",
-    "expected_drugs": [
-     "rituximab",
-     "hyaluronidase"
-    ],
-    "heard_drugs": [
-     "hyaluronidase"
-    ]
-   }
-  ]
- },
- {
-  "clip_id": "ec18809717922ca38ceeb713515fbcff",
-  "provider": "whisper",
-  "accent": "sesotho",
-  "tier": "C",
-  "domain": "clinical",
-  "ref": "[[1|meloxicam]] mobic recently introduced for the treatment of osteoarthritis is also used for rheumatoid arthritis and certain acute conditions",
-  "hyp": "meloxicamoebae coma recently introduced for the treatment of osteoarthritis coma is also used for rheumatoid arthritis and certain acute conditions full stop",
-  "findings": [
-   {
-    "finding_id": 99,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "meloxicam",
-    "heard_entity": "",
-    "ref_excerpt": "[[meloxicam]] mobic recently introduced for the treatment of",
-    "hyp_excerpt": "meloxicamoebae coma recently introduced for the treatment of",
-    "expected_drugs": [
-     "meloxicam"
-    ],
-    "heard_drugs": []
-   }
-  ]
- },
- {
-  "clip_id": "b89670db369c7e025fb0d74ca94533af",
-  "provider": "gemini",
-  "accent": "hausa",
-  "tier": "A",
-  "domain": "clinical",
-  "ref": "syrup oral children is [[1|cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5 ml",
-  "hyp": "sirop oral zyrtec d arizine hydrochlorure allergy zyrtec hydrochlorure 5 mg 5 ml",
-  "findings": [
-   {
-    "finding_id": 100,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "cetirizine",
-    "heard_entity": "",
-    "ref_excerpt": "syrup oral children is [[cetirizine]] hydrochloride allergy cetirizine hydrochloride 5 mg 5",
-    "hyp_excerpt": "sirop oral zyrtec d arizine hydrochlorure allergy zyrtec hydrochlorure 5 mg 5",
-    "expected_drugs": [
-     "cetirizine",
-     "cetirizine"
-    ],
-    "heard_drugs": []
-   }
-  ]
- },
- {
-  "clip_id": "f1c88ce543440298faaed9f743d579de",
-  "provider": "gemini",
-  "accent": "hausa",
-  "tier": "A",
-  "domain": "clinical",
-  "ref": "continue vanc [[1|zosyn]]",
-  "hyp": "continue bank 205",
-  "findings": [
-   {
-    "finding_id": 101,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "zosyn",
-    "heard_entity": "",
-    "ref_excerpt": "continue vanc [[zosyn]]",
-    "hyp_excerpt": "continue bank 205",
-    "expected_drugs": [
-     "zosyn"
-    ],
-    "heard_drugs": []
-   }
-  ]
- },
- {
-  "clip_id": "cf42ee5d7ae6579d20f480a8cf8dc00f",
-  "provider": "dg-medical",
-  "accent": "ibibio",
-  "tier": "B",
-  "domain": "clinical",
-  "ref": "fall from scooter sequela capsule extended release oral [[1,2|diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left elbow",
-  "hyp": "follow from scrotal nonmotorized sequelae capsule extended release oral dilithiazem hydrochloride dilithiazem hydrochloride 120 milligram contracture left elbow",
-  "findings": [
-   {
-    "finding_id": 103,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "diltiazem",
-    "heard_entity": "",
-    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
-    "hyp_excerpt": "from scrotal nonmotorized sequelae capsule extended release oral dilithiazem hydrochloride dilithiazem hydrochloride 120 milligram contracture",
-    "expected_drugs": [
-     "diltiazem",
-     "diltiazem"
-    ],
-    "heard_drugs": []
-   },
-   {
-    "finding_id": 112,
-    "position": 2,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "diltiazem",
-    "heard_entity": "",
-    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
-    "hyp_excerpt": "from scrotal nonmotorized sequelae capsule extended release oral dilithiazem hydrochloride dilithiazem hydrochloride 120 milligram contracture",
-    "expected_drugs": [
-     "diltiazem",
-     "diltiazem"
-    ],
-    "heard_drugs": []
-   }
-  ]
- },
- {
-  "clip_id": "868ed2786d8b2dedffe5b5358c2c529d",
-  "provider": "dg-general",
-  "accent": "agatu",
-  "tier": "C",
-  "domain": "clinical",
-  "ref": "14 [[1|glargine]] sig 22 units at bedtime",
-  "hyp": "14 nickelagine sig 22 open bracket 22 close bracket unit at bedtime",
-  "findings": [
-   {
-    "finding_id": 104,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "glargine",
-    "heard_entity": "",
-    "ref_excerpt": "14 [[glargine]] sig 22 units at bedtime",
-    "hyp_excerpt": "14 nickelagine sig 22 22 unit at bedtime",
-    "expected_drugs": [
-     "glargine"
-    ],
-    "heard_drugs": []
-   }
-  ]
- },
- {
-  "clip_id": "a9a96ccbe9944292c08bc630aaee1d78",
-  "provider": "whisper",
-  "accent": "idoma",
-  "tier": "B",
-  "domain": "clinical",
-  "ref": "per anesthesia pt received ativan 2 mg iv prior to [[1|propofol]] due to agitation 100 mcg fentanyl for pain",
-  "hyp": "par anesthesiologist pt received ativan 2 mg iv prior to popo 4 due to agitation 100 mcg fentanyl for pain",
-  "findings": [
-   {
-    "finding_id": 106,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "propofol",
-    "heard_entity": "",
-    "ref_excerpt": "received ativan 2 mg iv prior to [[propofol]] due to agitation 100 mcg fentanyl for",
-    "hyp_excerpt": "ativan 2 mg iv prior to popo 4 due to agitation 100 mcg fentanyl for",
-    "expected_drugs": [
-     "propofol",
-     "fentanyl"
-    ],
-    "heard_drugs": [
-     "fentanyl"
-    ]
-   }
-  ]
- },
- {
-  "clip_id": "b9fbfa440d2ba2a19ff2e1f37ee2edf4",
-  "provider": "whisper",
-  "accent": "yoruba",
-  "tier": "A",
-  "domain": "clinical",
-  "ref": "poisoning by other primarily systemic and hematological agents accide tablet oral 28 zovia one 35 e 28 ethinyl [[1|estradiol]] ethynodiol diacetate 0.035 mg one mg other injury of intrinsic muscle fascia and tendon of other finger at",
-  "hyp": "poisoning by other family systemic hematological agents acid tablets oral 28 zovia one 35 e 2 28 ethinyl estrador estrinodrol dicetate 0.035 mg one mg other injury of encephalic muscle facial tendon of other finger at",
-  "findings": [
-   {
-    "finding_id": 107,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "estradiol",
-    "heard_entity": "",
-    "ref_excerpt": "28 zovia one 35 e 28 ethinyl [[estradiol]] ethynodiol diacetate 0.035 mg one mg other",
-    "hyp_excerpt": "zovia one 35 e 2 28 ethinyl estrador estrinodrol dicetate 0.035 mg one mg other",
-    "expected_drugs": [
-     "estradiol",
-     "ethynodiol"
-    ],
-    "heard_drugs": []
-   }
-  ]
- },
- {
-  "clip_id": "6afed7fe39a177c3d510b925d8267a94",
-  "provider": "gemini",
-  "accent": "swahili",
-  "tier": "A",
-  "domain": "general",
-  "ref": "etander ayale other antimalarial drugs include [[1|pyrimethamine]] proguanil chlorproguanil and trimethoprim",
-  "hyp": "estandar hallarle a la antimalaria drugs include comma proguanil comma chlorproguanil comma and comma trimethoprim",
-  "findings": [
-   {
-    "finding_id": 108,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-DEL",
-    "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "pyrimethamine",
-    "heard_entity": "",
-    "ref_excerpt": "etander ayale other antimalarial drugs include [[pyrimethamine]] proguanil chlorproguanil and trimethoprim",
-    "hyp_excerpt": "estandar hallarle a la antimalaria drugs include proguanil chlorproguanil and trimethoprim",
-    "expected_drugs": [
-     "pyrimethamine",
-     "proguanil",
-     "chlorproguanil",
-     "trimethoprim"
-    ],
-    "heard_drugs": [
-     "proguanil",
-     "chlorproguanil",
-     "trimethoprim"
-    ]
-   }
-  ]
- },
- {
   "clip_id": "9a375dac7ab12b6d59cffdb932f4d50b",
   "provider": "gemini",
   "accent": "hausa",
@@ -2983,12 +2639,12 @@ const CARDS = [
   "hyp": "started on vancomycin and zoysin for concern of infection but given the lack of systemic symptoms this is unlikely",
   "findings": [
    {
-    "finding_id": 109,
+    "finding_id": 96,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
     "expected": "zosyn",
     "heard_entity": "",
     "ref_excerpt": "started on vancomycin and [[zosyn]] for concern of infection but given the",
@@ -3004,55 +2660,211 @@ const CARDS = [
   ]
  },
  {
-  "clip_id": "3c5572142e8029ffb07a9bbe17542aed",
-  "provider": "whisper",
-  "accent": "khana",
+  "clip_id": "c43d8faa6efe9020bdd669a67ba1e988",
+  "provider": "gemini",
+  "accent": "efik",
   "tier": "C",
   "domain": "clinical",
-  "ref": "nf [[1|cyclosporine]] 0.05 ou hospital ogbalay 7",
-  "hyp": "nf ticlosporin 0.05% ou hospital abale 7",
+  "ref": "solution subcutaneous rituxan hycela [[1|rituximab]] hyaluronidase 1600 mg and 26800 units 13.4 ml",
+  "hyp": "solution comma subcutaneous comma wituzan comma icella comma wituzima comma semicolon comma hyaluronidase comma open bracket comma human recombinant comma close bracket comma comma 1600 mg and 26800 units 13.4 ml",
   "findings": [
    {
-    "finding_id": 111,
+    "finding_id": 97,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "cyclosporine",
+    "weight": 3.9762,
+    "expected": "rituximab",
     "heard_entity": "",
-    "ref_excerpt": "nf [[cyclosporine]] 0.05 ou hospital ogbalay 7",
-    "hyp_excerpt": "nf ticlosporin 0.05% ou hospital abale 7",
+    "ref_excerpt": "solution subcutaneous rituxan hycela [[rituximab]] hyaluronidase 1600 mg and 26800 units 13.4",
+    "hyp_excerpt": "solution subcutaneous wituzan icella wituzima hyaluronidase human recombinant 1600 mg and 26800 units",
     "expected_drugs": [
-     "cyclosporine"
+     "rituximab",
+     "hyaluronidase"
+    ],
+    "heard_drugs": [
+     "hyaluronidase"
+    ]
+   }
+  ]
+ },
+ {
+  "clip_id": "824c7c4c945e6189c231341493d25e5d",
+  "provider": "dg-general",
+  "accent": "sepedi",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "thus [[1|nitroglycerin]] relieves the symptoms of angina by restoring the balance between myocardial oxygen supply and demand",
+  "hyp": "thus comma metropolisone relays the symptoms of adrenal by restoring the balance between myocardial oxygen supply and demand full stop",
+  "findings": [
+   {
+    "finding_id": 98,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "nitroglycerin",
+    "heard_entity": "",
+    "ref_excerpt": "thus [[nitroglycerin]] relieves the symptoms of angina by restoring",
+    "hyp_excerpt": "thus metropolisone relays the symptoms of adrenal by restoring",
+    "expected_drugs": [
+     "nitroglycerin"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "a8b08dfb2d86e274967be71c137de2c2",
+  "clip_id": "6b6bd6a9b36dbd20ca8ba0b48a0e83c0",
   "provider": "dg-medical",
-  "accent": "idoma",
-  "tier": "B",
-  "domain": "general",
-  "ref": "all chemists from hahjoing market in roodepoort sell halofantrine [[1|lumefantrine]] piperaquine and tafenoquine to treat malaria",
-  "hyp": "joint market in rhodes port cell halofatrine comma lomotrin comma piperquin comma and tafinoquine to treat malaria",
+  "accent": "igbo",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "otorrhea left ear tablet oral miltown [[1|meprobamate]] 600 mg algoneurodystrophy unspecified site",
+  "hyp": "autoria left ear tablet oral milton meprobamet 600 milligram algo neurodystrophy unspecified site",
   "findings": [
    {
-    "finding_id": 113,
+    "finding_id": 99,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "lumefantrine",
+    "weight": 3.9762,
+    "expected": "meprobamate",
     "heard_entity": "",
-    "ref_excerpt": "from hahjoing market in roodepoort sell halofantrine [[lumefantrine]] piperaquine and tafenoquine to treat malaria",
-    "hyp_excerpt": "market in rhodes port cell halofatrine lomotrin piperquin and tafinoquine to treat malaria",
+    "ref_excerpt": "otorrhea left ear tablet oral miltown [[meprobamate]] 600 mg algoneurodystrophy unspecified site",
+    "hyp_excerpt": "autoria left ear tablet oral milton meprobamet 600 milligram algo neurodystrophy unspecified site",
     "expected_drugs": [
-     "lumefantrine",
-     "piperaquine"
+     "meprobamate"
+    ],
+    "heard_drugs": []
+   }
+  ]
+ },
+ {
+  "clip_id": "cf42ee5d7ae6579d20f480a8cf8dc00f",
+  "provider": "whisper",
+  "accent": "ibibio",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "fall from scooter sequela capsule extended release oral [[1,2|diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left elbow",
+  "hyp": "foil from scooter non motorized sequela capsule extended release boradilithiazem hydrochloride dilithiazem hydrochloride 120 mg contracture left elbow",
+  "findings": [
+   {
+    "finding_id": 100,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "diltiazem",
+    "heard_entity": "",
+    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
+    "hyp_excerpt": "from scooter non motorized sequela capsule extended release boradilithiazem hydrochloride dilithiazem hydrochloride 120 mg contracture",
+    "expected_drugs": [
+     "diltiazem",
+     "diltiazem"
+    ],
+    "heard_drugs": []
+   },
+   {
+    "finding_id": 104,
+    "position": 2,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "diltiazem",
+    "heard_entity": "",
+    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
+    "hyp_excerpt": "from scooter non motorized sequela capsule extended release boradilithiazem hydrochloride dilithiazem hydrochloride 120 mg contracture",
+    "expected_drugs": [
+     "diltiazem",
+     "diltiazem"
+    ],
+    "heard_drugs": []
+   }
+  ]
+ },
+ {
+  "clip_id": "2f11308426efe80f4c4a23795b245383",
+  "provider": "whisper",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "pt completed course of [[1|dilantin]] after injury no siezure activity noted",
+  "hyp": "pt completed course of dilatine after injury no seizure activity noted full stop",
+  "findings": [
+   {
+    "finding_id": 101,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "dilantin",
+    "heard_entity": "",
+    "ref_excerpt": "pt completed course of [[dilantin]] after injury no siezure activity noted",
+    "hyp_excerpt": "pt completed course of dilatine after injury no seizure activity noted",
+    "expected_drugs": [
+     "dilantin"
+    ],
+    "heard_drugs": []
+   }
+  ]
+ },
+ {
+  "clip_id": "cf42ee5d7ae6579d20f480a8cf8dc00f",
+  "provider": "dg-general",
+  "accent": "ibibio",
+  "tier": "B",
+  "domain": "clinical",
+  "ref": "fall from scooter sequela capsule extended release oral [[1|diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left elbow",
+  "hyp": "fall from scrotal non motorized sequelae capsule extended release bora dilithiazem hydrochloride dilithiazem hydrochloride 120 milligram contracture left elbow",
+  "findings": [
+   {
+    "finding_id": 102,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "diltiazem",
+    "heard_entity": "",
+    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
+    "hyp_excerpt": "scrotal non motorized sequelae capsule extended release bora dilithiazem hydrochloride dilithiazem hydrochloride 120 milligram contracture",
+    "expected_drugs": [
+     "diltiazem",
+     "diltiazem"
+    ],
+    "heard_drugs": []
+   }
+  ]
+ },
+ {
+  "clip_id": "bfeb15fa6cda5bc99eca0dfa907afdfd",
+  "provider": "dg-medical",
+  "accent": "igarra",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "9 [[1|levothyroxine]] 50 mcg tablet sig one one tablet po dailydaily.10",
+  "hyp": "9 low 1015 cg tablet 11 tablet 458",
+  "findings": [
+   {
+    "finding_id": 103,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "levothyroxine",
+    "heard_entity": "",
+    "ref_excerpt": "9 [[levothyroxine]] 50 mcg tablet sig one one tablet",
+    "hyp_excerpt": "9 low 1015 cg tablet 11 tablet 458",
+    "expected_drugs": [
+     "levothyroxine"
     ],
     "heard_drugs": []
    }
@@ -3068,12 +2880,12 @@ const CARDS = [
   "hyp": "through my sin administered as ordered to eyes for history of drainage",
   "findings": [
    {
-    "finding_id": 114,
+    "finding_id": 105,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
     "expected": "erythromycin",
     "heard_entity": "",
     "ref_excerpt": "[[erythromycin]] administered as ordered to eyes for hx",
@@ -3086,55 +2898,147 @@ const CARDS = [
   ]
  },
  {
-  "clip_id": "5b5cea61187384389906b36683ffa428",
+  "clip_id": "11caa8fa466d48bcc966b305b18a3141",
   "provider": "dg-medical",
-  "accent": "zulu",
-  "tier": "B",
+  "accent": "ogoni",
+  "tier": "C",
   "domain": "clinical",
-  "ref": "adverse effects and drug interactions with codeineare similar to those reported for [[1|morphine]] althoughthey are less intense",
-  "hyp": "adverse effects and drug interaction with convenience similar to those reported for monocail comma although early symptoms",
+  "ref": "he was started on [[1|ceftriaxone]] on 16 for focal opacity seen on cxr",
+  "hyp": "he was started on ceftriolone on 16 for focal opacity seen on cxr",
   "findings": [
    {
-    "finding_id": 115,
+    "finding_id": 106,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "morphine",
+    "weight": 3.9762,
+    "expected": "ceftriaxone",
     "heard_entity": "",
-    "ref_excerpt": "with codeineare similar to those reported for [[morphine]] althoughthey are less intense",
-    "hyp_excerpt": "interaction with convenience similar to those reported for monocail although early symptoms",
+    "ref_excerpt": "he was started on [[ceftriaxone]] on 16 for focal opacity seen on",
+    "hyp_excerpt": "he was started on ceftriolone on 16 for focal opacity seen on",
     "expected_drugs": [
-     "morphine"
+     "ceftriaxone"
     ],
     "heard_drugs": []
    }
   ]
  },
  {
-  "clip_id": "a8b08dfb2d86e274967be71c137de2c2",
+  "clip_id": "c361cf1ef4cfa79c13cac6ea5f92ff83",
   "provider": "dg-general",
-  "accent": "idoma",
-  "tier": "B",
-  "domain": "general",
-  "ref": "all chemists from hahjoing market in roodepoort sell halofantrine [[1|lumefantrine]] piperaquine and tafenoquine to treat malaria",
-  "hyp": "enjoyed market in rutherford cell halofatrine comma lumafatrine comma piperquin comma and tafenoquine to treat malaria",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "abnormal renal function has been noted when foscarnet is used with [[1|ritonavir]] or ritonavir and saquinavir",
+  "hyp": "abnormal renal function has been noted when foscarnet is used with retronava or retronava and sacrenava full stop",
   "findings": [
    {
-    "finding_id": 116,
+    "finding_id": 108,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
-    "expected": "lumefantrine",
+    "weight": 3.9762,
+    "expected": "ritonavir",
     "heard_entity": "",
-    "ref_excerpt": "from hahjoing market in roodepoort sell halofantrine [[lumefantrine]] piperaquine and tafenoquine to treat malaria",
-    "hyp_excerpt": "enjoyed market in rutherford cell halofatrine lumafatrine piperquin and tafenoquine to treat malaria",
+    "ref_excerpt": "been noted when foscarnet is used with [[ritonavir]] or ritonavir and saquinavir",
+    "hyp_excerpt": "been noted when foscarnet is used with retronava or retronava and sacrenava",
     "expected_drugs": [
-     "lumefantrine",
-     "piperaquine"
+     "foscarnet",
+     "ritonavir",
+     "ritonavir"
+    ],
+    "heard_drugs": [
+     "foscarnet"
+    ]
+   }
+  ]
+ },
+ {
+  "clip_id": "8cb3809701786ccfebe73b788fdbf219",
+  "provider": "whisper",
+  "accent": "setswana",
+  "tier": "B",
+  "domain": "general",
+  "ref": "rotimi yetunde other antimalarial drugs include pyrimethamine proguanil chlorproguanil and [[1|trimethoprim]]",
+  "hyp": "rotimi yetunde other antimalarial drugs include pyrimethamine proguanil chlorpropuanil and trimethropium",
+  "findings": [
+   {
+    "finding_id": 109,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "trimethoprim",
+    "heard_entity": "",
+    "ref_excerpt": "antimalarial drugs include pyrimethamine proguanil chlorproguanil and [[trimethoprim]]",
+    "hyp_excerpt": "antimalarial drugs include pyrimethamine proguanil chlorpropuanil and trimethropium",
+    "expected_drugs": [
+     "pyrimethamine",
+     "proguanil",
+     "chlorproguanil",
+     "trimethoprim"
+    ],
+    "heard_drugs": [
+     "pyrimethamine",
+     "proguanil"
+    ]
+   }
+  ]
+ },
+ {
+  "clip_id": "c361cf1ef4cfa79c13cac6ea5f92ff83",
+  "provider": "whisper",
+  "accent": "swahili",
+  "tier": "A",
+  "domain": "clinical",
+  "ref": "abnormal renal function has been noted when foscarnet is used with [[1|ritonavir]] or ritonavir and saquinavir",
+  "hyp": "abnormal renal function has been noted when foscarinet is used with retroneva or retroneva and saquineva full stop",
+  "findings": [
+   {
+    "finding_id": 110,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "ritonavir",
+    "heard_entity": "",
+    "ref_excerpt": "been noted when foscarnet is used with [[ritonavir]] or ritonavir and saquinavir",
+    "hyp_excerpt": "been noted when foscarinet is used with retroneva or retroneva and saquineva",
+    "expected_drugs": [
+     "foscarnet",
+     "ritonavir",
+     "ritonavir"
+    ],
+    "heard_drugs": []
+   }
+  ]
+ },
+ {
+  "clip_id": "5f6166b9974aacf66ecec0d39f992fd9",
+  "provider": "gemini",
+  "accent": "bekwarra",
+  "tier": "C",
+  "domain": "general",
+  "ref": "opium itself is a very harmful and addictive ingredient and comes in many other forms of illegal drugs including heroin andor [[1|diamorphine]]",
+  "hyp": "opium itself is a very harmful and addictive ingredient and comes in many other forms of illegal drugs including heroin and the diamond full stop",
+  "findings": [
+   {
+    "finding_id": 111,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-DEL",
+    "flag": "DRUG-DEL candidate",
+    "weight": 3.9762,
+    "expected": "diamorphine",
+    "heard_entity": "",
+    "ref_excerpt": "forms of illegal drugs including heroin andor [[diamorphine]]",
+    "hyp_excerpt": "of illegal drugs including heroin and the diamond",
+    "expected_drugs": [
+     "diamorphine"
     ],
     "heard_drugs": []
    }
@@ -3142,20 +3046,20 @@ const CARDS = [
  },
  {
   "clip_id": "2a2db36f700c4b370d82f111f4e23096",
-  "provider": "dg-general",
+  "provider": "whisper",
   "accent": "etsako",
   "tier": "C",
   "domain": "clinical",
   "ref": "the following medication change was made added amoxicillin clavulanic acid take one tablet twice a day for another 3 days last dose on the evening on wednesday 16 may 2029 added folate thiamine and a [[1|multivitamin]]",
-  "hyp": "the following medication change was made added amoxicillin clavulanic acid take one tablet twice a day for another 3 days last dose on the evening on wednesday 16 may 2029 added folate thiamine and emotivitamin",
+  "hyp": "the following medication change was made added amozicillin clavulanic acid take one tablet twice a day for another 3 days last dose on the evening on wednesday 16 may 2029 added folate thiamine and emotivitamin",
   "findings": [
    {
-    "finding_id": 117,
+    "finding_id": 112,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-DEL",
     "flag": "DRUG-DEL candidate",
-    "weight": 3.3404,
+    "weight": 3.9762,
     "expected": "multivitamin",
     "heard_entity": "",
     "ref_excerpt": "may 2029 added folate thiamine and a [[multivitamin]]",
@@ -3173,6 +3077,35 @@ const CARDS = [
   ]
  },
  {
+  "clip_id": "24e4da52fc2d6869251f9c9de581409c",
+  "provider": "gemini",
+  "accent": "ekpeye",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "cont on [[1|dilantin]] 100 mg q 6 hr cv af rate 65 87 bp 139 170 60 71 received hydralazine 10 mg at 1400",
+  "hyp": "continue on dilaudid 100 mg q 6 hour cvaf rate 65 to 87 blood pressure 139 to 170 60 to 71 receive hydralazine 10 mg at 1400",
+  "findings": [
+   {
+    "finding_id": 113,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-SUB",
+    "flag": "DRUG-SUB candidate",
+    "weight": 1.0,
+    "expected": "dilantin",
+    "heard_entity": "dilaudid",
+    "ref_excerpt": "cont on [[dilantin]] 100 mg q 6 hr cv af",
+    "hyp_excerpt": "continue on dilaudid 100 mg q 6 hour cvaf rate",
+    "expected_drugs": [
+     "dilantin"
+    ],
+    "heard_drugs": [
+     "dilaudid"
+    ]
+   }
+  ]
+ },
+ {
   "clip_id": "5b5cea61187384389906b36683ffa428",
   "provider": "gemini",
   "accent": "zulu",
@@ -3182,7 +3115,7 @@ const CARDS = [
   "hyp": "adverse effects and drug interaction with quinine similar to those reported for monotherapy chloroquine and all artesunate",
   "findings": [
    {
-    "finding_id": 118,
+    "finding_id": 114,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-SUB",
@@ -3204,6 +3137,36 @@ const CARDS = [
   ]
  },
  {
+  "clip_id": "5f6166b9974aacf66ecec0d39f992fd9",
+  "provider": "aai",
+  "accent": "bekwarra",
+  "tier": "C",
+  "domain": "general",
+  "ref": "opium itself is a very harmful and addictive ingredient and comes in many other forms of illegal drugs including heroin andor [[1|diamorphine]]",
+  "hyp": "opium itself is a very harmful and addictive ingredient and comes in many other forms of illegal drugs including heroin and codeine morphine",
+  "findings": [
+   {
+    "finding_id": 115,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-SUB",
+    "flag": "DRUG-SUB candidate",
+    "weight": 1.0,
+    "expected": "diamorphine",
+    "heard_entity": "codeine",
+    "ref_excerpt": "forms of illegal drugs including heroin andor [[diamorphine]]",
+    "hyp_excerpt": "of illegal drugs including heroin and codeine morphine",
+    "expected_drugs": [
+     "diamorphine"
+    ],
+    "heard_drugs": [
+     "codeine",
+     "morphine"
+    ]
+   }
+  ]
+ },
+ {
   "clip_id": "950669fd990036359a84fc27a609d98b",
   "provider": "aai",
   "accent": "hausa",
@@ -3213,7 +3176,7 @@ const CARDS = [
   "hyp": "nondisplaced fracture of unspecified ulna styloid process subsequent tablet extended release orally requiped xl propranolol hydrochloride eq 12 mg base exposure to excessive natural heat sequela",
   "findings": [
    {
-    "finding_id": 119,
+    "finding_id": 116,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-SUB",
@@ -3233,6 +3196,96 @@ const CARDS = [
   ]
  },
  {
+  "clip_id": "a118dd3124494bfe59ab23ed58e83735",
+  "provider": "dg-general",
+  "accent": "idah",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "she was on heparin at 250 units hr [[1|dopa]] at 5 mcg kg and tpn at 42 cc hr",
+  "hyp": "she was on heparin at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition at 42 cubic centimeters per hour",
+  "findings": [
+   {
+    "finding_id": 118,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-SUB",
+    "flag": "DRUG-SUB candidate",
+    "weight": 1.0,
+    "expected": "dopa",
+    "heard_entity": "dopamine",
+    "ref_excerpt": "was on heparin at 250 units hr [[dopa]] at 5 mcg kg and tpn at",
+    "hyp_excerpt": "at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition",
+    "expected_drugs": [
+     "heparin",
+     "dopa"
+    ],
+    "heard_drugs": [
+     "dopamine"
+    ]
+   }
+  ]
+ },
+ {
+  "clip_id": "a118dd3124494bfe59ab23ed58e83735",
+  "provider": "gemini",
+  "accent": "idah",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "she was on heparin at 250 units hr [[1|dopa]] at 5 mcg kg and tpn at 42 cc hr",
+  "hyp": "she was on heparin at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition at 42 cubic cm per hour",
+  "findings": [
+   {
+    "finding_id": 120,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-SUB",
+    "flag": "DRUG-SUB candidate",
+    "weight": 1.0,
+    "expected": "dopa",
+    "heard_entity": "dopamine",
+    "ref_excerpt": "was on heparin at 250 units hr [[dopa]] at 5 mcg kg and tpn at",
+    "hyp_excerpt": "at 250 units per hour dopamine at 5 microgram per kilogram and total parenteral nutrition",
+    "expected_drugs": [
+     "heparin",
+     "dopa"
+    ],
+    "heard_drugs": [
+     "dopamine"
+    ]
+   }
+  ]
+ },
+ {
+  "clip_id": "a118dd3124494bfe59ab23ed58e83735",
+  "provider": "whisper",
+  "accent": "idah",
+  "tier": "C",
+  "domain": "clinical",
+  "ref": "she was on heparin at 250 units hr [[1|dopa]] at 5 mcg kg and tpn at 42 cc hr",
+  "hyp": "she was on heparin at 250 units per hour dopamine at 5 micrograms per kilogram and total parenteral nutrition at 42 cubic centimeters per hour",
+  "findings": [
+   {
+    "finding_id": 121,
+    "position": 1,
+    "source": "detector",
+    "kind": "DRUG-SUB",
+    "flag": "DRUG-SUB candidate",
+    "weight": 1.0,
+    "expected": "dopa",
+    "heard_entity": "dopamine",
+    "ref_excerpt": "was on heparin at 250 units hr [[dopa]] at 5 mcg kg and tpn at",
+    "hyp_excerpt": "at 250 units per hour dopamine at 5 micrograms per kilogram and total parenteral nutrition",
+    "expected_drugs": [
+     "heparin",
+     "dopa"
+    ],
+    "heard_drugs": [
+     "dopamine"
+    ]
+   }
+  ]
+ },
+ {
   "clip_id": "a52cc1bdf941a9b4d76061ddbda05072",
   "provider": "dg-medical",
   "accent": "igbo",
@@ -3242,7 +3295,7 @@ const CARDS = [
   "hyp": "glatropin humira 25 milligram tablet civitrol one tablet is once a day at bedtime",
   "findings": [
    {
-    "finding_id": 120,
+    "finding_id": 122,
     "position": 1,
     "source": "detector",
     "kind": "DRUG-SUB",
@@ -3257,57 +3310,6 @@ const CARDS = [
     ],
     "heard_drugs": [
      "humira"
-    ]
-   }
-  ]
- },
- {
-  "clip_id": "cf42ee5d7ae6579d20f480a8cf8dc00f",
-  "provider": "gemini",
-  "accent": "ibibio",
-  "tier": "B",
-  "domain": "clinical",
-  "ref": "fall from scooter sequela capsule extended release oral [[1,2|diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left elbow",
-  "hyp": "folliculo escutar nao motorizada cicula causa extended release loratadiazem hydrocloride loratadiazem hydrocloride 120 mg contracture left elbow",
-  "findings": [
-   {
-    "finding_id": 121,
-    "position": 1,
-    "source": "detector",
-    "kind": "DRUG-SUB",
-    "flag": "DRUG-SUB candidate",
-    "weight": 1.0,
-    "expected": "diltiazem",
-    "heard_entity": "hydrocloride",
-    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
-    "hyp_excerpt": "escutar nao motorizada cicula causa extended release loratadiazem hydrocloride loratadiazem hydrocloride 120 mg contracture left",
-    "expected_drugs": [
-     "diltiazem",
-     "diltiazem"
-    ],
-    "heard_drugs": [
-     "hydrocloride",
-     "hydrocloride"
-    ]
-   },
-   {
-    "finding_id": 122,
-    "position": 2,
-    "source": "detector",
-    "kind": "DRUG-SUB",
-    "flag": "DRUG-SUB candidate",
-    "weight": 1.0,
-    "expected": "diltiazem",
-    "heard_entity": "hydrocloride",
-    "ref_excerpt": "from scooter sequela capsule extended release oral [[diltiazem]] hydrochloride diltiazem hydrochloride 120 mg contracture left",
-    "hyp_excerpt": "escutar nao motorizada cicula causa extended release loratadiazem hydrocloride loratadiazem hydrocloride 120 mg contracture left",
-    "expected_drugs": [
-     "diltiazem",
-     "diltiazem"
-    ],
-    "heard_drugs": [
-     "hydrocloride",
-     "hydrocloride"
     ]
    }
   ]

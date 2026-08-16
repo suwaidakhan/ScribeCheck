@@ -270,3 +270,34 @@ class TestBuildMergesEverySource:
         assert "insulin" in terms  # dictionary word, rescued by the INN list
         assert "paracetamol" in terms  # INN only, absent from openFDA
         assert "chloroquine" in terms
+
+
+class TestGapsFoundByAuditingFalsePositives:
+    """Terms whose absence changed a published number or hid a real error.
+
+    Found by reading what the drug-precision denominator was made of, not by a
+    coverage sweep. Each of these was charging a provider for the lexicon.
+    """
+
+    def test_a_misspelled_salt_is_not_a_drug(self):
+        # `hydrocloride` reached the lexicon from a single malformed openFDA
+        # record, `meclizine hydrocloride`. The correctly spelled
+        # `hydrochloride` is on the blocklist because a salt is not a
+        # prescribing decision, so the misspelling was the only one of the pair
+        # that counted, and Gemini was charged twice for spelling it correctly.
+        from src.lexicon import COLLISION_BLOCKLIST
+
+        assert "hydrocloride" in COLLISION_BLOCKLIST
+
+    def test_the_supplement_carries_the_drugs_that_hid_errors(self):
+        from src.lexicon import load_inn_terms
+
+        terms = load_inn_terms()
+        # dilantin: its absence meant `dilantin` heard as `dilaudid`, phenytoin
+        # read as hydromorphone, scored as an invented drug rather than as the
+        # drug substitution it is. That is the class this benchmark exists to
+        # measure and it was invisible.
+        assert "dilantin" in terms
+        # diamorphine: heard as `morphine`, a real and dangerous substitution.
+        assert "diamorphine" in terms
+        assert "dopa" in terms

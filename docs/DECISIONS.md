@@ -378,3 +378,46 @@ attach a human judgment to whichever error now holds that number, which is worse
 than losing it, because a wrong label is indistinguishable from a right one once
 it is in the file. Remapping is done offline against the old sheet in git, where
 the mapping can be checked.
+
+**D030 | rapidfuzz declared and pinned to the installed version | Add
+`rapidfuzz==3.14.5` to requirements.txt, matching what is installed in `.venv`.
+| Pin the newest release. | It was imported by `src/score.py` and
+`src/findings.py` and declared nowhere, so a clean install per the header comment
+could not run the scorer at all. The pin is the version that produced every
+number in `results/`, not the newest one, because rapidfuzz supplies the
+Levenshtein distance behind drug matching and the committed results have to be
+reproducible from the committed requirements. Upgrading it is a change that
+should move numbers visibly in a diff, not silently on someone else's machine.
+
+**D031 | an invented drug is measured against the whole reference, not against
+the lexicon's matches | A hypothesis drug within edit distance 1 of any token
+the clinician actually said is not a false positive, whether or not the lexicon
+holds that token. Consumed one for one, so a drug said once and written twice
+still counts the second copy. | Compare only against lexicon-matched reference
+mentions. | 10 of the 35 false positives in the first run were charging a
+provider for being right. The reference reads `propanolol`, a misspelling, which
+is in no lexicon and therefore not a mention, so three providers that wrote
+`propranolol` correctly were each recorded as inventing a drug. `hydrocloride`
+had reached the lexicon from one malformed openFDA record while the correct
+`hydrochloride` was blocklisted as a salt, so writing it correctly counted as
+invention twice against one provider. `insulins` matched nothing, so `insulin`
+was an invention. Precision is a published number and a third of its numerator
+was an artifact of lexicon coverage.
+
+**D032 | three drugs added because their absence hid errors | `dilantin`,
+`diamorphine` and `dopa` added to the committed supplement; `hydrocloride` and
+`meclizine hydrocloride` removed. | Leave the lexicon as built. | These were not
+found by a coverage sweep, they were found by reading what the precision
+denominator held. `dilantin` heard as `dilaudid` is phenytoin read as an opioid,
+and with `dilantin` absent from the lexicon it scored as an invented drug rather
+than as a drug substitution, which is the error class this benchmark exists to
+measure. `diamorphine` heard as `morphine` is the same shape. Drug substitutions
+moved from 3, 4, 2, 2, 2 to 5, 4, 3, 3, 3 as a result.
+
+**D033 | the lexicon delta was applied surgically, not by rebuilding | The three
+additions and two removals were applied to the committed `data/drug_lexicon.txt`
+directly. | Rerun `python -m src.lexicon --force`. | The rebuild returned 5,912
+terms against the committed 5,347, and only 3 of that 565-term difference was
+intended. The rest is the openFDA paging drift recorded in D025. Publishing a
+565-term lexicon change to explain a 3-term fix would make the diff unreadable
+and the numbers unattributable. The underlying non-determinism is still open.
